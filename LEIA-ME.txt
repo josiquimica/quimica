@@ -1,0 +1,39 @@
+🧪 JOGO DE QUÍMICA — LAB DA JOSI
+================================
+
+COMO JOGAR
+1. Dê dois cliques no arquivo "JOGO DE QUÍMICA.html".
+2. Ele abre no seu navegador (Chrome ou Edge). Não precisa de internet!
+3. Seu progresso (estrelas e estações concluídas) fica salvo
+   automaticamente neste computador.
+
+O QUE TEM DENTRO
+• 10 estações de experimentos animados e interativos, uma para cada
+  bloco do CONTEÚDO PROGRAMÁTICO OFICIAL do concurso:
+  Edital nº 030/2018 - SEDUC/SEPLAG (banca CEV/UECE) - Professor de Química.
+
+  1. ⚛️  Zoológico dos Átomos ........ História da Química e Modelos atômicos (itens 1 e 7)
+  2. ⚖️  Balança de Lavoisier ........ Leis ponderais e estequiometria (item 2)
+  3. 🧲  Baile das Moléculas ......... Ligações químicas e geometria molecular (item 3)
+  4. 🧊  Dança dos Estados ........... Estados da matéria e diagramas de fase (itens 4 e 5)
+  5. 🥤  Bar das Soluções ............ Soluções e propriedades coligativas (item 6)
+  6. 🌈  Titulação Rosa-Choque ....... Funções inorgânicas, pH e titulação (item 8)
+  7. 🗺️  Mapa dos Elementos .......... Tabela periódica (item 9)
+  8. 🏁  Corrida Cinética ............ Cinética e equilíbrio químico (item 10)
+  9. 🧬  Caça às Funções ............. Química orgânica (item 11)
+  10. 🥽 Detetive da Segurança ....... Segurança no laboratório (item 13)
+
+COMO GANHAR ESTRELAS (máximo: 20 ⭐)
+• Cada estação vale até 2 ⭐:
+  - 1 ⭐ pela prática (o mini-jogo da estação)
+  - 1 ⭐ pela questão de prova
+• Ao final: 18+ ⭐ = Mestra Alquimista 🏆
+
+DICA PARA O SEU FOCO (pomodoro)
+• Cada estação leva ~3 minutos.
+• Jogue 2 ou 3 estações por sessão de 25 minutos e faça uma pausa.
+• Errou algo? O jogo explica na hora e o "CAI NA PROVA" + o mnemônico
+  fixam o conteúdo. Rejogar as estações espaçadamente (dia seguinte,
+  3 dias, 1 semana) é o melhor jeito de gravar na memória!
+
+Bons estudos, Josiane! 💪🧪
