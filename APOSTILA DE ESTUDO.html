@@ -23,7 +23,7 @@
     }
   }
   *{box-sizing:border-box}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; margin:0; padding:0 16px 80px}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; margin:0; padding:0 16px 80px; overflow-x:hidden; -webkit-text-size-adjust:100%}
   h1,h2,h3,h4{font-family:'Trebuchet MS','Segoe UI',sans-serif; line-height:1.25; text-wrap:balance}
   .wrap{max-width:860px; margin:0 auto}
   a{color:var(--accent)}
@@ -142,8 +142,37 @@
   .toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px); background:var(--good); color:#fff; padding:10px 20px; border-radius:999px; font-weight:700; box-shadow:0 6px 20px rgba(0,0,0,.3); opacity:0; transition:opacity .3s, transform .3s; z-index:90}
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
 
+  @media (max-width:640px){
+    body{padding:0 10px 70px}
+    header.top h1{font-size:1.35rem}
+    header.top{padding:16px 0 12px}
+    nav.toc{padding:13px 15px}
+    .part{padding:12px 15px} .part h2{font-size:1.15rem}
+    section.mod{padding:16px 14px}
+    section.mod > h3{font-size:1.12rem}
+    section.mod h4{font-size:1rem}
+    .box{padding:11px 13px; font-size:.9rem}
+    .fbig{font-size:1.02rem; padding:10px}
+    .formula{font-size:1rem}
+    .calc .step{padding-left:30px}
+    .calcbox{padding:13px}
+    .fields{gap:8px}
+    .field{flex:1 1 46%}
+    .field input,.field select{width:100%}
+    .calcbox button.go{width:100%; margin-top:4px}
+    table.data{font-size:.82rem} table.data th,table.data td{padding:6px 8px}
+    #tutor{right:8px; bottom:8px; max-width:min(300px,92vw)}
+    #tutorFace{width:52px; height:52px}
+    #tutorBubble{font-size:.82rem; padding:9px 12px}
+    .xp-lvl{font-size:.76rem}
+  }
+  @media (max-width:380px){
+    header.top h1{font-size:1.18rem}
+    .field{flex:1 1 100%}
+    #tutorFace{width:46px; height:46px}
+  }
   @media print{
-    body{padding:0; font-size:11pt} .top-link,nav.toc,.print-tip,#tutor,.calcbox button.go,.xp-wrap{display:none}
+    body{padding:0; font-size:11pt} .top-link,nav.toc,.print-tip,#tutor,.calcbox button.go,.xp-wrap,#calc-lab,#lab{display:none}
     section.mod,.box,figure svg{box-shadow:none; break-inside:avoid}
     .part{-webkit-print-color-adjust:exact; print-color-adjust:exact}
     .tip{border:none}

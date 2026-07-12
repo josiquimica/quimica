@@ -30,6 +30,7 @@
     background:var(--bg); color:var(--ink);
     font-family:'Segoe UI', system-ui, sans-serif;
     line-height:1.55; margin:0; padding:0 16px 60px;
+    overflow-x:hidden; -webkit-text-size-adjust:100%;
   }
   h1,h2,h3{font-family:'Trebuchet MS','Segoe UI',sans-serif; text-wrap:balance; line-height:1.2}
   .wrap{max-width:780px; margin:0 auto}
@@ -62,7 +63,7 @@
     background:var(--info-soft); border-left:4px solid var(--info);
     border-radius:8px; padding:10px 14px; font-size:.94rem; margin-bottom:18px;
   }
-  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr)); gap:12px}
   .card{
     background:var(--panel); border:1.5px solid var(--line); border-radius:14px;
     padding:15px; cursor:pointer; text-align:left; color:var(--ink);
@@ -257,6 +258,30 @@
   .confetti{position:fixed; top:-16px; width:9px; height:14px; border-radius:2px; z-index:60; animation:confall linear forwards}
   @keyframes confall{to{transform:translateY(105vh) rotate(720deg); opacity:.15}}
 
+  @media (max-width:600px){
+    body{padding:0 10px 48px}
+    header.top{padding:14px 0 10px; gap:8px 10px}
+    header.top h1{font-size:1.2rem}
+    header.top .sub{font-size:.84rem}
+    .star-count{margin-left:0; font-size:.9rem; padding:3px 11px}
+    .pill{width:22px; height:22px; font-size:.62rem}
+    .cards{grid-template-columns:1fr}
+    .exp-head h2{font-size:1.15rem}
+    .exp-head .eyebrow{font-size:.62rem}
+    .card h3{font-size:1rem}
+    .goal,.menu-note,.stage-note{font-size:.88rem}
+    .stage{padding:10px}
+    .controls{gap:7px}
+    .chip{padding:6px 11px; font-size:.84rem}
+    .btn{padding:9px 14px}
+    .quiz{padding:13px}
+    .q-opt{padding:8px 10px}
+    .next-row{flex-wrap:wrap}
+  }
+  @media (max-width:380px){
+    header.top h1{font-size:1.08rem}
+    .pill{width:19px; height:19px; font-size:.55rem; border-radius:5px 5px 8px 8px}
+  }
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important; transition:none !important}
   }
