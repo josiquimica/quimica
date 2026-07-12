@@ -240,6 +240,15 @@
   .shake{animation:shakeX .28s ease 2}
   @keyframes shakeX{25%{transform:translateX(-5px)} 75%{transform:translateX(5px)}}
 
+  /* ---------- E17 lâmpada · E18 duelo · E20 pistão ---------- */
+  #lampHalo{opacity:0; transition:opacity .7s ease}
+  .lamp-strong #lampHalo{opacity:.95}
+  .lamp-weak #lampHalo{opacity:.3}
+  .duel{transition:transform .9s cubic-bezier(.34,1.3,.64,1); transform-box:fill-box; transform-origin:center}
+  #piston20{transition:transform 1s ease}
+  #merc20{transition:transform .9s ease; transform-box:fill-box; transform-origin:center bottom}
+  #gasParts.fast .jig{animation-duration:.2s}
+
   #beamG{transform-box:view-box; transform-origin:280px 78px; transition:transform 1.1s cubic-bezier(.34,1.4,.64,1)}
 
   #flameGroup10{transform-box:fill-box; transform-origin:50% 100%; animation:flick 1.6s ease-in-out infinite}
@@ -258,10 +267,10 @@
   <header class="top">
     <h1>🧪 Lab da Josi</h1>
     <div class="pills" aria-label="progresso">
-      <span class="pill" id="pill-e1">1</span><span class="pill" id="pill-e2">2</span><span class="pill" id="pill-e3">3</span><span class="pill" id="pill-e4">4</span><span class="pill" id="pill-e5">5</span><span class="pill" id="pill-e6">6</span><span class="pill" id="pill-e7">7</span><span class="pill" id="pill-e8">8</span><span class="pill" id="pill-e9">9</span><span class="pill" id="pill-e10">10</span><span class="pill" id="pill-e11">11</span><span class="pill" id="pill-e12">12</span><span class="pill" id="pill-e13">13</span>
+      <span class="pill" id="pill-e1">1</span><span class="pill" id="pill-e2">2</span><span class="pill" id="pill-e3">3</span><span class="pill" id="pill-e4">4</span><span class="pill" id="pill-e5">5</span><span class="pill" id="pill-e6">6</span><span class="pill" id="pill-e7">7</span><span class="pill" id="pill-e8">8</span><span class="pill" id="pill-e9">9</span><span class="pill" id="pill-e10">10</span><span class="pill" id="pill-e11">11</span><span class="pill" id="pill-e12">12</span><span class="pill" id="pill-e13">13</span><span class="pill" id="pill-e14">14</span><span class="pill" id="pill-e15">15</span><span class="pill" id="pill-e16">16</span><span class="pill" id="pill-e17">17</span><span class="pill" id="pill-e18">18</span><span class="pill" id="pill-e19">19</span><span class="pill" id="pill-e20">20</span>
     </div>
-    <span class="star-count">⭐ <span id="starCount">0</span>/26</span>
-    <p class="sub">13 estações de experimentos animados + caderno de cálculos — os 16 itens do conteúdo programático oficial do <b>Edital nº 030/2018-SEDUC/SEPLAG (CEV/UECE) · Professor de Química</b>.</p>
+    <span class="star-count">⭐ <span id="starCount">0</span>/40</span>
+    <p class="sub">20 estações de experimentos animados + caderno de cálculos — os 16 itens do conteúdo programático oficial do <b>Edital nº 030/2018-SEDUC/SEPLAG (CEV/UECE) · Professor de Química</b>.</p>
   </header>
 
   <!-- ================= MENU ================= -->
@@ -284,6 +293,13 @@
       <button class="card" data-go="e11"><span class="tag">EDITAL · ITEM 8 — FUNÇÕES QUÍMICAS NO DIA A DIA</span><h3>🃏 Memória das Fórmulas</h3><p>Vire as cartas e case cada fórmula com seu uso no dia a dia.</p><span class="status" id="st-e11"></span></button>
       <button class="card" data-go="e12"><span class="tag">EDITAL · ITENS 4 E 6 — MISTURAS E SEPARAÇÕES</span><h3>⚗️ Oficina das Misturas</h3><p>Filtração, decantação e destilação funcionando ao vivo — escolha o método certo.</p><span class="status" id="st-e12"></span></button>
       <button class="card" data-go="e13"><span class="tag">EDITAL · ITENS 12, 14, 15 E 16 — ENSINO DE QUÍMICA</span><h3>👩‍🏫 Missão Professora</h3><p>Monte a aula investigativa na ordem certa e conquiste a turma.</p><span class="status" id="st-e13"></span></button>
+      <button class="card" data-go="e14"><span class="tag">EDITAL · ITEM 1 — HISTÓRIA DA QUÍMICA</span><h3>⏳ Linha do Tempo Química</h3><p>Da alquimia a Mendeleev: adivinhe o capítulo da história.</p><span class="status" id="st-e14"></span></button>
+      <button class="card" data-go="e15"><span class="tag">EDITAL · ITEM 2 — ESTEQUIOMETRIA</span><h3>🏭 Fábrica Estequiométrica</h3><p>Mol, massa e volume na esteira: calcule e escolha o valor certo.</p><span class="status" id="st-e15"></span></button>
+      <button class="card" data-go="e16"><span class="tag">EDITAL · ITEM 3 — HIBRIDIZAÇÃO E ORBITAIS</span><h3>🌀 Dança dos Orbitais</h3><p>sp, sp² ou sp³? Descubra pela forma da molécula.</p><span class="status" id="st-e16"></span></button>
+      <button class="card" data-go="e17"><span class="tag">EDITAL · ITEM 6 — ELETRÓLITOS E ÍONS</span><h3>💡 Teste da Lâmpada</h3><p>A solução conduz corrente? Veja a lâmpada acender (ou não!).</p><span class="status" id="st-e17"></span></button>
+      <button class="card" data-go="e18"><span class="tag">EDITAL · ITENS 7 E 9 — PROPRIEDADES PERIÓDICAS</span><h3>⚔️ Batalha dos Átomos</h3><p>Raio, eletronegatividade e energia: qual átomo vence o duelo?</p><span class="status" id="st-e18"></span></button>
+      <button class="card" data-go="e19"><span class="tag">EDITAL · ITEM 11 — NOMENCLATURA ORGÂNICA</span><h3>🏷️ Batizado Orgânico</h3><p>Dê o nome oficial de cada estrutura desenhada.</p><span class="status" id="st-e19"></span></button>
+      <button class="card" data-go="e20"><span class="tag">EDITAL · ITENS 2 E 5 — GASES</span><h3>🎈 Pistão dos Gases</h3><p>Boyle, Charles e Avogadro num cilindro animado.</p><span class="status" id="st-e20"></span></button>
       <button class="card" data-go="calc"><span class="tag">ESTUDO · ESTEQUIOMETRIA E CÁLCULOS</span><h3>📚 Caderno de Cálculos</h3><p>Todos os cálculos resolvidos passo a passo, com explicação de cada conteúdo.</p><span class="status"></span></button>
     </div>
   </div>
@@ -1076,6 +1092,435 @@
       <div class="box mnemo"><b class="box-title">🧠 MNEMÔNICO</b>
         <b>“D-F-S: Diagnóstica ANTES, Formativa DURANTE, Somativa no FIM.”</b>
       </div>
+      <div class="next-row"><button class="btn ghost" data-go="calc">📚 Caderno de Cálculos</button><button class="btn" data-go="e14">Próxima: ⏳ Linha do Tempo →</button></div>
+    </section>
+  </div>
+
+  <!-- ================= E14 · HISTÓRIA DA QUÍMICA ================= -->
+  <div class="screen" id="e14">
+    <div class="exp-head"><div><span class="eyebrow">ESTAÇÃO 14 · ITEM 1 DO EDITAL · ⏱ ~3 MIN</span><h2>⏳ Linha do Tempo Química</h2></div><button class="back" data-go="menu">← menu</button></div>
+    <div class="goal">🎯 <b>Meta:</b> a cena que brilhar pertence a um capítulo da história da Química. Diga qual! Acerte 3 de 4 para a ⭐. As datas são a dica. 😉</div>
+    <div class="stage">
+      <svg viewBox="0 0 560 235" role="img" aria-label="Quatro cenas da história da química">
+        <g id="hist-alq">
+          <g transform="translate(80,36)" class="fizz-slow">
+            <g class="flame"><path d="M0,106 q-8,-12 0,-23 q8,11 0,23 Z" fill="#F59F00"/><path d="M0,104 q-4,-7 0,-13 q4,6 0,13 Z" fill="#FFD43B"/></g>
+            <line x1="-18" y1="108" x2="18" y2="108" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M-28,58 a28,22 0 0 0 56,0 Z" fill="#40484F" stroke="var(--ink)" stroke-width="2"/>
+            <ellipse cx="0" cy="58" rx="28" ry="7" fill="#212529" stroke="var(--ink)" stroke-width="2"/>
+            <ellipse cx="0" cy="58" rx="20" ry="4" fill="#845EF6"/>
+            <circle class="bub" cx="-8" cy="52" r="3" fill="#B197FC"/>
+            <circle class="bub" cx="6" cy="54" r="2.5" fill="#B197FC" style="animation-delay:.8s"/>
+            <text x="-42" y="18" style="font-size:16px">🌙</text><text x="26" y="10" style="font-size:16px">✨</text>
+          </g>
+          <text x="80" y="200" text-anchor="middle" style="font-weight:700">séc. III–XVII</text>
+          <text x="80" y="218" text-anchor="middle" class="data">“transmutar em ouro”</text>
+        </g>
+        <g id="hist-lav">
+          <g transform="translate(215,36)">
+            <line x1="0" y1="14" x2="0" y2="74" stroke="var(--ink)" stroke-width="3"/>
+            <path d="M0,74 L-20,100 L20,100 Z" fill="var(--muted)"/>
+            <line x1="-44" y1="14" x2="44" y2="14" stroke="var(--ink)" stroke-width="3"/>
+            <line x1="-44" y1="14" x2="-44" y2="38" stroke="var(--ink)" stroke-width="2"/>
+            <line x1="44" y1="14" x2="44" y2="38" stroke="var(--ink)" stroke-width="2"/>
+            <path d="M-56,40 a12,7 0 0 0 24,0 Z" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>
+            <path d="M32,40 a12,7 0 0 0 24,0 Z" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>
+            <rect x="-50" y="30" width="12" height="9" rx="2" fill="#C2255C"/>
+            <rect x="38" y="30" width="12" height="9" rx="2" fill="#1971C2"/>
+          </g>
+          <text x="215" y="200" text-anchor="middle" style="font-weight:700">1789</text>
+          <text x="215" y="218" text-anchor="middle" class="data">nada se perde…</text>
+        </g>
+        <g id="hist-dal">
+          <g transform="translate(350,36)">
+            <circle cx="-20" cy="76" r="17" fill="#C2255C" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="20" cy="76" r="17" fill="#1971C2" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="0" cy="46" r="17" fill="#F0B24E" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="-25" cy="70" r="4" fill="#fff" opacity=".7"/>
+            <circle cx="15" cy="70" r="4" fill="#fff" opacity=".7"/>
+            <circle cx="-5" cy="40" r="4" fill="#fff" opacity=".7"/>
+          </g>
+          <text x="350" y="200" text-anchor="middle" style="font-weight:700">1803</text>
+          <text x="350" y="218" text-anchor="middle" class="data">esferas maciças</text>
+        </g>
+        <g id="hist-men">
+          <g transform="translate(487,36)">
+            <g stroke="var(--ink)" stroke-width="1.5">
+              <rect x="-40" y="28" width="18" height="16" rx="2" fill="#A8D8F0"/><rect x="-19" y="28" width="18" height="16" rx="2" fill="#A8D8F0"/><rect x="2" y="28" width="18" height="16" rx="2" fill="#FDF0DC"/><rect x="23" y="28" width="18" height="16" rx="2" fill="#FFC078"/>
+              <rect x="-40" y="47" width="18" height="16" rx="2" fill="#A8D8F0"/><rect x="-19" y="47" width="18" height="16" rx="2" fill="#FDF0DC"/><rect x="2" y="47" width="18" height="16" rx="2" fill="#FFC078"/><rect x="23" y="47" width="18" height="16" rx="2" fill="#8CE99A"/>
+              <rect x="-40" y="66" width="18" height="16" rx="2" fill="#A8D8F0"/><rect x="-19" y="66" width="18" height="16" rx="2" fill="#B197FC"/><rect x="2" y="66" width="18" height="16" rx="2" fill="#FFC078"/><rect x="23" y="66" width="18" height="16" rx="2" fill="#8CE99A"/>
+            </g>
+            <text x="-10" y="40" text-anchor="middle" style="font-size:11px; font-weight:700">?</text>
+            <text x="11" y="59" text-anchor="middle" style="font-size:11px; font-weight:700">?</text>
+          </g>
+          <text x="487" y="200" text-anchor="middle" style="font-weight:700">1869</text>
+          <text x="487" y="218" text-anchor="middle" class="data">tabela com lacunas</text>
+        </g>
+      </svg>
+      <div class="stage-note" id="note14">A cena <b>brilhando</b> é de qual capítulo da história da Química?</div>
+    </div>
+    <div class="controls" id="chips14">
+      <button class="chip" data-v="alq">Alquimistas</button>
+      <button class="chip" data-v="lav">Lavoisier</button>
+      <button class="chip" data-v="dal">Dalton</button>
+      <button class="chip" data-v="men">Mendeleev</button>
+    </div>
+    <div id="fb14"></div>
+    <section class="step" id="quizwrap14" hidden><div class="quiz" id="quiz14"></div></section>
+    <section class="step" id="recap14" hidden>
+      <div class="box prova"><b class="box-title">📌 CAI NA PROVA</b>
+        <b>Item 1 do edital:</b> a Alquimia buscava a pedra filosofal e o elixir da vida — não conseguiu, mas criou as
+        <b>técnicas de laboratório</b> (destilação, calcinação, banho-maria). <b>Lavoisier (1789)</b> funda a Química moderna
+        medindo massas (fim do flogisto). <b>Dalton (1803)</b> retoma o átomo para explicar as leis ponderais.
+        <b>Mendeleev (1869)</b> organiza os elementos e <b>prevê</b> os que faltavam. Química e sociedade: da metalurgia aos fármacos.
+      </div>
+      <div class="box mnemo"><b class="box-title">🧠 MNEMÔNICO</b>
+        <b>“ALquimia deu a técnica, LAvoisier a balança, DALton o átomo, MENdeleev a tabela.”</b>
+      </div>
+      <div class="next-row"><button class="btn" data-go="e15">Próxima: 🏭 Fábrica Estequiométrica →</button></div>
+    </section>
+  </div>
+
+  <!-- ================= E15 · ESTEQUIOMETRIA ================= -->
+  <div class="screen" id="e15">
+    <div class="exp-head"><div><span class="eyebrow">ESTAÇÃO 15 · ITEM 2 DO EDITAL · ⏱ ~3 MIN</span><h2>🏭 Fábrica Estequiométrica</h2></div><button class="back" data-go="menu">← menu</button></div>
+    <div class="goal">🎯 <b>Meta:</b> a fábrica de amônia precisa dos seus cálculos! Resolva de cabeça (ou no papel) e escolha o valor certo. Acerte 3 de 4 para a ⭐.</div>
+    <div class="stage">
+      <svg viewBox="0 0 560 200" role="img" aria-label="Fábrica com esteira e caixas de reagentes">
+        <text x="36" y="64" style="font-size:30px">🏭</text>
+        <text x="300" y="42" text-anchor="middle" style="font-size:20px; font-weight:700">N₂ + 3 H₂ → 2 NH₃</text>
+        <text x="300" y="66" text-anchor="middle" class="data">M: N₂ = 28 · H₂ = 2 · NH₃ = 17 · CO₂ = 44 · CNTP: 1 mol = 22,4 L</text>
+        <rect x="60" y="150" width="440" height="10" rx="5" fill="var(--line)"/>
+        <circle cx="100" cy="155" r="7" fill="var(--muted)"/><circle cx="180" cy="155" r="7" fill="var(--muted)"/><circle cx="260" cy="155" r="7" fill="var(--muted)"/><circle cx="340" cy="155" r="7" fill="var(--muted)"/><circle cx="420" cy="155" r="7" fill="var(--muted)"/><circle cx="480" cy="155" r="7" fill="var(--muted)"/>
+        <g class="flo"><rect x="120" y="112" width="60" height="34" rx="6" fill="#A8D8F0" stroke="var(--ink)" stroke-width="2"/><text x="150" y="134" text-anchor="middle" style="font-weight:700; font-size:12px">N₂</text></g>
+        <g class="wob"><rect x="250" y="112" width="60" height="34" rx="6" fill="#FFC078" stroke="var(--ink)" stroke-width="2"/><text x="280" y="134" text-anchor="middle" style="font-weight:700; font-size:12px">H₂</text></g>
+        <g class="flo" style="animation-delay:1.1s"><rect x="380" y="112" width="60" height="34" rx="6" fill="#8CE99A" stroke="var(--ink)" stroke-width="2"/><text x="410" y="134" text-anchor="middle" style="font-weight:700; font-size:12px">NH₃</text></g>
+      </svg>
+      <div class="stage-note" id="note15"></div>
+    </div>
+    <div class="controls" id="chips15"></div>
+    <div id="fb15"></div>
+    <section class="step" id="quizwrap15" hidden><div class="quiz" id="quiz15"></div></section>
+    <section class="step" id="recap15" hidden>
+      <div class="box prova"><b class="box-title">📌 CAI NA PROVA</b>
+        Os 3 passos de TODO cálculo estequiométrico: ① <b>balancear</b> a equação · ② transformar o dado em <b>mol</b>
+        (n = m/M) · ③ usar a <b>proporção dos coeficientes</b>. Conversões: mol → massa (× M) · mol → volume CNTP (× 22,4 L)
+        · mol → partículas (× 6,02×10²³). Pureza entra ANTES, rendimento DEPOIS. Cálculos resolvidos no 📚 Caderno!
+      </div>
+      <div class="box mnemo"><b class="box-title">🧠 MNEMÔNICO</b>
+        <b>“B-M-P: Balanceia, vira Mol, aplica a Proporção.”</b>
+      </div>
+      <div class="next-row"><button class="btn ghost" data-go="calc">📚 Ver cálculos resolvidos</button><button class="btn" data-go="e16">Próxima: 🌀 Dança dos Orbitais →</button></div>
+    </section>
+  </div>
+
+  <!-- ================= E16 · HIBRIDIZAÇÃO ================= -->
+  <div class="screen" id="e16">
+    <div class="exp-head"><div><span class="eyebrow">ESTAÇÃO 16 · ITEM 3 DO EDITAL · ⏱ ~3 MIN</span><h2>🌀 Dança dos Orbitais</h2></div><button class="back" data-go="menu">← menu</button></div>
+    <div class="goal">🎯 <b>Meta:</b> conte as <b>nuvens eletrônicas</b> da molécula que brilhar e diga a hibridização do átomo central. Acerte 3 de 4 para a ⭐.</div>
+    <div class="stage">
+      <svg viewBox="0 0 560 235" role="img" aria-label="Quatro moléculas com seus ângulos">
+        <g id="orb-ch4" class="wob">
+          <g transform="translate(80,90)">
+            <line x1="0" y1="0" x2="0" y2="-30" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="0" y1="0" x2="-27" y2="17" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="0" y1="0" x2="27" y2="17" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="0" y1="0" x2="0" y2="26" stroke="var(--ink)" stroke-width="2.5" stroke-dasharray="4 3"/>
+            <circle r="11" fill="#343A40" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="0" cy="-30" r="7" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="-27" cy="17" r="7" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="27" cy="17" r="7" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="0" cy="26" r="6" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2" opacity=".85"/>
+          </g>
+          <text x="80" y="180" text-anchor="middle" style="font-weight:700">CH₄ · 109,5°</text>
+          <text x="80" y="198" text-anchor="middle" class="data">4 ligações σ</text>
+        </g>
+        <g id="orb-eteno" class="wob" style="animation-delay:-.8s">
+          <g transform="translate(215,90)">
+            <ellipse cx="0" cy="-16" rx="26" ry="8" fill="var(--info)" opacity=".18"/>
+            <ellipse cx="0" cy="16" rx="26" ry="8" fill="var(--info)" opacity=".18"/>
+            <line x1="-14" y1="-3" x2="14" y2="-3" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="-14" y1="3" x2="14" y2="3" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="-14" y1="0" x2="-32" y2="-18" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="-14" y1="0" x2="-32" y2="18" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="14" y1="0" x2="32" y2="-18" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="14" y1="0" x2="32" y2="18" stroke="var(--ink)" stroke-width="2.5"/>
+            <circle cx="-14" r="10" fill="#343A40" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="14" r="10" fill="#343A40" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="-32" cy="-18" r="6" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="-32" cy="18" r="6" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="32" cy="-18" r="6" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="32" cy="18" r="6" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+          </g>
+          <text x="215" y="180" text-anchor="middle" style="font-weight:700">H₂C=CH₂ · 120°</text>
+          <text x="215" y="198" text-anchor="middle" class="data">dupla = 1 σ + 1 π</text>
+        </g>
+        <g id="orb-etino" class="wob" style="animation-delay:-1.6s">
+          <g transform="translate(350,90)">
+            <ellipse cx="0" cy="-13" rx="22" ry="6" fill="var(--info)" opacity=".18"/>
+            <ellipse cx="0" cy="13" rx="22" ry="6" fill="var(--info)" opacity=".18"/>
+            <line x1="-12" y1="-4" x2="12" y2="-4" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="-12" y1="0" x2="12" y2="0" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="-12" y1="4" x2="12" y2="4" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="-12" y1="0" x2="-36" y2="0" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="12" y1="0" x2="36" y2="0" stroke="var(--ink)" stroke-width="2.5"/>
+            <circle cx="-12" r="9" fill="#343A40" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="12" r="9" fill="#343A40" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="-36" r="6" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="36" r="6" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+          </g>
+          <text x="350" y="180" text-anchor="middle" style="font-weight:700">HC≡CH · 180°</text>
+          <text x="350" y="198" text-anchor="middle" class="data">tripla = 1 σ + 2 π</text>
+        </g>
+        <g id="orb-h2o" class="wob" style="animation-delay:-2.4s">
+          <g transform="translate(487,90)">
+            <ellipse cx="-10" cy="-15" rx="9" ry="6" fill="var(--info)" opacity=".18" transform="rotate(-40 -10 -15)"/>
+            <ellipse cx="10" cy="-15" rx="9" ry="6" fill="var(--info)" opacity=".18" transform="rotate(40 10 -15)"/>
+            <line x1="0" y1="0" x2="-27" y2="21" stroke="var(--ink)" stroke-width="2.5"/>
+            <line x1="0" y1="0" x2="27" y2="21" stroke="var(--ink)" stroke-width="2.5"/>
+            <circle r="12" fill="#FA5252" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="-27" cy="21" r="7" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="27" cy="21" r="7" fill="#F8F9FA" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="-7" cy="-17" r="2.2" fill="var(--info)"/><circle cx="-13" cy="-13" r="2.2" fill="var(--info)"/>
+            <circle cx="7" cy="-17" r="2.2" fill="var(--info)"/><circle cx="13" cy="-13" r="2.2" fill="var(--info)"/>
+          </g>
+          <text x="487" y="180" text-anchor="middle" style="font-weight:700">H₂O · 104,5°</text>
+          <text x="487" y="198" text-anchor="middle" class="data">2 σ + 2 pares livres</text>
+        </g>
+      </svg>
+      <div class="stage-note" id="note16">Qual é a hibridização do átomo central da molécula <b>brilhando</b>?</div>
+    </div>
+    <div class="controls" id="chips16">
+      <button class="chip" data-v="sp">sp</button>
+      <button class="chip" data-v="sp2">sp²</button>
+      <button class="chip" data-v="sp3">sp³</button>
+    </div>
+    <div id="fb16"></div>
+    <section class="step" id="quizwrap16" hidden><div class="quiz" id="quiz16"></div></section>
+    <section class="step" id="recap16" hidden>
+      <div class="box prova"><b class="box-title">📌 CAI NA PROVA</b>
+        Conte as <b>nuvens eletrônicas</b> (ligações σ + pares livres) do átomo central:
+        <b>2 nuvens = sp</b> (linear, 180°) · <b>3 = sp²</b> (trigonal, 120°) · <b>4 = sp³</b> (tetraédrica, 109,5°).
+        A 1ª ligação entre dois átomos é sempre <b>σ</b> (sobreposição frontal); as extras da dupla/tripla são <b>π</b> (laterais).
+        Pares livres também contam como nuvem — por isso o O da água é sp³!
+      </div>
+      <div class="box mnemo"><b class="box-title">🧠 MNEMÔNICO</b>
+        <b>“Conte as nuvens: 2-sp, 3-sp², 4-sp³. Dupla tem 1 π, tripla tem 2 π.”</b>
+      </div>
+      <div class="next-row"><button class="btn" data-go="e17">Próxima: 💡 Teste da Lâmpada →</button></div>
+    </section>
+  </div>
+
+  <!-- ================= E17 · ELETRÓLITOS ================= -->
+  <div class="screen" id="e17">
+    <div class="exp-head"><div><span class="eyebrow">ESTAÇÃO 17 · ITEM 6 DO EDITAL · ⏱ ~3 MIN</span><h2>💡 Teste da Lâmpada</h2></div><button class="back" data-go="menu">← menu</button></div>
+    <div class="goal">🎯 <b>Meta:</b> mergulhamos os eletrodos em cada solução. Aposte: a lâmpada acende forte, fraco ou nada? Depois veja o resultado real! Acerte 3 de 4 para a ⭐.</div>
+    <div class="stage">
+      <svg viewBox="0 0 560 240" role="img" aria-label="Circuito com pilha, lâmpada e béquer">
+        <g id="lampScene">
+          <rect x="60" y="176" width="56" height="26" rx="4" fill="var(--muted)"/>
+          <text x="88" y="193" text-anchor="middle" style="font-size:11px; fill:#fff; font-weight:700">PILHA</text>
+          <line x1="70" y1="176" x2="70" y2="170" stroke="var(--ink)" stroke-width="3"/>
+          <line x1="106" y1="176" x2="106" y2="166" stroke="var(--ink)" stroke-width="3"/>
+          <path d="M88,176 V80 H235" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+          <circle id="lampHalo" cx="255" cy="72" r="34" fill="#FFD43B"/>
+          <circle cx="255" cy="72" r="20" class="outline glass"/>
+          <path d="M247,78 l4,-8 l4,8 l4,-8 l4,-4" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <rect x="248" y="92" width="14" height="8" rx="2" fill="var(--muted)"/>
+          <path d="M275,80 H420 V150" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+          <path d="M440,150 V214 H116 V202" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+          <rect x="392" y="162" width="76" height="18" fill="#B5D9F2" opacity=".55"/>
+          <path class="outline glass" d="M388,140 v34 q0,8 8,8 h48 q8,0 8,-8 v-34"/>
+          <line x1="420" y1="150" x2="420" y2="172" stroke="var(--ink)" stroke-width="3.5"/>
+          <line x1="440" y1="150" x2="440" y2="172" stroke="var(--ink)" stroke-width="3.5"/>
+          <text id="sub17" x="430" y="132" text-anchor="middle" style="font-weight:700; font-size:13px">?</text>
+        </g>
+      </svg>
+      <div class="stage-note" id="note17"></div>
+    </div>
+    <div class="controls" id="chips17"></div>
+    <div id="fb17"></div>
+    <section class="step" id="quizwrap17" hidden><div class="quiz" id="quiz17"></div></section>
+    <section class="step" id="recap17" hidden>
+      <div class="box prova"><b class="box-title">📌 CAI NA PROVA</b>
+        Conduz corrente quem tem <b>íons livres</b>: eletrólitos <b>fortes</b> (sais dissolvidos, ácidos/bases fortes — ionização ~100%),
+        <b>fracos</b> (ácido acético, NH₄OH — ionizam pouco), <b>não eletrólitos</b> (açúcar, álcool — moléculas neutras).
+        Detalhe de prova: NaCl <b>sólido</b> NÃO conduz (íons presos no retículo); fundido ou dissolvido, conduz!
+      </div>
+      <div class="box mnemo"><b class="box-title">🧠 MNEMÔNICO</b>
+        <b>“Sem íon solto, sem luz.”</b>
+      </div>
+      <div class="next-row"><button class="btn" data-go="e18">Próxima: ⚔️ Batalha dos Átomos →</button></div>
+    </section>
+  </div>
+
+  <!-- ================= E18 · PROPRIEDADES PERIÓDICAS ================= -->
+  <div class="screen" id="e18">
+    <div class="exp-head"><div><span class="eyebrow">ESTAÇÃO 18 · ITENS 7 E 9 DO EDITAL · ⏱ ~3 MIN</span><h2>⚔️ Batalha dos Átomos</h2></div><button class="back" data-go="menu">← menu</button></div>
+    <div class="goal">🎯 <b>Meta:</b> dois átomos entram no ringue disfarçados do mesmo tamanho. Aposte quem vence cada propriedade — e veja o tamanho real deles! Acerte 3 de 4 para a ⭐.</div>
+    <div class="stage">
+      <svg viewBox="0 0 560 210" role="img" aria-label="Dois átomos em duelo">
+        <g id="duel-l" class="duel" transform="translate(170,100)">
+          <circle r="42" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle r="30" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle r="17" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+          <text id="sym18L" text-anchor="middle" dy="6" style="font-size:17px; font-weight:800">?</text>
+        </g>
+        <text x="280" y="108" text-anchor="middle" style="font-size:24px; font-weight:800">VS</text>
+        <g id="duel-r" class="duel" transform="translate(390,100)">
+          <circle r="42" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle r="30" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle r="17" fill="var(--info-soft)" stroke="var(--info)" stroke-width="2.5"/>
+          <text id="sym18R" text-anchor="middle" dy="6" style="font-size:17px; font-weight:800">?</text>
+        </g>
+      </svg>
+      <div class="stage-note" id="note18"></div>
+    </div>
+    <div class="controls" id="chips18"></div>
+    <div id="fb18"></div>
+    <section class="step" id="quizwrap18" hidden><div class="quiz" id="quiz18"></div></section>
+    <section class="step" id="recap18" hidden>
+      <div class="box prova"><b class="box-title">📌 CAI NA PROVA</b>
+        <b>Raio atômico</b> cresce ← e ↓ (mais camadas embaixo; mais prótons puxando à direita).
+        <b>Eletronegatividade, energia de ionização e afinidade eletrônica</b> crescem → e ↑, rumo ao <b>flúor</b>.
+        <b>Caráter metálico</b> acompanha o raio (cresce ← e ↓, rumo ao frâncio). Gases nobres ficam fora da disputa de eletronegatividade.
+      </div>
+      <div class="box mnemo"><b class="box-title">🧠 MNEMÔNICO</b>
+        <b>“Raio corre pro FRâncio; o resto corre pro Flúor.”</b>
+      </div>
+      <div class="next-row"><button class="btn" data-go="e19">Próxima: 🏷️ Batizado Orgânico →</button></div>
+    </section>
+  </div>
+
+  <!-- ================= E19 · NOMENCLATURA ORGÂNICA ================= -->
+  <div class="screen" id="e19">
+    <div class="exp-head"><div><span class="eyebrow">ESTAÇÃO 19 · ITEM 11 DO EDITAL · ⏱ ~3 MIN</span><h2>🏷️ Batizado Orgânico</h2></div><button class="back" data-go="menu">← menu</button></div>
+    <div class="goal">🎯 <b>Meta:</b> cada estrutura precisa do nome oficial (IUPAC). Prefixo conta os carbonos, sufixo dá a função. Acerte 3 de 4 para a ⭐.</div>
+    <div class="stage">
+      <svg viewBox="0 0 560 220" role="img" aria-label="Quatro estruturas orgânicas">
+        <g id="org19-met" class="wob">
+          <g transform="translate(80,92)" style="font-weight:700">
+            <line x1="0" y1="-12" x2="0" y2="-30" stroke="var(--ink)" stroke-width="2"/>
+            <line x1="0" y1="12" x2="0" y2="30" stroke="var(--ink)" stroke-width="2"/>
+            <line x1="-12" y1="0" x2="-30" y2="0" stroke="var(--ink)" stroke-width="2"/>
+            <line x1="12" y1="0" x2="30" y2="0" stroke="var(--ink)" stroke-width="2"/>
+            <text text-anchor="middle" dy="6" style="font-size:17px">C</text>
+            <text y="-34" text-anchor="middle" style="font-size:14px">H</text>
+            <text y="44" text-anchor="middle" style="font-size:14px">H</text>
+            <text x="-40" dy="5" text-anchor="middle" style="font-size:14px">H</text>
+            <text x="40" dy="5" text-anchor="middle" style="font-size:14px">H</text>
+          </g>
+          <text x="80" y="180" text-anchor="middle" class="data">1 carbono, só simples</text>
+        </g>
+        <g id="org19-eta" class="wob" style="animation-delay:-.8s">
+          <g transform="translate(215,92)" style="font-weight:700">
+            <text x="-40" dy="6" text-anchor="middle" style="font-size:15px">CH₃</text>
+            <line x1="-22" y1="0" x2="-14" y2="0" stroke="var(--ink)" stroke-width="2"/>
+            <text x="4" dy="6" text-anchor="middle" style="font-size:15px">CH₂</text>
+            <line x1="22" y1="0" x2="30" y2="0" stroke="var(--ink)" stroke-width="2"/>
+            <text x="44" dy="6" text-anchor="middle" style="font-size:15px" fill="var(--accent)">OH</text>
+          </g>
+          <text x="215" y="180" text-anchor="middle" class="data">2 carbonos + OH</text>
+        </g>
+        <g id="org19-prop" class="wob" style="animation-delay:-1.6s">
+          <g transform="translate(350,92)" style="font-weight:700">
+            <text x="-44" dy="6" text-anchor="middle" style="font-size:15px">CH₃</text>
+            <line x1="-26" y1="0" x2="-14" y2="0" stroke="var(--ink)" stroke-width="2"/>
+            <text x="-4" dy="6" text-anchor="middle" style="font-size:15px">C</text>
+            <line x1="-7" y1="-12" x2="-7" y2="-28" stroke="var(--ink)" stroke-width="2"/>
+            <line x1="-1" y1="-12" x2="-1" y2="-28" stroke="var(--ink)" stroke-width="2"/>
+            <text x="-4" y="-34" text-anchor="middle" style="font-size:15px" fill="var(--accent)">O</text>
+            <line x1="6" y1="0" x2="18" y2="0" stroke="var(--ink)" stroke-width="2"/>
+            <text x="36" dy="6" text-anchor="middle" style="font-size:15px">CH₃</text>
+          </g>
+          <text x="350" y="180" text-anchor="middle" class="data">3 carbonos + C=O no meio</text>
+        </g>
+        <g id="org19-ac" class="wob" style="animation-delay:-2.4s">
+          <g transform="translate(487,92)" style="font-weight:700">
+            <text x="-38" dy="6" text-anchor="middle" style="font-size:15px">CH₃</text>
+            <line x1="-20" y1="0" x2="-10" y2="0" stroke="var(--ink)" stroke-width="2"/>
+            <text x="0" dy="6" text-anchor="middle" style="font-size:15px">C</text>
+            <line x1="-3" y1="-12" x2="-3" y2="-28" stroke="var(--ink)" stroke-width="2"/>
+            <line x1="3" y1="-12" x2="3" y2="-28" stroke="var(--ink)" stroke-width="2"/>
+            <text x="0" y="-34" text-anchor="middle" style="font-size:15px" fill="var(--accent)">O</text>
+            <line x1="10" y1="0" x2="20" y2="0" stroke="var(--ink)" stroke-width="2"/>
+            <text x="36" dy="6" text-anchor="middle" style="font-size:15px" fill="var(--accent)">OH</text>
+          </g>
+          <text x="487" y="180" text-anchor="middle" class="data">2 carbonos + COOH</text>
+        </g>
+      </svg>
+      <div class="stage-note" id="note19">Qual é o nome oficial da estrutura <b>brilhando</b>?</div>
+    </div>
+    <div class="controls" id="chips19">
+      <button class="chip" data-v="met">Metano</button>
+      <button class="chip" data-v="eta">Etanol</button>
+      <button class="chip" data-v="prop">Propanona</button>
+      <button class="chip" data-v="ac">Ácido etanoico</button>
+    </div>
+    <div id="fb19"></div>
+    <section class="step" id="quizwrap19" hidden><div class="quiz" id="quiz19"></div></section>
+    <section class="step" id="recap19" hidden>
+      <div class="box prova"><b class="box-title">📌 CAI NA PROVA</b>
+        Nome IUPAC = <b>prefixo</b> (nº de C: met-1, et-2, prop-3, but-4, pent-5…) + <b>infixo</b> (an = simples,
+        en = dupla, in = tripla) + <b>sufixo</b> da função (-o hidrocarboneto, -ol álcool, -al aldeído, -ona cetona,
+        -oico ácido, -amina). Ex.: etanol = 2C, saturado, álcool; propanona = 3C, cetona (a acetona!).
+      </div>
+      <div class="box mnemo"><b class="box-title">🧠 MNEMÔNICO — prefixos</b>
+        <b>“MEu Tio PROcura BUscar PENtes”</b> (MET-1, ET-2, PROP-3, BUT-4, PENT-5).
+      </div>
+      <div class="next-row"><button class="btn" data-go="e20">Próxima: 🎈 Pistão dos Gases →</button></div>
+    </section>
+  </div>
+
+  <!-- ================= E20 · GASES ================= -->
+  <div class="screen" id="e20">
+    <div class="exp-head"><div><span class="eyebrow">ESTAÇÃO 20 · ITENS 2 E 5 DO EDITAL · ⏱ ~3 MIN</span><h2>🎈 Pistão dos Gases</h2></div><button class="back" data-go="menu">← menu</button></div>
+    <div class="goal">🎯 <b>Meta:</b> preveja o que acontece com o gás do cilindro em cada situação — e veja o pistão obedecer às leis! Acerte 3 de 4 para a ⭐.</div>
+    <div class="stage">
+      <svg viewBox="0 0 560 235" role="img" aria-label="Cilindro com pistão, termômetro e balões">
+        <g transform="translate(170,34)">
+          <path class="outline" d="M-60,-4 v158 h120 v-158" fill="none"/>
+          <g id="piston20">
+            <rect x="-24" y="-24" width="48" height="8" rx="3" fill="var(--muted)"/>
+            <rect x="-5" y="-18" width="10" height="48" fill="var(--muted)"/>
+            <rect x="-58" y="28" width="116" height="12" rx="2" fill="var(--muted)" stroke="var(--ink)" stroke-width="2"/>
+          </g>
+          <g id="gasParts">
+            <circle class="jig" cx="-36" cy="70" r="5" fill="var(--accent)"/>
+            <circle class="jig" cx="0" cy="86" r="5" fill="var(--accent)" style="animation-delay:.12s"/>
+            <circle class="jig" cx="34" cy="66" r="5" fill="var(--accent)" style="animation-delay:.24s"/>
+            <circle class="jig" cx="-22" cy="112" r="5" fill="var(--accent)" style="animation-delay:.36s"/>
+            <circle class="jig" cx="22" cy="120" r="5" fill="var(--accent)" style="animation-delay:.48s"/>
+            <circle class="jig" cx="4" cy="138" r="5" fill="var(--accent)" style="animation-delay:.6s"/>
+          </g>
+          <text x="0" y="176" text-anchor="middle" class="data">cilindro com pistão móvel</text>
+        </g>
+        <g transform="translate(340,44)">
+          <rect x="-7" y="0" width="14" height="100" rx="7" class="outline glass"/>
+          <g id="merc20"><rect x="-3.5" y="55" width="7" height="45" rx="3.5" fill="#E03131"/></g>
+          <circle cx="0" cy="106" r="10" fill="#E03131" stroke="var(--ink)" stroke-width="2"/>
+          <text x="0" y="136" text-anchor="middle" class="data">T</text>
+        </g>
+        <g id="ballons20">
+          <g class="flo"><circle cx="450" cy="70" r="26" fill="#A8D8F0" stroke="var(--ink)" stroke-width="2"/><text x="450" y="76" text-anchor="middle" style="font-weight:700; font-size:13px">O₂</text><line x1="450" y1="96" x2="450" y2="130" stroke="var(--ink)" stroke-width="1.5"/></g>
+          <g class="flo" style="animation-delay:1.2s"><circle cx="510" cy="82" r="26" fill="#FFC078" stroke="var(--ink)" stroke-width="2"/><text x="510" y="88" text-anchor="middle" style="font-weight:700; font-size:13px">N₂</text><line x1="510" y1="108" x2="510" y2="140" stroke="var(--ink)" stroke-width="1.5"/></g>
+          <text x="480" y="166" text-anchor="middle" class="data">mesmo V, T e P</text>
+        </g>
+      </svg>
+      <div class="stage-note" id="note20"></div>
+    </div>
+    <div class="controls" id="chips20"></div>
+    <div id="fb20"></div>
+    <section class="step" id="quizwrap20" hidden><div class="quiz" id="quiz20"></div></section>
+    <section class="step" id="recap20" hidden>
+      <div class="box prova"><b class="box-title">📌 CAI NA PROVA</b>
+        <b>Boyle</b> (T fixa): P×V constante — dobra P, cai V pela metade. <b>Charles/Gay-Lussac</b> (P fixa): V/T constante
+        — sempre em <b>KELVIN</b> (K = °C + 273)! <b>Avogadro</b>: volumes iguais (mesmas T e P) = mesmo nº de moléculas;
+        na CNTP 1 mol = 22,4 L. Equação geral: <b>PV = nRT</b>. Gás real ≈ ideal em <b>baixa P e alta T</b>.
+      </div>
+      <div class="box mnemo"><b class="box-title">🧠 MNEMÔNICO</b>
+        <b>“BOYLE aperta (P×V), CHARLES esquenta (V/T), AVOGADRO conta (n).”</b>
+      </div>
       <div class="next-row"><button class="btn ghost" data-go="calc">📚 Caderno de Cálculos</button><button class="btn" id="btnFinal">Ver meu resultado 🏆 →</button></div>
     </section>
   </div>
@@ -1225,7 +1670,7 @@
       <p id="finMsg"></p>
     </div>
     <div class="box prova">
-      <b class="box-title">⚡ RESUMO RELÂMPAGO — o edital inteiro em 13 linhas</b>
+      <b class="box-title">⚡ RESUMO RELÂMPAGO — o edital inteiro em 20 linhas</b>
       <ul class="recap">
         <li>⚛️ <b>Modelos:</b> Dalton bola → Thomson pudim → Rutherford núcleo → Bohr níveis quantizados.</li>
         <li>⚖️ <b>Leis ponderais:</b> Lavoisier conserva massa; Proust fixa proporções; 1 mol = 6,02×10²³.</li>
@@ -1240,6 +1685,13 @@
         <li>🃏 <b>Funções inorgânicas:</b> H na frente = ácido · OH no fim = base · O no fim = óxido · metal + ametal = sal.</li>
         <li>⚗️ <b>Misturas:</b> sólido solto FILTRA · imiscível DECANTA · dissolvido DESTILA (fracionada p/ líquidos miscíveis).</li>
         <li>👩‍🏫 <b>Ensino:</b> aula investigativa (aluno protagonista), TICs com objetivo pedagógico, avaliação D-F-S, PCNEM = contextualizar.</li>
+        <li>⏳ <b>História:</b> ALquimia deu a técnica, LAvoisier a balança, DALton o átomo, MENdeleev a tabela (com lacunas!).</li>
+        <li>🏭 <b>Estequiometria:</b> B-M-P — Balanceia, vira Mol (n = m/M), aplica a Proporção; CNTP = 22,4 L/mol.</li>
+        <li>🌀 <b>Hibridização:</b> conte as nuvens — 2·sp (180°), 3·sp² (120°), 4·sp³ (109,5°); dupla = σ+π, tripla = σ+2π.</li>
+        <li>💡 <b>Eletrólitos:</b> só íon livre conduz — forte ioniza tudo, fraco pouco, molécula neutra nada (NaCl sólido não conduz!).</li>
+        <li>⚔️ <b>Periódicas:</b> raio corre pro FRâncio (←↓); eletronegatividade, EI e afinidade correm pro Flúor (→↑).</li>
+        <li>🏷️ <b>Nomenclatura:</b> prefixo conta C (met-et-prop-but-pent) + infixo (an/en/in) + sufixo da função (-o, -ol, -ona, -al, -oico).</li>
+        <li>🎈 <b>Gases:</b> Boyle aperta (P×V), Charles esquenta (V/T em kelvin!), Avogadro conta (mesmo V = mesmo nº de moléculas).</li>
       </ul>
     </div>
     <div class="next-row" style="justify-content:center">
@@ -1332,7 +1784,28 @@ const QUIZ = {
        explain:'O sal está DISSOLVIDO (mistura homogênea): filtro e decantação não funcionam. Na destilação a água evapora, condensa no condensador e é recolhida pura — o sal fica no balão.'},
   e13:{ q:'A avaliação FORMATIVA, valorizada pelos PCNEM, é aquela que:',
        opts:['Acontece apenas na prova bimestral','Acompanha todo o processo e reorienta o ensino conforme as dificuldades','Serve somente para classificar os alunos em notas','Mede apenas a memorização de fórmulas'], correct:1,
-       explain:'Diagnóstica ANTES (o que já sabem), formativa DURANTE (feedback contínuo que reorienta o professor), somativa NO FIM (nota). O ensino investigativo só funciona com a formativa acompanhando.'}
+       explain:'Diagnóstica ANTES (o que já sabem), formativa DURANTE (feedback contínuo que reorienta o professor), somativa NO FIM (nota). O ensino investigativo só funciona com a formativa acompanhando.'},
+  e14:{ q:'A principal herança da Alquimia para a Química moderna foi:',
+       opts:['A transformação de chumbo em ouro','As técnicas e aparelhagens de laboratório (destilação, calcinação, banho-maria)','O modelo atômico quântico','A lei da conservação das massas'], correct:1,
+       explain:'A transmutação em ouro nunca aconteceu, mas os alquimistas nos deixaram fornos, alambiques e técnicas. A conservação das massas é de Lavoisier; o modelo quântico veio muito depois.'},
+  e15:{ q:'Na reação N₂ + 3 H₂ → 2 NH₃, quantos LITROS de NH₃ (CNTP) se formam a partir de 2 mol de N₂?',
+       opts:['22,4 L','89,6 L','44,8 L','67,2 L'], correct:1,
+       explain:'Proporção 1 N₂ : 2 NH₃ → 2 mol de N₂ dão 4 mol de NH₃. V = 4 × 22,4 = 89,6 L. (B-M-P: balanceia, vira mol, aplica a proporção!)'},
+  e16:{ q:'No eteno (H₂C=CH₂), cada carbono apresenta hibridização:',
+       opts:['sp','sp²','sp³','sp³d'], correct:1,
+       explain:'Cada C tem 3 nuvens (2 C–H + 1 C=C, pois a dupla conta como UMA nuvem) → sp², trigonal, 120°. A dupla = 1 σ + 1 π.'},
+  e17:{ q:'Uma solução aquosa conduz corrente elétrica quando:',
+       opts:['Contém moléculas neutras dissolvidas','Contém íons livres em movimento','Está saturada','O soluto é orgânico'], correct:1,
+       explain:'Arrhenius: quem transporta a carga são os ÍONS livres (Na⁺, Cl⁻, H⁺, OH⁻…). Açúcar dissolve como molécula neutra — por isso não acende a lâmpada.'},
+  e18:{ q:'A energia de ionização é a energia necessária para:',
+       opts:['Formar uma ligação química','Arrancar um elétron de um átomo gasoso isolado','Ganhar um elétron','Fundir o elemento'], correct:1,
+       explain:'EI = arrancar elétron (cresce →↑, rumo ao F, junto com a eletronegatividade). GANHAR elétron é a afinidade eletrônica. O raio faz o caminho contrário.'},
+  e19:{ q:'Na nomenclatura IUPAC, o sufixo -OL indica a presença de:',
+       opts:['Ácido carboxílico','Hidroxila de álcool (–OH em carbono saturado)','Carbonila de cetona','Ligação dupla'], correct:1,
+       explain:'-ol = álcool (etanol!) · -ona = cetona · -al = aldeído · -oico = ácido carboxílico · dupla é o infixo -en- (eteno). Prefixo conta os carbonos: met-et-prop-but.'},
+  e20:{ q:'Um gás ideal ocupa 10 L a 300 K. Aquecendo até 600 K com pressão constante, o novo volume será:',
+       opts:['5 L','20 L','10 L','40 L'], correct:1,
+       explain:'Charles: V₁/T₁ = V₂/T₂ → 10/300 = V₂/600 → V₂ = 20 L. Dobrou a temperatura ABSOLUTA (em kelvin!), dobrou o volume.'}
 };
 const LETTERS = ['A','B','C','D'];
 function buildQuiz(mountId, key, onDone){
@@ -1867,6 +2340,207 @@ playRounds({
   });
 })();
 
+/* ---------- rounds engine com chips por rodada ---------- */
+function playQuizRounds(cfg){
+  // cfg: exp, needed, chips, note, fb, quizMount, quizWrap, recap,
+  //      seq [{q, opts:[{t,v}], answer, right, praise, fx(ok), onRound()}]
+  let idx = 0, hits = 0, over = false;
+  const box = $(cfg.chips);
+  function renderRound(prefix){
+    const cur = cfg.seq[idx];
+    box.innerHTML = '';
+    cur.opts.forEach(o=>{
+      const b = document.createElement('button');
+      b.className = 'chip'; b.innerHTML = o.t; b.dataset.v = o.v;
+      b.addEventListener('click', ()=>answer(b));
+      box.appendChild(b);
+    });
+    cur.onRound && cur.onRound();
+    $(cfg.note).innerHTML = (prefix||'') + 'Rodada ' + (idx+1) + ' de ' + cfg.seq.length + ': ' + cur.q;
+  }
+  function answer(b){
+    if(over) return;
+    const cur = cfg.seq[idx];
+    const ok = b.dataset.v === cur.answer;
+    if(ok) hits++;
+    cur.fx && cur.fx(ok);
+    idx++;
+    const verdict = ok ? '🎯 <b>Acertou!</b> ' : '❌ <b>Era “'+cur.right+'”.</b> ';
+    if(idx < cfg.seq.length){
+      setTimeout(()=>renderRound(verdict + cur.praise + '<br>'), 1400);
+      $(cfg.note).innerHTML = verdict + cur.praise;
+      box.querySelectorAll('.chip').forEach(c=>c.disabled=true);
+    } else {
+      over = true;
+      box.querySelectorAll('.chip').forEach(c=>c.disabled=true);
+      $(cfg.note).innerHTML = verdict + cur.praise;
+      let extra = '';
+      if(hits >= cfg.needed){ addStar(cfg.exp+'p'); extra = ' <b>+1 ⭐ pela prática!</b>'; }
+      $(cfg.fb).innerHTML = '<div class="feedback '+(hits>=cfg.needed?'good':'bad')+'">Você acertou <b>'+hits+' de '+cfg.seq.length+'</b>.'+extra+' Agora, a questão de prova:</div>';
+      buildQuiz(cfg.quizMount, cfg.exp, ()=>{ markDone(cfg.exp); reveal($(cfg.recap)); });
+      reveal($(cfg.quizWrap));
+    }
+  }
+  renderRound('');
+}
+
+/* ================= E14 · HISTÓRIA ================= */
+playRounds({
+  exp:'e14', needed:3,
+  chips:'#chips14', note:'#note14', fb:'#fb14',
+  quizMount:'quiz14', quizWrap:'#quizwrap14', recap:'#recap14',
+  ask:(item,n)=>'Rodada '+n+' de 4: a cena <b>brilhando</b> é de qual capítulo da história?',
+  seq: shuffle([
+    {id:'hist-alq', answer:'alq', right:'Alquimistas', praise:'Caldeirão, símbolos e a pedra filosofal: não viraram ouro, mas nos deram a destilação, os cadinhos e o banho-maria.'},
+    {id:'hist-lav', answer:'lav', right:'Lavoisier', praise:'1789: Lavoisier mede TUDO na balança — conservação das massas e o fim da teoria do flogisto.'},
+    {id:'hist-dal', answer:'dal', right:'Dalton', praise:'1803: Dalton ressuscita o átomo — esferas maciças e indivisíveis explicando as leis ponderais.'},
+    {id:'hist-men', answer:'men', right:'Mendeleev', praise:'1869: Mendeleev organiza os elementos e OUSA deixar lacunas — e acertou os elementos que ainda seriam descobertos!'}
+  ])
+});
+
+/* ================= E15 · ESTEQUIOMETRIA ================= */
+playQuizRounds({
+  exp:'e15', needed:3,
+  chips:'#chips15', note:'#note15', fb:'#fb15',
+  quizMount:'quiz15', quizWrap:'#quizwrap15', recap:'#recap15',
+  seq:[
+    {q:'1 mol de CO₂ (M = 44 g/mol) tem quantos gramas?', answer:'44',
+     opts:[{t:'22 g',v:'22'},{t:'44 g',v:'44'},{t:'88 g',v:'88'}], right:'44 g',
+     praise:'Massa de 1 mol = a própria massa molar: 44 g. Simples assim!'},
+    {q:'88 g de CO₂ correspondem a quantos mols?', answer:'2',
+     opts:[{t:'1 mol',v:'1'},{t:'2 mol',v:'2'},{t:'4 mol',v:'4'}], right:'2 mol',
+     praise:'n = m ÷ M = 88 ÷ 44 = 2 mol. Massa vira mol DIVIDINDO pela massa molar.'},
+    {q:'2 mol de gás na CNTP ocupam que volume?', answer:'44.8',
+     opts:[{t:'22,4 L',v:'22.4'},{t:'44,8 L',v:'44.8'},{t:'11,2 L',v:'11.2'}], right:'44,8 L',
+     praise:'Cada mol de gás = 22,4 L na CNTP → 2 × 22,4 = 44,8 L, seja qual for o gás!'},
+    {q:'N₂ + 3 H₂ → 2 NH₃: 1 mol de N₂ produz quantos mols de NH₃?', answer:'2',
+     opts:[{t:'1 mol',v:'1'},{t:'2 mol',v:'2'},{t:'3 mol',v:'3'}], right:'2 mol',
+     praise:'A proporção vem dos COEFICIENTES: 1 N₂ → 2 NH₃. Os coeficientes são a receita da fábrica.'}
+  ]
+});
+
+/* ================= E16 · HIBRIDIZAÇÃO ================= */
+playRounds({
+  exp:'e16', needed:3,
+  chips:'#chips16', note:'#note16', fb:'#fb16',
+  quizMount:'quiz16', quizWrap:'#quizwrap16', recap:'#recap16',
+  ask:(item,n)=>'Rodada '+n+' de 4: qual a hibridização do átomo central da molécula <b>brilhando</b>?',
+  seq: shuffle([
+    {id:'orb-ch4', answer:'sp3', right:'sp³', praise:'CH₄: 4 ligações σ, nenhum par livre = 4 nuvens → sp³ (109,5°).'},
+    {id:'orb-eteno', answer:'sp2', right:'sp²', praise:'Eteno: cada C tem 3 nuvens (a dupla conta como UMA) → sp², 120°. A dupla = 1 σ + 1 π.'},
+    {id:'orb-etino', answer:'sp', right:'sp', praise:'Etino: 2 nuvens por carbono → sp, linear 180°. A tripla = 1 σ + 2 π.'},
+    {id:'orb-h2o', answer:'sp3', right:'sp³', praise:'PEGADINHA: o O tem 2 ligações + 2 PARES LIVRES = 4 nuvens → sp³ também!'}
+  ])
+});
+
+/* ================= E17 · ELETRÓLITOS ================= */
+(function(){
+  const scene = document.getElementById('lampScene');
+  const OPTS = [{t:'💡 Acende forte',v:'forte'},{t:'🕯️ Acende fraco',v:'fraco'},{t:'🌑 Não acende',v:'nao'}];
+  function setLamp(mode){
+    scene.classList.remove('lamp-strong','lamp-weak');
+    if(mode==='forte') scene.classList.add('lamp-strong');
+    if(mode==='fraco') scene.classList.add('lamp-weak');
+  }
+  playQuizRounds({
+    exp:'e17', needed:3,
+    chips:'#chips17', note:'#note17', fb:'#fb17',
+    quizMount:'quiz17', quizWrap:'#quizwrap17', recap:'#recap17',
+    seq:[
+      {q:'sal de cozinha (NaCl) dissolvido — a lâmpada…', answer:'forte', opts:OPTS, right:'Acende forte',
+       onRound(){ $('#sub17').textContent='NaCl(aq)'; setLamp('off'); }, fx(){ setLamp('forte'); },
+       praise:'NaCl se DISSOCIA em Na⁺ e Cl⁻: íons livres carregam a corrente — brilho total!'},
+      {q:'açúcar (C₁₂H₂₂O₁₁) dissolvido — a lâmpada…', answer:'nao', opts:OPTS, right:'Não acende',
+       onRound(){ $('#sub17').textContent='açúcar(aq)'; setLamp('off'); }, fx(){ setLamp('off'); },
+       praise:'Açúcar dissolve como MOLÉCULA neutra: zero íons, zero corrente, lâmpada apagada.'},
+      {q:'vinagre (ácido acético) — a lâmpada…', answer:'fraco', opts:OPTS, right:'Acende fraco',
+       onRound(){ $('#sub17').textContent='vinagre'; setLamp('off'); }, fx(){ setLamp('fraco'); },
+       praise:'Ácido FRACO ioniza pouquinho: poucos íons, luzinha tímida.'},
+      {q:'ácido clorídrico (HCl) diluído — a lâmpada…', answer:'forte', opts:OPTS, right:'Acende forte',
+       onRound(){ $('#sub17').textContent='HCl(aq)'; setLamp('off'); }, fx(){ setLamp('forte'); },
+       praise:'Ácido forte ioniza ~100%: mar de H⁺ e Cl⁻ — acende com força!'}
+    ]
+  });
+})();
+
+/* ================= E18 · BATALHA PERIÓDICA ================= */
+(function(){
+  const L = document.getElementById('duel-l'), R = document.getElementById('duel-r');
+  function setDuel(sl, sr){
+    $('#sym18L').textContent = sl; $('#sym18R').textContent = sr;
+    L.style.transform=''; R.style.transform='';
+  }
+  function revealSizes(a,b){ L.style.transform='scale('+a+')'; R.style.transform='scale('+b+')'; }
+  playQuizRounds({
+    exp:'e18', needed:3,
+    chips:'#chips18', note:'#note18', fb:'#fb18',
+    quizMount:'quiz18', quizWrap:'#quizwrap18', recap:'#recap18',
+    seq:[
+      {q:'<b>Na</b> × <b>Cl</b> (mesmo período): quem tem o MAIOR raio atômico?', answer:'Na',
+       opts:[{t:'Na',v:'Na'},{t:'Cl',v:'Cl'}], right:'Na',
+       onRound(){ setDuel('Na','Cl'); }, fx(){ revealSizes(1.25,.7); },
+       praise:'No período, o raio DIMINUI p/ a direita: mais prótons puxando a mesma camada. Na > Cl.'},
+      {q:'<b>F</b> × <b>I</b>: quem tem a MAIOR eletronegatividade?', answer:'F',
+       opts:[{t:'F',v:'F'},{t:'I',v:'I'}], right:'F',
+       onRound(){ setDuel('F','I'); }, fx(){ revealSizes(.7,1.25); },
+       praise:'O F é pequenininho (veja!) mas é o campeão absoluto de eletronegatividade (4,0).'},
+      {q:'<b>K</b> × <b>Li</b> (mesmo grupo): quem tem o MAIOR raio?', answer:'K',
+       opts:[{t:'K',v:'K'},{t:'Li',v:'Li'}], right:'K',
+       onRound(){ setDuel('K','Li'); }, fx(){ revealSizes(1.35,.65); },
+       praise:'Descendo o grupo ganha-se camadas: K tem 4, Li tem 2. K gigante!'},
+      {q:'<b>Cl</b> × <b>Br</b>: quem tem a MAIOR eletronegatividade?', answer:'Cl',
+       opts:[{t:'Cl',v:'Cl'},{t:'Br',v:'Br'}], right:'Cl',
+       onRound(){ setDuel('Cl','Br'); }, fx(){ revealSizes(.8,1.15); },
+       praise:'Subindo o grupo a eletronegatividade cresce: Cl (3,0) > Br (2,8).'}
+    ]
+  });
+})();
+
+/* ================= E19 · NOMENCLATURA ================= */
+playRounds({
+  exp:'e19', needed:3,
+  chips:'#chips19', note:'#note19', fb:'#fb19',
+  quizMount:'quiz19', quizWrap:'#quizwrap19', recap:'#recap19',
+  ask:(item,n)=>'Rodada '+n+' de 4: qual é o nome oficial da estrutura <b>brilhando</b>?',
+  seq: shuffle([
+    {id:'org19-met', answer:'met', right:'Metano', praise:'MET = 1 carbono + ANO (saturado): metano, o gás do biogás e do pântano.'},
+    {id:'org19-eta', answer:'eta', right:'Etanol', praise:'ET = 2C + OL = álcool: etanol, o álcool do posto e das bebidas.'},
+    {id:'org19-prop', answer:'prop', right:'Propanona', praise:'PROP = 3C + ONA = cetona: propanona, a acetona do removedor de esmalte.'},
+    {id:'org19-ac', answer:'ac', right:'Ácido etanoico', praise:'2C + COOH = ácido etanoico (acético): o ácido do vinagre.'}
+  ])
+});
+
+/* ================= E20 · GASES ================= */
+(function(){
+  const piston = document.getElementById('piston20');
+  const merc = document.getElementById('merc20');
+  const parts = document.getElementById('gasParts');
+  function reset(){ piston.style.transform=''; merc.style.transform=''; parts.classList.remove('fast'); }
+  playQuizRounds({
+    exp:'e20', needed:3,
+    chips:'#chips20', note:'#note20', fb:'#fb20',
+    quizMount:'quiz20', quizWrap:'#quizwrap20', recap:'#recap20',
+    seq:[
+      {q:'Dobrando a PRESSÃO (T constante), o volume do gás…', answer:'metade',
+       opts:[{t:'cai pela metade',v:'metade'},{t:'dobra',v:'dobra'},{t:'não muda',v:'igual'}], right:'cai pela metade',
+       onRound(){ reset(); }, fx(){ piston.style.transform='translateY(34px)'; },
+       praise:'Boyle: P × V = constante (T fixa). Aperta o dobro, sobra metade do espaço — veja o pistão!'},
+      {q:'AQUECENDO o gás (P constante), o volume…', answer:'aumenta',
+       opts:[{t:'aumenta',v:'aumenta'},{t:'diminui',v:'diminui'},{t:'não muda',v:'igual'}], right:'aumenta',
+       onRound(){ reset(); }, fx(){ piston.style.transform='translateY(-16px)'; merc.style.transform='scaleY(1.6)'; parts.classList.add('fast'); },
+       praise:'Charles/Gay-Lussac: V/T = constante (em KELVIN!). Partículas agitadas empurram o pistão p/ cima.'},
+      {q:'Os balões de O₂ e N₂ têm o mesmo V, T e P. Então eles têm…', answer:'moleculas',
+       opts:[{t:'o mesmo nº de moléculas',v:'moleculas'},{t:'a mesma massa',v:'massa'},{t:'a mesma densidade',v:'dens'}], right:'o mesmo nº de moléculas',
+       onRound(){ reset(); }, fx(){ const b=document.getElementById('ballons20'); b.classList.add('glow'); setTimeout(()=>b.classList.remove('glow'),2000); },
+       praise:'Avogadro! Mesmo V, T e P = mesmo número de moléculas — mas massas diferentes (O₂ = 32 g/mol, N₂ = 28 g/mol).'},
+      {q:'Um gás REAL se comporta como ideal em…', answer:'baixaP',
+       opts:[{t:'baixa P e alta T',v:'baixaP'},{t:'alta P e baixa T',v:'altaP'},{t:'qualquer condição',v:'sempre'}], right:'baixa P e alta T',
+       onRound(){ reset(); }, fx(){ parts.classList.add('fast'); },
+       praise:'Longe da liquefação (rarefeito e quente), as moléculas mal interagem: PV = nRT funciona direitinho.'}
+    ]
+  });
+})();
+
 /* ================= FINAL ================= */
 function confettiRain(){
   const colors = ['#C2255C','#1971C2','#2B8A3E','#F0B24E','#845EF6','#F06595'];
@@ -1884,12 +2558,12 @@ function confettiRain(){
 $('#btnFinal').addEventListener('click', ()=>{
   const n = starTotal();
   let trophy, title, msg;
-  if(n >= 23){ trophy='🏆'; title='Mestra Alquimista!'; msg='Domínio quase total dos 16 itens do edital. A banca que se prepare, professora!'; }
-  else if(n >= 15){ trophy='🔬'; title='Cientista de Bancada!'; msg='Muito bem! Revise o resumo relâmpago — cada estrela que falta é um ponto a mais na prova.'; }
+  if(n >= 35){ trophy='🏆'; title='Mestra Alquimista!'; msg='Domínio quase total dos 16 itens do edital. A banca que se prepare, professora!'; }
+  else if(n >= 22){ trophy='🔬'; title='Cientista de Bancada!'; msg='Muito bem! Revise o resumo relâmpago — cada estrela que falta é um ponto a mais na prova.'; }
   else { trophy='🥼'; title='Estagiária do Lab — por enquanto!'; msg='Todo grande químico começou errando experimento. Jogue de novo: a repetição espaçada é o segredo da memória!'; }
   $('#finTrophy').textContent = trophy;
   $('#finTitle').textContent = title;
-  $('#finStars').textContent = '⭐ ' + n + ' de 26 estrelas';
+  $('#finStars').textContent = '⭐ ' + n + ' de 40 estrelas';
   $('#finMsg').textContent = msg;
   showScreen('final');
   if(n >= 12) confettiRain();
