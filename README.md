@@ -1,7 +1,13 @@
-# 🧪 Lab da Josi — Jogo de Química
+# 🧪 Lab da Josi — Química para Concurso
 
-Jogo interativo de Química com 13 estações animadas + caderno de cálculos resolvidos,
-baseado no conteúdo programático oficial do Edital nº 030/2018-SEDUC/SEPLAG (CEV/UECE) — Professor de Química.
+Material de estudo de Química para concurso de Professor (Edital SEDUC-CE 2018 / CONSULPAM).
 
-**Jogar:** abra `index.html` (ou o arquivo `JOGO DE QUÍMICA.html`) em qualquer navegador.
-O progresso (estrelas) fica salvo automaticamente no navegador.
+## 🌐 Acesse online
+**https://josifoda.github.io/quimica/**
+
+- 🎮 **Jogo de Química** — 20 estações animadas e interativas (`jogo.html`)
+- 📚 **Apostila de Estudo** — todo o edital passo a passo, com calculadoras interativas, avatar-tutora e gamificação (`apostila.html`)
+
+O progresso (estrelas e XP) fica salvo automaticamente no navegador.
+
+Feito com 💜 para a Josiane estudar.
