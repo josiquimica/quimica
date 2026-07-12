@@ -2,9 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>📚 Apostila da Josi — Química + Conhecimentos Gerais</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#C2255C">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Apostila da Josi">
+<link rel="apple-touch-icon" href="icon-180.png">
 <style>
   :root{
     --bg:#EDF4F2; --panel:#FFFFFF; --panel2:#F6FAF9; --ink:#132F36; --muted:#587179;
@@ -1416,6 +1423,8 @@ document.querySelectorAll('details.quiz').forEach(d=>{
 
 /* mensagem ociosa a cada 45s se a bolha estiver aberta */
 setInterval(()=>{ if(!$('#tutorBubble').classList.contains('hide') && Math.random()<.4) tutorTip(); }, 45000);
+
+if('serviceWorker' in navigator){ window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
 </script>
 </body>
 </html>

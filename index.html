@@ -2,9 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>🧪 Lab da Josi — Química para Concurso</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#C2255C">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lab da Josi">
+<link rel="apple-touch-icon" href="icon-180.png">
 <style>
   :root{
     --bg:#EDF4F2; --panel:#FFFFFF; --ink:#132F36; --muted:#587179; --line:#D5E2E0;
@@ -65,6 +72,7 @@
       <span class="go">Estudar agora →</span>
     </a>
   </div>
-  <footer>Feito com 💜 para a Josiane estudar. Seu progresso fica salvo no seu navegador.</footer>
+  <footer>Feito com 💜 para a Josiane estudar. Seu progresso fica salvo no seu navegador.<br><span style="font-size:.92em">📲 No iPhone: toque em <b>Compartilhar</b> → <b>Adicionar à Tela de Início</b> para instalar como app.</span></footer>
+  <script>if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }</script>
 </body>
 </html>
