@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>📚 Apostila da Josi — Química + Conhecimentos Gerais</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{
+    --bg:#EDF4F2; --panel:#FFFFFF; --panel2:#F6FAF9; --ink:#132F36; --muted:#587179;
+    --line:#D5E2E0; --accent:#C2255C; --accent-soft:#FBE3EC;
+    --good:#2B8A3E; --good-soft:#E3F5E8; --bad:#C92A2A; --bad-soft:#FBE7E7;
+    --info:#1971C2; --info-soft:#E1EEFB; --warn:#B87708; --warn-soft:#FDF0DC;
+    --calc:#7048E8; --calc-soft:#EDE7FB; --shadow:0 2px 10px rgba(19,47,54,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E1B1E; --panel:#152A2F; --panel2:#1B3339; --ink:#E4EFED; --muted:#93ABA9;
+      --line:#28454B; --accent:#F06595; --accent-soft:#3A2030;
+      --good:#69C57A; --good-soft:#1B3226; --bad:#F08A8A; --bad-soft:#3A2224;
+      --info:#74B4EC; --info-soft:#1B2E42; --warn:#F0B24E; --warn-soft:#3A2E1C;
+      --calc:#B197FC; --calc-soft:#251C3A; --shadow:0 2px 10px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; margin:0; padding:0 16px 80px}
+  h1,h2,h3,h4{font-family:'Trebuchet MS','Segoe UI',sans-serif; line-height:1.25; text-wrap:balance}
+  .wrap{max-width:860px; margin:0 auto}
+  a{color:var(--accent)}
+
+  header.top{padding:22px 0 14px; border-bottom:3px solid var(--accent); margin-bottom:16px}
+  header.top h1{font-size:1.7rem; margin:0 0 4px}
+  header.top p{margin:2px 0; color:var(--muted); font-size:.94rem}
+  .print-tip{background:var(--info-soft); border-left:4px solid var(--info); border-radius:8px; padding:8px 14px; font-size:.9rem; margin-top:12px}
+
+  nav.toc{background:var(--panel); border:1.5px solid var(--line); border-radius:14px; padding:16px 20px; box-shadow:var(--shadow); margin-bottom:26px}
+  nav.toc h2{margin:0 0 8px; font-size:1.1rem; color:var(--accent)}
+  nav.toc ol{margin:6px 0; padding-left:22px}
+  nav.toc li{margin:3px 0}
+  nav.toc a{text-decoration:none; font-weight:600}
+  nav.toc a:hover{text-decoration:underline}
+  nav.toc .sub{font-size:.86rem; color:var(--muted); font-weight:400}
+
+  .part{margin:38px 0 10px; padding:14px 20px; border-radius:14px; background:linear-gradient(135deg,var(--accent),#E64980); color:#fff; box-shadow:var(--shadow)}
+  .part h2{margin:0; font-size:1.35rem}
+  .part p{margin:4px 0 0; opacity:.92; font-size:.9rem}
+
+  section.mod{background:var(--panel); border:1.5px solid var(--line); border-radius:14px; padding:20px 22px; margin:18px 0; box-shadow:var(--shadow)}
+  section.mod > h3{margin-top:0; font-size:1.25rem; color:var(--accent); border-bottom:2px solid var(--line); padding-bottom:8px}
+  .pomo{display:inline-block; font-family:Consolas,monospace; font-size:.72rem; background:var(--warn-soft); color:var(--warn); border-radius:999px; padding:2px 10px; margin-left:8px; vertical-align:middle}
+  section.mod h4{font-size:1.06rem; margin:20px 0 6px; color:var(--info)}
+  section.mod p{margin:8px 0}
+  section.mod ul,section.mod ol{margin:8px 0; padding-left:24px}
+  section.mod li{margin:4px 0}
+  b,strong{color:var(--ink)}
+  .term{color:var(--accent); font-weight:700}
+
+  .box{border-radius:10px; padding:12px 16px; margin:14px 0; font-size:.95rem}
+  .box b.tt{display:block; font-family:Consolas,monospace; font-size:.72rem; letter-spacing:.1em; margin-bottom:6px; text-transform:uppercase}
+  .concept{background:var(--info-soft); border-left:4px solid var(--info)} .concept b.tt{color:var(--info)}
+  .prova{background:var(--accent-soft); border-left:4px solid var(--accent)} .prova b.tt{color:var(--accent)}
+  .mnemo{background:var(--warn-soft); border-left:4px solid var(--warn)} .mnemo b.tt{color:var(--warn)}
+  .peg{background:var(--bad-soft); border-left:4px solid var(--bad)} .peg b.tt{color:var(--bad)}
+  .calc{background:var(--calc-soft); border-left:4px solid var(--calc)} .calc b.tt{color:var(--calc)}
+  .calc .step{margin:8px 0; padding-left:34px; position:relative}
+  .calc .step .n{position:absolute; left:0; top:0; width:24px; height:24px; border-radius:7px; background:var(--calc); color:#fff; font-family:Consolas,monospace; font-weight:700; font-size:.8rem; display:grid; place-items:center}
+  .calc .res{background:var(--good-soft); border:1.5px solid var(--good); border-radius:8px; padding:8px 12px; margin-top:10px; font-weight:700}
+  .formula{font-family:'Cambria Math','Times New Roman',serif; font-size:1.12rem; background:var(--panel2); border:1.5px solid var(--line); border-radius:8px; padding:6px 12px; display:inline-block; margin:4px 0}
+  .fbig{display:block; text-align:center; font-size:1.25rem; padding:12px; margin:12px auto}
+
+  table.data{border-collapse:collapse; width:100%; margin:14px 0; font-size:.9rem; overflow:hidden; border-radius:8px}
+  table.data th,table.data td{border:1px solid var(--line); padding:7px 10px; text-align:left}
+  table.data th{background:var(--panel2); color:var(--accent); font-family:Consolas,monospace; font-size:.78rem; letter-spacing:.04em}
+  table.data tr:nth-child(even) td{background:var(--panel2)}
+  .scroll{overflow-x:auto}
+
+  figure{margin:16px 0; text-align:center}
+  figure svg{max-width:100%; height:auto; background:var(--panel2); border:1.5px solid var(--line); border-radius:12px; padding:10px}
+  figcaption{font-size:.84rem; color:var(--muted); margin-top:6px; font-style:italic}
+  svg text{fill:var(--ink); font-family:'Segoe UI',sans-serif}
+  svg .lbl{font-size:13px; font-weight:700}
+  svg .sm{font-size:11px; fill:var(--muted); font-family:Consolas,monospace}
+
+  details.quiz{background:var(--panel2); border:1.5px solid var(--line); border-radius:10px; padding:10px 16px; margin:12px 0}
+  details.quiz summary{cursor:pointer; font-weight:700; color:var(--info)}
+  details.quiz summary::marker{color:var(--info)}
+  details.quiz .ans{margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); color:var(--good); font-weight:600}
+  .top-link{display:block; text-align:right; font-size:.8rem; margin-top:10px}
+
+  /* ---------- tooltips (hover / toque) ---------- */
+  .tip{border-bottom:2px dotted var(--info); cursor:help; position:relative}
+  .tip:focus{outline:none}
+  .tip::after{
+    content:attr(data-tip); position:absolute; left:50%; bottom:135%; transform:translateX(-50%) translateY(6px);
+    background:var(--ink); color:var(--bg); padding:8px 12px; border-radius:8px; font-size:.82rem; font-weight:400;
+    line-height:1.4; width:max-content; max-width:260px; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,.3);
+    opacity:0; pointer-events:none; transition:opacity .18s, transform .18s; z-index:50; white-space:normal;
+  }
+  .tip::before{
+    content:''; position:absolute; left:50%; bottom:135%; transform:translateX(-50%) translateY(6px);
+    border:6px solid transparent; border-top-color:var(--ink); margin-bottom:-6px; opacity:0; transition:opacity .18s; z-index:50;
+  }
+  .tip:hover::after,.tip:focus::after,.tip:active::after,.tip:hover::before,.tip:focus::before,.tip:active::before{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  /* ---------- gamificação (barra XP) ---------- */
+  .xp-wrap{display:flex; align-items:center; gap:10px; margin-top:14px; flex-wrap:wrap}
+  .xp-badge{font-family:Consolas,monospace; font-weight:700; font-size:.9rem; background:var(--accent); color:#fff; border-radius:999px; padding:4px 14px}
+  .xp-bar{flex:1; min-width:160px; height:14px; background:var(--panel2); border:1.5px solid var(--line); border-radius:999px; overflow:hidden}
+  .xp-fill{height:100%; width:0; background:linear-gradient(90deg,var(--good),#69DB7C); transition:width .6s cubic-bezier(.34,1.3,.64,1)}
+  .xp-lvl{font-size:.82rem; color:var(--muted); font-family:Consolas,monospace}
+  .badges{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+  .badge{font-size:1.3rem; filter:grayscale(1) opacity(.3); transition:filter .4s, transform .4s}
+  .badge.on{filter:none; transform:scale(1.15)}
+
+  /* ---------- laboratório de cálculos ---------- */
+  .calcbox{background:var(--panel2); border:1.5px solid var(--calc); border-radius:12px; padding:16px; margin:14px 0}
+  .calcbox h4{margin:0 0 4px; color:var(--calc)}
+  .calcbox .desc{font-size:.86rem; color:var(--muted); margin:0 0 10px}
+  .calcbox .fields{display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end}
+  .field{display:flex; flex-direction:column; gap:3px}
+  .field label{font-size:.78rem; color:var(--muted); font-weight:600}
+  .field input,.field select{font:inherit; font-size:.95rem; padding:7px 9px; width:120px; border:1.5px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink)}
+  .field input:focus,.field select:focus{outline:none; border-color:var(--calc)}
+  .calcbox button.go{background:var(--calc); color:#fff; border:none; border-radius:8px; padding:9px 18px; font:inherit; font-weight:700; cursor:pointer; transition:transform .12s}
+  .calcbox button.go:hover{transform:translateY(-2px)}
+  .calcout{margin-top:12px; font-size:.92rem; display:none}
+  .calcout.show{display:block; animation:fadein .3s ease}
+  .calcout .stepline{padding:4px 0 4px 26px; position:relative; border-left:2px solid var(--calc); margin-left:8px}
+  .calcout .stepline::before{content:'▸'; position:absolute; left:6px; color:var(--calc)}
+  .calcout .final{background:var(--good-soft); border:1.5px solid var(--good); border-radius:8px; padding:8px 12px; margin-top:8px; font-weight:700}
+
+  /* ---------- avatar tutor ---------- */
+  #tutor{position:fixed; right:16px; bottom:16px; z-index:80; display:flex; align-items:flex-end; gap:10px; max-width:min(360px,88vw)}
+  #tutorBubble{background:var(--panel); border:2px solid var(--accent); border-radius:16px 16px 4px 16px; padding:11px 15px; font-size:.9rem; box-shadow:0 6px 22px rgba(0,0,0,.22); position:relative; transition:opacity .3s, transform .3s}
+  #tutorBubble.hide{opacity:0; transform:translateY(10px) scale(.9); pointer-events:none}
+  #tutorBubble b{color:var(--accent)}
+  #tutorFace{flex:none; width:66px; height:66px; cursor:pointer; filter:drop-shadow(0 3px 8px rgba(0,0,0,.25)); transition:transform .3s}
+  #tutorFace:hover{transform:scale(1.08) rotate(-3deg)}
+  #tutorFace.talk{animation:bob 1s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-5px)}}
+  #tutorClose{position:absolute; top:-8px; right:-8px; width:22px; height:22px; border-radius:50%; background:var(--muted); color:#fff; border:none; cursor:pointer; font-size:.8rem; line-height:1; display:grid; place-items:center}
+  .toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px); background:var(--good); color:#fff; padding:10px 20px; border-radius:999px; font-weight:700; box-shadow:0 6px 20px rgba(0,0,0,.3); opacity:0; transition:opacity .3s, transform .3s; z-index:90}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  @media print{
+    body{padding:0; font-size:11pt} .top-link,nav.toc,.print-tip,#tutor,.calcbox button.go,.xp-wrap{display:none}
+    section.mod,.box,figure svg{box-shadow:none; break-inside:avoid}
+    .part{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .tip{border:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top" id="topo">
+  <h1>📚 Apostila da Josi</h1>
+  <p><b>Química + Conhecimentos Gerais</b> — apoio de estudo para concurso de Professor.</p>
+  <p>Baseada no conteúdo programático oficial do <b>Edital nº 030/2018-SEDUC/SEPLAG (CEV/UECE)</b>, ampliada com Termoquímica, Eletroquímica e Gases para o próximo concurso.</p>
+  <div class="print-tip">🖨️ <b>Dica:</b> aperte <b>Ctrl+P</b> para imprimir ou salvar em PDF. Estude <b>1 módulo por sessão de 25 min (pomodoro)</b> — o tempo estimado está em cada título. 💡 Passe o mouse (ou toque) nos termos <span class="tip" data-tip="Isto é um tooltip! Passe o mouse em qualquer palavra sublinhada de azul para ver a explicação rápida.">sublinhados</span> para dicas rápidas, e resolva no <b>🧮 Laboratório de Cálculos</b> com a Profa. Mol te ajudando.</div>
+  <div class="xp-wrap">
+    <span class="xp-badge">⭐ <span id="xpPts">0</span> XP</span>
+    <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+    <span class="xp-lvl" id="xpLvl">Nível 1 · Estagiária</span>
+  </div>
+  <div class="badges" id="badges">
+    <span class="badge" data-b="calc" title="Fez o primeiro cálculo">🧮</span>
+    <span class="badge" data-b="esteq" title="Dominou a estequiometria">⚗️</span>
+    <span class="badge" data-b="ph" title="Calculou pH">💧</span>
+    <span class="badge" data-b="gas" title="Calculou gases">🎈</span>
+    <span class="badge" data-b="quiz" title="Acertou testes">🧠</span>
+    <span class="badge" data-b="mestre" title="500 XP — Mestra!">🏆</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>🗺️ Índice — clique para pular</h2>
+  <ol>
+    <li><b><a href="#p1">PARTE 1 · Conhecimentos Gerais</a></b>
+      <ul style="list-style:none; padding-left:6px">
+        <li><a href="#m-port">A.</a> <span class="sub">Língua Portuguesa</span></li>
+        <li><a href="#m-adm">B.</a> <span class="sub">Administração Pública + Legislação</span></li>
+        <li><a href="#m-ind">C.</a> <span class="sub">Indicadores Educacionais (com % passo a passo)</span></li>
+        <li><a href="#m-ped">D.</a> <span class="sub">Temas Educacionais e Pedagógicos</span></li>
+      </ul>
+    </li>
+    <li><b><a href="#p2">PARTE 2 · Química (Conhecimentos Específicos)</a></b>
+      <ul style="list-style:none; padding-left:6px">
+        <li><a href="#q-hist">1.</a> <span class="sub">História da Química e Modelos Atômicos</span></li>
+        <li><a href="#q-tab">2.</a> <span class="sub">Tabela Periódica e Propriedades</span></li>
+        <li><a href="#q-lig">3.</a> <span class="sub">Ligações Químicas e Geometria</span></li>
+        <li><a href="#q-inorg">4.</a> <span class="sub">Funções Inorgânicas ⭐cálculo</span></li>
+        <li><a href="#q-esteq">5.</a> <span class="sub">Estequiometria ⭐⭐cálculo detalhado</span></li>
+        <li><a href="#q-sol">6.</a> <span class="sub">Soluções e Concentração ⭐cálculo</span></li>
+        <li><a href="#q-gas">7.</a> <span class="sub">Gases ⭐cálculo</span></li>
+        <li><a href="#q-termo">8.</a> <span class="sub">Termoquímica ⭐cálculo</span></li>
+        <li><a href="#q-cin">9.</a> <span class="sub">Cinética, Equilíbrio e pH ⭐cálculo</span></li>
+        <li><a href="#q-eletro">10.</a> <span class="sub">Eletroquímica ⭐cálculo</span></li>
+        <li><a href="#q-org">11.</a> <span class="sub">Química Orgânica</span></li>
+        <li><a href="#q-ensino">12.</a> <span class="sub">Ensino de Química (didática)</span></li>
+      </ul>
+    </li>
+  </ol>
+</nav>
+
+<!-- ==================== PARTE 1 ==================== -->
+<div class="part" id="p1"><h2>PARTE 1 — Conhecimentos Gerais</h2><p>As 30 questões da prova básica: Português, Administração Pública, Indicadores Educacionais e Temas Pedagógicos.</p></div>
+
+<!-- ===== A · PORTUGUÊS ===== -->
+<section class="mod" id="m-port">
+  <h3>A. Língua Portuguesa <span class="pomo">⏱ ~25 min</span></h3>
+  <p>O edital cobra 11 tópicos. Aqui estão as regras que mais caem, com exemplos. Não decore tudo de uma vez — foque em <b>crase, concordância, regência e pontuação</b>, que são os campeões de questão.</p>
+
+  <h4>1 e 11 · Interpretação de texto e significação das palavras</h4>
+  <p>A questão de interpretação pede o que o texto <b>realmente diz</b>, não sua opinião. Cuidado com alternativas que <b>extrapolam</b> (dizem mais do que o texto) ou <b>contradizem</b>. Sobre significação:</p>
+  <ul>
+    <li><span class="term">Sinônimo</span>: sentido parecido (casa ≈ lar). <span class="term">Antônimo</span>: oposto (alto × baixo).</li>
+    <li><span class="term">Sentido conotativo</span> (figurado): “Ela é um <i>doce</i>.” <span class="term">Denotativo</span> (literal): “Comprei um doce.”</li>
+    <li><span class="term">Homônimos</span>: som/grafia iguais, sentidos diferentes (<i>manga</i> da fruta / da camisa). <span class="term">Parônimos</span>: parecidos mas distintos (<i>ratificar</i> = confirmar / <i>retificar</i> = corrigir).</li>
+  </ul>
+
+  <h4>3 e 4 · Ortografia e acentuação</h4>
+  <div class="box concept"><b class="tt">Conceito-chave — regras de acento</b>
+    <ul>
+      <li><b>Oxítonas</b> (força na última): acento se terminam em <b>a, e, o</b> (+s), <b>em, ens</b> → <i>sofá, café, cipó, também</i>.</li>
+      <li><b>Paroxítonas</b> (força na penúltima): acento se <b>NÃO</b> terminam em a/e/o/em → <i>táxi, fácil, órgão, bíceps</i>.</li>
+      <li><b>Proparoxítonas</b> (antepenúltima): <b>TODAS</b> têm acento → <i>médico, lâmpada, química</i>.</li>
+      <li>Reforma ortográfica: caiu o trema (só em nomes: Müller) e o acento de <i>ideia, feiura, voo, enjoo</i>.</li>
+    </ul>
+  </div>
+
+  <h4>6 · Crase (o terror que vira ponto fácil)</h4>
+  <p>Crase é a fusão de dois “a”: preposição <b>a</b> + artigo <b>a</b> = <b>à</b>. Use o truque:</p>
+  <div class="box mnemo"><b class="tt">🧠 Truque infalível da crase</b>
+    Troque a palavra feminina por uma masculina. Se aparecer <b>“ao”</b>, tem crase (à). Se aparecer só <b>“o”</b>, não tem.<br>
+    “Vou <b>à</b> escola” → “Vou <b>ao</b> colégio” ✅ (tem crase) &nbsp;|&nbsp; “Vou <b>a</b> pé” → “Vou <b>a</b> pé” (masc. não muda) ❌ sem crase.
+  </div>
+  <div class="box peg"><b class="tt">⚠️ Pegadinhas de crase</b>
+    <b>Nunca</b> há crase antes de: verbo (“começou a estudar”), palavra masculina (“a cavalo”), palavra no plural com “a” singular (“a livrarias”), e pronomes como <i>ela, esta, você</i>.
+    <b>Sempre</b> há em: “à moda de”, “à vista”, “à noite”, “às vezes”, e nas horas (“às 8h”).
+  </div>
+
+  <h4>5 · Classes de palavras</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Classe</th><th>Função</th><th>Exemplo</th></tr>
+    <tr><td>Substantivo</td><td>nomeia seres/coisas</td><td>professora, química, escola</td></tr>
+    <tr><td>Adjetivo</td><td>caracteriza o substantivo</td><td>aula <b>dinâmica</b></td></tr>
+    <tr><td>Verbo</td><td>ação, estado, fenômeno</td><td>estudar, ser, chover</td></tr>
+    <tr><td>Advérbio</td><td>modifica verbo/adjetivo</td><td>estudou <b>muito</b>, <b>bem</b> feito</td></tr>
+    <tr><td>Preposição</td><td>liga termos</td><td>de, para, com, a</td></tr>
+    <tr><td>Conjunção</td><td>liga orações</td><td>e, mas, porque, embora</td></tr>
+  </table></div>
+
+  <h4>9 · Concordância (nominal e verbal)</h4>
+  <ul>
+    <li><b>Verbal:</b> o verbo concorda com o sujeito. “Os alunos <b>estudam</b>.” (sujeito plural → verbo plural)</li>
+    <li><b>Nominal:</b> artigo/adjetivo concordam com o substantivo. “<b>As</b> boas provas.”</li>
+    <li>Regra que cai: “<b>Fazem</b> dois anos” é ERRADO — <i>fazer</i> indicando tempo é impessoal: “<b>Faz</b> dois anos”. Idem “<b>Havia</b> muitas pessoas” (nunca “haviam”).</li>
+  </ul>
+
+  <h4>7 e 8 · Sintaxe e pontuação</h4>
+  <div class="box concept"><b class="tt">Conceito-chave — vírgula</b>
+    Use vírgula para: separar itens de lista, isolar aposto/vocativo (“Josiane, venha cá”), separar orações. <b>NUNCA</b> separe sujeito do verbo com uma vírgula só: “A professora<s>,</s> explicou” está errado.
+  </div>
+
+  <details class="quiz"><summary>🧠 Teste-se: “Refiro-me ___ questões difíceis.” (a / à / às)</summary>
+    <div class="ans">✅ <b>às</b> — o verbo “referir-se” pede preposição <i>a</i>; “questões” é feminino plural com artigo → a+as = às. Troque por masculino: “refiro-me <b>aos</b> pontos difíceis”, confirmou o “ao(s)”.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== B · ADMINISTRAÇÃO PÚBLICA ===== -->
+<section class="mod" id="m-adm">
+  <h3>B. Administração Pública + Legislação <span class="pomo">⏱ ~25 min</span></h3>
+  <p>Aqui caem os <b>princípios</b>, os <b>direitos e deveres do servidor</b> e a <b>legislação da educação</b>. É conteúdo de decorar com mnemônico.</p>
+
+  <h4>1 a 3 · Conceito e princípios da Administração Pública</h4>
+  <p><b>Administração Pública</b> é o conjunto de órgãos e agentes que executam os serviços do Estado. Os princípios estão no <b>art. 37 da Constituição</b>:</p>
+  <div class="box mnemo"><b class="tt">🧠 Princípios — decore “LIMPE”</b>
+    <b>L</b>egalidade (só fazer o que a lei permite) · <b>I</b>mpessoalidade (sem favorecer ninguém) · <b>M</b>oralidade (agir com honestidade) · <b>P</b>ublicidade (atos transparentes) · <b>E</b>ficiência (bom uso dos recursos).
+  </div>
+
+  <h4>4 e 5 · Direitos, deveres e responsabilidade do servidor</h4>
+  <ul>
+    <li><b>Deveres:</b> assiduidade, pontualidade, obediência às normas, zelo pelo patrimônio, lealdade à instituição.</li>
+    <li><b>Responsabilidades:</b> um mesmo ato pode gerar 3 punições independentes → <b>civil</b> (indenizar o dano), <b>penal</b> (crime) e <b>administrativa</b> (advertência, suspensão, demissão).</li>
+    <li><b>Estágio probatório:</b> 3 anos em que o servidor é avaliado antes de ganhar estabilidade.</li>
+  </ul>
+  <div class="box prova"><b class="tt">📌 Cai na prova — Estatuto (Lei 9.826/1974-CE)</b>
+    Para o professor do Ceará: provimento de cargo por <b>concurso público</b>; regime disciplinar prevê penalidades progressivas; a <b>carreira do Magistério (MAG)</b> tem regras próprias de jornada, promoção e remuneração (leis citadas no edital).
+  </div>
+
+  <h4>Legislação básica da educação</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Lei / norma</th><th>O que é — o essencial</th></tr>
+    <tr><td>LDB — Lei 9.394/1996</td><td>Lei de Diretrizes e Bases: organiza toda a educação nacional (níveis, deveres do Estado, formação de professores).</td></tr>
+    <tr><td>ECA — Lei 8.069/1990</td><td>Estatuto da Criança e do Adolescente: proteção integral, direito à educação, conselho tutelar.</td></tr>
+    <tr><td>CF art. 205 a 214</td><td>Educação como <b>direito de todos e dever do Estado e da família</b>; gestão democrática; piso salarial.</td></tr>
+    <tr><td>Lei 13.005/2014</td><td>PNE — Plano Nacional de Educação: 20 metas para 10 anos.</td></tr>
+    <tr><td>Lei 13.415/2017</td><td>Reforma do Ensino Médio: carga horária, itinerários formativos.</td></tr>
+    <tr><td>FUNDEB — Lei 11.494/2007</td><td>Fundo que financia a educação básica e valoriza o magistério.</td></tr>
+  </table></div>
+
+  <details class="quiz"><summary>🧠 Teste-se: quais são os 5 princípios da Administração Pública?</summary>
+    <div class="ans">✅ <b>LIMPE</b>: Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência (art. 37 da CF).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== C · INDICADORES ===== -->
+<section class="mod" id="m-ind">
+  <h3>C. Indicadores Educacionais <span class="pomo">⏱ ~25 min</span></h3>
+  <p>Este bloco mistura <b>siglas</b> (decorar) com <b>cálculo de porcentagem</b> (praticar). Como você tem dificuldade em cálculo, aqui vai bem devagarinho. 💜</p>
+
+  <h4>As siglas que sempre caem</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Sigla</th><th>O que mede</th></tr>
+    <tr><td><b>IDEB</b></td><td>Índice de Desenvolvimento da Educação Básica = <b>fluxo</b> (aprovação) × <b>nota</b> (Saeb). Vai de 0 a 10.</td></tr>
+    <tr><td><b>SAEB</b></td><td>Sistema de Avaliação da Educação Básica (prova nacional de Português e Matemática).</td></tr>
+    <tr><td><b>SPAECE</b></td><td>A avaliação do <b>Ceará</b> (estadual).</td></tr>
+    <tr><td><b>ENEM</b></td><td>Exame Nacional do Ensino Médio (acesso à faculdade).</td></tr>
+    <tr><td><b>PISA</b></td><td>Programa <b>Internacional</b> de avaliação (compara países).</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Conceito-chave — as taxas</b>
+    <b>Aprovação, reprovação e abandono</b> (as taxas de rendimento) sempre somam 100% da turma.
+    <b>Distorção idade-série</b>: % de alunos com 2+ anos de atraso na série certa.
+    <b>Escolarização líquida</b>: só conta quem está na idade certa; <b>bruta</b>: conta todos, mesmo fora da idade.
+  </div>
+
+  <h4>Cálculo de porcentagem — PASSO A PASSO 🐢</h4>
+  <div class="box calc"><b class="tt">📐 Cálculo 1 — que porcentagem um número é de outro</b>
+    <p><b>Pergunta:</b> numa escola de 400 alunos, 60 foram reprovados. Qual a taxa de reprovação?</p>
+    <div class="step"><span class="n">1</span> Monte a fração <b>parte ÷ total</b>: 60 ÷ 400</div>
+    <div class="step"><span class="n">2</span> Faça a divisão: 60 ÷ 400 = 0,15</div>
+    <div class="step"><span class="n">3</span> Para virar %, multiplique por 100: 0,15 × 100 = 15</div>
+    <div class="res">✅ Taxa de reprovação = <b>15%</b></div>
+    <p style="margin-top:8px"><i>Ideia: “porcentagem” é sempre uma parte de 100. 15% quer dizer “15 em cada 100 alunos”.</i></p>
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo 2 — quanto é uma % de um número</b>
+    <p><b>Pergunta:</b> a meta é aprovar 85% dos 400 alunos. Quantos alunos são?</p>
+    <div class="step"><span class="n">1</span> Transforme a % em decimal dividindo por 100: 85 ÷ 100 = 0,85</div>
+    <div class="step"><span class="n">2</span> Multiplique pelo total: 0,85 × 400</div>
+    <div class="step"><span class="n">3</span> Resolva: 0,85 × 400 = 340</div>
+    <div class="res">✅ Devem ser aprovados <b>340 alunos</b></div>
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo 3 — variação (o IDEB subiu quanto %?)</b>
+    <p><b>Pergunta:</b> o IDEB passou de 4,0 para 5,0. Qual foi o aumento percentual?</p>
+    <div class="step"><span class="n">1</span> Ache a diferença: 5,0 − 4,0 = 1,0</div>
+    <div class="step"><span class="n">2</span> Divida pelo valor <b>antigo</b>: 1,0 ÷ 4,0 = 0,25</div>
+    <div class="step"><span class="n">3</span> Multiplique por 100: 0,25 × 100 = 25</div>
+    <div class="res">✅ Aumento de <b>25%</b></div>
+    <div class="box peg" style="margin:10px 0 0"><b class="tt">⚠️ Pegadinha</b> Divida sempre pelo valor <b>de onde saiu</b> (o antigo), não pelo novo!</div>
+  </div>
+
+  <details class="quiz"><summary>🧠 Teste-se: de 250 alunos, 200 foram aprovados. Qual a taxa de aprovação?</summary>
+    <div class="ans">✅ 200 ÷ 250 = 0,8 → ×100 = <b>80%</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== D · PEDAGÓGICOS ===== -->
+<section class="mod" id="m-ped">
+  <h3>D. Temas Educacionais e Pedagógicos <span class="pomo">⏱ ~25 min</span></h3>
+  <p>O coração da prova pedagógica são os <b>teóricos da aprendizagem</b>, a <b>avaliação</b> e o <b>PPP</b>. Vamos por partes.</p>
+
+  <h4>3 · Teorias da aprendizagem — os 3 grandes nomes</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Teórico</th><th>Ideia central</th><th>Palavra-âncora</th></tr>
+    <tr><td><b>Piaget</b></td><td>A criança constrói o conhecimento em <b>estágios</b> conforme amadurece (interação com o objeto).</td><td>ESTÁGIOS</td></tr>
+    <tr><td><b>Vygotsky</b></td><td>Aprende-se pela <b>interação social</b> e linguagem; a <b>ZDP</b> (zona de desenvolvimento proximal) é o que a criança faz com ajuda.</td><td>SOCIAL / ZDP</td></tr>
+    <tr><td><b>Wallon</b></td><td>A <b>afetividade</b> e a emoção são inseparáveis da cognição.</td><td>AFETO</td></tr>
+    <tr><td><b>Gardner</b></td><td>Inteligências <b>múltiplas</b> (lógica, linguística, musical, corporal…).</td><td>MÚLTIPLAS</td></tr>
+  </table></div>
+  <div class="box mnemo"><b class="tt">🧠 Não confunda</b>
+    <b>Pia</b>get = <b>Pia</b>de dentro pra fora (individual, estágios). <b>V</b>ygotsky = con<b>V</b>ive (social). <b>W</b>allon = <b>W</b>armth/calor (afeto).
+  </div>
+
+  <h4>3.1 · Correntes (as “–ismos”)</h4>
+  <ul>
+    <li><span class="term">Inatismo</span>: já se nasce pronto (o dom).</li>
+    <li><span class="term">Comportamentalismo/Behaviorismo</span> (Skinner): aprende por <b>estímulo → resposta → reforço</b>.</li>
+    <li><span class="term">Interacionismo/Construtivismo</span> (Piaget, Vygotsky): aprende <b>interagindo</b> com o meio.</li>
+    <li><span class="term">Cognitivismo</span>: foco em como a mente <b>processa</b> a informação.</li>
+  </ul>
+
+  <h4>2 e 4 · Didática, PPP e avaliação</h4>
+  <div class="box concept"><b class="tt">Conceito-chave</b>
+    <b>PPP (Projeto Político-Pedagógico):</b> documento que define a identidade e as metas da escola — construído coletivamente.
+    <b>Planejamento didático:</b> objetivos → conteúdos → metodologia → avaliação.
+  </div>
+  <div class="box mnemo"><b class="tt">🧠 Os 3 tipos de avaliação — “D-F-S”</b>
+    <b>D</b>iagnóstica (ANTES: sonda o que já sabem) · <b>F</b>ormativa (DURANTE: acompanha e reorienta o ensino) · <b>S</b>omativa (FIM: atribui a nota).
+  </div>
+
+  <h4>6 · Políticas para o Ensino Médio</h4>
+  <ul>
+    <li><b>Interdisciplinaridade</b>: temas ligando várias disciplinas. <b>Contextualização</b>: ligar o conteúdo à vida do aluno.</li>
+    <li><b>Educação Inclusiva</b>: todos aprendem juntos, com adaptações para deficiência/necessidades especiais.</li>
+    <li><b>Protagonismo juvenil</b>: o aluno como sujeito ativo da própria formação.</li>
+  </ul>
+
+  <details class="quiz"><summary>🧠 Teste-se: qual teórico associa a APRENDIZAGEM à interação SOCIAL e criou a ZDP?</summary>
+    <div class="ans">✅ <b>Vygotsky</b> — a Zona de Desenvolvimento Proximal é a distância entre o que a criança faz sozinha e o que faz com ajuda.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ==================== PARTE 2 ==================== -->
+<div class="part" id="p2"><h2>PARTE 2 — Química (Conhecimentos Específicos)</h2><p>Os 16 itens do programa + Termoquímica, Eletroquímica e Gases. Os módulos com ⭐ têm cálculos resolvidos passo a passo.</p></div>
+
+<!-- ===== Q1 · HISTÓRIA E MODELOS ===== -->
+<section class="mod" id="q-hist">
+  <h3>1. História da Química e Modelos Atômicos <span class="pomo">⏱ ~25 min</span></h3>
+  <p>Tudo começou na <b>Alquimia</b>: os alquimistas queriam transformar metais em ouro e achar o elixir da vida. Não conseguiram, mas criaram as <b>técnicas de laboratório</b> (destilação, calcinação, banho-maria). A Química moderna nasce com <b>Lavoisier (1789)</b>, que colocou tudo na balança.</p>
+
+  <h4>A evolução do modelo atômico</h4>
+  <figure>
+    <svg viewBox="0 0 620 170" role="img" aria-label="Quatro modelos atômicos em sequência">
+      <!-- Dalton -->
+      <g transform="translate(70,80)"><circle r="34" fill="#C2255C" stroke="#132F36" stroke-width="2"/></g>
+      <text x="70" y="140" text-anchor="middle" class="lbl">Dalton</text><text x="70" y="156" text-anchor="middle" class="sm">1803 · bola</text>
+      <!-- Thomson -->
+      <g transform="translate(210,80)"><circle r="34" fill="#F783AC" stroke="#132F36" stroke-width="2"/>
+        <circle cx="-14" cy="-8" r="5" fill="#1971C2"/><circle cx="12" cy="6" r="5" fill="#1971C2"/><circle cx="-6" cy="16" r="5" fill="#1971C2"/><circle cx="16" cy="-14" r="5" fill="#1971C2"/></g>
+      <text x="210" y="140" text-anchor="middle" class="lbl">Thomson</text><text x="210" y="156" text-anchor="middle" class="sm">1897 · pudim</text>
+      <!-- Rutherford -->
+      <g transform="translate(350,80)"><circle r="34" fill="none" stroke="#587179" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <circle r="9" fill="#C2255C" stroke="#132F36" stroke-width="2"/>
+        <circle cx="34" cy="0" r="4" fill="#1971C2"/><circle cx="-24" cy="24" r="4" fill="#1971C2"/></g>
+      <text x="350" y="140" text-anchor="middle" class="lbl">Rutherford</text><text x="350" y="156" text-anchor="middle" class="sm">1911 · núcleo</text>
+      <!-- Bohr -->
+      <g transform="translate(500,80)"><circle r="12" fill="#C2255C" stroke="#132F36" stroke-width="2"/>
+        <circle r="22" fill="none" stroke="#587179" stroke-width="1.5"/><circle r="34" fill="none" stroke="#587179" stroke-width="1.5"/>
+        <circle cx="22" cy="0" r="4" fill="#1971C2"/><circle cx="0" cy="-34" r="4" fill="#1971C2"/><circle cx="-30" cy="16" r="4" fill="#1971C2"/></g>
+      <text x="500" y="140" text-anchor="middle" class="lbl">Bohr</text><text x="500" y="156" text-anchor="middle" class="sm">1913 · níveis</text>
+    </svg>
+    <figcaption>Da esfera maciça aos níveis de energia quantizados — cada cientista corrigiu o anterior.</figcaption>
+  </figure>
+  <div class="scroll"><table class="data">
+    <tr><th>Modelo</th><th>Ideia</th><th>Experimento/analogia</th></tr>
+    <tr><td><b>Dalton</b> (1803)</td><td>Átomo = esfera maciça, indivisível.</td><td>“bola de bilhar”</td></tr>
+    <tr><td><b>Thomson</b> (1897)</td><td>Esfera positiva com elétrons cravados.</td><td>“pudim de passas” (raios catódicos)</td></tr>
+    <tr><td><b>Rutherford</b> (1911)</td><td>Núcleo pequeno, denso e positivo; eletrosfera vazia.</td><td>lâmina de ouro + partículas α</td></tr>
+    <tr><td><b>Bohr</b> (1913)</td><td>Elétrons giram só em <b>níveis</b> de energia permitidos.</td><td>“degraus/órbitas”</td></tr>
+  </table></div>
+  <div class="box prova"><b class="tt">📌 Cai na prova — Rutherford</b>
+    A maioria das partículas α atravessou a folha de ouro <b>sem desviar</b> → o átomo é <b>praticamente vazio</b>. Poucas ricochetearam → existe um <b>núcleo pequeno, denso e positivo</b>.
+  </div>
+  <div class="box mnemo"><b class="tt">🧠 Ordem dos modelos</b>
+    “<b>D</b>alton <b>T</b>rouxe <b>R</b>utherford <b>B</b>ohr” → Dalton, Thomson, Rutherford, Bohr.
+  </div>
+
+  <h4>Partículas e identidade do átomo</h4>
+  <ul>
+    <li><span class="term tip" data-tip="Z é o que define QUAL elemento é. Todo átomo com Z=6 é carbono, sempre.">Número atômico (Z)</span> = nº de <b>prótons</b> (é a identidade do elemento).</li>
+    <li><span class="term tip" data-tip="A conta prótons + nêutrons (a massa fica quase toda no núcleo). Elétrons quase não pesam.">Número de massa (A)</span> = prótons + nêutrons. Então <b>nêutrons = A − Z</b>.</li>
+    <li>Átomo neutro: nº de prótons = nº de elétrons.</li>
+  </ul>
+  <details class="quiz"><summary>🧠 Teste-se: o sódio tem Z=11 e A=23. Quantos prótons, elétrons e nêutrons?</summary>
+    <div class="ans">✅ Prótons = 11 (é o Z), elétrons = 11 (átomo neutro), nêutrons = A−Z = 23−11 = <b>12</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q2 · TABELA PERIÓDICA ===== -->
+<section class="mod" id="q-tab">
+  <h3>2. Tabela Periódica e Propriedades <span class="pomo">⏱ ~25 min</span></h3>
+  <p><b>Mendeleev (1869)</b> organizou os elementos por massa e teve a coragem de <b>deixar lacunas</b> para elementos ainda não descobertos — e acertou! Hoje organizamos por <b>número atômico crescente</b>.</p>
+  <ul>
+    <li><span class="term tip" data-tip="O nº do período = quantas camadas de elétrons o átomo tem. Período 3 = 3 camadas.">Períodos</span> = as 7 linhas horizontais (nº de camadas eletrônicas).</li>
+    <li><span class="term tip" data-tip="Elementos da mesma coluna têm o mesmo nº de elétrons na última camada — por isso reagem parecido.">Grupos/famílias</span> = as 18 colunas (elementos com propriedades parecidas).</li>
+    <li><b>Metais</b> (esquerda/centro): brilho, conduzem, doam elétrons. <b>Ametais</b> (direita): recebem elétrons. <b>Semimetais</b>: intermediários (Si dos chips). <b>Gases nobres</b> (última coluna): estáveis, não reagem.</li>
+  </ul>
+
+  <h4>Propriedades periódicas — as setas</h4>
+  <figure>
+    <svg viewBox="0 0 420 220" role="img" aria-label="Setas das propriedades periódicas">
+      <rect x="40" y="40" width="340" height="140" fill="var(--panel)" stroke="#587179" stroke-width="1.5" rx="6"/>
+      <text x="210" y="28" text-anchor="middle" class="lbl">Tabela Periódica</text>
+      <!-- raio arrow: pra esquerda e pra baixo -->
+      <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1971C2"/></marker>
+      <marker id="ah2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#C2255C"/></marker></defs>
+      <line x1="360" y1="70" x2="70" y2="70" stroke="#1971C2" stroke-width="3" marker-end="url(#ah)"/>
+      <line x1="360" y1="70" x2="360" y2="160" stroke="#1971C2" stroke-width="3" marker-end="url(#ah)"/>
+      <text x="150" y="62" class="sm" fill="#1971C2">RAIO cresce ← e ↓ (rumo ao Frâncio)</text>
+      <line x1="70" y1="150" x2="355" y2="150" stroke="#C2255C" stroke-width="3" marker-end="url(#ah2)"/>
+      <line x1="70" y1="150" x2="70" y2="65" stroke="#C2255C" stroke-width="3" marker-end="url(#ah2)"/>
+      <text x="120" y="172" class="sm" fill="#C2255C">ELETRONEGATIVIDADE cresce → e ↑ (rumo ao Flúor)</text>
+    </svg>
+    <figcaption>Raio atômico e eletronegatividade caminham em sentidos opostos.</figcaption>
+  </figure>
+  <div class="box mnemo"><b class="tt">🧠 Mnemônico das setas</b>
+    “O <b>RAIO</b> corre pro <b>FRâncio</b> (canto inferior esquerdo); tudo o mais (<b>eletronegatividade, energia de ionização, afinidade</b>) corre pro <b>Flúor</b> (canto superior direito).”
+  </div>
+  <div class="box concept"><b class="tt">Conceito-chave — não confunda</b>
+    <b>Eletronegatividade</b>: tendência de <b>atrair</b> elétrons numa ligação (o F é o campeão). <b>Energia de ionização</b>: energia para <b>arrancar</b> um elétron. <b>Afinidade eletrônica</b>: energia liberada ao <b>ganhar</b> um elétron.
+  </div>
+  <div class="box mnemo"><b class="tt">🧠 Eletronegatividade (ordem decrescente)</b>
+    “<b>F</b>ui <b>O</b>ntem <b>N</b>o <b>Cl</b>ube, <b>Br</b>inquei, <b>I</b> (e) <b>S</b>aí <b>C</b>orrendo” → F &gt; O &gt; N &gt; Cl &gt; Br &gt; I &gt; S &gt; C.
+    <div class="box peg" style="margin:10px 0 0"><b class="tt">⚠️ Detalhe fino</b> Esse é o mnemônico consagrado, ótimo para a maioria das questões. Mas pelos <span class="tip" data-tip="Escala numérica de eletronegatividade mais usada. Valores: F=4,0 · O=3,4 · Cl=3,2 · N=3,0.">valores de Pauling</span>, o <b>Cl (3,2)</b> é ligeiramente maior que o <b>N (3,0)</b>. Se a banca cobrar valores exatos, a ordem no topo é <b>F &gt; O &gt; Cl &gt; N</b>.</div>
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: quem tem maior raio atômico, o Sódio (Na) ou o Cloro (Cl)? (mesmo período)</summary>
+    <div class="ans">✅ <b>Na</b> — no mesmo período, o raio diminui para a direita (mais prótons puxando a mesma camada). O Na está à esquerda do Cl.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q3 · LIGAÇÕES ===== -->
+<section class="mod" id="q-lig">
+  <h3>3. Ligações Químicas e Geometria Molecular <span class="pomo">⏱ ~25 min</span></h3>
+  <p>Os átomos se ligam para ficar <b>estáveis</b> — em geral buscando <b>8 elétrons na última camada</b> (regra do octeto), como os gases nobres.</p>
+  <div class="scroll"><table class="data">
+    <tr><th>Ligação</th><th>Quem + quem</th><th>O que acontece</th><th>Exemplo</th></tr>
+    <tr><td><b>Iônica</b></td><td>metal + ametal</td><td><b>transfere</b> elétrons → forma íons (+ e −)</td><td>NaCl (sal)</td></tr>
+    <tr><td><b>Covalente</b></td><td>ametal + ametal</td><td><b>compartilha</b> pares de elétrons</td><td>H₂O, CO₂</td></tr>
+    <tr><td><b>Metálica</b></td><td>metal + metal</td><td>“mar de elétrons” livres</td><td>ferro, cobre</td></tr>
+  </table></div>
+
+  <h4>Geometria molecular — a teoria VSEPR (repulsão de pares)</h4>
+  <p>A ideia é simples: os pares de elétrons ao redor do átomo central <b>se repelem</b> e ficam o mais <b>longe possível</b>. Isso define a forma da molécula. <b>Pares livres também empurram!</b></p>
+  <figure>
+    <svg viewBox="0 0 560 130" role="img" aria-label="Quatro geometrias moleculares">
+      <!-- CO2 linear -->
+      <g transform="translate(70,55)"><line x1="-40" y1="0" x2="40" y2="0" stroke="#132F36" stroke-width="2.5"/>
+        <circle r="11" fill="#343A40"/><circle cx="-40" r="12" fill="#FA5252"/><circle cx="40" r="12" fill="#FA5252"/></g>
+      <text x="70" y="95" text-anchor="middle" class="lbl">CO₂</text><text x="70" y="111" text-anchor="middle" class="sm">linear · 180°</text>
+      <!-- H2O angular -->
+      <g transform="translate(210,42)"><line x1="0" y1="0" x2="-27" y2="22" stroke="#132F36" stroke-width="2.5"/><line x1="0" y1="0" x2="27" y2="22" stroke="#132F36" stroke-width="2.5"/>
+        <circle r="12" fill="#FA5252"/><circle cx="-27" cy="22" r="7" fill="#DEE2E6"/><circle cx="27" cy="22" r="7" fill="#DEE2E6"/></g>
+      <text x="210" y="95" text-anchor="middle" class="lbl">H₂O</text><text x="210" y="111" text-anchor="middle" class="sm">angular · 104,5°</text>
+      <!-- NH3 piramidal -->
+      <g transform="translate(350,40)"><line x1="0" y1="0" x2="-24" y2="22" stroke="#132F36" stroke-width="2.5"/><line x1="0" y1="0" x2="0" y2="28" stroke="#132F36" stroke-width="2.5"/><line x1="0" y1="0" x2="24" y2="22" stroke="#132F36" stroke-width="2.5"/>
+        <circle r="11" fill="#4C6EF5"/><circle cx="-24" cy="22" r="7" fill="#DEE2E6"/><circle cx="0" cy="28" r="7" fill="#DEE2E6"/><circle cx="24" cy="22" r="7" fill="#DEE2E6"/></g>
+      <text x="350" y="95" text-anchor="middle" class="lbl">NH₃</text><text x="350" y="111" text-anchor="middle" class="sm">piramidal · 107°</text>
+      <!-- CH4 tetra -->
+      <g transform="translate(490,38)"><line x1="0" y1="0" x2="0" y2="-26" stroke="#132F36" stroke-width="2.5"/><line x1="0" y1="0" x2="-24" y2="16" stroke="#132F36" stroke-width="2.5"/><line x1="0" y1="0" x2="24" y2="16" stroke="#132F36" stroke-width="2.5"/><line x1="0" y1="0" x2="0" y2="30" stroke="#132F36" stroke-width="2.5" stroke-dasharray="3 2"/>
+        <circle r="10" fill="#343A40"/><circle cx="0" cy="-26" r="7" fill="#DEE2E6"/><circle cx="-24" cy="16" r="7" fill="#DEE2E6"/><circle cx="24" cy="16" r="7" fill="#DEE2E6"/><circle cx="0" cy="30" r="7" fill="#DEE2E6"/></g>
+      <text x="490" y="95" text-anchor="middle" class="lbl">CH₄</text><text x="490" y="111" text-anchor="middle" class="sm">tetraédrica · 109,5°</text>
+    </svg>
+    <figcaption>Quanto mais pares livres no átomo central, mais “fechado” fica o ângulo.</figcaption>
+  </figure>
+  <div class="box prova"><b class="tt">📌 Cai na prova — por que a água é angular?</b>
+    O oxigênio tem <b>4 nuvens</b>: 2 ligações O–H + <b>2 pares livres</b>. Os pares livres empurram as ligações e fecham o ângulo para 104,5°. Sem eles (como no CO₂), seria linear.
+  </div>
+  <div class="box concept"><b class="tt">Conceito-chave — hibridização (item 3 do edital)</b>
+    Conte as <b>nuvens</b> do átomo central (ligações σ + pares livres): <b>2 → sp</b> (linear), <b>3 → sp²</b> (trigonal, 120°), <b>4 → sp³</b> (tetraédrica, 109,5°). A 1ª ligação é sempre <b>sigma (σ)</b>; as extras da dupla/tripla são <b>pi (π)</b>.
+  </div>
+  <div class="box concept"><b class="tt">Conceito-chave — polaridade</b>
+    Ligação <b>polar</b>: entre átomos de eletronegatividades diferentes. Molécula polar (como a H₂O) dissolve substâncias polares e iônicas → “<b>semelhante dissolve semelhante</b>”. Óleo (apolar) não se mistura com água (polar).
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: NaCl é ligação iônica ou covalente? E a hibridização do C no metano (CH₄)?</summary>
+    <div class="ans">✅ NaCl = <b>iônica</b> (metal Na + ametal Cl, transfere elétrons). No CH₄, o carbono tem 4 nuvens → <b>sp³</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q4 · FUNÇÕES INORGÂNICAS ===== -->
+<section class="mod" id="q-inorg">
+  <h3>4. Funções Inorgânicas ⭐ <span class="pomo">⏱ ~30 min</span></h3>
+  <p>Existem 4 grandes “famílias” de compostos inorgânicos. Saber reconhecer cada uma pela fórmula é meio caminho da prova.</p>
+  <div class="scroll"><table class="data">
+    <tr><th>Função</th><th>Definição (Arrhenius)</th><th>Como reconhecer</th><th>Exemplos</th></tr>
+    <tr><td><b>Ácido</b></td><td>em água libera <b>H⁺</b></td><td>começa com <b>H</b></td><td>HCl, H₂SO₄, HNO₃</td></tr>
+    <tr><td><b>Base</b></td><td>em água libera <b>OH⁻</b></td><td>termina com <b>OH</b></td><td>NaOH, Ca(OH)₂</td></tr>
+    <tr><td><b>Sal</b></td><td>ácido + base → sal + água</td><td>metal + ametal (sem H/OH sobrando)</td><td>NaCl, CaCO₃, NaHCO₃</td></tr>
+    <tr><td><b>Óxido</b></td><td>composto <b>binário</b> com oxigênio</td><td>termina em <b>O</b>, só 2 elementos</td><td>CO₂, CaO, Fe₂O₃</td></tr>
+  </table></div>
+  <div class="box mnemo"><b class="tt">🧠 Reconhecimento rápido</b>
+    “<b>H</b> na frente = ácido · <b>OH</b> no fim = base · <b>O</b> no fim (2 elementos) = óxido · <b>metal + ametal</b> = sal.”
+  </div>
+
+  <h4>A reação de neutralização</h4>
+  <p>Quando um ácido encontra uma base, eles se <b>neutralizam</b> formando <b>sal + água</b>. É a base de toda titulação:</p>
+  <div class="formula fbig">ácido + base → sal + água</div>
+  <p style="text-align:center">HCl + NaOH → NaCl + H₂O</p>
+
+  <h4>⭐ Cálculo: balancear e usar as reações — PASSO A PASSO 🐢</h4>
+  <div class="box calc"><b class="tt">📐 Como balancear uma equação (o “acerto de coeficientes”)</b>
+    <p><b>Exemplo:</b> H₂ + O₂ → H₂O (quantos de cada?)</p>
+    <div class="step"><span class="n">1</span> Conte os átomos de cada lado. Esquerda: 2 H e 2 O. Direita: 2 H e <b>1 O</b>. O oxigênio está desigual.</div>
+    <div class="step"><span class="n">2</span> Coloque coeficiente 2 na água p/ igualar o O: H₂ + O₂ → <b>2</b> H₂O. Agora direita tem 4 H e 2 O.</div>
+    <div class="step"><span class="n">3</span> Reequilibre o H: precisa de 4 H à esquerda → <b>2</b> H₂ + O₂ → 2 H₂O.</div>
+    <div class="step"><span class="n">4</span> Confira: esquerda 4 H + 2 O · direita 4 H + 2 O ✅</div>
+    <div class="res">✅ Equação balanceada: <b>2 H₂ + O₂ → 2 H₂O</b></div>
+    <p style="margin-top:8px"><i>Regra de ouro: os coeficientes contam as MOLÉCULAS; os índices pequenos (o ₂ do H₂) você NUNCA muda.</i></p>
+  </div>
+
+  <h4>Hidrólise salina (o caráter do sal)</h4>
+  <div class="box concept"><b class="tt">Conceito-chave — quem vence, manda no pH</b>
+    Ao dissolver um sal, sobra o caráter do componente <b>mais forte</b>:
+    <ul style="margin:6px 0 0">
+      <li>ácido forte + base fraca → sal <b>ácido</b> (ex.: NH₄Cl, pH &lt; 7)</li>
+      <li>ácido fraco + base forte → sal <b>básico</b> (ex.: NaHCO₃, pH &gt; 7)</li>
+      <li>ácido forte + base forte → sal <b>neutro</b> (ex.: NaCl, pH = 7)</li>
+    </ul>
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: classifique — H₂SO₄, Ca(OH)₂, KNO₃, SO₃.</summary>
+    <div class="ans">✅ H₂SO₄ = ácido (H na frente) · Ca(OH)₂ = base (OH no fim) · KNO₃ = sal (metal+ametal) · SO₃ = óxido (2 elementos terminando em O).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q5 · ESTEQUIOMETRIA ===== -->
+<section class="mod" id="q-esteq">
+  <h3>5. Estequiometria ⭐⭐ <span class="pomo">⏱ ~40 min (2 pomodoros)</span></h3>
+  <p>Este é o módulo mais importante para você — e o que mais assusta. Respira: vamos construir do zero, tijolo por tijolo. Estequiometria é só “a matemática das receitas químicas”. 💜</p>
+
+  <h4>Passo 0 · Os 3 conceitos que você PRECISA ter na ponta da língua</h4>
+  <div class="box concept"><b class="tt">Conceito 1 — o que é MOL</b>
+    Mol é a “dúzia do químico”. Assim como 1 dúzia = 12 unidades, <b>1 mol = 6,02 × 10²³ partículas</b> (esse número gigante é o <b>número de Avogadro</b>). Usamos porque átomos são pequenos demais para contar um a um.
+  </div>
+  <div class="box concept"><b class="tt">Conceito 2 — MASSA MOLAR (M)</b>
+    É quanto “pesa” 1 mol, em gramas por mol (g/mol). Você a monta somando as <b>massas atômicas</b> da tabela periódica.
+    <br>Ex.: água H₂O = 2×(H) + 1×(O) = 2×1 + 16 = <b>18 g/mol</b>.
+  </div>
+  <div class="box concept"><b class="tt">Conceito 3 — VOLUME MOLAR (gases)</b>
+    Nas <b>CNTP</b> (0 °C e 1 atm), <b>1 mol de qualquer gás ocupa 22,4 litros</b>. Não importa se é O₂, CO₂ ou H₂ — todo gás obedece.
+  </div>
+
+  <h4>Passo 1 · A fórmula-mãe: massa ↔ mol</h4>
+  <div class="formula fbig">n = <span style="border-bottom:2px solid currentColor">m</span> / M &nbsp;&nbsp;→&nbsp;&nbsp; (mols = massa ÷ massa molar)</div>
+  <p>Onde <b>n</b> = quantidade em mols, <b>m</b> = massa em gramas, <b>M</b> = massa molar (g/mol). Dessa fórmula saem todas as outras. Veja o mapa de conversões:</p>
+  <figure>
+    <svg viewBox="0 0 560 150" role="img" aria-label="Mapa de conversões da estequiometria">
+      <rect x="220" y="55" width="120" height="44" rx="10" fill="var(--calc-soft)" stroke="var(--calc)" stroke-width="2"/>
+      <text x="280" y="82" text-anchor="middle" class="lbl">MOL (n)</text>
+      <rect x="20" y="55" width="120" height="44" rx="10" fill="var(--panel)" stroke="#587179" stroke-width="1.5"/>
+      <text x="80" y="82" text-anchor="middle" class="lbl">MASSA (g)</text>
+      <rect x="420" y="10" width="120" height="40" rx="10" fill="var(--panel)" stroke="#587179" stroke-width="1.5"/>
+      <text x="480" y="35" text-anchor="middle" class="lbl">PARTÍCULAS</text>
+      <rect x="420" y="100" width="120" height="40" rx="10" fill="var(--panel)" stroke="#587179" stroke-width="1.5"/>
+      <text x="480" y="125" text-anchor="middle" class="lbl">VOLUME (L)</text>
+      <line x1="140" y1="77" x2="218" y2="77" stroke="#587179" stroke-width="2" marker-end="url(#ah)"/>
+      <line x1="218" y1="70" x2="140" y2="70" stroke="#587179" stroke-width="2" marker-end="url(#ah)"/>
+      <text x="178" y="63" text-anchor="middle" class="sm">÷M / ×M</text>
+      <line x1="340" y1="70" x2="420" y2="40" stroke="#587179" stroke-width="2" marker-end="url(#ah)"/>
+      <text x="392" y="52" class="sm">×6,02·10²³</text>
+      <line x1="340" y1="85" x2="420" y2="115" stroke="#587179" stroke-width="2" marker-end="url(#ah)"/>
+      <text x="388" y="112" class="sm">×22,4 (gás)</text>
+    </svg>
+    <figcaption>O MOL é o centro de tudo. Sempre passe pelo mol para converter massa, partículas ou volume.</figcaption>
+  </figure>
+
+  <div class="box calc"><b class="tt">📐 Cálculo 1 — massa → mol</b>
+    <p><b>Pergunta:</b> quantos mols há em 90 g de água (M = 18 g/mol)?</p>
+    <div class="step"><span class="n">1</span> Use n = m / M</div>
+    <div class="step"><span class="n">2</span> Substitua: n = 90 ÷ 18</div>
+    <div class="step"><span class="n">3</span> Divida: 90 ÷ 18 = 5</div>
+    <div class="res">✅ n = <b>5 mol</b> de água</div>
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo 2 — mol → número de moléculas</b>
+    <p><b>Pergunta:</b> quantas moléculas há nesses 5 mol?</p>
+    <div class="step"><span class="n">1</span> Multiplique os mols pelo número de Avogadro: 5 × 6,02 × 10²³</div>
+    <div class="step"><span class="n">2</span> Faça: 5 × 6,02 = 30,1 → junte a potência: 30,1 × 10²³ = 3,01 × 10²⁴</div>
+    <div class="res">✅ <b>3,01 × 10²⁴ moléculas</b></div>
+  </div>
+
+  <h4>Passo 2 · A receita: os coeficientes dão a proporção</h4>
+  <p>Numa equação balanceada, os coeficientes são a <b>receita</b>. Em <b>2 H₂ + O₂ → 2 H₂O</b>, lê-se: “2 mols de H₂ reagem com 1 de O₂ e produzem 2 de água”. É uma <b>regra de três</b> disfarçada.</p>
+  <div class="box calc"><b class="tt">📐 Cálculo 3 — o problema clássico (massa → massa)</b>
+    <p><b>Pergunta:</b> quantos gramas de água se formam a partir de 8 g de gás hidrogênio (H₂)? Dados: H₂ = 2 g/mol, H₂O = 18 g/mol. Equação: 2 H₂ + O₂ → 2 H₂O.</p>
+    <div class="step"><span class="n">1</span> <b>Transforme o dado em mol:</b> n(H₂) = 8 ÷ 2 = 4 mol</div>
+    <div class="step"><span class="n">2</span> <b>Use a proporção da receita:</b> 2 H₂ : 2 H₂O é 1 para 1 → 4 mol de H₂ dão 4 mol de H₂O</div>
+    <div class="step"><span class="n">3</span> <b>Volte de mol para massa:</b> m = n × M = 4 × 18 = 72</div>
+    <div class="res">✅ Formam-se <b>72 g de água</b></div>
+    <p style="margin-top:8px"><i>Confere com Lavoisier: 8 g de H₂ + 64 g de O₂ = 72 g. Nada se perde!</i></p>
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo 4 — envolvendo volume de gás (CNTP)</b>
+    <p><b>Pergunta:</b> queimando calcário, CaCO₃ → CaO + CO₂. Qual o volume de CO₂ (CNTP) liberado por 50 g de CaCO₃? (M do CaCO₃ = 100 g/mol)</p>
+    <div class="step"><span class="n">1</span> Mol do dado: n(CaCO₃) = 50 ÷ 100 = 0,5 mol</div>
+    <div class="step"><span class="n">2</span> Proporção 1 CaCO₃ : 1 CO₂ → n(CO₂) = 0,5 mol</div>
+    <div class="step"><span class="n">3</span> Mol de gás → volume: V = n × 22,4 = 0,5 × 22,4 = 11,2</div>
+    <div class="res">✅ Libera <b>11,2 L de CO₂</b></div>
+  </div>
+
+  <div class="box mnemo"><b class="tt">🧠 A receita nunca falha — “B-M-P”</b>
+    <b>B</b>alanceia a equação → transforma o dado em <b>M</b>ol → aplica a <b>P</b>roporção dos coeficientes (e, se pedirem, volta para massa/volume no fim).
+  </div>
+
+  <h4>Passo 3 · Casos especiais (que a banca adora)</h4>
+  <div class="box calc"><b class="tt">📐 Cálculo 5 — reagente limitante</b>
+    <p><b>Pergunta:</b> N₂ + 3 H₂ → 2 NH₃. Misturando 28 g de N₂ (M=28) com 9 g de H₂ (M=2), qual a massa de amônia (NH₃, M=17)?</p>
+    <div class="step"><span class="n">1</span> Mols de cada: n(N₂)=28÷28=1 mol · n(H₂)=9÷2=4,5 mol</div>
+    <div class="step"><span class="n">2</span> Quem acaba primeiro? A receita pede 3 H₂ para cada 1 N₂. Tenho 1 N₂ → preciso de 3 H₂. Tenho 4,5 (sobra) → o <b>N₂ é o limitante</b> (manda no cálculo).</div>
+    <div class="step"><span class="n">3</span> Proporção 1 N₂ : 2 NH₃ → 1 mol de N₂ produz 2 mol de NH₃</div>
+    <div class="step"><span class="n">4</span> Massa: m = 2 × 17 = 34</div>
+    <div class="res">✅ Formam-se <b>34 g de NH₃</b> (e sobram 1,5 mol de H₂)</div>
+    <p style="margin-top:8px"><i>O reagente limitante é o que “acaba primeiro” e limita a produção. O cálculo SEMPRE parte dele.</i></p>
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo 6 — pureza e rendimento</b>
+    <p><b>Pergunta:</b> queima-se 120 g de carvão com 80% de pureza (C=12), com rendimento de 90%. Qual a massa de CO₂ (M=44)? Reação C + O₂ → CO₂.</p>
+    <div class="step"><span class="n">1</span> <b>Pureza vem ANTES:</b> só reage a parte pura → 120 × 0,80 = 96 g de C</div>
+    <div class="step"><span class="n">2</span> Mol: n(C) = 96 ÷ 12 = 8 mol → proporção 1:1 → 8 mol de CO₂</div>
+    <div class="step"><span class="n">3</span> Massa teórica: 8 × 44 = 352 g</div>
+    <div class="step"><span class="n">4</span> <b>Rendimento vem DEPOIS:</b> 352 × 0,90 = 316,8 g</div>
+    <div class="res">✅ Produz <b>316,8 g de CO₂</b></div>
+    <div class="box peg" style="margin:10px 0 0"><b class="tt">⚠️ Ordem que nunca falha</b> Pureza é do reagente (aplica no começo); rendimento é do produto (aplica no fim).</div>
+  </div>
+
+  <details class="quiz"><summary>🧠 Teste-se: quantos mols há em 88 g de CO₂ (M = 44 g/mol)? E quantos litros na CNTP?</summary>
+    <div class="ans">✅ n = 88 ÷ 44 = <b>2 mol</b>. Volume = 2 × 22,4 = <b>44,8 L</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q6 · SOLUÇÕES ===== -->
+<section class="mod" id="q-sol">
+  <h3>6. Soluções e Concentração ⭐ <span class="pomo">⏱ ~30 min</span></h3>
+  <p>Uma <b>solução</b> é uma mistura homogênea: <b>soluto</b> (o que dissolve, ex.: sal) + <b>solvente</b> (quem dissolve, ex.: água). Concentração responde: “<b>quanto de soluto tem em cada litro?</b>”</p>
+  <div class="box concept"><b class="tt">Conceito-chave — saturação</b>
+    <b>Insaturada</b>: ainda dá para dissolver mais. <b>Saturada</b>: chegou no limite. <b>Supersaturada</b>: passou do limite (instável — qualquer perturbação precipita o excesso).
+  </div>
+
+  <h4>As duas concentrações que caem</h4>
+  <p><b>Concentração comum (C)</b> em g/L e <b>concentração molar (M)</b> em mol/L:</p>
+  <div class="formula fbig">C = m / V &nbsp;(g/L) &nbsp;&nbsp;•&nbsp;&nbsp; M = n / V &nbsp;(mol/L)</div>
+  <p>Onde m = massa (g), n = mols, V = volume da solução <b>em litros</b>.</p>
+
+  <div class="box calc"><b class="tt">📐 Cálculo 1 — concentração comum e molar juntas</b>
+    <p><b>Pergunta:</b> dissolvemos 5,85 g de sal NaCl (M = 58,5 g/mol) em água até completar 500 mL. Calcule C e M.</p>
+    <div class="step"><span class="n">1</span> <b>Converta o volume p/ litros:</b> 500 mL ÷ 1000 = 0,5 L</div>
+    <div class="step"><span class="n">2</span> <b>Concentração comum:</b> C = m ÷ V = 5,85 ÷ 0,5 = 11,7 g/L</div>
+    <div class="step"><span class="n">3</span> <b>Ache os mols:</b> n = 5,85 ÷ 58,5 = 0,1 mol</div>
+    <div class="step"><span class="n">4</span> <b>Concentração molar:</b> M = n ÷ V = 0,1 ÷ 0,5 = 0,2 mol/L</div>
+    <div class="res">✅ C = <b>11,7 g/L</b> &nbsp;e&nbsp; M = <b>0,2 mol/L</b></div>
+    <div class="box peg" style="margin:10px 0 0"><b class="tt">⚠️ Erro mais comum</b> Esquecer de passar mL para L. 500 mL = 0,5 L, sempre!</div>
+  </div>
+
+  <h4>Diluição — quando você só acrescenta água</h4>
+  <p>Ao diluir, o <b>soluto não muda</b> (só espalha em mais água). Por isso vale:</p>
+  <div class="formula fbig">C₁ · V₁ = C₂ · V₂</div>
+  <div class="box calc"><b class="tt">📐 Cálculo 2 — diluição</b>
+    <p><b>Pergunta:</b> quanta água acrescentar a 100 mL de HCl 2,0 mol/L para obter 0,5 mol/L?</p>
+    <div class="step"><span class="n">1</span> Identifique: C₁=2,0 · V₁=100 mL · C₂=0,5 · V₂=? </div>
+    <div class="step"><span class="n">2</span> Aplique C₁V₁ = C₂V₂ → 2,0 × 100 = 0,5 × V₂</div>
+    <div class="step"><span class="n">3</span> 200 = 0,5 × V₂ → V₂ = 200 ÷ 0,5 = 400 mL (volume FINAL)</div>
+    <div class="step"><span class="n">4</span> Água a acrescentar = final − inicial = 400 − 100 = 300</div>
+    <div class="res">✅ Acrescentar <b>300 mL de água</b></div>
+    <div class="box peg" style="margin:10px 0 0"><b class="tt">⚠️ Pegadinha</b> V₂ é o volume TOTAL no fim (400 mL), não a água adicionada. A água é a diferença.</div>
+  </div>
+
+  <h4>Propriedades coligativas (o efeito do soluto)</h4>
+  <div class="box concept"><b class="tt">Conceito-chave — dependem da QUANTIDADE de partículas, não do tipo</b>
+    <ul style="margin:6px 0 0">
+      <li><b>Ebulioscopia:</b> soluto <b>aumenta</b> a temperatura de ebulição (água com sal ferve acima de 100 °C).</li>
+      <li><b>Crioscopia:</b> soluto <b>abaixa</b> a de congelamento (sal derrete o gelo das estradas).</li>
+      <li><b>Tonoscopia:</b> soluto abaixa a pressão de vapor.</li>
+      <li><b>Osmose:</b> a água passa do meio menos concentrado para o mais concentrado.</li>
+    </ul>
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: 4 g de NaOH (M=40) em 200 mL de água. Qual a concentração molar?</summary>
+    <div class="ans">✅ n = 4 ÷ 40 = 0,1 mol · V = 0,2 L · M = 0,1 ÷ 0,2 = <b>0,5 mol/L</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q7 · GASES ===== -->
+<section class="mod" id="q-gas">
+  <h3>7. Gases ⭐ <span class="pomo">⏱ ~30 min</span></h3>
+  <p>Um gás é definido por 3 grandezas: <b>Pressão (P)</b>, <b>Volume (V)</b> e <b>Temperatura (T)</b>. As leis dos gases dizem o que acontece com uma quando você mexe na outra.</p>
+  <div class="box peg"><b class="tt">⚠️ A regra que mais derruba gente</b>
+    Temperatura em lei de gás é <b>SEMPRE em Kelvin</b>. Converta: <b>K = °C + 273</b>. Ex.: 27 °C = 300 K. Se usar Celsius, erra tudo!
+  </div>
+
+  <h4>As 3 leis (mantendo uma grandeza fixa)</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Lei</th><th>Fixa</th><th>Relação</th><th>Na prática</th></tr>
+    <tr><td><b>Boyle</b></td><td>Temperatura</td><td>P × V = constante</td><td>aperta (↑P) → encolhe (↓V)</td></tr>
+    <tr><td><b>Charles / Gay-Lussac</b></td><td>Pressão</td><td>V / T = constante</td><td>esquenta (↑T) → expande (↑V)</td></tr>
+    <tr><td><b>Avogadro</b></td><td>P e T</td><td>V ∝ n (mols)</td><td>volumes iguais = nº de moléculas iguais</td></tr>
+  </table></div>
+  <figure>
+    <svg viewBox="0 0 420 140" role="img" aria-label="Boyle: pistão comprimindo o gás">
+      <rect x="30" y="30" width="70" height="90" fill="var(--panel)" stroke="#132F36" stroke-width="2"/>
+      <rect x="30" y="70" width="70" height="50" fill="var(--accent-soft)"/>
+      <text x="65" y="20" text-anchor="middle" class="sm">P baixa</text>
+      <circle cx="50" cy="95" r="3" fill="#C2255C"/><circle cx="75" cy="105" r="3" fill="#C2255C"/><circle cx="62" cy="82" r="3" fill="#C2255C"/><circle cx="85" cy="90" r="3" fill="#C2255C"/>
+      <line x1="150" y1="75" x2="210" y2="75" stroke="#587179" stroke-width="2" marker-end="url(#ah)"/>
+      <text x="180" y="66" text-anchor="middle" class="sm">↑ dobra P</text>
+      <rect x="260" y="30" width="70" height="90" fill="var(--panel)" stroke="#132F36" stroke-width="2"/>
+      <rect x="260" y="95" width="70" height="25" fill="var(--accent-soft)"/>
+      <text x="295" y="20" text-anchor="middle" class="sm">P alta</text>
+      <circle cx="280" cy="108" r="3" fill="#C2255C"/><circle cx="305" cy="112" r="3" fill="#C2255C"/><circle cx="292" cy="102" r="3" fill="#C2255C"/><circle cx="315" cy="106" r="3" fill="#C2255C"/>
+      <text x="295" y="135" text-anchor="middle" class="sm">V cai pela metade</text>
+    </svg>
+    <figcaption>Lei de Boyle: dobrando a pressão (T fixa), o volume cai pela metade.</figcaption>
+  </figure>
+
+  <div class="box calc"><b class="tt">📐 Cálculo 1 — Lei de Charles (esquentando)</b>
+    <p><b>Pergunta:</b> um gás ocupa 10 L a 300 K (pressão constante). Qual o volume a 600 K?</p>
+    <div class="step"><span class="n">1</span> Como P é fixa, use V₁/T₁ = V₂/T₂</div>
+    <div class="step"><span class="n">2</span> Substitua: 10 ÷ 300 = V₂ ÷ 600</div>
+    <div class="step"><span class="n">3</span> “Passe” o 600 multiplicando: V₂ = (10 ÷ 300) × 600 = 20</div>
+    <div class="res">✅ V₂ = <b>20 L</b> (dobrou a T em kelvin, dobrou o V)</div>
+  </div>
+
+  <h4>A equação geral dos gases (junta tudo)</h4>
+  <div class="formula fbig">P · V = n · R · T</div>
+  <p>R = constante = <b>0,082 atm·L/(mol·K)</b>. Serve quando você tem os 4 dados e quer o quinto.</p>
+  <div class="box calc"><b class="tt">📐 Cálculo 2 — equação geral (PV = nRT)</b>
+    <p><b>Pergunta:</b> quantos mols de gás há em 4,92 L, a 2 atm e 300 K? (R = 0,082)</p>
+    <div class="step"><span class="n">1</span> Isole n: n = (P × V) ÷ (R × T)</div>
+    <div class="step"><span class="n">2</span> Substitua: n = (2 × 4,92) ÷ (0,082 × 300)</div>
+    <div class="step"><span class="n">3</span> Calcule em cima e embaixo: 9,84 ÷ 24,6 = 0,4</div>
+    <div class="res">✅ n = <b>0,4 mol</b> de gás</div>
+  </div>
+  <div class="box concept"><b class="tt">Conceito-chave — gás real × ideal</b>
+    Tudo isso vale para o <b>gás ideal</b>. Um gás real se aproxima do ideal em <b>baixa pressão e alta temperatura</b> (moléculas afastadas, quase sem interagir). Perto de virar líquido (alta P, baixa T), ele “desobedece”.
+  </div>
+  <div class="box mnemo"><b class="tt">🧠 Mnemônico das leis</b>
+    “<b>BOYLE</b> aperta (P×V), <b>CHARLES</b> esquenta (V/T em kelvin!), <b>AVOGADRO</b> conta (mols).”
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: um gás tem 6 L a 2 atm. Comprimindo até 3 atm (T fixa), qual o novo volume?</summary>
+    <div class="ans">✅ Boyle: P₁V₁ = P₂V₂ → 2×6 = 3×V₂ → 12 = 3V₂ → V₂ = <b>4 L</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q8 · TERMOQUÍMICA ===== -->
+<section class="mod" id="q-termo">
+  <h3>8. Termoquímica ⭐ <span class="pomo">⏱ ~35 min</span></h3>
+  <p>Termoquímica estuda o <b>calor</b> nas reações. Toda reação ou <b>libera</b> calor ou <b>absorve</b> calor. Medimos isso pela <b>entalpia (H)</b> — pense nela como a “energia guardada” nas substâncias.</p>
+
+  <h4>Os 2 tipos de reação</h4>
+  <figure>
+    <svg viewBox="0 0 560 160" role="img" aria-label="Diagramas de reação exotérmica e endotérmica">
+      <!-- Exo -->
+      <line x1="30" y1="20" x2="30" y2="140" stroke="#587179" stroke-width="1.5"/>
+      <line x1="30" y1="140" x2="260" y2="140" stroke="#587179" stroke-width="1.5"/>
+      <text x="12" y="80" class="sm" transform="rotate(-90 12 80)">Entalpia (H)</text>
+      <line x1="55" y1="45" x2="120" y2="45" stroke="#C2255C" stroke-width="3"/>
+      <text x="88" y="38" text-anchor="middle" class="sm">reagentes</text>
+      <line x1="120" y1="45" x2="180" y2="110" stroke="#C2255C" stroke-width="3"/>
+      <line x1="180" y1="110" x2="245" y2="110" stroke="#C2255C" stroke-width="3"/>
+      <text x="212" y="103" text-anchor="middle" class="sm">produtos</text>
+      <text x="145" y="145" text-anchor="middle" class="lbl" fill="#C2255C">EXOTÉRMICA</text>
+      <text x="150" y="75" class="sm" fill="#C2255C">libera calor · ΔH &lt; 0</text>
+      <!-- Endo -->
+      <line x1="310" y1="20" x2="310" y2="140" stroke="#587179" stroke-width="1.5"/>
+      <line x1="310" y1="140" x2="540" y2="140" stroke="#587179" stroke-width="1.5"/>
+      <line x1="335" y1="110" x2="400" y2="110" stroke="#1971C2" stroke-width="3"/>
+      <text x="368" y="103" text-anchor="middle" class="sm">reagentes</text>
+      <line x1="400" y1="110" x2="460" y2="45" stroke="#1971C2" stroke-width="3"/>
+      <line x1="460" y1="45" x2="525" y2="45" stroke="#1971C2" stroke-width="3"/>
+      <text x="492" y="38" text-anchor="middle" class="sm">produtos</text>
+      <text x="425" y="145" text-anchor="middle" class="lbl" fill="#1971C2">ENDOTÉRMICA</text>
+      <text x="415" y="90" class="sm" fill="#1971C2">absorve calor · ΔH &gt; 0</text>
+    </svg>
+    <figcaption>Exotérmica: produtos com MENOS energia (o resto virou calor). Endotérmica: produtos com MAIS energia (absorveu calor).</figcaption>
+  </figure>
+  <div class="box concept"><b class="tt">Conceito-chave — o sinal do ΔH</b>
+    ΔH = H(produtos) − H(reagentes).
+    <ul style="margin:6px 0 0">
+      <li><b>Exotérmica:</b> libera calor, esquenta o ambiente, <b>ΔH negativo</b> (ex.: combustão, respiração).</li>
+      <li><b>Endotérmica:</b> absorve calor, esfria o ambiente, <b>ΔH positivo</b> (ex.: fotossíntese, gelo derretendo).</li>
+    </ul>
+  </div>
+  <div class="box mnemo"><b class="tt">🧠 Não troque os sinais</b>
+    “<b>EXO</b> = <b>EX</b>pulsa calor (−). <b>ENDO</b> = <b>EN</b>tra calor (+).”
+  </div>
+
+  <h4>⭐ Cálculo do ΔH pela Lei de Hess</h4>
+  <div class="box concept"><b class="tt">Conceito-chave — Lei de Hess</b>
+    O ΔH total só depende do <b>início e do fim</b>, não do caminho. Então podemos <b>somar equações</b> intermediárias para achar o ΔH de uma reação difícil de medir. Regras ao manipular: se <b>inverter</b> a equação, <b>troca o sinal</b> do ΔH; se <b>multiplicar</b> a equação por um número, <b>multiplica</b> o ΔH também.
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo 1 — ΔH pelas entalpias de formação</b>
+    <p><b>Fórmula:</b> ΔH = ΣH(produtos) − ΣH(reagentes). <b>Pergunta:</b> na combustão CH₄ + 2 O₂ → CO₂ + 2 H₂O, com ΔHf: CH₄ = −75 · CO₂ = −394 · H₂O = −286 · O₂ = 0 (kJ/mol). Qual o ΔH?</p>
+    <div class="step"><span class="n">1</span> <b>Some os produtos</b> (multiplicando pelo coeficiente): CO₂ (−394) + 2×H₂O (2×−286 = −572) = −966</div>
+    <div class="step"><span class="n">2</span> <b>Some os reagentes:</b> CH₄ (−75) + 2×O₂ (2×0) = −75</div>
+    <div class="step"><span class="n">3</span> <b>Subtraia (produtos − reagentes):</b> −966 − (−75) = −966 + 75 = −891</div>
+    <div class="res">✅ ΔH = <b>−891 kJ/mol</b> (negativo → exotérmica, como toda combustão)</div>
+    <div class="box peg" style="margin:10px 0 0"><b class="tt">⚠️ Cuidado com o sinal</b> Subtrair um número negativo VIRA soma: −(−75) = +75. É o erro nº 1 aqui.</div>
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo 2 — calor sensível (aquecer sem reação)</b>
+    <p><b>Fórmula:</b> Q = m · c · ΔT (massa × calor específico × variação de temperatura). <b>Pergunta:</b> quanto calor para aquecer 200 g de água de 20 °C a 80 °C? (c da água = 1 cal/g·°C)</p>
+    <div class="step"><span class="n">1</span> ΔT = 80 − 20 = 60 °C</div>
+    <div class="step"><span class="n">2</span> Q = m · c · ΔT = 200 × 1 × 60</div>
+    <div class="step"><span class="n">3</span> Q = 12 000</div>
+    <div class="res">✅ Q = <b>12 000 cal = 12 kcal</b></div>
+  </div>
+  <div class="box concept"><b class="tt">Conceito-chave — entropia e energia livre (nível avançado)</b>
+    <b>Entropia (S)</b> = desordem; o universo tende a aumentá-la. <b>Energia livre de Gibbs:</b> ΔG = ΔH − T·ΔS. Se <b>ΔG &lt; 0</b>, a reação é <b>espontânea</b>; se ΔG &gt; 0, não é.
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: uma reação tem ΔH = −200 kJ. Ela libera ou absorve calor? É exo ou endotérmica?</summary>
+    <div class="ans">✅ ΔH negativo → <b>libera</b> calor → <b>exotérmica</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q9 · CINÉTICA, EQUILÍBRIO, pH ===== -->
+<section class="mod" id="q-cin">
+  <h3>9. Cinética, Equilíbrio e pH ⭐ <span class="pomo">⏱ ~35 min</span></h3>
+
+  <h4>Cinética — a velocidade das reações</h4>
+  <p>Cinética estuda o que faz uma reação ser mais <b>rápida</b> ou <b>lenta</b>. Os fatores:</p>
+  <div class="box mnemo"><b class="tt">🧠 Fatores da velocidade</b>
+    <b>T</b>emperatura (↑T = mais rápido) · <b>C</b>oncentração (↑ = mais rápido) · <b>S</b>uperfície de contato (triturado reage mais rápido que inteiro) · <b>Cat</b>alisador (acelera sem ser consumido, diminuindo a energia de ativação).
+  </div>
+  <div class="box concept"><b class="tt">Conceito-chave — teoria das colisões</b>
+    Para reagir, as moléculas precisam <b>colidir</b> com energia suficiente (a <b>energia de ativação</b>) e na orientação certa. Um <b>catalisador</b> cria um “atalho” com energia de ativação menor — por isso acelera.
+  </div>
+
+  <h4>Equilíbrio químico e Le Chatelier</h4>
+  <div class="box concept"><b class="tt">Conceito-chave</b>
+    Em reações reversíveis (⇌), chega um ponto em que a velocidade de ida = velocidade de volta: o <b>equilíbrio</b>. O <b>Princípio de Le Chatelier</b>: se você perturba o equilíbrio, ele se desloca para <b>anular</b> a perturbação (é “do contra”).
+  </div>
+  <div class="scroll"><table class="data">
+    <tr><th>Você faz…</th><th>O equilíbrio…</th></tr>
+    <tr><td>↑ concentração de um reagente</td><td>desloca para os produtos (consome o excesso)</td></tr>
+    <tr><td>↑ pressão</td><td>desloca para o lado de <b>menos mols gasosos</b></td></tr>
+    <tr><td>↑ temperatura</td><td>favorece o lado endotérmico</td></tr>
+    <tr><td>catalisador</td><td>não desloca (só chega mais rápido ao equilíbrio)</td></tr>
+  </table></div>
+
+  <h4>⭐ Cálculo de pH</h4>
+  <div class="box concept"><b class="tt">Conceito-chave — a escala de pH</b>
+    pH mede a acidez pela concentração de H⁺. Escala de 0 a 14: <b>&lt; 7 ácido</b>, <b>= 7 neutro</b>, <b>&gt; 7 básico</b>. Fórmulas: <b>pH = −log[H⁺]</b> e <b>pH + pOH = 14</b>.
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo — pH de ácido forte</b>
+    <p><b>Pergunta:</b> qual o pH de uma solução de HCl 0,001 mol/L? E o pOH?</p>
+    <div class="step"><span class="n">1</span> HCl é ácido forte → ioniza 100% → [H⁺] = 0,001 = 10⁻³ mol/L</div>
+    <div class="step"><span class="n">2</span> pH = −log[H⁺] = −log(10⁻³). O log de 10⁻³ é −3.</div>
+    <div class="step"><span class="n">3</span> pH = −(−3) = 3</div>
+    <div class="step"><span class="n">4</span> pOH = 14 − pH = 14 − 3 = 11</div>
+    <div class="res">✅ pH = <b>3</b> (ácido) e pOH = <b>11</b></div>
+    <p style="margin-top:8px"><i>Atalho: quando a concentração é uma potência de 10 (10⁻³), o pH é só o expoente sem o sinal (3).</i></p>
+  </div>
+
+  <h4>⭐ Cálculo de titulação (item 8 do edital)</h4>
+  <div class="box concept"><b class="tt">Conceito-chave</b>
+    Na titulação, gotejamos uma solução de concentração conhecida até <b>neutralizar</b> a outra (o indicador muda de cor no ponto de viragem). No ponto certo, os mols de H⁺ = mols de OH⁻: <b>Mₐ·Vₐ = M_b·V_b</b> (ajustando pela quantidade de H/OH).
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo — titulação</b>
+    <p><b>Pergunta:</b> 25 mL de NaOH foram neutralizados por 10 mL de H₂SO₄ 0,5 mol/L. Qual a concentração do NaOH? (Atenção: H₂SO₄ tem 2 H⁺!)</p>
+    <div class="step"><span class="n">1</span> Mols do ácido: n = M × V = 0,5 × 0,010 L = 0,005 mol</div>
+    <div class="step"><span class="n">2</span> Cada H₂SO₄ solta 2 H⁺ → mols de H⁺ = 2 × 0,005 = 0,01 mol</div>
+    <div class="step"><span class="n">3</span> No ponto de viragem, mols de OH⁻ = mols de H⁺ = 0,01 mol</div>
+    <div class="step"><span class="n">4</span> Concentração da base: M = n ÷ V = 0,01 ÷ 0,025 L = 0,4</div>
+    <div class="res">✅ NaOH = <b>0,4 mol/L</b></div>
+    <div class="box peg" style="margin:10px 0 0"><b class="tt">⚠️ Não esqueça o ×2</b> Ácidos com 2 hidrogênios (H₂SO₄) dobram os H⁺. É a pegadinha favorita da banca.</div>
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: no equilíbrio N₂O₄ ⇌ 2 NO₂, aumentar a pressão desloca para qual lado?</summary>
+    <div class="ans">✅ Para o lado com <b>menos mols de gás</b> = o N₂O₄ (1 mol contra 2 mols de NO₂).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q10 · ELETROQUÍMICA ===== -->
+<section class="mod" id="q-eletro">
+  <h3>10. Eletroquímica ⭐ <span class="pomo">⏱ ~35 min</span></h3>
+  <p>Eletroquímica é a ponte entre <b>reações químicas e eletricidade</b>. Tudo gira em torno da <b>oxirredução</b>: uns átomos <b>perdem</b> elétrons, outros <b>ganham</b>.</p>
+  <div class="box mnemo"><b class="tt">🧠 O conceito que organiza tudo — “PERDE-OX / GANHA-RED”</b>
+    <b>Oxidação</b> = <b>PERDE</b> elétrons (o nox aumenta). <b>Redução</b> = <b>GANHA</b> elétrons (o nox diminui). Frase: “<b>PE</b>rdeu, <b>O</b>xidou · <b>GA</b>nhou, <b>RE</b>duziu” (PEO-GAR).
+  </div>
+  <div class="box concept"><b class="tt">Conceito-chave — agente oxidante e redutor (a confusão clássica)</b>
+    O <b>agente redutor</b> é quem <b>sofre oxidação</b> (doa elétrons, causando a redução do outro). O <b>agente oxidante</b> é quem <b>sofre redução</b> (recebe elétrons). Parece invertido, mas é assim: você é o "agente" da mudança no OUTRO.
+  </div>
+
+  <h4>Número de oxidação (Nox) — passo a passo</h4>
+  <div class="box calc"><b class="tt">📐 Como achar o Nox de um elemento</b>
+    <p><b>Regras rápidas:</b> elemento puro (O₂, Fe) = 0 · H quase sempre = +1 · O quase sempre = −2 · a soma de todos os nox na molécula = 0 (ou = carga do íon).</p>
+    <p><b>Pergunta:</b> qual o nox do enxofre (S) no H₂SO₄?</p>
+    <div class="step"><span class="n">1</span> H: 2 átomos × (+1) = +2 · O: 4 átomos × (−2) = −8</div>
+    <div class="step"><span class="n">2</span> A soma total deve ser 0: (+2) + S + (−8) = 0</div>
+    <div class="step"><span class="n">3</span> S − 6 = 0 → S = +6</div>
+    <div class="res">✅ Nox do enxofre = <b>+6</b></div>
+  </div>
+
+  <h4>Pilha (célula galvânica) — gera energia</h4>
+  <figure>
+    <svg viewBox="0 0 460 180" role="img" aria-label="Esquema de uma pilha de Daniell">
+      <rect x="40" y="70" width="70" height="80" fill="#E1EEFB" stroke="#132F36" stroke-width="2"/>
+      <rect x="350" y="70" width="70" height="80" fill="#FBE3EC" stroke="#132F36" stroke-width="2"/>
+      <rect x="60" y="40" width="12" height="90" fill="#868E96" stroke="#132F36" stroke-width="1.5"/>
+      <rect x="388" y="40" width="12" height="90" fill="#C2255C" stroke="#132F36" stroke-width="1.5"/>
+      <text x="66" y="32" text-anchor="middle" class="sm">Zn (−)</text>
+      <text x="394" y="32" text-anchor="middle" class="sm">Cu (+)</text>
+      <path d="M66,40 L66,18 L200,18" fill="none" stroke="#132F36" stroke-width="2"/>
+      <path d="M394,40 L394,18 L260,18" fill="none" stroke="#132F36" stroke-width="2"/>
+      <circle cx="230" cy="18" r="16" fill="#FFD43B" stroke="#132F36" stroke-width="2"/>
+      <text x="230" y="23" text-anchor="middle" class="lbl">e⁻</text>
+      <text x="230" y="52" text-anchor="middle" class="sm">← elétrons fluem →</text>
+      <path d="M110,95 Q230,60 350,95" fill="none" stroke="#587179" stroke-width="8" stroke-linecap="round" opacity=".5"/>
+      <text x="230" y="80" text-anchor="middle" class="sm">ponte salina</text>
+      <text x="75" y="168" text-anchor="middle" class="sm">ânodo · oxida</text>
+      <text x="385" y="168" text-anchor="middle" class="sm">cátodo · reduz</text>
+    </svg>
+    <figcaption>Na pilha, o metal mais reativo (Zn) oxida e “empurra” elétrons pelo fio até o cátodo (Cu).</figcaption>
+  </figure>
+  <div class="box mnemo"><b class="tt">🧠 Ânodo × Cátodo</b>
+    “<b>Â</b>nodo = <b>A</b>xé de oxidar (perde e⁻, polo <b>−</b> na pilha). <b>C</b>átodo = <b>C</b>aptura e reduz (polo <b>+</b>).” Os elétrons sempre viajam do ânodo → cátodo.
+  </div>
+  <div class="box calc"><b class="tt">📐 Cálculo — ddp (voltagem) da pilha</b>
+    <p><b>Fórmula:</b> ΔE = E(cátodo, maior redução) − E(ânodo). <b>Pergunta:</b> com E°(Cu²⁺) = +0,34 V e E°(Zn²⁺) = −0,76 V, qual a ddp da pilha?</p>
+    <div class="step"><span class="n">1</span> O maior potencial de redução é o cátodo: Cu (+0,34). O menor é o ânodo: Zn (−0,76).</div>
+    <div class="step"><span class="n">2</span> ΔE = E(cátodo) − E(ânodo) = (+0,34) − (−0,76)</div>
+    <div class="step"><span class="n">3</span> = 0,34 + 0,76 = 1,10</div>
+    <div class="res">✅ ddp = <b>+1,10 V</b> (positivo → a pilha funciona espontaneamente)</div>
+  </div>
+
+  <h4>Eletrólise — consome energia (o inverso da pilha)</h4>
+  <div class="box concept"><b class="tt">Conceito-chave</b>
+    Na <b>eletrólise</b>, forçamos uma corrente elétrica para provocar uma reação NÃO espontânea (ex.: separar água em H₂ e O₂, galvanizar metais). É o oposto da pilha: aqui a energia elétrica <b>entra</b>. Regida pelas <b>Leis de Faraday</b> (a massa depositada é proporcional à carga que passou).
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: numa reação, o zinco passou de Zn⁰ para Zn²⁺. Ele oxidou ou reduziu? É agente oxidante ou redutor?</summary>
+    <div class="ans">✅ Perdeu 2 elétrons (nox subiu de 0 a +2) → <b>oxidou</b>. Como sofreu oxidação, ele é o <b>agente redutor</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q11 · ORGÂNICA ===== -->
+<section class="mod" id="q-org">
+  <h3>11. Química Orgânica <span class="pomo">⏱ ~30 min</span></h3>
+  <p>Química orgânica é a química do <b>carbono</b>. O carbono é especial porque faz <b>4 ligações</b> e se encadeia formando cadeias enormes.</p>
+
+  <h4>Nomenclatura — a lógica de montar o nome</h4>
+  <p>O nome IUPAC tem 3 partes: <b>prefixo</b> (nº de carbonos) + <b>infixo</b> (tipo de ligação) + <b>sufixo</b> (função).</p>
+  <div class="scroll"><table class="data">
+    <tr><th>Prefixo (nº C)</th><th>Infixo (ligação)</th><th>Sufixo (função)</th></tr>
+    <tr><td>1 = met</td><td>an = só simples</td><td>-o = hidrocarboneto</td></tr>
+    <tr><td>2 = et</td><td>en = uma dupla</td><td>-ol = álcool</td></tr>
+    <tr><td>3 = prop</td><td>in = uma tripla</td><td>-al = aldeído</td></tr>
+    <tr><td>4 = but</td><td></td><td>-ona = cetona</td></tr>
+    <tr><td>5 = pent</td><td></td><td>-oico = ácido carboxílico</td></tr>
+  </table></div>
+  <div class="box mnemo"><b class="tt">🧠 Prefixos (nº de carbonos)</b>
+    “<b>MET</b>er <b>ET</b>a <b>PROP</b>osta <b>BUT</b>ando <b>PENT</b>elhando” → 1-met, 2-et, 3-prop, 4-but, 5-pent.
+  </div>
+  <p><b>Exemplos:</b> metano (1C, simples) · etanol (2C + OH = álcool) · propanona (3C + cetona = a acetona) · ácido etanoico (2C + COOH = o ácido do vinagre).</p>
+
+  <h4>Funções orgânicas — como reconhecer o grupo</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Função</th><th>Grupo característico</th><th>Exemplo do dia a dia</th></tr>
+    <tr><td>Álcool</td><td>—OH em carbono saturado</td><td>etanol (álcool)</td></tr>
+    <tr><td>Aldeído</td><td>—CHO na ponta</td><td>formol</td></tr>
+    <tr><td>Cetona</td><td>C=O no meio da cadeia</td><td>acetona</td></tr>
+    <tr><td>Ácido carboxílico</td><td>—COOH</td><td>ácido acético (vinagre)</td></tr>
+    <tr><td>Éster</td><td>—COO—</td><td>aroma de frutas</td></tr>
+    <tr><td>Amina</td><td>—NH₂</td><td>parente da amônia</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Conceito-chave — a esterificação</b>
+    <b>ácido carboxílico + álcool ⇌ éster + água.</b> É a reação que dá o cheiro de fruta de balas e perfumes.
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se: uma molécula tem 3 carbonos e um grupo —OH. Qual o nome e a função?</summary>
+    <div class="ans">✅ 3C = prop, saturado = an, álcool = ol → <b>propanol</b>, função <b>álcool</b>.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== Q12 · ENSINO ===== -->
+<section class="mod" id="q-ensino">
+  <h3>12. Ensino de Química (itens 12 a 16) <span class="pomo">⏱ ~20 min</span></h3>
+  <p>Os últimos itens do edital são <b>pedagógicos</b>, aplicados à Química. A banca quer o professor que forma cidadãos, não decoradores de fórmula.</p>
+  <ul>
+    <li><b>Ensino investigativo:</b> parte de um <b>problema do cotidiano</b> (“por que o bolo cresce?”), levanta hipóteses, experimenta, discute e só então formaliza o conceito. O aluno é <b>protagonista</b>; o professor, <b>mediador</b>.</li>
+    <li><b>Contextualização:</b> ligar a Química à vida (a química da cozinha, dos remédios, do meio ambiente).</li>
+    <li><b>TICs (item 14):</b> simuladores (PhET), vídeos e apps — mas sempre com <b>objetivo pedagógico claro</b>, não por enfeite.</li>
+    <li><b>Recursos didáticos (item 13):</b> experimentos simples, jogos, modelos; conhecer <b>técnicas, materiais e normas de segurança</b> do laboratório.</li>
+    <li><b>Avaliação (item 15):</b> diagnóstica → formativa → somativa (o D-F-S da Parte 1).</li>
+    <li><b>PCNEM (item 16):</b> competências e habilidades, interdisciplinaridade e contextualização.</li>
+  </ul>
+  <div class="box prova"><b class="tt">📌 Cai na prova</b>
+    Segurança de laboratório: sempre EPIs (óculos, jaleco, luvas), cabelo preso, nada de comida, nunca pipetar com a boca. Diluir ácido: <b>Ácido À Água</b>, devagar (A.A.A.) — nunca água no ácido.
+  </div>
+  <a class="top-link" href="#topo">↑ voltar ao topo</a>
+</section>
+
+<!-- ===== LABORATÓRIO DE CÁLCULOS (INTERATIVO) ===== -->
+<div class="part" id="lab" style="background:linear-gradient(135deg,var(--calc),#845EF6)"><h2>🧮 Laboratório de Cálculos</h2><p>Digite seus próprios números e a Profa. Mol resolve de verdade, passo a passo. Cada cálculo vale XP! Troque os valores à vontade — é seu laboratório.</p></div>
+
+<section class="mod" id="calc-lab">
+  <div class="calcbox">
+    <h4>1 · Mol ↔ Massa <span class="tip" data-tip="n = quantidade de mols; m = massa em gramas; M = massa molar (soma das massas atômicas), em g/mol.">(n = m / M)</span></h4>
+    <p class="desc">Descubra quantos mols há numa massa — ou vice-versa. Ex.: água M = 18, CO₂ M = 44, NaCl M = 58,5.</p>
+    <div class="fields">
+      <div class="field"><label>Massa m (g)</label><input type="number" id="c1_m" placeholder="90" step="any"></div>
+      <div class="field"><label>Massa molar M (g/mol)</label><input type="number" id="c1_M" placeholder="18" step="any"></div>
+      <button class="go" onclick="calcMol()">Calcular mols ▸</button>
+    </div>
+    <div class="calcout" id="c1_out"></div>
+  </div>
+
+  <div class="calcbox">
+    <h4>2 · Concentração de solução <span class="tip" data-tip="C = concentração comum (g/L). M = concentração molar (mol/L). V precisa estar em litros!">(C = m/V e M = n/V)</span></h4>
+    <p class="desc">Dissolveu um soluto num volume? Veja a concentração comum e molar de uma vez.</p>
+    <div class="fields">
+      <div class="field"><label>Massa soluto (g)</label><input type="number" id="c2_m" placeholder="5.85" step="any"></div>
+      <div class="field"><label>Massa molar (g/mol)</label><input type="number" id="c2_M" placeholder="58.5" step="any"></div>
+      <div class="field"><label>Volume (mL)</label><input type="number" id="c2_V" placeholder="500" step="any"></div>
+      <button class="go" onclick="calcConc()">Calcular ▸</button>
+    </div>
+    <div class="calcout" id="c2_out"></div>
+  </div>
+
+  <div class="calcbox">
+    <h4>3 · Diluição <span class="tip" data-tip="Ao diluir, o soluto se conserva. V₂ é o volume FINAL — a água adicionada é V₂ menos V₁.">(C₁V₁ = C₂V₂)</span></h4>
+    <p class="desc">Quanto de água acrescentar para chegar numa concentração menor?</p>
+    <div class="fields">
+      <div class="field"><label>C₁ inicial</label><input type="number" id="c3_c1" placeholder="2" step="any"></div>
+      <div class="field"><label>V₁ inicial (mL)</label><input type="number" id="c3_v1" placeholder="100" step="any"></div>
+      <div class="field"><label>C₂ desejada</label><input type="number" id="c3_c2" placeholder="0.5" step="any"></div>
+      <button class="go" onclick="calcDil()">Calcular ▸</button>
+    </div>
+    <div class="calcout" id="c3_out"></div>
+  </div>
+
+  <div class="calcbox">
+    <h4>4 · pH e pOH <span class="tip" data-tip="pH = −log[H⁺]. Quanto menor o pH, mais ácido. pH + pOH = 14 (a 25°C).">(pH = −log[H⁺])</span></h4>
+    <p class="desc">Digite a concentração de H⁺ (em mol/L) de um ácido forte. Ex.: 0,001 ou 0,0001.</p>
+    <div class="fields">
+      <div class="field"><label>[H⁺] (mol/L)</label><input type="number" id="c4_h" placeholder="0.001" step="any"></div>
+      <button class="go" onclick="calcPH()">Calcular pH ▸</button>
+    </div>
+    <div class="calcout" id="c4_out"></div>
+  </div>
+
+  <div class="calcbox">
+    <h4>5 · Gases — equação geral <span class="tip" data-tip="P·V = n·R·T. R = 0,082. Temperatura SEMPRE em Kelvin (K = °C + 273). Deixe UM campo vazio para ele descobrir.">(P·V = n·R·T)</span></h4>
+    <p class="desc">Preencha 3 campos e deixe <b>1 vazio</b> — a Profa. Mol acha o que falta. (T em Kelvin!)</p>
+    <div class="fields">
+      <div class="field"><label>Pressão P (atm)</label><input type="number" id="c5_p" placeholder="2" step="any"></div>
+      <div class="field"><label>Volume V (L)</label><input type="number" id="c5_v" placeholder="4.92" step="any"></div>
+      <div class="field"><label>Mols n</label><input type="number" id="c5_n" placeholder="(vazio)" step="any"></div>
+      <div class="field"><label>Temperatura T (K)</label><input type="number" id="c5_t" placeholder="300" step="any"></div>
+      <button class="go" onclick="calcGas()">Descobrir o que falta ▸</button>
+    </div>
+    <div class="calcout" id="c5_out"></div>
+  </div>
+
+  <div class="calcbox">
+    <h4>6 · Estequiometria (massa → massa) <span class="tip" data-tip="Transforma a massa do reagente em mols, aplica a proporção dos coeficientes e volta para massa do produto.">(B-M-P)</span></h4>
+    <p class="desc">A partir da massa de um reagente, quanta massa de produto se forma? Informe os coeficientes da equação balanceada.</p>
+    <div class="fields">
+      <div class="field"><label>Massa reagente (g)</label><input type="number" id="c6_m" placeholder="8" step="any"></div>
+      <div class="field"><label>M reagente (g/mol)</label><input type="number" id="c6_Mr" placeholder="2" step="any"></div>
+      <div class="field"><label>Coef. reagente</label><input type="number" id="c6_cr" placeholder="2" step="any"></div>
+      <div class="field"><label>Coef. produto</label><input type="number" id="c6_cp" placeholder="2" step="any"></div>
+      <div class="field"><label>M produto (g/mol)</label><input type="number" id="c6_Mp" placeholder="18" step="any"></div>
+      <button class="go" onclick="calcEsteq()">Calcular produto ▸</button>
+    </div>
+    <div class="calcout" id="c6_out"></div>
+  </div>
+
+  <div class="calcbox">
+    <h4>7 · Titulação <span class="tip" data-tip="No ponto de viragem, mols de H⁺ = mols de OH⁻. 'nH' é o número de hidrogênios ionizáveis do ácido (HCl=1, H₂SO₄=2).">(Mₐ·Vₐ·nH = M_b·V_b)</span></h4>
+    <p class="desc">Ache a concentração da base a partir do ácido que a neutralizou.</p>
+    <div class="fields">
+      <div class="field"><label>Conc. ácido (mol/L)</label><input type="number" id="c7_ma" placeholder="0.5" step="any"></div>
+      <div class="field"><label>Vol. ácido (mL)</label><input type="number" id="c7_va" placeholder="10" step="any"></div>
+      <div class="field"><label>nº de H⁺ do ácido</label><input type="number" id="c7_nh" placeholder="2" step="any"></div>
+      <div class="field"><label>Vol. base (mL)</label><input type="number" id="c7_vb" placeholder="25" step="any"></div>
+      <button class="go" onclick="calcTit()">Calcular base ▸</button>
+    </div>
+    <div class="calcout" id="c7_out"></div>
+  </div>
+
+  <div class="calcbox">
+    <h4>8 · Pilha — ddp <span class="tip" data-tip="ΔE = E(cátodo) − E(ânodo). O cátodo é o de MAIOR potencial de redução. Resultado positivo = pilha espontânea.">(ΔE = E_cat − E_an)</span></h4>
+    <p class="desc">Informe os potenciais de redução dos dois eletrodos (a Profa. Mol descobre quem é cátodo).</p>
+    <div class="fields">
+      <div class="field"><label>Potencial 1 (V)</label><input type="number" id="c8_e1" placeholder="0.34" step="any"></div>
+      <div class="field"><label>Potencial 2 (V)</label><input type="number" id="c8_e2" placeholder="-0.76" step="any"></div>
+      <button class="go" onclick="calcPilha()">Calcular ddp ▸</button>
+    </div>
+    <div class="calcout" id="c8_out"></div>
+  </div>
+</section>
+
+<!-- ===== FORMULÁRIO DE BOLSO ===== -->
+<section class="mod" id="formulario" style="border-color:var(--accent)">
+  <h3>🎯 Formulário de Bolso — imprima e cole na parede</h3>
+  <div class="scroll"><table class="data">
+    <tr><th>Tema</th><th>Fórmula</th><th>Lê-se</th></tr>
+    <tr><td>Mol ↔ massa</td><td>n = m / M</td><td>mols = massa ÷ massa molar</td></tr>
+    <tr><td>Partículas</td><td>N = n × 6,02·10²³</td><td>número de Avogadro</td></tr>
+    <tr><td>Gás (CNTP)</td><td>V = n × 22,4</td><td>1 mol = 22,4 L</td></tr>
+    <tr><td>Concentração comum</td><td>C = m / V</td><td>g por litro</td></tr>
+    <tr><td>Concentração molar</td><td>M = n / V</td><td>mol por litro</td></tr>
+    <tr><td>Diluição</td><td>C₁V₁ = C₂V₂</td><td>soluto se conserva</td></tr>
+    <tr><td>Titulação</td><td>Mₐ·Vₐ·n<sub>H</sub> = M_b·V_b·n<sub>OH</sub></td><td>lembre do nº de H⁺ (H₂SO₄ → ×2)</td></tr>
+    <tr><td>pH</td><td>pH = −log[H⁺]</td><td>pH + pOH = 14</td></tr>
+    <tr><td>Gases (geral)</td><td>P·V = n·R·T</td><td>R = 0,082</td></tr>
+    <tr><td>Charles</td><td>V₁/T₁ = V₂/T₂</td><td>T em Kelvin!</td></tr>
+    <tr><td>Termoquímica</td><td>ΔH = ΣHprod − ΣHreag</td><td>Q = m·c·ΔT</td></tr>
+    <tr><td>Pilha</td><td>ΔE = Ecátodo − Eânodo</td><td>positivo = espontânea</td></tr>
+  </table></div>
+  <div class="box mnemo"><b class="tt">🧠 Frases-âncora para levar para a prova</b>
+    <ul style="margin:6px 0 0">
+      <li>Estequiometria: <b>B-M-P</b> (Balanceia, vira Mol, aplica a Proporção).</li>
+      <li>Periódicas: raio corre pro <b>FRâncio</b>, o resto pro <b>Flúor</b>.</li>
+      <li>Termoquímica: <b>EXO</b> expulsa calor (−), <b>ENDO</b> entra calor (+).</li>
+      <li>Eletroquímica: <b>PE</b>rdeu <b>O</b>xidou, <b>GA</b>nhou <b>RE</b>duziu.</li>
+      <li>Gases: temperatura <b>SEMPRE em Kelvin</b> (K = °C + 273).</li>
+      <li>Segurança: <b>A.A.A.</b> — Adicione o Ácido À Água.</li>
+    </ul>
+  </div>
+  <p style="text-align:center; margin-top:20px; color:var(--muted)">🌟 <b>Você consegue, Josiane!</b> Estude um módulo por vez, refaça os cálculos no papel e use o jogo para fixar. A repetição espaçada é o segredo. 💜</p>
+</section>
+</div>
+
+<!-- ===== AVATAR TUTOR ===== -->
+<div id="tutor">
+  <div id="tutorBubble">
+    <button id="tutorClose" onclick="document.getElementById('tutorBubble').classList.add('hide')" title="fechar">✕</button>
+    <span id="tutorText">Oi, Josi! 👋 Eu sou a <b>Profa. Mol</b>. Role até o <b>🧮 Laboratório de Cálculos</b> e digite qualquer número — eu resolvo com você, passo a passo!</span>
+  </div>
+  <svg id="tutorFace" viewBox="0 0 100 100" onclick="tutorTip()" role="img" aria-label="Professora Mol, sua tutora">
+    <circle cx="50" cy="50" r="46" fill="#C2255C"/>
+    <circle cx="50" cy="54" r="34" fill="#F1C7A3" stroke="#132F36" stroke-width="2"/>
+    <path d="M16,50 Q20,20 50,20 Q80,20 84,50 Q84,38 50,34 Q16,38 16,50 Z" fill="#5C4033"/>
+    <circle cx="38" cy="52" r="8" fill="#fff" stroke="#132F36" stroke-width="1.5"/>
+    <circle cx="62" cy="52" r="8" fill="#fff" stroke="#132F36" stroke-width="1.5"/>
+    <circle cx="39" cy="53" r="3.5" fill="#132F36" id="eyeL"/>
+    <circle cx="63" cy="53" r="3.5" fill="#132F36" id="eyeR"/>
+    <path d="M30,50 L46,48 M54,48 L70,50" stroke="#132F36" stroke-width="2" fill="none"/>
+    <path id="mouth" d="M40,66 Q50,74 60,66" stroke="#132F36" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="30" cy="63" r="4" fill="#F783AC" opacity=".6"/><circle cx="70" cy="63" r="4" fill="#F783AC" opacity=".6"/>
+    <rect x="72" y="30" width="16" height="12" rx="2" fill="#132F36" transform="rotate(-15 80 36)"/>
+    <text x="80" y="39" text-anchor="middle" font-size="9" fill="#FFD43B" transform="rotate(-15 80 36)">🧪</text>
+  </svg>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ util ============ */
+const $ = s => document.querySelector(s);
+const fmt = x => { if(!isFinite(x)) return '—'; const r=Math.round(x*1e6)/1e6; return String(r).replace('.',','); };
+function out(id, steps, final){
+  const el=document.getElementById(id);
+  el.innerHTML = steps.map(s=>'<div class="stepline">'+s+'</div>').join('') + '<div class="final">✅ '+final+'</div>';
+  el.classList.add('show');
+}
+
+/* ============ avatar tutor ============ */
+const SAY = {
+  idle:['Digite números diferentes e veja o que muda! 🔬','Errar faz parte — refaça no papel depois. 💪','Cada cálculo aqui vira XP lá em cima! ⭐'],
+  mol:'Boa! Lembra: <b>massa vira mol dividindo</b> pela massa molar. O mol é o coração de tudo! 🫀',
+  conc:'Concentração é "quanto de soluto por litro". Não esqueça de passar mL → L! 💧',
+  dil:'Diluir só espalha o soluto em mais água. V₂ é o volume FINAL, viu? 🚰',
+  ph:'pH baixo = ácido forte. Quando [H⁺] é potência de 10, o pH é só o expoente! ⚡',
+  gas:'Gás é P·V = n·R·T. Temperatura <b>sempre em Kelvin</b>, senão dá errado! 🎈',
+  esteq:'Essa é a rainha da prova: B-M-P — Balanceia, vira Mol, aplica a Proporção! ⚗️',
+  tit:'Na viragem, mols de ácido = mols de base. Ácido com 2 H⁺ dobra a conta! 🌈',
+  pilha:'O cátodo é o de maior potencial. ddp positiva = a pilha funciona sozinha! 🔋',
+  levelup:'🎉 Subiu de nível, Josi! Você está pegando o jeito dos cálculos!',
+  mestre:'🏆 500 XP! Você é oficialmente uma MESTRA dos cálculos de química!'
+};
+let tutorTimer;
+function tutorSay(msg, talk=true){
+  const b=$('#tutorBubble'); b.classList.remove('hide');
+  $('#tutorText').innerHTML = msg;
+  const f=$('#tutorFace'); if(talk){ f.classList.add('talk'); clearTimeout(tutorTimer); tutorTimer=setTimeout(()=>f.classList.remove('talk'),1600); }
+}
+function tutorTip(){ tutorSay(SAY.idle[Math.floor(Math.random()*SAY.idle.length)]); }
+
+/* ============ gamificação ============ */
+const GKEY='apostila-josi-xp';
+let G={xp:0, badges:{}};
+try{ const s=JSON.parse(localStorage.getItem(GKEY)||'{}'); if(s.xp){G.xp=s.xp; G.badges=s.badges||{};} }catch(e){}
+const LEVELS=[[0,'Estagiária'],[80,'Auxiliar de Lab'],[180,'Química Jr.'],[320,'Cientista'],[500,'Mestra Alquimista']];
+function levelName(xp){ let n='Estagiária',i=1; LEVELS.forEach((L,k)=>{ if(xp>=L[0]){n=L[1]; i=k+1;} }); return {n,i}; }
+function renderG(){
+  $('#xpPts').textContent=G.xp;
+  const {n,i}=levelName(G.xp);
+  $('#xpLvl').textContent='Nível '+i+' · '+n;
+  const cur=LEVELS[i-1][0], next=(LEVELS[i]?LEVELS[i][0]:cur+1);
+  const pct=Math.min(100,((G.xp-cur)/(next-cur))*100);
+  $('#xpFill').style.width=pct+'%';
+  document.querySelectorAll('.badge').forEach(b=>b.classList.toggle('on',!!G.badges[b.dataset.b]));
+}
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+function addXP(pts, badge){
+  const before=levelName(G.xp).i;
+  G.xp+=pts;
+  if(badge) G.badges[badge]=1;
+  if(G.xp>=500) G.badges.mestre=1;
+  const after=levelName(G.xp).i;
+  try{ localStorage.setItem(GKEY,JSON.stringify(G)); }catch(e){}
+  renderG();
+  toast('+'+pts+' XP! ⭐');
+  if(after>before){ setTimeout(()=>{ tutorSay(G.badges.mestre&&G.xp>=500?SAY.mestre:SAY.levelup); toast('🎉 Nível '+after+'!'); },600); }
+}
+renderG();
+
+/* ============ CALCULADORAS REAIS ============ */
+function num(id){ const v=parseFloat(document.getElementById(id).value.replace(',','.')); return isNaN(v)?null:v; }
+
+function calcMol(){
+  const m=num('c1_m'), M=num('c1_M');
+  if(m===null||M===null||M===0){ tutorSay('Preencha a massa e a massa molar (diferente de zero)! 😊'); return; }
+  const n=m/M;
+  out('c1_out',[
+    'Fórmula: n = m / M',
+    'Substituindo: n = '+fmt(m)+' / '+fmt(M),
+    'Dividindo: '+fmt(m)+' ÷ '+fmt(M)+' = '+fmt(n)
+  ], 'n = <b>'+fmt(n)+' mol</b> &nbsp;(e isso equivale a '+fmt(n*6.02)+' × 10²³ partículas)');
+  tutorSay(SAY.mol); addXP(15,'calc');
+}
+function calcConc(){
+  const m=num('c2_m'), M=num('c2_M'), Vml=num('c2_V');
+  if(m===null||M===null||Vml===null||M===0||Vml===0){ tutorSay('Preencha massa, massa molar e volume! 💧'); return; }
+  const V=Vml/1000, C=m/V, n=m/M, Mc=n/V;
+  out('c2_out',[
+    'Volume em litros: '+fmt(Vml)+' mL ÷ 1000 = '+fmt(V)+' L',
+    'Concentração comum: C = m/V = '+fmt(m)+' / '+fmt(V)+' = '+fmt(C)+' g/L',
+    'Mols do soluto: n = m/M = '+fmt(m)+' / '+fmt(M)+' = '+fmt(n)+' mol',
+    'Concentração molar: M = n/V = '+fmt(n)+' / '+fmt(V)+' = '+fmt(Mc)+' mol/L'
+  ], 'C = <b>'+fmt(C)+' g/L</b> &nbsp;e&nbsp; M = <b>'+fmt(Mc)+' mol/L</b>');
+  tutorSay(SAY.conc); addXP(15,'calc');
+}
+function calcDil(){
+  const c1=num('c3_c1'), v1=num('c3_v1'), c2=num('c3_c2');
+  if(c1===null||v1===null||c2===null||c2===0){ tutorSay('Preencha C₁, V₁ e C₂ (diferente de zero)! 🚰'); return; }
+  const v2=(c1*v1)/c2, agua=v2-v1;
+  out('c3_out',[
+    'Fórmula: C₁·V₁ = C₂·V₂',
+    'Isolando V₂: V₂ = (C₁·V₁) / C₂ = ('+fmt(c1)+' × '+fmt(v1)+') / '+fmt(c2),
+    'Volume final: V₂ = '+fmt(c1*v1)+' / '+fmt(c2)+' = '+fmt(v2)+' mL',
+    'Água a acrescentar = V₂ − V₁ = '+fmt(v2)+' − '+fmt(v1)+' = '+fmt(agua)+' mL'
+  ], 'Volume final <b>'+fmt(v2)+' mL</b> → acrescentar <b>'+fmt(agua)+' mL de água</b>');
+  tutorSay(SAY.dil); addXP(15,'calc');
+}
+function calcPH(){
+  const h=num('c4_h');
+  if(h===null||h<=0){ tutorSay('A concentração de H⁺ precisa ser um número positivo, tipo 0,001! ⚡'); return; }
+  const pH=-Math.log10(h), pOH=14-pH;
+  const carac = pH<7?'ácida':(pH>7?'básica':'neutra');
+  out('c4_out',[
+    'Fórmula: pH = −log[H⁺]',
+    'Substituindo: pH = −log('+fmt(h)+')',
+    'Calculando o log: pH = '+fmt(pH),
+    'pOH = 14 − pH = 14 − '+fmt(pH)+' = '+fmt(pOH)
+  ], 'pH = <b>'+fmt(pH)+'</b> (solução '+carac+') · pOH = <b>'+fmt(pOH)+'</b>');
+  tutorSay(SAY.ph); addXP(15,'ph');
+}
+function calcGas(){
+  const R=0.082;
+  let P=num('c5_p'), V=num('c5_v'), n=num('c5_n'), T=num('c5_t');
+  const vazios=[P,V,n,T].filter(x=>x===null).length;
+  if(vazios!==1){ tutorSay('Deixe exatamente <b>1 campo vazio</b> — preencha os outros 3! 🎈'); return; }
+  let steps=['Fórmula: P·V = n·R·T &nbsp;(R = 0,082)'], final, alvo;
+  if(P===null){ P=(n*R*T)/V; alvo='P = (n·R·T)/V = ('+fmt(n)+'×0,082×'+fmt(T)+')/'+fmt(V); final='P = <b>'+fmt(P)+' atm</b>'; }
+  else if(V===null){ V=(n*R*T)/P; alvo='V = (n·R·T)/P = ('+fmt(n)+'×0,082×'+fmt(T)+')/'+fmt(P); final='V = <b>'+fmt(V)+' L</b>'; }
+  else if(n===null){ n=(P*V)/(R*T); alvo='n = (P·V)/(R·T) = ('+fmt(P)+'×'+fmt(V)+')/(0,082×'+fmt(T)+')'; final='n = <b>'+fmt(n)+' mol</b>'; }
+  else { T=(P*V)/(n*R); alvo='T = (P·V)/(n·R) = ('+fmt(P)+'×'+fmt(V)+')/('+fmt(n)+'×0,082)'; final='T = <b>'+fmt(T)+' K</b>'; }
+  steps.push('Isolando o que falta: '+alvo); steps.push('Resultado do cálculo → '+final.replace(/<\/?b>/g,''));
+  out('c5_out', steps, final);
+  tutorSay(SAY.gas); addXP(20,'gas');
+}
+function calcEsteq(){
+  const m=num('c6_m'), Mr=num('c6_Mr'), cr=num('c6_cr'), cp=num('c6_cp'), Mp=num('c6_Mp');
+  if([m,Mr,cr,cp,Mp].some(x=>x===null)||Mr===0||cr===0){ tutorSay('Preencha todos os campos da equação! ⚗️'); return; }
+  const nR=m/Mr, nP=nR*(cp/cr), mP=nP*Mp;
+  out('c6_out',[
+    'Passo 1 — massa do reagente vira mol: n = m/M = '+fmt(m)+' / '+fmt(Mr)+' = '+fmt(nR)+' mol',
+    'Passo 2 — proporção dos coeficientes ('+fmt(cr)+' : '+fmt(cp)+'): n(produto) = '+fmt(nR)+' × ('+fmt(cp)+'/'+fmt(cr)+') = '+fmt(nP)+' mol',
+    'Passo 3 — mol do produto vira massa: m = n × M = '+fmt(nP)+' × '+fmt(Mp)+' = '+fmt(mP)
+  ], 'Forma-se <b>'+fmt(mP)+' g do produto</b>');
+  tutorSay(SAY.esteq); addXP(25,'esteq');
+}
+function calcTit(){
+  const ma=num('c7_ma'), va=num('c7_va'), nh=num('c7_nh'), vb=num('c7_vb');
+  if([ma,va,nh,vb].some(x=>x===null)||vb===0){ tutorSay('Preencha os dados do ácido e o volume da base! 🌈'); return; }
+  const molH=ma*(va/1000)*nh, mb=molH/(vb/1000);
+  out('c7_out',[
+    'Mols de H⁺ = Conc.ácido × Vol.ácido(L) × nºH = '+fmt(ma)+' × '+fmt(va/1000)+' × '+fmt(nh)+' = '+fmt(molH)+' mol',
+    'Na viragem, mols de OH⁻ = mols de H⁺ = '+fmt(molH)+' mol',
+    'Conc. base = mols / Vol.base(L) = '+fmt(molH)+' / '+fmt(vb/1000)
+  ], 'Concentração da base = <b>'+fmt(mb)+' mol/L</b>');
+  tutorSay(SAY.tit); addXP(25,'calc');
+}
+function calcPilha(){
+  const e1=num('c8_e1'), e2=num('c8_e2');
+  if(e1===null||e2===null){ tutorSay('Preencha os dois potenciais de redução! 🔋'); return; }
+  const cat=Math.max(e1,e2), an=Math.min(e1,e2), ddp=cat-an;
+  out('c8_out',[
+    'Cátodo = maior potencial de redução = '+fmt(cat)+' V',
+    'Ânodo = menor potencial de redução = '+fmt(an)+' V',
+    'ΔE = E(cátodo) − E(ânodo) = '+fmt(cat)+' − ('+fmt(an)+') = '+fmt(ddp)
+  ], 'ddp = <b>'+fmt(ddp)+' V</b> '+(ddp>0?'(positiva → pilha espontânea ✅)':'(não espontânea)'));
+  tutorSay(SAY.pilha); addXP(20,'calc');
+}
+
+/* ============ XP pelos testes "Teste-se" ============ */
+document.querySelectorAll('details.quiz').forEach(d=>{
+  d.addEventListener('toggle', ()=>{ if(d.open && !d.dataset.xp){ d.dataset.xp='1'; addXP(10,'quiz'); } });
+});
+
+/* mensagem ociosa a cada 45s se a bolha estiver aberta */
+setInterval(()=>{ if(!$('#tutorBubble').classList.contains('hide') && Math.random()<.4) tutorTip(); }, 45000);
+</script>
+</body>
+</html>
