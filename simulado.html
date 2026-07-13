@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🎓 Simulado UECE — Lab da Josi</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#1971C2">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lab da Josi">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+  :root{
+    --bg:#EDF4F2; --panel:#FFFFFF; --panel2:#F3F8F7; --ink:#132F36; --muted:#587179; --line:#D5E2E0;
+    --accent:#C2255C; --accent-ink:#fff; --calc:#7048E8; --info:#1971C2;
+    --good:#2F9E44; --good-soft:#D3F1DB; --bad:#E03131; --bad-soft:#FBE3E3;
+    --shadow:0 6px 24px rgba(19,47,54,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#0E1B1E; --panel:#152A2F; --panel2:#1B3339; --ink:#E4EFED; --muted:#93ABA9; --line:#28454B;
+      --accent:#F06595; --calc:#B197FC; --info:#74B4EC;
+      --good:#51CF66; --good-soft:#12351C; --bad:#FF6B6B; --bad-soft:#3E1616;
+      --shadow:0 6px 24px rgba(0,0,0,.4);}
+  }
+  *{box-sizing:border-box}
+  body{margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; overflow-x:hidden;
+    -webkit-text-size-adjust:100%; padding:0 16px 60px}
+  .wrap{max-width:860px; margin:0 auto}
+  header.top{padding:22px 0 8px}
+  header.top h1{font-family:'Trebuchet MS',sans-serif; font-size:1.6rem; margin:0}
+  header.top .sub{color:var(--muted); margin:4px 0 0; font-size:.95rem}
+  a.back{color:var(--info); text-decoration:none; font-weight:700; font-size:.9rem}
+  .aviso{background:var(--panel); border:1.5px solid var(--line); border-left:5px solid var(--info);
+    border-radius:12px; padding:12px 16px; margin:14px 0; font-size:.88rem; color:var(--muted)}
+  .aviso b{color:var(--ink)}
+  .placar{position:sticky; top:0; z-index:30; background:var(--bg); padding:10px 0; display:flex;
+    flex-wrap:wrap; gap:8px; align-items:center; border-bottom:1.5px solid var(--line); margin-bottom:16px}
+  .chip{background:var(--panel); border:1.5px solid var(--line); border-radius:999px;
+    padding:6px 14px; font:inherit; font-size:.88rem; cursor:pointer; color:var(--ink)}
+  .chip:hover,.chip:active{border-color:var(--accent)}
+  .chip.sel{background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:700}
+  .score{margin-left:auto; font-weight:700; font-size:.9rem; color:var(--info); white-space:nowrap}
+  .reset{background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer; font:inherit; font-size:.8rem}
+  h2.tema{font-size:1.25rem; margin:28px 0 12px; color:var(--accent);
+    font-family:'Trebuchet MS',sans-serif; border-bottom:2px solid var(--line); padding-bottom:6px}
+  .q{background:var(--panel); border:1.5px solid var(--line); border-radius:14px;
+    padding:16px; box-shadow:var(--shadow); margin-bottom:16px}
+  .q-tag{font-family:Consolas,monospace; font-size:.7rem; letter-spacing:.12em;
+    color:var(--info); font-weight:700; margin-bottom:6px}
+  .q-enun{margin:0 0 12px; white-space:pre-line}
+  .q-enun img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line);
+    border-radius:8px; padding:6px; margin:8px 0; display:block}
+  table.qt{border-collapse:collapse; margin:10px 0; font-size:.9rem; background:var(--panel2)}
+  table.qt th, table.qt td{border:1px solid var(--line); padding:5px 12px; text-align:left}
+  table.qt th{background:var(--panel2); font-weight:700}
+  .eqs{background:var(--panel2); border:1px solid var(--line); border-radius:8px;
+    padding:8px 14px; margin:8px 0; font-size:.93rem}
+  .q-opts{display:grid; gap:8px}
+  .q-opt{display:flex; align-items:flex-start; gap:10px; text-align:left;
+    background:var(--panel2); border:1.5px solid var(--line); border-radius:10px;
+    padding:9px 12px; font:inherit; cursor:pointer; color:var(--ink); line-height:1.45}
+  .q-opt:hover,.q-opt:active{border-color:var(--accent)}
+  .q-opt:disabled{cursor:default; opacity:.92}
+  .q-opt.ok{border-color:var(--good); background:var(--good-soft); font-weight:600}
+  .q-opt.err{border-color:var(--bad); background:var(--bad-soft)}
+  .q-letter{font-family:Consolas,monospace; font-weight:700; flex:none;
+    width:26px; height:26px; border-radius:7px; display:grid; place-items:center;
+    background:var(--line); font-size:.85rem; margin-top:2px}
+  .q-opt.ok .q-letter{background:var(--good); color:#fff}
+  .q-opt.err .q-letter{background:var(--bad); color:#fff}
+  .fb{margin-top:10px; font-size:.88rem; font-weight:700; display:none}
+  .fb.show{display:block}
+  .fb.ok{color:var(--good)} .fb.err{color:var(--bad)}
+  footer{margin-top:34px; color:var(--muted); font-size:.82rem; text-align:center}
+  @media (max-width:600px){
+    body{padding:0 10px 48px}
+    header.top h1{font-size:1.3rem}
+    .q{padding:12px}
+    .q-opt{padding:8px 10px; font-size:.92rem}
+    .chip{padding:5px 11px; font-size:.82rem}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="back" href="index.html">← Voltar ao Lab</a>
+    <h1>🎓 Simulado UECE — Química</h1>
+    <p class="sub">81 questões de provas anteriores do vestibular da UECE (2010–2019): Termoquímica, Eletroquímica, Equilíbrio Químico e Cinética Química.</p>
+  </header>
+  <div class="aviso"><b>Fonte:</b> questões de provas oficiais do vestibular da <b>UECE</b> (ano e fase indicados em cada questão). <b>Atenção:</b> o gabarito exibido é <b>não oficial</b> (resolvido automaticamente) — confira sempre com o gabarito oficial da banca ou com seu professor.</div>
+  <div class="placar">
+    <button class="chip sel" data-f="all">Todas</button>
+    <button class="chip" data-f="termo">Termoquímica</button>
+    <button class="chip" data-f="eletro">Eletroquímica</button>
+    <button class="chip" data-f="equi">Equilíbrio</button>
+    <button class="chip" data-f="cine">Cinética</button>
+    <span class="score" id="score"></span>
+    <button class="reset" id="reset">zerar</button>
+  </div>
+  <div id="lista"></div>
+  <footer>Feito com 💜 para a Josiane estudar. Seu progresso fica salvo no seu navegador.</footer>
+</div>
+<script>
+const TEMAS={termo:'🔥 Termoquímica',eletro:'⚡ Eletroquímica',equi:'⚖️ Equilíbrio Químico',cine:'⏱️ Cinética Química'};
+const QS=[
+{n:1,f:'UECE 2010.1 – 2ª fase',t:'termo',e:`O fluoreto de cálcio, CaF₂, usado como fluxo na fabricação de ácido; como fundente, na obtenção de HF e esmaltação de utensílios de cozinha, pode ser preparado seguindo o ciclo de Born-Haber a partir do cálcio e do gás flúor. Solicitou-se a um aluno para elaborar o ciclo, que, após concluído, apresentou um equívoco do aluno. Assinale a alternativa que mostra esse equívoco.<img src='img/simulado-q01.png' alt='Ciclo de Born-Haber do CaF₂ elaborado pelo aluno'>`,
+a:[`Não são 2xΔH<sub>AE</sub>, mas somente ΔH<sub>AE</sub>.`,`Ao invés de E<sub>dis</sub> o correto são 2E<sub>dis</sub>.`,`As posições de ΔE<sub>ret</sub> e ΔH°<sub>f</sub> foram trocadas entre si.`,`Como os 2 elétrons do cálcio são retirados de uma única vez não deve ser usado a energia do 1° Potencial de Ionização.`],g:2},
+{n:2,f:'UECE 2010.1 – 2ª fase',t:'termo',e:`O ácido clorídrico, HCl, é bastante usado pelo ser humano, em processamento de alimentos, limpeza em geral, decapagem de metais, redução de ouro, acidificação em poços de petróleo, dentre outros. O gráfico mostra sua formação a partir dos gases de hidrogênio e de cloro. Assinale a alternativa correta.<img src='img/simulado-q02.png' alt='Diagrama de energia da formação do HCl'>`,
+a:[`A reação é exotérmica.`,`ΔH &gt; 0.`,`O complexo ativado H₂Cl₂ é uma estrutura intermediária e estável entre os reagentes e o produto.`,`A energia de ativação, E<sub>at</sub>, é o valor máximo de energia que as moléculas de H₂ e Cl₂ devem possuir para que uma colisão entre elas seja eficaz.`],g:0},
+{n:3,f:'UECE 2011.2 – 2ª fase',t:'termo',e:`Potes, moringas ou filtros de cerâmica, ainda usados em algumas regiões remotas do Brasil, esfriam em relação à temperatura ambiente e mantêm fresca a água potável das habitações mais humildes. O resfriamento da água ocorre por conta da`,
+a:[`porosidade da cerâmica e da vaporização da água.`,`composição química do material e da sublimação da água.`,`permeabilidade da cerâmica e da condensação da água.`,`força das ligações de hidrogênio da água.`],g:0},
+{n:4,f:'UECE 2011.2 – 2ª fase',t:'termo',e:`Uma compressa de água fria usada para luxações é constituída de duas bolsas: uma contém água e a outra, nitrato de amônio. Quando pressionada, a bolsa de água se rompe dissolvendo o nitrato de amônio e produzindo um frio instantâneo que pode durar até quarenta minutos.
+A explicação coerente para o fenômeno é que`,
+a:[`ocorre, no caso, uma reação química de adição.`,`o nitrato de amônio se ioniza na presença de água.`,`o nitrato de amônio é uma substância termoscópica.`,`a dissolução do nitrato de amônio é um processo endotérmico.`],g:3},
+{n:5,f:'UECE 2011.2 – 2ª fase',t:'termo',e:`As reações químicas espontâneas são de grande interesse comercial e, em alguns casos, podem minimizar gastos de energia. Considere a reação indicada abaixo e os respectivos valores de entalpia e entropia a 1 atm de pressão.<div class='eqs'>½ H₂(g) + ½ I₂(g) → HI(g) &nbsp;&nbsp; ΔH = 25,9 kJ &nbsp;&nbsp; ΔS = 34,6 × 10⁻² kJ/K</div>Sobre essa reação, marque a afirmativa verdadeira.`,
+a:[`Em qualquer temperatura, nunca será espontânea.`,`Será espontânea em temperaturas acima de 350 °C.`,`Será espontânea em temperaturas abaixo de 300 °C.`,`Será espontânea em temperaturas entre 320 °C e 340 °C.`],g:1},
+{n:6,f:'UECE 2011.2 – 2ª fase',t:'termo',e:`A revista Veja de 12.11.1997, com o título “Marvada Pinga”, informa que uma cachaça produzida com metanol matou 13 pessoas na cidade da Serrinha na Bahia. Em que pese a sua toxicidade o metanol é usado na transesterificação de gorduras para a produção de biodiesel. A sua síntese consiste na reação do monóxido de carbono com hidrogênio e libera 217 kJ/mol. Quando se aumenta a pressão do sistema ocorre`,
+a:[`aumento da massa do monóxido de carbono.`,`absorção de calor.`,`aumento de temperatura.`,`aumento da massa do hidrogênio.`],g:2},
+{n:7,f:'UECE 2012.1 – 2ª fase',t:'termo',e:`O sulfeto de zinco, usado por Ernest Rutherford no seu famoso experimento, emite luz por excitação causada por raios X ou feixe de elétrons e reage com o oxigênio, produzindo um óxido de zinco e dióxido de enxofre. Os calores de formação das diferentes substâncias estão na tabela abaixo:<table class='qt'><tr><th>Substância</th><th>Calor de formação (kcal/mol)</th></tr><tr><td>ZnS(s)</td><td>− 43,90</td></tr><tr><td>SO₂(g)</td><td>− 69,20</td></tr><tr><td>ZnO(s)</td><td>− 83,50</td></tr></table>Utilizando-se os valores da tabela, o calor de combustão do sulfeto de zinco será`,
+a:[`− 108,8 kcal/mol.`,`+ 54,4 kcal/mol.`,`+ 163,2 kcal/mol.`,`− 217,6 kcal/mol.`],g:0},
+{n:8,f:'UECE 2012.2 – 2ª fase',t:'termo',e:`O cloreto de amônio, considerado um dos quatro espíritos da alquimia islâmica, é usado para limpeza de solda, fabricação de xampus, em estamparia de tecidos e em expectorantes. Ele é obtido pela reação de amônia gasosa com cloreto de hidrogênio gasoso a 25 °C e 1 atm de pressão. Considere os dados constantes na tabela abaixo e marque a opção que corresponde, aproximadamente, à entalpia do processo.<table class='qt'><tr><th>Substância</th><th>Entalpia de formação</th></tr><tr><td>Amônia(g)</td><td>− 10,9 kcal/mol</td></tr><tr><td>Cloreto de hidrogênio(g)</td><td>− 21,9 kcal/mol</td></tr><tr><td>Cloreto de amônio(s)</td><td>− 74,9 kcal/mol</td></tr></table>`,
+a:[`+ 42,1 kcal`,`+ 85,9 kcal`,`− 42,1 kcal`,`− 85,9 kcal`],g:2},
+{n:9,f:'UECE 2014.1 – 1ª fase',t:'termo',e:`Normalmente uma reação química libera ou absorve calor. Esse processo é representado no seguinte diagrama, considerando uma reação específica.<img src='img/simulado-q09.png' alt='Diagrama de energia: H₂ + ½O₂ acima, H₂O(ℓ) abaixo, liberando 68,3 kcal'>Com relação a esse processo, assinale a equação química correta.`,
+a:[`H₂(g) + ½ O₂(g) → H₂O(ℓ) − 68,3 kcal`,`H₂O(ℓ) − 68,3 kcal → H₂(g) + ½ O₂(g)`,`H₂O(ℓ) → H₂(g) + ½ O₂(g) + 68,3 kcal`,`H₂(g) + ½ O₂(g) → H₂O(ℓ) + 68,3 kcal`],g:3},
+{n:10,f:'UECE 2014.1 – 1ª fase',t:'termo',e:`Segundo Bill Bryson, autor de Uma Breve História de Quase Tudo, o cientista americano Josiah Willard Gibbs (1839-1913) foi “o mais brilhante ilustre desconhecido da história”, por conta de sua modéstia e timidez. Gibbs contribuiu, em vários campos da física e da química, sobretudo na conceituação de energia livre que permitiu definir, através de cálculos singelos, a espontaneidade de uma reação química. Considerando-se o valor da constante de Faraday 96.500 C, conhecendo-se os potenciais de redução para as semirreações que ocorrem na pilha, Sn/Sn²⁺ // Pb²⁺/Pb, cujas concentrações de Sn e Pb valem, respectivamente, 1,0 M e 10⁻³ M, e sabendo-se, ainda, que:<div class='eqs'>Sn²⁺ + 2e⁻ → Sn &nbsp;&nbsp; E⁰ = − 0,14 V<br>Pb²⁺ + 2e⁻ → Pb &nbsp;&nbsp; E⁰ = − 0,22 V</div>pode-se afirmar corretamente que a reação global da pilha`,
+a:[`é espontânea, e o valor da energia de Gibbs é −15,44 kJ.`,`não é espontânea, e o valor da energia de Gibbs é +15,44 kJ.`,`não é espontânea, e o valor da energia de Gibbs é −7,72 kJ.`,`é espontânea, e o valor da energia de Gibbs é +7,72 kJ.`],g:1},
+{n:11,f:'UECE 2014.2 – 2ª fase',t:'termo',e:`A combustão do sulfeto de zinco produz, entre outros materiais, o óxido de zinco, um composto químico de cor branca, pouco solúvel em água e utilizado como inibidor do crescimento de fungos em pinturas, e como pomada antisséptica na medicina. É dada a equação não balanceada: ZnS(s) + O₂(g) → ZnO(s) + SO₂(g) e conhecem-se os valores do calor de combustão do zinco = −108,85 kcal/mol, e dos calores de formação do ZnS = −44,04 kcal/mol, e do SO₂ = −71,00 kcal/mol. Com essas informações, pode-se afirmar corretamente que o calor de formação do óxido de zinco será, em kcal/mol, aproximadamente`,
+a:[`− 83,56.`,`− 41,78.`,`− 62,67.`,`− 167,12.`],g:0},
+{n:12,f:'UECE 2015.2 – 2ª fase',t:'termo',e:`A glicose é produzida no intestino pela degradação dos carboidratos, e transportada pelo sangue até as células onde reage com o oxigênio produzindo dióxido de carbono e água. Para entender a formação da glicose, são fornecidas as seguintes equações:<div class='eqs'>1. C(s) + O₂(g) → CO₂(g) &nbsp;&nbsp; ΔH = − 94,1 kcal<br>2. H₂(g) + ½ O₂(g) → H₂O(g) &nbsp;&nbsp; ΔH = − 68,3 kcal<br>3. C₆H₁₂O₆(s) + 6 O₂(g) → 6 CO₂(g) + 6 H₂O &nbsp;&nbsp; ΔH = − 673,0 kcal</div>Considerando as reações que conduzem à formação da glicose e apenas as informações acima, pode-se afirmar corretamente que o processo é`,
+a:[`espontâneo.`,`não espontâneo.`,`endoenergético.`,`exoenergético.`],g:3},
+{n:13,f:'UECE 2015.2 – 2ª fase',t:'termo',e:`Em um laboratório de Química, foi realizada uma experiência, cujo procedimento foi o seguinte:
+1. Colocou-se 30 ml de água destilada em um béquer de capacidade de 100 ml.
+2. Adicionou-se, neste mesmo béquer, 30 ml de álcool isopropílico.
+3. Com um bastão de vidro, fez-se agitação na solução.
+4. Em seguida, mergulhou-se uma cédula de R$ 100,00 no béquer contendo a solução, e deixou-se que a cédula embebesse a solução por dois minutos.
+5. Com uma pinça de madeira, retirou-se a cédula do béquer pinçando-a por uma das pontas.
+6. A cédula foi então submetida à chama de uma vela, para que ela queimasse; essa ação permitiu a combustão do álcool isopropílico.
+7. Observou-se em seguida que, apesar de a cédula ter sido submetida ao fogo da chama da vela, ela não queimou, ficando da mesma forma que estava antes da experiência.
+Com relação a essa experiência, assinale a afirmação verdadeira.`,
+a:[`A reação de combustão do álcool isopropílico é 2C₃H₇OH(l) + 9O₂(g) → 6CO₂(g) + 8H₂O(g) e a entalpia é ΔH = −1827 kJ/mol.`,`A combustão do álcool isopropílico libera energia na forma de calor e a vaporização da água também libera energia que apaga as chamas da cédula.`,`Ao mesmo tempo em que ocorre a combustão do álcool isopropílico, ocorre a absorção do calor dessa combustão pela água, não existindo calor suficiente para que a cédula se queime.`,`A vaporização da água pode ser demonstrada através da equação: H₂O(l) → H₂O(g) ΔH = −43,7 kJ/mol.`],g:2},
+{n:14,f:'UECE 2016.1 – 2ª fase',t:'termo',e:`Os químicos alemães Fritz Haber (1868-1934) e Carl Bosch (1874-1940) desenvolveram, em 1909, um processo de produção de amônia, matéria-prima para a fabricação de explosivos utilizados durante a Primeira Guerra Mundial. De acordo com o processo Haber, a obtenção da amônia se faz através da reação:<div class='eqs'>N₂(g) + 3H₂(g) → 2NH₃(g)</div>Para essa reação, a variação de entalpia é negativa, sugerindo que ela ocorra a baixas temperaturas. No entanto, a reação é favorecida por elevada temperatura, garantindo alta energia de ativação para`,
+a:[`quebrar as ligações entre os átomos de hidrogênio.`,`quebrar as ligações entre os átomos de nitrogênio.`,`melhorar, simultaneamente, o rendimento da amônia e a velocidade da reação.`,`reorganizar a estrutura na molécula da amônia.`],g:1},
+{n:15,f:'UECE 2016.1 – 2ª fase',t:'termo',e:`Durante a Segunda Guerra Mundial, o monóxido de carbono foi usado como combustível alternativo nos veículos para suprir a falta de gasolina. O monóxido de carbono era obtido em equipamentos conhecidos como gasogênios, pela combustão parcial da madeira. Nos motores dos automóveis, o monóxido de carbono era convertido em gás carbônico ao reagir com o oxigênio, e liberava 57,0 kcal/mol. Sabendo-se que a entalpia do produto dióxido de carbono é −94 kcal, pode-se afirmar corretamente que a entalpia de formação do monóxido de carbono é`,
+a:[`− 37,0 kcal/mol.`,`− 151,0 kcal/mol.`,`+ 37,0 kcal/mol.`,`+ 151,0 kcal/mol.`],g:0},
+{n:16,f:'UECE 2016.2 – 2ª fase',t:'termo',e:`Josiah Willard Gibbs (1839-1903) foi um pesquisador norte-americano que contribuiu para a determinação da energia livre de um sistema termodinâmico através de uma lei que é associada ao seu nome. Em se tratando de energia livre e de entropia, analise as seguintes proposições:
+I. A energia livre pode ser positiva ou negativa, mas nunca pode ser nula.
+II. A energia livre é a totalidade de energia de um sistema termodinâmico, que pode ser usada para a realização de trabalho útil.
+III. Toda a reação exotérmica é espontânea.
+IV. A variação de entropia de uma reação espontânea pode ser negativa.
+V. Em certas reações químicas a variação de entalpia coincide com a variação da energia interna.
+É correto o que se afirma somente em`,
+a:[`I e II.`,`III e IV.`,`I, III e V.`,`II, IV e V.`],g:3},
+{n:17,f:'UECE 2016.2 – 2ª fase',t:'termo',e:`A sacarose, formada a partir da glicose e da frutose, é o açúcar comercial encontrado na cana-de-açúcar, nas frutas e raízes como a beterraba. A sacarose C₁₂H₂₂O₁₁ reage com o oxigênio produzindo dióxido de carbono e água, e liberando 83,70 kcal/mol na pressão de 1 atm. A corrente sanguínea absorve, em média, 26 mols de O₂ ao dia. Para produzir essa massa de oxigênio são liberadas`,
+a:[`181,35 kcal.`,`90,67 kcal.`,`136,01 kcal.`,`68,05 kcal.`],g:0},
+{n:18,f:'UECE 2017.1 – 1ª fase',t:'termo',e:`O conceito de entropia está intimamente associado à definição de espontaneidade de uma reação química, através da segunda lei da termodinâmica, embora não seja suficiente para caracterizá-la. Considerando os sistemas apresentados a seguir, assinale aquele em que há aumento de entropia.`,
+a:[`Liquefação da água.`,`Síntese da amônia.`,`Reação do hidrogênio gasoso com oxigênio gasoso para formar água líquida.`,`Dissolução do nitrato de potássio em água.`],g:3},
+{n:19,f:'UECE 2017.1 – 2ª fase',t:'termo',e:`Partindo das reações de combustão do acetileno e do benzeno, que produzem apenas gás carbônico e água, e cujas entalpias são, respectivamente, −310,7 kcal e −781,0 kcal, é correto afirmar que o valor da entalpia de trimerização do acetileno será`,
+a:[`− 151,1 kcal`,`− 121,3 kcal`,`− 141,50 kcal`,`− 131,2 kcal`],g:0},
+{n:20,f:'UECE 2017.2 – 1ª fase',t:'termo',e:`Um estudante de química, usando um calorímetro caseiro com temperatura 25 °C e 1 atm de pressão, queimou 5 mL de etanol produzindo dióxido de carbono gasoso e água líquida. Sabendo-se que a densidade absoluta do etanol é 0,79 g/mL e o calor produzido a pressão constante é 28 kcal, a variação de entalpia de combustão do etanol é aproximadamente`,
+a:[`− 163,00 kcal/mol`,`+ 326,00 kcal/mol`,`+ 163,00 kcal/mol`,`− 326,00 kcal/mol`],g:3},
+{n:21,f:'UECE 2018.1 – 1ª fase',t:'termo',e:`A entropia é uma função de estado que indica o grau de desordem de um sistema. Considerando que, em uma transformação reversível e isotérmica, o sistema absorveu 4,5 kcal a uma temperatura de 67 °C a variação de entropia é aproximadamente`,
+a:[`− 13,23 cal/K.`,`+ 12,43 cal/K.`,`− 12,43 cal/K.`,`+ 13,23 cal/K.`],g:3},
+{n:22,f:'UECE 2018.1 – 1ª fase',t:'termo',e:`Considerando a equação de formação da glicose não balanceada C + H₂ + O₂ → C₆H₁₂O₆ atente às seguintes equações:<div class='eqs'>I. C + O₂ → CO₂ &nbsp;&nbsp; ΔH = − 94,1 kcal<br>II. H₂ + ½ O₂ → H₂O &nbsp;&nbsp; ΔH = − 68,3 kcal<br>III. C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O &nbsp;&nbsp; ΔH = − 673,0 kcal</div>A massa de glicose formada a partir da reação de 14,4 g de carbono e sua entalpia de formação em kcal/mol serão, respectivamente,
+Dados: C = 12; H = 1; O = 16`,
+a:[`36 g e +301,4 kcal/mol`,`36 g e −301,4 kcal/mol`,`18 g e −201,4 kcal/mol`,`18 g e +201,4 kcal/mol`],g:1},
+{n:23,f:'UECE 2018.1 – 2ª fase',t:'termo',e:`Através da eletrólise, houve a decomposição da água em hidrogênio e oxigênio. Considerando-se os seguintes valores de energia de ligação para as várias substâncias envolvidas no processo: E (H–H) = 104,30 kcal/mol; E (O=O) = 119,13 kcal/mol e E (O–H) = 111,72 kcal/mol é correto afirmar que o valor da variação de entalpia da reação descrita acima, em kcal/mol, é aproximadamente`,
+a:[`80,00`,`120,00`,`60,00`,`90,00`],g:2},
+{n:24,f:'UECE 2010.1 – 1ª fase',t:'eletro',e:`Na virada do ano, os austríacos derretem um pouco de chumbo, que se funde a 327 °C, e assim que o relógio soa zero hora, derramam o metal num copo com água. A figura formada pelo chumbo resfriado funciona como uma “bola de cristal” – a partir do formato que a figura assume, os “videntes” tentam adivinhar o futuro. Com relação a esse metal ou a um de seus compostos, pode-se afirmar corretamente que`,
+a:[`por se tratar de um metal radioativo é usado em chapas de raios-X na emissão de raios alfa.`,`os 4 números quânticos do elétron de valência e mais energético do chumbo em sua distribuição eletrônica no estado fundamental são: n = 6, l = 1, m = +1, s = +1/2.`,`na reação: 2MnO(s) + 5PbO₂(s) + 8H⁺(aq) → 5Pb²⁺(aq) + 2MnO₄⁻(aq) + 4H₂O(l), o óxido de chumbo atua como agente oxidante.`,`é o metal usado no cátodo (polo negativo) em bateria de 12 V dos automóveis, cuja semirreação é: Pb(s) + SO₄²⁻(aq) → PbSO₄(s) + 2e⁻.`],g:2},
+{n:25,f:'UECE 2010.1 – 2ª fase',t:'eletro',e:`A relação quantitativa que permite calcular a força eletromotriz de uma célula galvânica foi desenvolvida por:`,
+a:[`Charles Coulomb.`,`Michael Faraday.`,`Walter Nernst.`,`John Daniel.`],g:2},
+{n:26,f:'UECE 2010.2 – 1ª fase',t:'eletro',e:`A publicação Química Nova na Escola nº 30 de novembro de 2008 apresenta um procedimento simples de limpeza de objetos de prata escurecidos. Os ingredientes usados são apenas água, sal de cozinha e papel alumínio. Com as informações acima e sabendo que:<div class='eqs'>Ag₂S(s) + 2e⁻ ⇌ 2 Ag(s) + S²⁻(aq) &nbsp;&nbsp; E° = − 0,69 V<br>Al³⁺(aq) + 3e⁻ ⇌ Al(s) &nbsp;&nbsp; E° = − 1,68 V</div>Marque a alternativa correta:`,
+a:[`o sulfeto de prata é o agente redutor porque reduz o alumínio de +3 para zero.`,`A diferença de potencial na reação global é menor que zero e a reação não é espontânea.`,`O coeficiente da prata metálica na reação global balanceada é 2.`,`O cloreto de sódio aquoso é responsável pela migração dos elétrons no sentido Al para Ag₂S.`],g:3},
+{n:27,f:'UECE 2010.2 – 2ª fase',t:'eletro',e:`Apesar das restrições feitas pelos ecologistas temendo a conversão do cromo III em cromo VI, que é tóxico e carcinogênico, o sulfato de cromo III é o principal composto usado no curtimento de couros. Uma solução do citado material foi eletrolisada para produzir cromo metálico usando-se uma corrente de 4 A durante 40 minutos. A massa de cromo produzida e depositada no cátodo corresponde, aproximadamente, a
+Dados: Cr = 52; 1F = 96500 C.`,
+a:[`0,86 g.`,`1,72 g.`,`2,44 g.`,`3,44 g.`],g:1},
+{n:28,f:'UECE 2011.2 – 2ª fase',t:'eletro',e:`A combustão da parafina de uma vela produz gás carbônico e vapor d’água. O livro A História Química de uma Vela, escrito por Michael Faraday (1791-1867) relata experiências relacionadas ao comportamento da chama diante de um campo magnético. Colocada entre polos opostos de um imã, a chama sofre um alongamento para cima por conta do(a)`,
+a:[`efeito termoiônico sobre o material da vela.`,`paramagnetismo dos produtos da combustão.`,`diamagnetismo dos produtos da combustão.`,`repulsão dos fótons produzidos pela vela.`],g:2},
+{n:29,f:'UECE 2012.1 – 2ª fase',t:'eletro',e:`A bateria de automóvel possui dois tipos de eletrodos (de PbO₂ e de PbO), mantidos em solução de H₂SO₄. A equação correspondente à reação envolvida na geração de energia é:<div class='eqs'>PbO₂ + PbO + 2 H₂SO₄ → 2 PbSO₄ + 2 H₂O</div>De acordo com a equação acima, é correto afirmar-se que`,
+a:[`os eletrodos de PbO₂ atuam como agentes redutores.`,`nos eletrodos de PbO há perda de elétrons.`,`o elemento químico chumbo sofre redução nos eletrodos de PbO e oxidação nos eletrodos de PbO₂.`,`o estado de oxidação do chumbo no PbO₂ é +2.`],g:1},
+{n:30,f:'UECE 2012.2 – 2ª fase',t:'eletro',e:`Normalmente os compostos que contêm enxofre, como os existentes na cebola, podem escurecer talheres de prata cuja reação química não balanceada é:<div class='eqs'>Ag(s) + H₂S(g) + O₂(g) → Ag₂S(s) + H₂O(l)</div>Considerando esse processo, assinale a opção correta.`,
+a:[`O gás oxigênio atua como agente redutor.`,`Os átomos de prata são reduzidos.`,`Após o balanceamento da equação, a soma de todos os coeficientes mínimos inteiros dos reagentes é igual a 7.`,`O H₂S funciona como o oxidante no processo.`],g:2},
+{n:31,f:'UECE 2013.1 – 1ª fase',t:'eletro',e:`Alessandro Volta (1745-1827) inventou, em 1800, o primeiro gerador elétrico de corrente contínua, empilhando alternadamente discos de zinco e de cobre separados por pedaços de tecidos embebidos em solução de ácido sulfúrico. Com estas informações e conhecendo os potenciais padrões de redução do zinco e do cobre a 25 °C, indicados na tabela abaixo, assinale a única afirmação verdadeira.<table class='qt'><tr><th>Semiequações</th><th>Potencial de redução</th></tr><tr><td>Zn²⁺(aq) + 2e⁻ → Zn⁰(s)</td><td>− 0,76 V</td></tr><tr><td>Cu²⁺(aq) + 2e⁻ → Cu⁰(s)</td><td>+ 0,34 V</td></tr></table>`,
+a:[`O zinco é o cátodo onde ocorre a redução.`,`O cobre é o ânodo que libera elétrons.`,`A diferença de potencial da pilha é, teoricamente, 0,42 volts.`,`O ácido sulfúrico funciona como eletrólito.`],g:3},
+{n:32,f:'UECE 2013.1 – 2ª fase',t:'eletro',e:`O funcionamento de uma pilha não recarregável faz a sua força eletromotriz diminuir até zero quando os seus reagentes ficam em equilíbrio com os produtos e a pilha descarrega. Fora da condição padrão, a força eletromotriz de uma pilha é calculada através de uma equação atribuída a`,
+a:[`Walther Nernst.`,`Michael Faraday.`,`Alessandro Volta.`,`Luigi Galvani.`],g:0},
+{n:33,f:'UECE 2013.1 – 2ª fase',t:'eletro',e:`Uma célula eletrolítica contendo uma solução aquosa de nitrato de certo metal é submetida a uma corrente elétrica de 6 A durante 2 h, 14 min e 30 s. A massa de metal depositada é 54 g. Através de cálculos aproximados, pode-se concluir corretamente que se trata do nitrato de`,
+a:[`prata.`,`cobre.`,`zinco.`,`estanho.`],g:0},
+{n:34,f:'UECE 2013.1 – 2ª fase',t:'eletro',e:`A "pilha voltaica", como veio a ser chamada em homenagem ao seu inventor, foi a primeira pilha elétrica conhecida que tornou possível a geração de "eletricidade dinâmica". Em algumas dessas pilhas são usadas pontes salinas, cuja finalidade é`,
+a:[`reduzir o movimento de íons na célula e assim a solução se mantém neutra com relação às partículas carregadas (íons) na solução, e também abre o circuito elétrico.`,`permitir o movimento de íons na célula e assim a solução se mantém neutra com relação às partículas carregadas (íons) na solução, e também fecha o circuito elétrico.`,`controlar o movimento de íons na célula e assim a solução se mantém positiva com relação às partículas carregadas (íons) na solução.`,`reduzir o movimento de íons na célula e assim a solução se mantém negativa com relação às partículas carregadas (íons) na solução, e também fecha o circuito elétrico.`],g:1},
+{n:35,f:'UECE 2013.2 – 2ª fase',t:'eletro',e:`O uso de pilhas e baterias é intenso em nossa sociedade. Muitas vezes nem nos damos conta de como essa tecnologia está presente em nosso cotidiano. Um dos tipos de pilha alcalina muito utilizada em aparelhos MP3 contém íons Hg²⁺. Com relação a esse tipo de pilha, assinale a afirmação correta.`,
+a:[`Os íons Hg²⁺ são oxidados a mercúrio metálico quando a pilha está sendo descarregada.`,`A redução dos íons Hg²⁺ ocorre no catodo.`,`Quando a pilha está sendo descarregada, os íons Hg²⁺ são oxidados para íons Hg⁴⁺.`,`A redução dos íons Hg²⁺ ocorre no anodo.`],g:1},
+{n:36,f:'UECE 2013.2 – 2ª fase',t:'eletro',e:`Notícia do Portal R7 notícias em 10/4/2013: “em vigor desde o dia 29 de janeiro, a nova Lei Seca diz que o motorista que for parado em uma blitz de trânsito e for flagrado com 0,05 mg ou mais de álcool por litro de sangue será multado”. A aferição sobre a ingestão de álcoois pelos motoristas é feita pelo bafômetro moderno onde é produzida uma corrente elétrica que é transformada em sinal digital. A reação que ocorre no aparelho é traduzida, de maneira simplificada, pela equação não balanceada:<div class='eqs'>CH₃CH₂OH + K₂Cr₂O₇ + H₂SO₄ → CH₃COOH + Cr₂(SO₄)₃ + K₂SO₄ + H₂O</div>É correto afirmar-se que, no bafômetro moderno,`,
+a:[`ocorre uma reação de óxido-redução na qual o dicromato de potássio é o agente oxidante.`,`a soma dos coeficientes da equação completa balanceada é 39.`,`ocorre um efeito Tyndall sobre a dispersão coloidal expelida dos pulmões.`,`ocorre um efeito termoelétrico produzido pela diferença de temperatura entre o gás expelido dos pulmões e o ar atmosférico.`],g:0},
+{n:37,f:'UECE 2013.2 – 2ª fase',t:'eletro',e:`Um estudante de Química da FECLESC − Unidade da UECE, que em 2013 completa 30 anos – está tentando fabricar uma pilha usando prata e cobre, a partir da reação 2 Ag(s) + Cu²⁺ → 2Ag⁺ + Cu(s). Considerando as semirreações Ag⁺ → Ag(s) e Cu²⁺ → Cu(s), bem como os potenciais de redução E⁰ = 0,80 V e E⁰ = 0,34 V, marque a alternativa que preenche adequadamente as lacunas da frase a seguir. É correto afirmar-se que a pilha tem ddp de _____________ volts, e a reação no sentido indicado é ______________.`,
+a:[`+ 1,14; espontânea.`,`− 1,14; não espontânea.`,`− 0,46; não espontânea.`,`+ 0,46; espontânea.`],g:2},
+{n:38,f:'UECE 2014.1 – 1ª fase',t:'eletro',e:`Segundo Bill Bryson, autor de Uma Breve História de Quase Tudo, o cientista americano Josiah Willard Gibbs (1839-1913) foi “o mais brilhante ilustre desconhecido da história”, por conta de sua modéstia e timidez. Gibbs contribuiu, em vários campos da física e da química, sobretudo na conceituação de energia livre que permitiu definir, através de cálculos singelos, a espontaneidade de uma reação química. Considerando-se o valor da constante de Faraday 96.500 C, conhecendo-se os potenciais de redução para as semirreações que ocorrem na pilha, Sn/Sn²⁺ // Pb²⁺/Pb, cujas concentrações de Sn e Pb valem, respectivamente, 1,0 M e 10⁻³ M, e sabendo-se, ainda, que:<div class='eqs'>Sn²⁺ + 2e⁻ → Sn &nbsp;&nbsp; E⁰ = − 0,14 V<br>Pb²⁺ + 2e⁻ → Pb &nbsp;&nbsp; E⁰ = − 0,22 V</div>pode-se afirmar corretamente que a reação global da pilha`,
+a:[`é espontânea, e o valor da energia de Gibbs é −15,44 kJ.`,`não é espontânea, e o valor da energia de Gibbs é +15,44 kJ.`,`não é espontânea, e o valor da energia de Gibbs é −7,72 kJ.`,`é espontânea, e o valor da energia de Gibbs é +7,72 kJ.`],g:1},
+{n:39,f:'UECE 2014.1 – 2ª fase',t:'eletro',e:`Para minimizar os efeitos da corrosão nas chapas de ferro do casco de um navio, são fixadas plaquetas de um metal – metal de sacrifício ou eletrodo de sacrifício – que é oxidado em seu lugar. Na comparação com as características do ferro, o metal de sacrifício mais indicado é aquele que apresenta`,
+a:[`menor eletronegatividade.`,`menor poder de redução.`,`maior condutibilidade elétrica.`,`maior tenacidade.`],g:0},
+{n:40,f:'UECE 2014.1 – 2ª fase',t:'eletro',e:`Pilhas de Ni-Cd são muito utilizadas em eletrodomésticos caseiros, como em rádios portáteis, controles remotos, telefones sem fio e aparelhos de barbear. A reação de oxirredução desse tipo de pilha é<div class='eqs'>Cd(s) + NiO₂(s) + 2H₂O(l) → Cd(OH)₂(s) + Ni(OH)₂(s)</div>Considere as seguintes afirmações a respeito dessa reação:
+I. O cádmio se oxida.
+II. O dióxido de níquel é o agente redutor.
+III. O cádmio é o agente oxidante.
+IV. O número de oxidação do níquel varia de +4 para +2.
+Está correto o que se afirma em`,
+a:[`I, II e III apenas.`,`III e IV apenas.`,`I, II, III e IV.`,`I e IV apenas.`],g:3},
+{n:41,f:'UECE 2014.2 – 2ª fase',t:'eletro',e:`A indústria eletroquímica moderna produz atualmente milhões de toneladas de substâncias químicas. A semirreação 2Cl⁻(l) → Cl₂(g) + 2e⁻ mostra a formação de cada molécula quando elétrons passam pelo circuito, na eletrólise. A partir dessa informação, é correto afirmar que o tempo necessário para produzir 560 mL de gás cloro (um mol da substância gasosa corresponde a um volume de 22,4 litros) que se forma com passagem de corrente com intensidade igual a 19,3 A, considerando-se a constante de Faraday igual a 96.500 C, é de`,
+a:[`8 minutos e 20 segundos.`,`6 minutos e 15 segundos.`,`4 minutos e 10 segundos.`,`2 minutos e 5 segundos.`],g:2},
+{n:42,f:'UECE 2015.1 – 2ª fase',t:'eletro',e:`A primeira bateria a gás do mundo, conhecida hoje como célula a combustível, foi inventada por sir Wiliam Robert Grove (1811-1896) que àquela época já se preocupava com as emissões de gases poluentes causadas pelo uso de combustíveis fósseis. O combustível básico da maioria das células a combustível é o hidrogênio, que reage com o oxigênio e produz água e eletricidade e calor, de acordo com as reações simplificadas abaixo representadas.<div class='eqs'>Reação 1: 2 H₂(g) → 4 H⁺(aq) + 4e⁻<br>Reação 2: O₂(g) + 4 H⁺(aq) + 4e⁻ → 2 H₂O(ℓ)</div>Sobre células a combustível, marque a afirmação verdadeira.`,
+a:[`A reação 1 é uma oxidação e ocorre no cátodo da célula.`,`A reação líquida da célula é o oposto da eletrólise.`,`A célula a combustível produz somente corrente alternada.`,`A célula a combustível é um conversor de energia termoiônica.`],g:1},
+{n:43,f:'UECE 2015.1 – 2ª fase',t:'eletro',e:`Segundo o INMETRO, a pilha alcalina produz voltagem de 1,5 V, não é recarregável, mantém a voltagem constante por mais tempo e, embora custe mais caro, dura cerca de cinco vezes mais. Seu nome decorre do fato de ela substituir a pasta de cloreto de amônio e cloreto de zinco por hidróxido de potássio ou hidróxido de sódio. Considerando a reação que ocorre na pilha alcalina,<div class='eqs'>Zn + 2MnO₂ + H₂O → Zn²⁺ + Mn₂O₃ + 2OH⁻</div>pode-se afirmar corretamente que sua duração é maior porque`,
+a:[`o cátodo é feito de zinco metálico poroso.`,`o manganês presente na pilha sofre oxidação.`,`possui uma resistência interna muito menor que a pilha comum.`,`é um aperfeiçoamento da pilha de Daniell.`],g:2},
+{n:44,f:'UECE 2015.1 – 2ª fase',t:'eletro',e:`Está sendo construído novo carro-conceito híbrido usando energia solar. Painéis solares montados no teto do veículo são utilizados para carregar uma bateria de íons de lítio, que abastece o carro para viagens de até 34 km. Depois disso, o motor a gasolina do híbrido entra em funcionamento, até um novo carregamento da bateria. O sistema permite que o carro carregue até 8 vezes mais rápido do que se fosse simplesmente estacionado na luz solar. Pela importância do uso do lítio em baterias, assinale a alternativa correta.`,
+a:[`O carbonato de lítio, Li₂CO₃, é a matéria prima para fabricação de baterias cuja produção tem aumentado nos últimos anos.`,`Geralmente os eletrólitos utilizados em baterias de lítio são os sais: hexafluorofosfato de lítio (LiPF₆), perclorato de lítio (LiCℓO₃) e hexafluoroarseniato de lítio (LiAsF₆).`,`Em uma bateria de lítio, que usa o LiPF₆ como eletrólito, os cátions Li⁺ se movimentam na solução do eletrólito migrando do cátodo para o ânodo, e os ânions PF₆⁻ da solução buscarão migrar na direção oposta, em direção ao cátodo.`,`A equação: 6C + LiCo₂O₄ → LiC₆ + 2CoO₂ mostra as reações químicas básicas ocorridas durante a carga e a descarga das baterias de lítio-íon, em que o carbono, C, é o agente redutor.`],g:0},
+{n:45,f:'UECE 2015.2 – 1ª fase',t:'eletro',e:`Um objeto de prata em contato com sulfeto de hidrogênio do ar e de alguns alimentos adquire uma camada escura superficial. Para retirar a película escura, sugere-se introduzir o objeto em uma panela de alumínio com água e detergente, e aquecer o sistema até a ebulição do líquido. Baseando-se nessa informação, é correto afirmar que`,
+a:[`ao reagir com o sulfeto de hidrogênio, a prata ganha elétrons.`,`na panela ocorre uma reação química com catálise homogênea promovida pelo detergente.`,`a regeneração e a limpeza da prata são decorrentes de um processo de redução da prata.`,`não há reação química, porque a mancha escura, que é o sulfeto de prata, dissolve-se na água.`],g:2},
+{n:46,f:'UECE 2015.2 – 2ª fase',t:'eletro',e:`Duas células galvânicas ligadas em série contêm, respectivamente, íons Cu²⁺ e Au³⁺. No cátodo da primeira são depositados 0,0686 g de cobre. A massa de ouro que será depositada, ao mesmo tempo, no cátodo da outra célula, em gramas, será, aproximadamente,`,
+a:[`0,140.`,`0,280.`,`0,430.`,`0,520.`],g:0},
+{n:47,f:'UECE 2015.2 – 2ª fase',t:'eletro',e:`Reações de oxidorredução são reações químicas onde ocorrem transferências de elétrons entre duas ou mais substâncias químicas. Numa reação de oxidorredução sempre há perda e ganho de elétrons, pois os que são perdidos por um átomo, íon ou molécula são imediatamente recebidos por outros. No meio em que vivemos, ocorrem muitas reações de oxidorredução. A esse respeito, assinale a afirmação verdadeira.`,
+a:[`Quando o vinho é exposto ao ar, ele se transforma em vinagre, cujo principal componente é o ácido acético. Isso ocorre porque o álcool etílico ou etanol presente no vinho reduz-se em contato com o oxigênio atmosférico, resultando no ácido acético.`,`O efeito branqueador dos alvejantes se dá em razão da presença dos seguintes agentes oxidantes: o ânion hipoclorito (em geral, na forma de sal sódico – NaOCl) presente, por exemplo, na água sanitária, e o peróxido de hidrogênio (H₂O₂) que é comercializado como água oxigenada.`,`Um bafômetro simples descartável consiste em um tubo transparente contendo uma solução aquosa do sal dicromato de potássio e sílica umedecida com ácido sulfúrico, misturada com cor laranja. Esse sal, em contato com o vapor do álcool contido na respiração do motorista embriagado, reage, mudando a coloração para verde. Isso significa que é causada a redução do etanol (álcool) a etanal.`,`Em supermercados, as latas contendo alimentos são feitas de ferro revestido por estanho. Não se deve comprar alimento que esteja em lata amassada, porque o revestimento metálico é usado para evitar que o metal constituinte do objeto se oxide; esse revestimento deve permanecer intacto, sem ranhuras, para evitar o contato do metal com maior potencial de oxidação com o alimento.`],g:1},
+{n:48,f:'UECE 2016.1 – 2ª fase',t:'eletro',e:`As pilhas de marca-passo precisam ser pequenas, confiáveis e duráveis, evitando algumas cirurgias para sua troca. Como não formam gases, elas podem ser hermeticamente fechadas. Sua duração é de aproximadamente 10 anos. Essas pilhas são formadas por lítio metálico e iodo (LiI). Assinale a alternativa que mostra as semirreações que ocorrem corretamente para formar o produto LiI.`,
+a:[`cátodo: 2Li⁰ → 2Li⁺ + 2e⁻; ânodo: I₂ + 2e⁻ → 2I⁻.`,`cátodo: 2Li⁰ + 2e⁻ → 2Li⁺; ânodo: I₂ → 2I⁻ + 2e⁻.`,`ânodo: 2Li⁰ → 2Li⁺ + 2e⁻; cátodo: I₂ + 2e⁻ → 2I⁻.`,`ânodo: 2Li⁰ + 2e⁻ → 2Li⁺; cátodo: I₂ → 2I⁻ + 2e⁻.`],g:2},
+{n:49,f:'UECE 2016.1 – 1ª fase',t:'eletro',e:`Atente ao seguinte enunciado: “A tocha olímpica é preparada para ficar acesa por vários dias durante sua jornada, que vai de Olímpia, na Grécia, até o Rio de Janeiro. A armação da tocha é feita com uma liga de alumínio e magnésio, metais leves e duráveis. O combustível consta de propano e eventualmente butano. Dentro da tocha, o propano é armazenado sob pressão para manter-se na forma líquida. Aberta a válvula, ele escapa para o ar na forma gasosa, quando então é aceso, produzindo uma visível chama amarelada, cuja reação química é C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O + energia”. (Planeta Química – Físico-Química – Ciscato &amp; Pereira, 2010, p. 313).
+Considerando essas informações, assinale a afirmação verdadeira.`,
+a:[`A liga de alumínio e magnésio é uma mistura heterogênea que é bastante leve, porque a porcentagem de magnésio é maior do que a do metal alumínio.`,`A reação química é de combustão, não se caracterizando como reação de oxidação-redução.`,`A liga de alumínio e magnésio é durável, porque esses dois metais localizam-se em períodos diferentes na tabela periódica.`,`No propano, os números de oxidação dos átomos de carbono são respectivamente: −3, −2, −3.`],g:3},
+{n:50,f:'UECE 2016.2 – 2ª fase',t:'eletro',e:`Uma pilha é formada com eletrodos de alumínio e ouro que apresentam os potenciais de redução, respectivamente, −1,66 volts e 1,50 volts.
+Após analisar as características dessa pilha, pode-se afirmar corretamente que`,
+a:[`a reação do cátodo é Aℓ → Aℓ³⁺ + 3e⁻.`,`a ddp da pilha é +3,16 V.`,`a reação global é Aℓ³⁺ + Au → Au³⁺ + Aℓ.`,`a equação global da pilha é Au³⁺(aq) / Au // Aℓ³⁺(aq) / Aℓ.`],g:1},
+{n:51,f:'UECE 2017.1 – 1ª fase',t:'eletro',e:`Um belo exemplo de como a química está presente em todo lugar são os vaga-lumes, nos quais ocorre uma reação química do tipo bioluminescente que “acende” seus corpos, produzindo um lindo efeito com a participação do oxigênio que age como agente oxidante e, dessa forma, uma reação de oxidação redução é responsável pela emissão de luz. Atente ao que se diz a esse respeito:
+I. Em uma reação de oxidação-redução, todos os átomos passam por variação do número de oxidação.
+II. Geralmente não há oxidação sem redução e vice-versa.
+III. As reações de dupla troca são de oxidação-redução.
+IV. As reações de combustão (queima na presença de oxigênio) são também processos redox.
+V. Os termos oxidante e redutor costumam referir-se às espécies químicas, e não somente a determinado átomo.
+Está correto o que se afirma somente em`,
+a:[`II, IV e V.`,`I, II e III.`,`I, III, IV e V.`,`II, III e IV.`],g:0},
+{n:52,f:'UECE 2017.1 – 2ª fase',t:'eletro',e:`Para preservar o casco de ferro dos navios contra os efeitos danosos da corrosão, além da pintura são introduzidas placas ou cravos de certo material conhecido como “metal de sacrifício”. A função do metal de sacrifício é sofrer oxidação no lugar do ferro. Considerando seus conhecimentos de química e a tabela de potenciais de redução impressa abaixo, assinale a opção que apresenta o metal mais adequado para esse fim.<table class='qt'><tr><th>Metal</th><th>Potencial de redução (V)</th></tr><tr><td>Cobre (Cu²⁺ + 2e⁻ → Cu⁰)</td><td>+ 0,34</td></tr><tr><td>Ferro (Fe²⁺ + 2e⁻ → Fe⁰)</td><td>− 0,44</td></tr><tr><td>Magnésio (Mg²⁺ + 2e⁻ → Mg⁰)</td><td>− 2,37</td></tr><tr><td>Potássio (K⁺ + 1e⁻ → K⁰)</td><td>− 2,93</td></tr><tr><td>Cádmio (Cd²⁺ + 2e⁻ → Cd⁰)</td><td>− 0,40</td></tr></table>`,
+a:[`Potássio.`,`Cádmio.`,`Cobre.`,`Magnésio.`],g:3},
+{n:53,f:'UECE 2017.2 – 2ª fase',t:'eletro',e:`Na eletrólise da água, que ocorre com a participação do ácido sulfúrico, obtém-se, no cátodo, um gás que é`,
+a:[`comburente.`,`inflamável.`,`irritante.`,`corrosivo.`],g:1},
+{n:54,f:'UECE 2017.2 – 2ª fase',t:'eletro',e:`Atente às seguintes proposições:
+I. Eletrólise é um processo não espontâneo que consome energia externa fornecida por um gerador.
+II. A pilha se esgota quando entra em equilíbrio, e não quando algum dos seus reagentes se esgota.
+Considerando as proposições acima, é correto afirmar que`,
+a:[`a 1 é falsa e a 2 é verdadeira.`,`a 2 é falsa e a 1 é verdadeira.`,`ambas são falsas.`,`ambas são verdadeiras.`],g:3},
+{n:55,f:'UECE 2018.1 – 1ª fase',t:'eletro',e:`Walther Hermann Nernst, físico-químico alemão (1864-1941), contribuiu significativamente para o desenvolvimento da físico-química moderna. Entre as suas contribuições está a importantíssima equação de Nernst, que é utilizada para determinar`,
+a:[`a ddp de uma pilha em um dado momento do seu funcionamento.`,`a massa final de produtos de uma eletrólise.`,`o volume de um gás produzido em uma eletrólise.`,`o potencial de redução de um metal.`],g:0},
+{n:56,f:'UECE 2018.1 – 2ª fase',t:'eletro',e:`A água é o principal componente do sangue. Não é à toa que profissionais de saúde aconselham que se beba 8 copos de água por dia. Assim, quanto mais água ingerida, mais líquido vermelho corre nas veias. Isso aumenta o transporte de nutrientes por todo o corpo, inclusive para o cérebro, que tem suas funções otimizadas. Isso se dá não só porque o cérebro recebe mais nutrientes por meio do sangue, mas também porque certas reações químicas que acontecem nele, entre elas, a formação da memória, também dependem da presença da água para acontecer. A água atua como agente oxidante na seguinte equação:`,
+a:[`2NaCℓ + H₂O → Na₂O + 2HCℓ.`,`3H₂O + 2CO₂ → C₂H₆O + 3O₂.`,`H₂O₂ + HNO₂ → HNO₃ + H₂O.`,`2Na + 2H₂O → 2NaOH + H₂.`],g:3},
+{n:57,f:'UECE 2018.2 – 1ª fase',t:'eletro',e:`Considerando as semirreações BiO₃⁻ + 6H⁺ + 2e⁻ → Bi³⁺ + 3H₂O e Mn²⁺ + 4H₂O → MnO₄⁻ + 8H⁺ + 5e⁻, é correto afirmar que o coeficiente do íon MnO₄⁻ na reação global devidamente balanceada é`,
+a:[`2.`,`5.`,`6.`,`7.`],g:0},
+{n:58,f:'UECE 2019.1 – 1ª fase',t:'eletro',e:`Uma pilha de alumínio e prata foi montada e, após algum tempo, constatou-se que o eletrodo de alumínio perdeu 135 mg desse metal. O número de elétrons transferidos de um eletrodo para outro durante esse tempo foi de
+Dados: Aℓ = 27; N<sub>A</sub> = 6,02×10²³ mol⁻¹.`,
+a:[`6,02×10²³.`,`6,02×10²¹.`,`9,03×10²¹.`,`9,03×10²³.`],g:2},
+{n:59,f:'UECE 2010.1 – 2ª fase',t:'equi',e:`O ácido carbônico encontrado na cerveja e em outras bebidas tem a constante de ionização 4,0 × 10⁻⁷ na primeira fase. Quando seu grau de ionização for 2,0 × 10⁻³, a sua concentração em quantidade de matéria será`,
+a:[`0,1 mol/L.`,`0,2 mol/L.`,`0,3 mol/L.`,`0,4 mol/L.`],g:0},
+{n:60,f:'UECE 2010.2 – 2ª fase',t:'equi',e:`O termo pH foi utilizado pela primeira vez em 1909, pelo bioquímico dinamarquês Sören Peter Lauritz Sörensen (1868-1939) que, à época, pesquisava para uma cervejaria sobre a qualidade das cervejas. Ao seu conceito está ligado o de pOH. Considerando que o pOH de um ácido monoprótico é 13 e que ele se encontra 40% ionizado, a concentração, em quantidade de matéria, do referido ácido é`,
+a:[`0,5 mol/L.`,`0,25 mol/L.`,`0,005 mol/L.`,`0,025 mol/L.`],g:1},
+{n:61,f:'UECE 2011.1 – 2ª fase',t:'equi',e:`Os estudos pioneiros sobre equilíbrio químico efetivados por Claude Berthollet (1748-1822) forneceram subsídios para a otimização de certos processos de interesse da indústria química tais como a esterificação, a síntese do amoníaco, etc. Sobre reações reversíveis e equilíbrio químico assinale a afirmação verdadeira.`,
+a:[`No equilíbrio químico, as cores dos reagentes e produtos podem ser alteradas.`,`No momento do equilíbrio as reações direta e inversa deixam de acontecer.`,`Ao contrário do inibidor, o catalisador aumenta apenas a velocidade da reação direta.`,`No equilíbrio as concentrações de reagentes e produtos se mantêm constantes.`],g:3},
+{n:62,f:'UECE 2012.1 – 2ª fase',t:'equi',e:`O pH ideal para o cabelo está situado na faixa entre 4,0 e 5,0. O uso de certos xampus pode deixá-lo levemente alcalino, mas alguns produtos de fácil acesso poderão fazer o pH voltar ao seu intervalo normal. Marque a alternativa que contém dois desses produtos que podem ser utilizados para fazer o pH do cabelo voltar ao seu intervalo normal.`,
+a:[`leite de magnésia e vinagre`,`vinagre e amoníaco`,`limão e leite de magnésia`,`vinagre e limão`],g:3},
+{n:63,f:'UECE 2012.1 – 2ª fase',t:'equi',e:`A imprensa registra com muita insistência o processo de degradação das colunas do Parthenon grego e de outros monumentos em consequência da poluição ambiental. A reação a seguir mostra como acontece o ataque aos monumentos de mármore:<div class='eqs'>CaCO₃(s) + H₂SO₄(aq) ⇌ CaSO₄(s) + CO₂(g) + H₂O(l)</div>A reação se torna mais agressiva por sofrer um natural deslocamento para a direita. Apenas com as informações disponíveis na equação acima, marque a alternativa que contempla a explicação para esse fato.`,
+a:[`a densidade do ácido sulfúrico aquoso`,`a formação do dióxido de carbono gasoso`,`a presença de um catalisador`,`o fato de o sistema ser endotérmico`],g:1},
+{n:64,f:'UECE 2012.1 – 2ª fase',t:'equi',e:`Fritz Haber (1868-1934) ganhou um prêmio Nobel de Química pela descoberta da síntese do amoníaco (1918), que possibilitou a produção de compostos nitrogenados, principalmente os fertilizantes, e também contribuiu para a produção de armas químicas letais, usadas na primeira e segunda guerras mundiais. Uma dessas armas, aperfeiçoada, deu origem ao Ziklon B, um pesticida constituído de ácido cianídrico, cloro e nitrogênio, empregado no extermínio em massa de prisioneiros nas câmaras de gases. A reação de produção do amoníaco, conhecida como Processo Haber-Bosch é:<div class='eqs'>N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + energia</div>Sobre a formação do amoníaco, considerando apenas as informações fornecidas pela equação acima, e sobre os constituintes do Ziklon B, é correto afirmar-se que`,
+a:[`o processo Haber-Bosch é reversível e uma elevação de pressão pode deslocar o equilíbrio no sentido de produzir menor quantidade do produto amoníaco.`,`a reação Haber-Bosch terá seu equilíbrio deslocado no sentido de produzir maior quantidade de amoníaco se for catalisada com grãos de ferro.`,`a molécula do composto amoníaco apresenta geometria trigonal plana e hibridação do tipo sp² para o nitrogênio.`,`o cloro que está presente no Ziklon B e em alguns ácidos e sais inorgânicos é usado também no clareamento da polpa de papel e na fabricação do PVC.`],g:3},
+{n:65,f:'UECE 2012.2 – 2ª fase',t:'equi',e:`O gás carbônico, descoberto por Joseph Black (1728-1799), é um dos vilões do efeito estufa, mas é essencial para a fotossíntese. Assinale a única opção verdadeira, referente às propriedades de uma solução saturada de gás carbônico em água a 27 °C.`,
+a:[`Não conduz corrente elétrica e tem pOH maior que 7.`,`Conduz corrente elétrica e tem pOH menor que 7.`,`Não conduz corrente elétrica e tem pOH menor que 7.`,`Conduz corrente elétrica e tem pOH maior que 7.`],g:3},
+{n:66,f:'UECE 2013.1 – 2ª fase',t:'equi',e:`O óxido nítrico é um gás incolor que pode resultar de uma reação no interior de máquinas de combustão interna e, ao ser resfriado no ar, é convertido a dióxido de nitrogênio, um gás de cor castanha, que irrita os pulmões e diminui a resistência às infecções respiratórias, conforme a reação:<div class='eqs'>2 NO(g) + O₂(g) ⇌ 2 NO₂(g) &nbsp;&nbsp; ΔH &lt; 0</div>Considerando o sistema acima em equilíbrio, é correto afirmar-se que a produção de dióxido de nitrogênio será favorecida quando se`,
+a:[`adicionar um catalisador.`,`aumentar a pressão.`,`elevar a temperatura.`,`retirar oxigênio.`],g:1},
+{n:67,f:'UECE 2013.2 – 2ª fase',t:'equi',e:`O conhecimento da solubilidade é importante em preparações industriais e laboratoriais e, na medicina, para o estudo dos cálculos renais. O estudo da solubilidade também explica, entre outras coisas, a formação de estalactites e a poluição térmica em cursos de água. No que concerne à solubilidade ou ao produto de solubilidade, assinale a afirmação verdadeira.`,
+a:[`A solubilidade e o produto de solubilidade sempre se referem a soluções insaturadas.`,`A solubilidade de um gás em água sempre aumenta com a temperatura.`,`O produto de solubilidade é uma constante de equilíbrio.`,`Todos os processos de dissolução de sais são exotérmicos.`],g:2},
+{n:68,f:'UECE 2014.1 – 2ª fase',t:'equi',e:`O fluoreto de hidrogênio é amplamente utilizado na produção de gases refrigerantes, criolita, agrotóxicos, detergentes, teflon e, ainda, na purificação de minérios, na alquilação da gasolina e no enriquecimento do urânio. O desafio da indústria química é otimizar sua produção a partir de uma reação de tetrafluoreto de silício e vapor d’água, que produz, além do fluoreto de hidrogênio gasoso, o dióxido de silício. Para atingir esse fim, a indústria está interessada em`,
+a:[`aumentar a pressão sobre o sistema.`,`introduzir um catalisador.`,`diminuir a concentração de dióxido de silício.`,`diminuir o volume de hexafluoreto de silício.`],g:1},
+{n:69,f:'UECE 2014.2 – 1ª fase',t:'equi',e:`Em 1909, o químico dinamarquês Soren Peter Lauritz Sorensen (1868-1939) introduziu na literatura química o termo pH, que significa potencial hidrogeniônico e afere a acidez, a alcalinidade, ou a neutralidade de uma solução a uma determinada temperatura. Sabe-se, por exemplo, que o produto iônico da água neutra a 45 °C é igual a 4,0 × 10⁻¹⁴ e log 2 = 0,30 (aproximadamente). Sobre o pH da água, assinale a afirmação FALSA.`,
+a:[`Em meio alcalino, a qualquer temperatura, [OH⁻] &gt; [H⁺] e pOH &gt; pH.`,`Em meio neutro, a qualquer temperatura, [H⁺] = [OH⁻].`,`O pH da água neutra a 45 °C é, aproximadamente, 6,7.`,`Quanto menor sua concentração hidrogeniônica, menor sua acidez.`],g:0},
+{n:70,f:'UECE 2015.1 – 2ª fase',t:'equi',e:`Ao que tudo indica, as lentes fotossensíveis foram inventadas nos laboratórios da empresa Corning Glass Works Inc. em 1996. Elas têm a propriedade de escurecer na presença do sol e retornar às condições primitivas em ambiente coberto. Atente para os seguintes fenômenos:
+I. deslocamento do equilíbrio;
+II. reação de oxidorredução;
+III. efeito fotoelétrico;
+IV. efeito termoiônico;
+V. ação de indicador.
+Correspondem a fenômenos que ocorrem nas lentes fotossensíveis somente os itens`,
+a:[`II e IV.`,`I e II.`,`IV e V.`,`III e V.`],g:1},
+{n:71,f:'UECE 2015.1 – 2ª fase',t:'equi',e:`O tetróxido de dinitrogênio gasoso, utilizado como propelente de foguetes, dissocia-se em dióxido de nitrogênio, um gás irritante para os pulmões, que diminui a resistência às infecções respiratórias. Considerando que no equilíbrio a 60 ºC a pressão parcial do tetróxido de dinitrogênio é 1,4 atm e a pressão parcial do dióxido de nitrogênio é 1,8 atm, a constante de equilíbrio Kp será, em termos aproximados,`,
+a:[`1,09 atm.`,`1,67 atm.`,`2,09 atm.`,`2,31 atm.`],g:3},
+{n:72,f:'UECE 2016.2 – 1ª fase',t:'equi',e:`O sulfeto de cádmio é um sólido amarelo e semicondutor, cuja condutividade aumenta quando se incide luz sobre o material. É utilizado como pigmento para a fabricação de tintas e a construção de foto resistores (em detectores de luz). Considerando o Kps do sulfeto de cádmio a 18 °C igual a 4 × 10⁻³⁰ (conforme tabela), a solubilidade do sulfeto de cádmio àquela temperatura, com α (alfa) = 100%, será`,
+a:[`2,89×10⁻¹³ g/L.`,`3,75×10⁻¹³ g/L.`,`1,83×10⁻¹³ g/L.`,`3,89×10⁻¹³ g/L.`],g:0},
+{n:73,f:'UECE 2017.1 – 2ª fase',t:'equi',e:`Um estudante de química retirou água do seguinte sistema em equilíbrio:<div class='eqs'>2NO₂(g) + CH₄(g) ⇌ CO₂(g) + 2H₂O(l) + N₂(g)</div>Em seguida, esse aluno constatou acertadamente que`,
+a:[`a concentração de metano diminuiu.`,`o equilíbrio se desloca para a esquerda.`,`a concentração do dióxido de carbono diminuiu.`,`a concentração do nitrogênio gasoso diminuiu.`],g:0},
+{n:74,f:'UECE 2017.2 – 2ª fase',t:'equi',e:`Uma mistura de monóxido de carbono e gás hidrogênio, obtida como produto exclusivo da reação reversível do metano gasoso com vapor d’água, com variação de entalpia positiva, tem vasta aplicação na indústria em turbinas a vapor, caldeiras e fornos industriais. Sobre a reação mencionada, é correto afirmar que`,
+a:[`aumentando a temperatura, aumenta a produção de hidrogênio.`,`o aumento de pressão desloca o equilíbrio para a direita.`,`a diminuição da concentração de monóxido de carbono desloca o equilíbrio para a esquerda.`,`é espontânea independentemente da temperatura.`],g:0},
+{n:75,f:'UECE 2017.2 – 2ª fase',t:'equi',e:`Uma massa de 0,81 g de brometo de hidrogênio é dissolvida para formar 1,0 litro de solução. O pOH desta solução será:`,
+a:[`11.`,`10.`,`13.`,`12.`],g:3},
+{n:76,f:'UECE 2018.1 – 2ª fase',t:'equi',e:`Considere a reação seguinte no equilíbrio:<div class='eqs'>HCO₃⁻(aq) + H⁺(aq) ⇌ CO₂(g) + H₂O(l)</div>Para aumentar a produção de água, com a temperatura constante, deve-se`,
+a:[`acrescentar CO₂.`,`retirar parte do HCO₃⁻(aq).`,`acrescentar um catalisador.`,`acrescentar um pouco de HCl.`],g:3},
+{n:77,f:'UECE 2019.1 – 2ª fase',t:'equi',e:`Quatro fatores afetam o equilíbrio químico de um sistema, mas apenas um deles modifica o valor da constante. Esse fator é o(a):`,
+a:[`temperatura.`,`pressão.`,`concentração.`,`volume.`],g:0},
+{n:78,f:'UECE 2019.1 – 2ª fase',t:'equi',e:`O dióxido de carbono pode ser formado a partir da reação do monóxido de carbono com o oxigênio expressa pela equação não balanceada:<div class='eqs'>CO(g) + O₂(g) ⇌ CO₂(g)</div>Assinale a opção que representa corretamente o efeito provocado pela retirada de dióxido de carbono.`,
+a:[`A concentração de CO(g) aumenta mais do que a concentração de O₂(g).`,`A concentração de CO(g) diminui mais do que a concentração de O₂(g).`,`As concentrações de CO(g) e de O₂(g) não se alteram.`,`As concentrações de CO(g) e de O₂(g) diminuem igualmente.`],g:1},
+{n:79,f:'UECE 2016.2 – 2ª fase',t:'cine',e:`Alguns medicamentos são apresentados na forma de comprimidos que, quando ingeridos, dissolvem-se lentamente no líquido presente no tubo digestório, garantindo um efeito prolongado no organismo. Contudo, algumas pessoas, por conta própria, amassam o comprimido antes de tomá-lo.
+Esse procedimento é inconveniente, pois reduz o efeito prolongado devido`,
+a:[`à diminuição da superfície de contato do comprimido, provocando redução na velocidade da reação.`,`à diminuição da superfície de contato, favorecendo a dissolução.`,`ao aumento da velocidade da reação em consequência do aumento da superfície de contato do comprimido.`,`à diminuição da frequência de colisões das partículas do comprimido com as moléculas do líquido presente no tubo digestório.`],g:2},
+{n:80,f:'UECE 2015.2 – 1ª fase',t:'cine',e:`Manchete do jornal o Estado de São Paulo em 23.04.2014: “Gás metano produzido por vacas é usado para abastecer veículos”. Cientistas argentinos desenvolveram tecnologia para aproveitar o gás metano gerado pelos bovinos, que tem efeito estufa na atmosfera do planeta. Pesquisando o gás metano, um grupo de estudantes da UECE realizou, em laboratório, uma combustão e coletou os dados da tabela abaixo:<table class='qt'><tr><th>Tempo (min)</th><th>[CH₄] (mol/L)</th><th>[CO₂] (mol/L)</th></tr><tr><td>0</td><td>0,050</td><td>0</td></tr><tr><td>10</td><td>0,030</td><td>0,020</td></tr><tr><td>20</td><td>0,020</td><td>?</td></tr></table>Com os dados da tabela, a velocidade média da reação entre 0 e 20 minutos foi determinada com o valor`,
+a:[`1,2×10⁻³ mol·L⁻¹·min⁻¹.`,`0,8×10⁻³ mol·L⁻¹·min⁻¹.`,`1,3×10⁻³ mol·L⁻¹·min⁻¹.`,`1,5×10⁻³ mol·L⁻¹·min⁻¹.`],g:3},
+{n:81,f:'UECE 2017.2 – 2ª fase',t:'cine',e:`Ao adicionarmos um catalisador a uma reação química,`,
+a:[`a entalpia da reação aumenta.`,`a ordem da reação é alterada.`,`as etapas elementares da reação são eliminadas.`,`o mecanismo da reação é modificado.`],g:3}
+];
+const KEY='simuladoUECE';
+let resp={}; try{ resp=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+let filtro='all';
+const lista=document.getElementById('lista');
+function salvar(){ localStorage.setItem(KEY, JSON.stringify(resp)); }
+function placar(){
+  const qs=QS.filter(q=>filtro==='all'||q.t===filtro);
+  const done=qs.filter(q=>resp[q.n]!=null);
+  const ok=done.filter(q=>resp[q.n]===q.g);
+  document.getElementById('score').textContent=`✅ ${ok.length} de ${done.length} respondidas · ${qs.length} questões`;
+}
+function render(){
+  lista.innerHTML='';
+  let temaAtual='';
+  QS.filter(q=>filtro==='all'||q.t===filtro).forEach(q=>{
+    if(q.t!==temaAtual){
+      temaAtual=q.t;
+      const h=document.createElement('h2'); h.className='tema'; h.textContent=TEMAS[q.t];
+      lista.appendChild(h);
+    }
+    const art=document.createElement('article'); art.className='q'; art.id='q'+q.n;
+    const letras=['A','B','C','D'];
+    art.innerHTML=`<div class='q-tag'>QUESTÃO ${q.n} · ${q.f.toUpperCase()}</div>
+      <p class='q-enun'>${q.e}</p>
+      <div class='q-opts'>${q.a.map((alt,i)=>`<button class='q-opt' data-i='${i}'><span class='q-letter'>${letras[i]}</span><span>${alt}</span></button>`).join('')}</div>
+      <div class='fb'></div>`;
+    const fb=art.querySelector('.fb');
+    const opts=[...art.querySelectorAll('.q-opt')];
+    function marcar(escolha){
+      opts.forEach((b,i)=>{
+        b.disabled=true;
+        if(i===q.g) b.classList.add('ok');
+        else if(i===escolha) b.classList.add('err');
+      });
+      fb.classList.add('show');
+      if(escolha===q.g){ fb.classList.add('ok'); fb.textContent='✔ Acertou! Gabarito (não oficial): '+letras[q.g]; }
+      else{ fb.classList.add('err'); fb.textContent='✘ Você marcou '+letras[escolha]+'. Gabarito (não oficial): '+letras[q.g]; }
+    }
+    opts.forEach((b,i)=>b.addEventListener('click',()=>{
+      if(resp[q.n]!=null) return;
+      resp[q.n]=i; salvar(); marcar(i); placar();
+    }));
+    if(resp[q.n]!=null) marcar(resp[q.n]);
+    lista.appendChild(art);
+  });
+  placar();
+}
+document.querySelectorAll('.placar .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('.placar .chip').forEach(x=>x.classList.remove('sel'));
+  c.classList.add('sel'); filtro=c.dataset.f; render();
+  window.scrollTo({top:0});
+}));
+document.getElementById('reset').addEventListener('click',()=>{
+  if(confirm('Apagar todas as suas respostas do simulado?')){ resp={}; salvar(); render(); }
+});
+render();
+if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
+</script>
+</body>
+</html>

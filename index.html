@@ -42,12 +42,13 @@
   a.card:hover,a.card:active{transform:translateY(-5px)}
   a.card.game:hover,a.card.game:active{border-color:var(--accent)}
   a.card.book:hover,a.card.book:active{border-color:var(--calc)}
+  a.card.exam:hover,a.card.exam:active{border-color:var(--info)}
   .emoji{font-size:2.6rem}
   a.card h2{margin:0; font-size:1.3rem}
-  a.card.game h2{color:var(--accent)} a.card.book h2{color:var(--calc)}
+  a.card.game h2{color:var(--accent)} a.card.book h2{color:var(--calc)} a.card.exam h2{color:var(--info)}
   a.card p{margin:0; color:var(--muted); font-size:.92rem}
   .go{margin-top:6px; font-weight:700; font-size:.9rem}
-  a.card.game .go{color:var(--accent)} a.card.book .go{color:var(--calc)}
+  a.card.game .go{color:var(--accent)} a.card.book .go{color:var(--calc)} a.card.exam .go{color:var(--info)}
   footer{margin-top:34px; color:var(--muted); font-size:.82rem; text-align:center}
   .tag{display:inline-block; font-family:Consolas,monospace; font-size:.66rem; letter-spacing:.08em;
     color:#fff; background:var(--info); border-radius:999px; padding:2px 10px; width:fit-content}
@@ -70,6 +71,13 @@
       <h2>Apostila de Estudo</h2>
       <p>Todo o edital explicado passo a passo, com cálculos resolvidos, calculadoras interativas, avatar que ensina e gamificação.</p>
       <span class="go">Estudar agora →</span>
+    </a>
+    <a class="card exam" href="simulado.html">
+      <span class="emoji">🎓</span>
+      <span class="tag">81 QUESTÕES UECE 2010–2019</span>
+      <h2>Simulado UECE</h2>
+      <p>Questões de provas anteriores: Termoquímica, Eletroquímica, Equilíbrio Químico e Cinética. Responda e veja o gabarito na hora.</p>
+      <span class="go">Fazer simulado →</span>
     </a>
   </div>
   <footer>Feito com 💜 para a Josiane estudar. Seu progresso fica salvo no seu navegador.<br><span style="font-size:.92em">📲 No iPhone: toque em <b>Compartilhar</b> → <b>Adicionar à Tela de Início</b> para instalar como app.</span></footer>
