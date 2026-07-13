@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>⭐ Estudo de Ciências — CONSULPAM (material principal)</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#2B8A3E">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ciências CONSULPAM">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+  :root{
+    --bg:#EDF4F2; --panel:#FFFFFF; --panel2:#F6FAF9; --ink:#132F36; --muted:#587179;
+    --line:#D5E2E0; --accent:#2B8A3E; --accent-soft:#E3F5E8;
+    --good:#2B8A3E; --good-soft:#E3F5E8; --bad:#C92A2A; --bad-soft:#FBE7E7;
+    --info:#1971C2; --info-soft:#E1EEFB; --warn:#B87708; --warn-soft:#FDF0DC;
+    --hot:#E8590C; --hot-soft:#FFE8D9; --calc:#7048E8; --calc-soft:#EDE7FB;
+    --shadow:0 2px 10px rgba(19,47,54,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E1B1E; --panel:#152A2F; --panel2:#1B3339; --ink:#E4EFED; --muted:#93ABA9;
+      --line:#28454B; --accent:#69C57A; --accent-soft:#1B3226;
+      --good:#69C57A; --good-soft:#1B3226; --bad:#F08A8A; --bad-soft:#3A2224;
+      --info:#74B4EC; --info-soft:#1B2E42; --warn:#F0B24E; --warn-soft:#3A2E1C;
+      --hot:#FF922B; --hot-soft:#3A2A1C; --calc:#B197FC; --calc-soft:#251C3A;
+      --shadow:0 2px 10px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; margin:0; padding:0 16px 100px; overflow-x:hidden; -webkit-text-size-adjust:100%}
+  h1,h2,h3,h4{font-family:'Trebuchet MS','Segoe UI',sans-serif; line-height:1.25; text-wrap:balance}
+  .wrap{max-width:880px; margin:0 auto}
+  a{color:var(--accent)}
+
+  header.top{padding:22px 0 14px; border-bottom:3px solid var(--accent); margin-bottom:16px}
+  header.top h1{font-size:1.75rem; margin:0 0 4px}
+  header.top p{margin:2px 0; color:var(--muted); font-size:.94rem}
+  .home-link{display:inline-block; margin:10px 0 0; font-size:.86rem; font-weight:700; text-decoration:none}
+  .print-tip{background:var(--info-soft); border-left:4px solid var(--info); border-radius:8px; padding:8px 14px; font-size:.9rem; margin-top:12px}
+
+  .prio-legend{display:flex; gap:14px; flex-wrap:wrap; font-size:.84rem; color:var(--muted); margin-top:12px}
+  .prio-legend b{color:var(--ink)}
+
+  nav.toc{background:var(--panel); border:1.5px solid var(--line); border-radius:14px; padding:16px 20px; box-shadow:var(--shadow); margin-bottom:26px}
+  nav.toc h2{margin:0 0 8px; font-size:1.1rem; color:var(--accent)}
+  nav.toc ol{margin:6px 0; padding-left:22px}
+  nav.toc li{margin:4px 0}
+  nav.toc a{text-decoration:none; font-weight:600}
+  nav.toc a:hover{text-decoration:underline}
+  nav.toc .sub{font-size:.86rem; color:var(--muted); font-weight:400}
+  .fire{font-size:.8rem; letter-spacing:-2px}
+
+  .part{margin:38px 0 10px; padding:14px 20px; border-radius:14px; background:linear-gradient(135deg,var(--accent),#40C057); color:#fff; box-shadow:var(--shadow)}
+  .part h2{margin:0; font-size:1.35rem}
+  .part p{margin:4px 0 0; opacity:.95; font-size:.9rem}
+
+  section.mod{background:var(--panel); border:1.5px solid var(--line); border-radius:14px; padding:20px 22px; margin:18px 0; box-shadow:var(--shadow)}
+  section.mod > h3{margin-top:0; font-size:1.22rem; color:var(--accent); border-bottom:2px solid var(--line); padding-bottom:8px; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .tag-prio{font-family:Consolas,monospace; font-size:.66rem; padding:2px 9px; border-radius:999px; letter-spacing:.05em; white-space:nowrap}
+  .p3{background:var(--hot-soft); color:var(--hot)} .p2{background:var(--warn-soft); color:var(--warn)} .p1{background:var(--info-soft); color:var(--info)}
+  section.mod h4{font-size:1.05rem; margin:20px 0 6px; color:var(--info)}
+  section.mod p{margin:8px 0}
+  section.mod ul,section.mod ol{margin:8px 0; padding-left:24px}
+  section.mod li{margin:4px 0}
+  b,strong{color:var(--ink)}
+  .term{color:var(--accent); font-weight:700}
+
+  .box{border-radius:10px; padding:12px 16px; margin:14px 0; font-size:.95rem}
+  .box b.tt{display:block; font-family:Consolas,monospace; font-size:.72rem; letter-spacing:.1em; margin-bottom:6px; text-transform:uppercase}
+  .concept{background:var(--info-soft); border-left:4px solid var(--info)} .concept b.tt{color:var(--info)}
+  .prova{background:var(--hot-soft); border-left:4px solid var(--hot)} .prova b.tt{color:var(--hot)}
+  .mnemo{background:var(--warn-soft); border-left:4px solid var(--warn)} .mnemo b.tt{color:var(--warn)}
+  .peg{background:var(--bad-soft); border-left:4px solid var(--bad)} .peg b.tt{color:var(--bad)}
+  .calc{background:var(--calc-soft); border-left:4px solid var(--calc)} .calc b.tt{color:var(--calc)}
+
+  table.data{border-collapse:collapse; width:100%; margin:14px 0; font-size:.9rem; overflow:hidden; border-radius:8px}
+  table.data th,table.data td{border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top}
+  table.data th{background:var(--panel2); color:var(--accent); font-family:Consolas,monospace; font-size:.78rem; letter-spacing:.04em}
+  table.data tr:nth-child(even) td{background:var(--panel2)}
+  .scroll{overflow-x:auto}
+
+  /* Questão modelo CONSULPAM */
+  .qc{background:var(--panel2); border:1.5px solid var(--line); border-radius:12px; padding:14px 16px; margin:16px 0}
+  .qc .qc-h{font-family:Consolas,monospace; font-size:.7rem; letter-spacing:.08em; color:var(--hot); text-transform:uppercase; margin-bottom:6px}
+  .qc .qc-q{font-weight:600; margin:0 0 10px}
+  .qc ol.alts{list-style:none; padding:0; margin:0}
+  .qc ol.alts li{background:var(--panel); border:1.5px solid var(--line); border-radius:9px; padding:8px 12px; margin:6px 0; cursor:pointer; transition:border-color .15s, background .15s}
+  .qc ol.alts li:hover{border-color:var(--accent)}
+  .qc ol.alts li .letter{font-weight:700; color:var(--accent); margin-right:8px}
+  .qc ol.alts li.correct{background:var(--good-soft); border-color:var(--good)}
+  .qc ol.alts li.wrong{background:var(--bad-soft); border-color:var(--bad)}
+  .qc .qc-exp{margin-top:10px; font-size:.9rem; color:var(--good); display:none; border-top:1px dashed var(--line); padding-top:8px}
+  .qc .qc-exp.show{display:block}
+  .qc .qc-exp b{color:var(--ink)}
+
+  details.quiz{background:var(--panel2); border:1.5px solid var(--line); border-radius:10px; padding:10px 16px; margin:12px 0}
+  details.quiz summary{cursor:pointer; font-weight:700; color:var(--info)}
+  details.quiz summary::marker{color:var(--info)}
+  details.quiz .ans{margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); color:var(--good); font-weight:600}
+  .top-link{display:block; text-align:right; font-size:.8rem; margin-top:10px}
+
+  .tip{border-bottom:2px dotted var(--info); cursor:help; position:relative}
+  .tip::after{content:attr(data-tip); position:absolute; left:50%; bottom:135%; transform:translateX(-50%) translateY(6px);
+    background:var(--ink); color:var(--bg); padding:8px 12px; border-radius:8px; font-size:.82rem; font-weight:400;
+    line-height:1.4; width:max-content; max-width:260px; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,.3);
+    opacity:0; pointer-events:none; transition:opacity .18s, transform .18s; z-index:50; white-space:normal;}
+  .tip:hover::after,.tip:focus::after,.tip:active::after{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  .xp-wrap{display:flex; align-items:center; gap:10px; margin-top:14px; flex-wrap:wrap}
+  .xp-badge{font-family:Consolas,monospace; font-weight:700; font-size:.9rem; background:var(--accent); color:#fff; border-radius:999px; padding:4px 14px}
+  .xp-bar{flex:1; min-width:160px; height:14px; background:var(--panel2); border:1.5px solid var(--line); border-radius:999px; overflow:hidden}
+  .xp-fill{height:100%; width:0; background:linear-gradient(90deg,var(--good),#69DB7C); transition:width .6s cubic-bezier(.34,1.3,.64,1)}
+  .xp-lvl{font-size:.82rem; color:var(--muted); font-family:Consolas,monospace}
+
+  #tutor{position:fixed; right:16px; bottom:16px; z-index:80; display:flex; align-items:flex-end; gap:10px; max-width:min(360px,88vw)}
+  #tutorBubble{background:var(--panel); border:2px solid var(--accent); border-radius:16px 16px 4px 16px; padding:11px 15px; font-size:.9rem; box-shadow:0 6px 22px rgba(0,0,0,.22); position:relative; transition:opacity .3s, transform .3s}
+  #tutorBubble.hide{opacity:0; transform:translateY(10px) scale(.9); pointer-events:none}
+  #tutorBubble b{color:var(--accent)}
+  #tutorFace{flex:none; width:64px; height:64px; cursor:pointer; filter:drop-shadow(0 3px 8px rgba(0,0,0,.25)); transition:transform .3s}
+  #tutorFace:hover,#tutorFace:active{transform:scale(1.08) rotate(-3deg)}
+  #tutorFace.talk{animation:bob 1s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-5px)}}
+  #tutorClose{position:absolute; top:-8px; right:-8px; width:22px; height:22px; border-radius:50%; background:var(--muted); color:#fff; border:none; cursor:pointer; font-size:.8rem; line-height:1; display:grid; place-items:center}
+  .toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px); background:var(--good); color:#fff; padding:10px 20px; border-radius:999px; font-weight:700; box-shadow:0 6px 20px rgba(0,0,0,.3); opacity:0; transition:opacity .3s, transform .3s; z-index:90}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:640px){
+    body{padding:0 10px 90px}
+    header.top h1{font-size:1.3rem}
+    .part{padding:12px 15px} .part h2{font-size:1.12rem}
+    section.mod{padding:15px 13px}
+    section.mod > h3{font-size:1.08rem}
+    .box{padding:11px 13px; font-size:.9rem}
+    table.data{font-size:.8rem} table.data th,table.data td{padding:6px 7px}
+    #tutor{right:8px; bottom:8px; max-width:min(300px,92vw)}
+    #tutorFace{width:50px; height:50px}
+    #tutorBubble{font-size:.82rem; padding:9px 12px}
+  }
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
+  @media print{
+    body{padding:0; font-size:10.5pt} .top-link,nav.toc,.print-tip,#tutor,.xp-wrap{display:none}
+    section.mod,.box,.qc{box-shadow:none; break-inside:avoid}
+    .qc .qc-exp{display:block !important}
+    .part{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .tip{border:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top" id="topo">
+  <h1>⭐ Estudo de Ciências — CONSULPAM</h1>
+  <p><b>Material PRINCIPAL</b> · Professor de Ciências · Prefeitura de Coreaú/CE · Conhecimentos Específicos.</p>
+  <p>Tudo o que você precisa em <b>um só lugar</b>, com foco no que <b>mais cai</b> nas provas específicas da banca. Estude por aqui do começo ao fim. 💚</p>
+  <a class="home-link" href="index.html">← Voltar ao portal</a>
+  <div class="print-tip">🖨️ <b>Ctrl+P</b> salva tudo em PDF. Cada tópico tem uma etiqueta de <b>prioridade</b> e <b>questões modelo</b> — clique na alternativa para conferir. Abra os <b>Teste-se</b> e responda as questões para ganhar XP com a <b>Profa. Bio</b>.</div>
+  <div class="prio-legend">
+    <span><b class="tag-prio p3">🔥🔥🔥 CAI MUITO</b></span>
+    <span><b class="tag-prio p2">🔥🔥 CAI</b></span>
+    <span><b class="tag-prio p1">🔥 PODE CAIR</b></span>
+  </div>
+  <div class="xp-wrap">
+    <span class="xp-badge">⭐ <span id="xpPts">0</span> XP</span>
+    <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+    <span class="xp-lvl" id="xpLvl">Nível 1 · Estagiária</span>
+  </div>
+</header>
+
+<div class="box prova">
+  <b class="tt">Como é a prova (leia primeiro!)</b>
+  A prova objetiva da CONSULPAM tem questões de <b>múltipla escolha com 4 alternativas (A, B, C, D)</b>. Para o professor: <b>Língua Portuguesa (10)</b> + <b>Informática/Legislação/Raciocínio Lógico/Município (10)</b> + <b>Conhecimentos Específicos de Ciências (20)</b>. Há ainda a <b>Prova Didática</b> (aula sobre tema sorteado). Costuma-se exigir <b>mínimo em cada bloco</b> para aprovar — por isso os 20 de Ciências valem ouro. <b>Este material cobre os Específicos por inteiro</b> (para Português/Legislação/Pedagogia, use a página "Conhecimentos Gerais e Pedagógicos" do portal).
+</div>
+
+<nav class="toc">
+  <h2>🗺️ Índice — os 18 temas (clique para pular)</h2>
+  <ol>
+    <li><a href="#m1">Citologia — a célula e organelas</a> <span class="fire">🔥🔥🔥</span></li>
+    <li><a href="#m2">Membrana e transportes</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m3">Bioquímica celular e divisão celular</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m4">Histologia — os tecidos</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m5">Classificação e os 5 reinos (+ vírus)</a> <span class="fire">🔥🔥🔥</span></li>
+    <li><a href="#m6">Botânica e fotossíntese</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m7">Zoologia — invertebrados e vertebrados</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m8">Corpo humano — todos os sistemas</a> <span class="fire">🔥🔥🔥</span></li>
+    <li><a href="#m9">Reprodução, sexualidade e ISTs</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m10">Saúde, doenças e prevenção</a> <span class="fire">🔥🔥🔥</span></li>
+    <li><a href="#m11">Genética — Mendel e hereditariedade</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m12">Evolução</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m13">Ecologia e meio ambiente</a> <span class="fire">🔥🔥🔥</span></li>
+    <li><a href="#m14">Matéria, estados e misturas</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m15">Átomo, elementos e Tabela Periódica</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m16">Ligações, reações e funções inorgânicas</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m17">Física — movimento, força, energia, calor, luz e som</a> <span class="fire">🔥🔥</span></li>
+    <li><a href="#m18">Terra e Universo — astronomia e o planeta</a> <span class="fire">🔥</span></li>
+    <li><a href="#final">✅ Reta final + banco de questões</a></li>
+  </ol>
+</nav>
+
+<!-- =============== BLOCO A: BIOLOGIA =============== -->
+<div class="part"><h2>🧬 Bloco A · Vida (Biologia) — o que MAIS cai</h2><p>Citologia, corpo humano, ecologia, reinos, genética: mais da metade das questões específicas.</p></div>
+
+<section class="mod" id="m1">
+  <h3>1. Citologia — a célula e organelas <span class="tag-prio p3">🔥🔥🔥 CAI MUITO</span></h3>
+  <div class="box concept"><b class="tt">Teoria celular</b> Todo ser vivo é formado por células; a célula é a unidade da vida; toda célula vem de outra célula.</div>
+  <ul>
+    <li><b class="term">Procarionte:</b> <b>sem núcleo</b> definido (DNA solto no citoplasma) — bactérias e cianobactérias.</li>
+    <li><b class="term">Eucarionte:</b> <b>com núcleo</b> definido por membrana — protistas, fungos, plantas e animais.</li>
+  </ul>
+  <div class="scroll"><table class="data">
+    <tr><th>Organela</th><th>Função — decore assim</th></tr>
+    <tr><td>Núcleo</td><td>Guarda o DNA e <b>comanda</b> a célula</td></tr>
+    <tr><td>Mitocôndria</td><td><b>Respiração celular</b> → produz energia (ATP). "A usina"</td></tr>
+    <tr><td>Ribossomo</td><td><b>Síntese de proteínas</b></td></tr>
+    <tr><td>Retículo endopl. rugoso</td><td>Tem ribossomos → produz proteínas</td></tr>
+    <tr><td>Retículo endopl. liso</td><td>Produz lipídios e faz desintoxicação</td></tr>
+    <tr><td>Complexo golgiense</td><td><b>Empacota e secreta</b> substâncias</td></tr>
+    <tr><td>Lisossomo</td><td><b>Digestão</b> intracelular</td></tr>
+    <tr><td>Cloroplasto <i>(vegetal)</i></td><td><b>Fotossíntese</b> (tem clorofila). "A cozinha"</td></tr>
+    <tr><td>Vacúolo <i>(vegetal)</i></td><td>Armazena água e substâncias</td></tr>
+    <tr><td>Parede celular <i>(vegetal)</i></td><td>Sustentação e proteção</td></tr>
+    <tr><td>Centríolos <i>(animal)</i></td><td>Divisão celular e cílios/flagelos</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Célula animal × vegetal (campeão de prova)</b> Só a <b>VEGETAL</b> tem: <b>parede celular, cloroplasto e grande vacúolo</b>. Só a <b>ANIMAL</b> tem: <b>lisossomos e centríolos</b>. As duas têm membrana, citoplasma, núcleo, mitocôndria e ribossomos.</div>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> <b>Mito</b>côndria = <b>energia</b> (respiração). <b>Cloro</b>plasto = <b>alimento</b> (fotossíntese). <b>Núcleo</b> = chefe. <b>Lisos</b>somo = "lixeiro" (digestão).</div>
+
+  <div class="qc" data-a="1">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">A organela responsável pela respiração celular, produzindo energia para a célula, é:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> o ribossomo.</li>
+      <li data-c="0"><span class="letter">B)</span> o cloroplasto.</li>
+      <li data-c="1"><span class="letter">C)</span> a mitocôndria.</li>
+      <li data-c="0"><span class="letter">D)</span> o lisossomo.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito C.</b> A mitocôndria realiza a respiração celular e produz ATP (energia). Cloroplasto faz fotossíntese; ribossomo sintetiza proteínas; lisossomo faz digestão.</div>
+  </div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Cite as três estruturas exclusivas da célula vegetal.
+    <div class="ans">Parede celular, cloroplastos e grande vacúolo central.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m2">
+  <h3>2. Membrana plasmática e transportes <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <p>A <b class="term">membrana plasmática</b> envolve a célula e é <b>seletiva</b> (controla o que entra e sai). É formada por lipídios e proteínas (modelo <span class="tip" data-tip="Bicamada de lipídios com proteínas 'flutuando', como um mosaico móvel.">mosaico fluido</span>).</p>
+  <div class="scroll"><table class="data">
+    <tr><th>Transporte</th><th>Gasta energia?</th><th>Como é</th></tr>
+    <tr><td>Difusão simples</td><td>Não (passivo)</td><td>Do mais concentrado para o menos concentrado</td></tr>
+    <tr><td>Osmose</td><td>Não (passivo)</td><td>Passagem de <b>água</b> pela membrana</td></tr>
+    <tr><td>Difusão facilitada</td><td>Não (passivo)</td><td>Com ajuda de proteínas transportadoras</td></tr>
+    <tr><td>Transporte ativo</td><td><b>Sim</b> (gasta ATP)</td><td>Contra o gradiente (ex.: bomba de sódio-potássio)</td></tr>
+  </table></div>
+  <div class="box peg"><b class="tt">Pegadinha</b> <b>Osmose</b> é só o movimento de <b>ÁGUA</b> (do meio menos concentrado em soluto para o mais concentrado). Não confunda com difusão (movimento do soluto).</div>
+  <div class="qc" data-a="2">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">O transporte de água através da membrana plasmática, sem gasto de energia, denomina-se:</p>
+    <ol class="alts">
+      <li data-c="1"><span class="letter">A)</span> osmose.</li>
+      <li data-c="0"><span class="letter">B)</span> transporte ativo.</li>
+      <li data-c="0"><span class="letter">C)</span> fagocitose.</li>
+      <li data-c="0"><span class="letter">D)</span> respiração.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito A.</b> Osmose = passagem de água pela membrana, transporte passivo (sem gasto de ATP).</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m3">
+  <h3>3. Bioquímica celular e divisão celular <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <h4>Substâncias químicas da célula</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Substância</th><th>Papel</th><th>Exemplos</th></tr>
+    <tr><td>Água</td><td>Mais abundante; meio das reações</td><td>—</td></tr>
+    <tr><td>Sais minerais</td><td>Estrutura e regulação</td><td>Cálcio (ossos), ferro (sangue), iodo (tireoide)</td></tr>
+    <tr><td>Carboidratos</td><td><b>Energia rápida</b></td><td>Glicose, amido, celulose</td></tr>
+    <tr><td>Lipídios</td><td>Reserva de energia, isolante</td><td>Gorduras, óleos, colesterol</td></tr>
+    <tr><td>Proteínas</td><td>Construção e função</td><td>Enzimas, anticorpos; feitas de <b>aminoácidos</b></td></tr>
+    <tr><td>Vitaminas</td><td>Reguladoras (falta = doença)</td><td>A, C, D, complexo B</td></tr>
+    <tr><td>Ácidos nucleicos</td><td>Informação genética</td><td><b>DNA</b> e <b>RNA</b></td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Enzimas</b> São <b>proteínas</b> que aceleram reações (catalisadores biológicos). Modelo "chave-fechadura": específicas, sensíveis a temperatura e pH.</div>
+  <h4>Divisão celular</h4>
+  <ul>
+    <li><b class="term">Mitose:</b> 1 célula → 2 células <b>IGUAIS</b> (mesmo nº de cromossomos). Faz crescimento, cicatrização e reprodução assexuada.</li>
+    <li><b class="term">Meiose:</b> 1 célula → 4 células com <b>METADE</b> dos cromossomos = <b>gametas</b>. Base da reprodução sexuada e da variabilidade.</li>
+  </ul>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> mit<b>O</b>se → células idêntic<b>O</b>s (2 iguais). mei<b>O</b>se → metade (4 gametas). "Meiose faz metade."</div>
+  <div class="qc" data-a="3">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">O tipo de divisão celular que origina os gametas, reduzindo o número de cromossomos à metade, é a:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> mitose.</li>
+      <li data-c="1"><span class="letter">B)</span> meiose.</li>
+      <li data-c="0"><span class="letter">C)</span> fecundação.</li>
+      <li data-c="0"><span class="letter">D)</span> respiração celular.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> A meiose produz 4 células com metade dos cromossomos (gametas). A mitose gera 2 células iguais.</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m4">
+  <h3>4. Histologia — os tecidos <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <p><b>Níveis de organização:</b> <b class="term">célula → tecido → órgão → sistema → organismo</b>. Tecido = conjunto de células semelhantes com a mesma função.</p>
+  <div class="scroll"><table class="data">
+    <tr><th>Tecido</th><th>Função</th><th>Onde</th></tr>
+    <tr><td>Epitelial</td><td>Reveste e protege; secreção (glândulas)</td><td>Pele, mucosas</td></tr>
+    <tr><td>Conjuntivo</td><td>Preenche, sustenta, nutre</td><td>Osso, cartilagem, sangue, gordura</td></tr>
+    <tr><td>Muscular</td><td>Contrai → movimento</td><td>Liso, estriado esquelético, cardíaco</td></tr>
+    <tr><td>Nervoso</td><td>Conduz impulsos</td><td>Neurônios (encéfalo, medula, nervos)</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Tecido muscular — 3 tipos</b> <b>Estriado esquelético</b> (voluntário, move os ossos), <b>liso</b> (involuntário, órgãos internos) e <b>cardíaco</b> (involuntário, só no coração). O <b>sangue</b> é um tecido conjuntivo!</div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m5">
+  <h3>5. Classificação e os 5 reinos (+ vírus) <span class="tag-prio p3">🔥🔥🔥 CAI MUITO</span></h3>
+  <div class="box concept"><b class="tt">Taxonomia (Lineu)</b> Do maior ao menor: <b>Reino → Filo → Classe → Ordem → Família → Gênero → Espécie</b>. Nome científico = Gênero + espécie em latim/itálico: <i>Homo sapiens</i>.</div>
+  <div class="scroll"><table class="data">
+    <tr><th>Reino</th><th>Células</th><th>Nutrição</th><th>Exemplos</th></tr>
+    <tr><td>Monera</td><td>Procarionte</td><td>Vários</td><td>Bactérias, cianobactérias</td></tr>
+    <tr><td>Protista</td><td>Eucarionte</td><td>Vários</td><td>Protozoários, algas</td></tr>
+    <tr><td>Fungi</td><td>Eucarionte</td><td>Heterótrofo (decompositor)</td><td>Cogumelos, bolores, leveduras</td></tr>
+    <tr><td>Plantae</td><td>Eucarionte</td><td>Autótrofo (fotossíntese)</td><td>Musgos, samambaias, árvores</td></tr>
+    <tr><td>Animalia</td><td>Eucarionte</td><td>Heterótrofo</td><td>Insetos, peixes, mamíferos</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Vírus — fora dos reinos!</b> São <b>acelulares</b> (não têm célula) e só se reproduzem <b>dentro de uma célula hospedeira</b> (parasitas obrigatórios). Causam gripe, dengue, covid, sarampo, HIV/aids.</div>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> <b>Autótrofo</b> = produz o próprio alimento (planta). <b>Heterótrofo</b> = busca alimento (animal, fungo). Reinos: "<b>M</b>onera, <b>P</b>rotista, <b>F</b>ungi, <b>P</b>lantae, <b>A</b>nimalia".</div>
+  <div class="qc" data-a="5">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">Os vírus não são incluídos em nenhum dos cinco reinos porque:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> são bactérias muito pequenas.</li>
+      <li data-c="1"><span class="letter">B)</span> não possuem organização celular (são acelulares).</li>
+      <li data-c="0"><span class="letter">C)</span> realizam fotossíntese.</li>
+      <li data-c="0"><span class="letter">D)</span> são fungos decompositores.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> Vírus são acelulares e só se reproduzem parasitando células vivas, por isso ficam fora dos reinos.</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m6">
+  <h3>6. Botânica e fotossíntese <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <div class="scroll"><table class="data">
+    <tr><th>Grupo</th><th>Vasos condutores?</th><th>Sementes/flores?</th><th>Exemplo</th></tr>
+    <tr><td>Briófitas</td><td>Não</td><td>Não</td><td>Musgos</td></tr>
+    <tr><td>Pteridófitas</td><td>Sim</td><td>Não (esporos)</td><td>Samambaias</td></tr>
+    <tr><td>Gimnospermas</td><td>Sim</td><td>Semente sem fruto</td><td>Pinheiros, araucária</td></tr>
+    <tr><td>Angiospermas</td><td>Sim</td><td><b>Flor e fruto</b></td><td>Maioria das plantas</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Fotossíntese (decore a equação!)</b> <b>gás carbônico + água + luz → glicose + oxigênio</b><br>6 CO₂ + 6 H₂O + luz → C₆H₁₂O₆ + 6 O₂. A planta <b>absorve CO₂</b> e <b>libera O₂</b>, usando clorofila. É a base das cadeias alimentares.</div>
+  <ul>
+    <li><b>Respiração vegetal:</b> ocorre o tempo todo, consome O₂ e libera CO₂ (o contrário da fotossíntese).</li>
+    <li><b>Transpiração:</b> perda de água pelas folhas (estômatos).</li>
+    <li><b>Partes da planta:</b> raiz (fixa e absorve), caule (sustenta e conduz), folha (fotossíntese), flor (reprodução), fruto e semente.</li>
+  </ul>
+  <div class="box peg"><b class="tt">Pegadinha</b> Na fotossíntese a planta LIBERA oxigênio e ABSORVE gás carbônico. Muita questão inverte isso de propósito.</div>
+  <div class="qc" data-a="6">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">Na fotossíntese, a planta absorve ___ e libera ___, respectivamente:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> oxigênio; gás carbônico.</li>
+      <li data-c="1"><span class="letter">B)</span> gás carbônico; oxigênio.</li>
+      <li data-c="0"><span class="letter">C)</span> nitrogênio; oxigênio.</li>
+      <li data-c="0"><span class="letter">D)</span> água; gás carbônico.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> Entra CO₂ (e água + luz), sai O₂ (e glicose).</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m7">
+  <h3>7. Zoologia — invertebrados e vertebrados <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <p><b>Invertebrados</b> (sem coluna vertebral): poríferos (esponjas), cnidários (águas-vivas, corais), platelmintos (vermes chatos), nematódeos (lombriga), anelídeos (minhoca), moluscos (caramujo, polvo, lula), <b>artrópodes</b> (insetos, aranhas, crustáceos — o maior grupo!) e equinodermos (estrela-do-mar, ouriço).</p>
+  <div class="scroll"><table class="data">
+    <tr><th>Vertebrados</th><th>Marca registrada</th><th>Temperatura</th></tr>
+    <tr><td>Peixes</td><td>Escamas, nadadeiras, brânquias</td><td>Pecilotérmicos</td></tr>
+    <tr><td>Anfíbios</td><td>Pele úmida; água e terra (sapo, rã)</td><td>Pecilotérmicos</td></tr>
+    <tr><td>Répteis</td><td>Escamas secas; ovos com casca (cobra, jacaré)</td><td>Pecilotérmicos</td></tr>
+    <tr><td>Aves</td><td>Penas, bico, ovíparas</td><td><b>Homeotérmicas</b></td></tr>
+    <tr><td>Mamíferos</td><td>Pelos e glândulas mamárias</td><td><b>Homeotérmicos</b></td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Não confunda</b> <b>Homeotérmicos</b> (aves e mamíferos) mantêm a temperatura constante. <b>Pecilotérmicos/ectotérmicos</b> (peixes, anfíbios, répteis) variam com o ambiente. <b>Ovíparos</b> põem ovos; <b>vivíparos</b> a cria se desenvolve no corpo da mãe.</div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m8">
+  <h3>8. Corpo humano — todos os sistemas <span class="tag-prio p3">🔥🔥🔥 CAI MUITO</span></h3>
+  <div class="scroll"><table class="data">
+    <tr><th>Sistema</th><th>Função</th><th>Órgãos-chave</th></tr>
+    <tr><td>Digestório</td><td>Digere e absorve nutrientes</td><td>Boca, esôfago, estômago, intestinos, fígado, pâncreas</td></tr>
+    <tr><td>Respiratório</td><td>Troca gasosa (entra O₂, sai CO₂)</td><td>Nariz, faringe, laringe, traqueia, brônquios, pulmões, alvéolos</td></tr>
+    <tr><td>Circulatório</td><td>Transporta sangue, gases, nutrientes</td><td>Coração, artérias, veias, capilares</td></tr>
+    <tr><td>Urinário</td><td>Filtra o sangue, forma a urina</td><td>Rins, ureteres, bexiga, uretra</td></tr>
+    <tr><td>Nervoso</td><td>Comanda, percebe, coordena</td><td>Encéfalo, medula, nervos, neurônios</td></tr>
+    <tr><td>Endócrino</td><td>Produz hormônios (regulação)</td><td>Hipófise, tireoide, pâncreas, suprarrenais</td></tr>
+    <tr><td>Locomotor</td><td>Sustentação e movimento</td><td>Ossos, músculos, articulações</td></tr>
+    <tr><td>Reprodutor</td><td>Reprodução</td><td>Ovários/útero; testículos</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Digestão</b> Boca (dentes + saliva/amilase, começa a digerir o amido) → estômago (suco gástrico ácido, digere proteínas) → <b>intestino delgado</b> (absorção dos nutrientes, com bile do fígado e suco do pâncreas) → intestino grosso (absorve água, forma as fezes).</div>
+  <div class="box concept"><b class="tt">Circulação</b> Coração com <b>4 cavidades</b> (2 átrios, 2 ventrículos). <b>Artéria SAI</b> do coração; <b>Veia CHEGA</b>. Pequena circulação: coração ↔ pulmões (oxigena). Grande circulação: coração ↔ corpo. Sangue: hemácias (levam O₂), leucócitos (defesa), plaquetas (coagulação), plasma.</div>
+  <div class="box concept"><b class="tt">Respiração</b> Nos <b>alvéolos</b> pulmonares o sangue solta CO₂ e capta O₂ (hematose). Diferente da respiração celular, que ocorre na mitocôndria de cada célula.</div>
+  <div class="box concept"><b class="tt">Nervoso</b> Neurônio = corpo celular + dendritos (recebem) + axônio (transmite). Central (encéfalo + medula) e periférico (nervos). Endócrino usa <b>hormônios</b> (insulina do pâncreas controla a glicose; tireoide regula o metabolismo).</div>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> "<b>A</b>rtéria <b>A</b>fasta / <b>V</b>eia <b>V</b>olta" ao coração. Absorção de nutrientes = intestino <b>delgado</b>.</div>
+  <div class="qc" data-a="8">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">A absorção da maior parte dos nutrientes dos alimentos ocorre no:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> estômago.</li>
+      <li data-c="1"><span class="letter">B)</span> intestino delgado.</li>
+      <li data-c="0"><span class="letter">C)</span> intestino grosso.</li>
+      <li data-c="0"><span class="letter">D)</span> esôfago.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> É no intestino delgado que a maioria dos nutrientes é absorvida para o sangue.</div>
+  </div>
+  <div class="qc" data-a="8b">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">Os vasos que transportam o sangue para <b>fora</b> do coração são as:</p>
+    <ol class="alts">
+      <li data-c="1"><span class="letter">A)</span> artérias.</li>
+      <li data-c="0"><span class="letter">B)</span> veias.</li>
+      <li data-c="0"><span class="letter">C)</span> válvulas.</li>
+      <li data-c="0"><span class="letter">D)</span> traqueias.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito A.</b> Artéria sai (afasta); veia chega (volta) ao coração.</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m9">
+  <h3>9. Reprodução, sexualidade e ISTs <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <ul>
+    <li><b>Feminino:</b> ovários (produzem óvulos e hormônios), tubas uterinas, útero, vagina. Ciclo menstrual ~28 dias; ovulação por volta do 14º dia.</li>
+    <li><b>Masculino:</b> testículos (produzem espermatozoides e testosterona), epidídimo, canais deferentes, pênis.</li>
+    <li><b>Fecundação:</b> espermatozoide + óvulo → zigoto → embrião → feto. Gestação ~9 meses.</li>
+    <li><b>Puberdade:</b> surgimento dos caracteres sexuais secundários, por ação hormonal.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Métodos contraceptivos e ISTs</b> A <b>camisinha</b> é o único método que previne gravidez <b>E</b> Infecções Sexualmente Transmissíveis. Outros: pílula, DIU, laqueadura, vasectomia. ISTs: HIV/aids, sífilis, gonorreia, HPV, hepatites B e C, herpes. Vacinas: HPV e hepatite B.</div>
+  <div class="qc" data-a="9">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">Qual método contraceptivo, além de evitar a gravidez, protege contra ISTs?</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> pílula anticoncepcional.</li>
+      <li data-c="0"><span class="letter">B)</span> DIU.</li>
+      <li data-c="1"><span class="letter">C)</span> preservativo (camisinha).</li>
+      <li data-c="0"><span class="letter">D)</span> tabelinha.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito C.</b> Só o preservativo é barreira contra a gravidez e contra as infecções sexualmente transmissíveis.</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m10">
+  <h3>10. Saúde, doenças e prevenção <span class="tag-prio p3">🔥🔥🔥 CAI MUITO</span></h3>
+  <div class="scroll"><table class="data">
+    <tr><th>Agente causador</th><th>Doenças</th><th>Transmissão comum</th></tr>
+    <tr><td>Vírus</td><td>Gripe, dengue, zika, chikungunya, covid, sarampo, caxumba, aids, raiva</td><td>Ar, mosquito, contato, fluidos</td></tr>
+    <tr><td>Bactérias</td><td>Tuberculose, tétano, cólera, hanseníase, leptospirose, coqueluche</td><td>Ar, água/alimento, feridas</td></tr>
+    <tr><td>Protozoários</td><td>Malária, doença de Chagas, amebíase, giardíase, leishmaniose</td><td>Mosquito/barbeiro, água</td></tr>
+    <tr><td>Vermes (helmintos)</td><td>Ascaridíase (lombriga), teníase/cisticercose, esquistossomose, amarelão</td><td>Água/alimento, solo contaminado</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Prevenção</b> Vacinas, saneamento básico (água tratada + esgoto), higiene, combate ao mosquito, alimentação equilibrada. <b>Vacina</b> = estimula o corpo a produzir anticorpos (imunização ativa, preventiva). <b>Soro</b> = já traz anticorpos prontos (imunização passiva, tratamento).</div>
+  <div class="box prova"><b class="tt">Foco CONSULPAM</b> Ligar a <b>doença ao agente</b> (vírus/bactéria/protozoário/verme) e à <b>transmissão</b> é dos temas que MAIS caem. Ex.: <b>dengue = vírus</b>, transmitida pelo mosquito <i>Aedes aegypti</i>; <b>malária = protozoário</b> (<i>Plasmodium</i>), pelo mosquito <i>Anopheles</i>; <b>Chagas = protozoário</b>, pelo barbeiro.</div>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> "<b>Vacina preVine</b>" (antes, produz anticorpos). "<b>Soro Socorre</b>" (depois, anticorpos prontos).</div>
+  <div class="qc" data-a="10">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">A dengue é uma doença causada por um ___ e transmitida pela picada do ___:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> bactéria; barbeiro.</li>
+      <li data-c="1"><span class="letter">B)</span> vírus; mosquito <i>Aedes aegypti</i>.</li>
+      <li data-c="0"><span class="letter">C)</span> protozoário; mosquito <i>Anopheles</i>.</li>
+      <li data-c="0"><span class="letter">D)</span> verme; caramujo.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> Dengue é viral, transmitida pelo <i>Aedes aegypti</i> (mesmo vetor de zika e chikungunya).</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m11">
+  <h3>11. Genética — Mendel e hereditariedade <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <ul>
+    <li><b class="term">DNA:</b> molécula em dupla-hélice que guarda a informação genética. Trecho de DNA = <b>gene</b>. Genes ficam nos <b>cromossomos</b> (humano: <b>46</b>, ou 23 pares).</li>
+    <li><b>Alelo dominante</b> (letra MAIÚSCULA, ex.: A) se manifesta mesmo em dose única. <b>Recessivo</b> (a) só aparece em dose dupla (<b>aa</b>).</li>
+    <li><b>Genótipo</b> = os genes (AA, Aa, aa). <b>Fenótipo</b> = a característica observável (genótipo + ambiente).</li>
+    <li><b>Homozigoto</b> = alelos iguais (AA ou aa). <b>Heterozigoto</b> = diferentes (Aa).</li>
+  </ul>
+  <div class="box concept"><b class="tt">1ª Lei de Mendel</b> Os fatores (alelos) de cada característica <b>se separam</b> na formação dos gametas. Cruzamento <b>Aa × Aa</b> → proporção genotípica <b>1 AA : 2 Aa : 1 aa</b> e fenotípica <b>3 dominantes : 1 recessivo</b>.</div>
+  <div class="box concept"><b class="tt">Herança do sexo</b> Mulher <b>XX</b>, homem <b>XY</b>. O <b>pai</b> determina o sexo do bebê (fornece X ou Y). Exemplos ligados ao X: daltonismo e hemofilia.</div>
+  <div class="qc" data-a="11">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">No cruzamento entre dois indivíduos heterozigotos (Aa × Aa), a proporção fenotípica esperada é:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> 1 : 1.</li>
+      <li data-c="1"><span class="letter">B)</span> 3 dominantes : 1 recessivo.</li>
+      <li data-c="0"><span class="letter">C)</span> todos recessivos.</li>
+      <li data-c="0"><span class="letter">D)</span> 2 : 2.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> Aa × Aa → 3/4 mostram o dominante e 1/4 o recessivo (3:1).</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m12">
+  <h3>12. Evolução <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <div class="scroll"><table class="data">
+    <tr><th>Teoria</th><th>Ideia central</th><th>Situação</th></tr>
+    <tr><td>Lamarck</td><td>Lei do uso e desuso + herança dos caracteres adquiridos</td><td>Refutada, mas cobrada</td></tr>
+    <tr><td>Darwin</td><td><b>Seleção natural</b>: o mais adaptado sobrevive e deixa mais descendentes</td><td>Aceita</td></tr>
+  </table></div>
+  <p><b>Evidências:</b> fósseis, órgãos homólogos, semelhanças embrionárias e de DNA. <b>Fontes de variabilidade:</b> mutações e reprodução sexuada.</p>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> <b>Lamarck</b> = "a girafa esticou o pescoço e passou adiante". <b>Darwin</b> = "já havia girafas variadas; as de pescoço longo sobreviveram melhor" (seleção natural).</div>
+  <div class="qc" data-a="12">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">A teoria segundo a qual os organismos mais adaptados ao ambiente têm mais chance de sobreviver e se reproduzir foi proposta por:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> Lamarck.</li>
+      <li data-c="1"><span class="letter">B)</span> Darwin.</li>
+      <li data-c="0"><span class="letter">C)</span> Mendel.</li>
+      <li data-c="0"><span class="letter">D)</span> Newton.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> A seleção natural é a base da teoria de Charles Darwin.</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m13">
+  <h3>13. Ecologia e meio ambiente <span class="tag-prio p3">🔥🔥🔥 CAI MUITO</span></h3>
+  <div class="scroll"><table class="data">
+    <tr><th>Termo</th><th>Significado (decore!)</th></tr>
+    <tr><td>População</td><td>Indivíduos da <b>mesma espécie</b> numa área</td></tr>
+    <tr><td>Comunidade</td><td>Conjunto de <b>populações</b> que convivem</td></tr>
+    <tr><td>Ecossistema</td><td>Comunidade + ambiente físico (bióticos + abióticos)</td></tr>
+    <tr><td>Biótico / Abiótico</td><td>Vivo (seres) / não-vivo (luz, água, solo, temperatura)</td></tr>
+    <tr><td>Habitat</td><td>"Endereço" — onde a espécie vive</td></tr>
+    <tr><td>Nicho ecológico</td><td>"Profissão" — o papel/o que a espécie faz</td></tr>
+    <tr><td>Biosfera</td><td>Conjunto de todos os ecossistemas</td></tr>
+  </table></div>
+  <h4>Cadeia alimentar</h4>
+  <ul>
+    <li><b>Produtores:</b> autótrofos (plantas, algas) — base, fazem fotossíntese.</li>
+    <li><b>Consumidores:</b> 1º (herbívoros), 2º e 3º (carnívoros).</li>
+    <li><b>Decompositores:</b> fungos e bactérias — reciclam a matéria.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Fluxo de energia × ciclo da matéria</b> A <b>energia</b> flui em <b>sentido único</b> (sol → produtor → consumidores) e <b>diminui</b> a cada nível. A <b>matéria é reciclada</b> pelos ciclos biogeoquímicos (água, carbono, oxigênio, nitrogênio).</div>
+  <h4>Relações ecológicas</h4>
+  <ul>
+    <li><b>Harmônicas</b> (sem prejuízo): mutualismo/protocooperação, comensalismo, colônia, sociedade.</li>
+    <li><b>Desarmônicas</b> (há prejuízo): competição, predação, parasitismo, amensalismo.</li>
+  </ul>
+  <h4>Biomas e impactos</h4>
+  <p><b>Biomas do Brasil:</b> Amazônia, <b>Cerrado</b>, <b>Caatinga</b> (do sertão cearense — de Coreaú!), Mata Atlântica, Pantanal e Pampa. <b>Poluição:</b> ar (efeito estufa, chuva ácida, buraco na camada de ozônio), água (esgoto, eutrofização) e solo (lixo, agrotóxicos). <b>Sustentabilidade:</b> 3 R's — Reduzir, Reutilizar, Reciclar.</p>
+  <div class="box peg"><b class="tt">Pegadinha</b> <b>Habitat</b> = onde vive (lugar). <b>Nicho</b> = o que faz (função). E a energia NÃO é reciclada — quem é reciclada é a matéria.</div>
+  <div class="qc" data-a="13">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">Na cadeia alimentar "capim → gafanhoto → sapo → cobra", o gafanhoto é classificado como:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> produtor.</li>
+      <li data-c="1"><span class="letter">B)</span> consumidor primário.</li>
+      <li data-c="0"><span class="letter">C)</span> consumidor terciário.</li>
+      <li data-c="0"><span class="letter">D)</span> decompositor.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> O gafanhoto come o produtor (capim), sendo o consumidor primário (herbívoro).</div>
+  </div>
+  <div class="qc" data-a="13b">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">O bioma predominante no semiárido nordestino, típico da região de Coreaú-CE, é a:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> Amazônia.</li>
+      <li data-c="0"><span class="letter">B)</span> Mata Atlântica.</li>
+      <li data-c="1"><span class="letter">C)</span> Caatinga.</li>
+      <li data-c="0"><span class="letter">D)</span> Pampa.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito C.</b> A Caatinga é o único bioma exclusivamente brasileiro, típico do sertão nordestino.</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<!-- =============== BLOCO B: QUÍMICA E FÍSICA =============== -->
+<div class="part"><h2>⚗️ Bloco B · Matéria e Energia (Química e Física)</h2><p>Do átomo às reações e às leis da física — presença certa nos Específicos.</p></div>
+
+<section class="mod" id="m14">
+  <h3>14. Matéria, estados e misturas <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <p><b class="term">Matéria</b> = tudo que tem massa e ocupa espaço. <b>Propriedades gerais:</b> massa, volume, impenetrabilidade, divisibilidade, inércia. <b>Específicas:</b> densidade, ponto de fusão/ebulição, cor, dureza.</p>
+  <div class="box concept"><b class="tt">Densidade</b> <b>d = massa ÷ volume</b>. Se a densidade do corpo &lt; densidade da água (1 g/cm³) → <b>flutua</b>; se &gt; → afunda.</div>
+  <h4>Estados e mudanças</h4>
+  <ul>
+    <li><b>Fusão</b> (sólido→líquido) · <b>Solidificação</b> (líquido→sólido)</li>
+    <li><b>Vaporização</b> (líquido→gás) · <b>Condensação/liquefação</b> (gás→líquido)</li>
+    <li><b>Sublimação</b> (sólido↔gás direto, ex.: naftalina, gelo-seco)</li>
+  </ul>
+  <div class="box peg"><b class="tt">Pegadinha</b> Durante a mudança de estado de uma substância <b>pura</b>, a temperatura <b>NÃO muda</b> (fica no patamar). A água ferve a 100 °C e permanece a 100 °C até virar todo vapor.</div>
+  <h4>Substâncias e misturas + separação</h4>
+  <ul>
+    <li><b>Substância pura simples</b> (1 elemento: O₂, Fe) · <b>composta</b> (2+ elementos: H₂O, CO₂).</li>
+    <li><b>Mistura homogênea</b> (1 fase: água+sal, ar) · <b>heterogênea</b> (2+ fases: água+óleo, granito).</li>
+  </ul>
+  <div class="scroll"><table class="data">
+    <tr><th>Método</th><th>Serve para</th></tr>
+    <tr><td>Filtração</td><td>Sólido + líquido (café); sólido + gás (filtro)</td></tr>
+    <tr><td>Decantação</td><td>Sólido + líquido ou 2 líquidos imiscíveis (água/óleo)</td></tr>
+    <tr><td>Separação magnética</td><td>Ferro na areia</td></tr>
+    <tr><td>Evaporação / destilação simples</td><td>Sólido dissolvido em líquido (sal na água)</td></tr>
+    <tr><td>Destilação fracionada</td><td>Líquidos miscíveis (água + álcool; petróleo)</td></tr>
+  </table></div>
+  <div class="qc" data-a="14">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">A passagem da água do estado líquido para o gasoso é chamada de:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> fusão.</li>
+      <li data-c="1"><span class="letter">B)</span> vaporização.</li>
+      <li data-c="0"><span class="letter">C)</span> solidificação.</li>
+      <li data-c="0"><span class="letter">D)</span> condensação.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> Líquido → gás = vaporização (evaporação ou ebulição).</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m15">
+  <h3>15. Átomo, elementos e Tabela Periódica <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <div class="box concept"><b class="tt">Estrutura do átomo</b> <b>Núcleo</b> (prótons + nêutrons) + <b>eletrosfera</b> (elétrons). Próton +, elétron −, nêutron neutro. Átomo neutro: prótons = elétrons.</div>
+  <ul>
+    <li><b>Número atômico (Z)</b> = nº de prótons (identifica o elemento).</li>
+    <li><b>Número de massa (A)</b> = prótons + nêutrons ⟹ <b>nêutrons = A − Z</b>.</li>
+    <li><b>Íons:</b> cátion (+, perdeu e⁻) e ânion (−, ganhou e⁻). <b>Isótopos:</b> mesmo Z, A diferente.</li>
+  </ul>
+  <p><b>Modelos:</b> Dalton (bola de bilhar) → Thomson (pudim de passas, achou o elétron) → Rutherford (núcleo + eletrosfera) → Bohr (camadas de energia).</p>
+  <p><b>Tabela Periódica:</b> <b>períodos</b> (linhas) = nº de camadas; <b>famílias/grupos</b> (colunas) = propriedades semelhantes. Metais (esquerda/centro), ametais (direita), gases nobres (grupo 18, estáveis).</p>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> "<b>N</b>êutrons = <b>A</b> menos <b>Z</b>." (n = A − Z). Átomo neutro: nº de prótons = nº de elétrons.</div>
+  <div class="qc" data-a="15">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">Um átomo possui número atômico Z = 11 e número de massa A = 23. O número de nêutrons desse átomo é:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> 11.</li>
+      <li data-c="1"><span class="letter">B)</span> 12.</li>
+      <li data-c="0"><span class="letter">C)</span> 23.</li>
+      <li data-c="0"><span class="letter">D)</span> 34.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito B.</b> nêutrons = A − Z = 23 − 11 = 12 (é o sódio, Na).</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m16">
+  <h3>16. Ligações, reações e funções inorgânicas <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <ul>
+    <li><b class="term">Iônica</b> (metal + ametal): <b>transfere</b> elétrons, forma íons (NaCl).</li>
+    <li><b class="term">Covalente</b> (ametal + ametal): <b>compartilha</b> elétrons (H₂O, CO₂, O₂).</li>
+    <li><b class="term">Metálica</b> (metal + metal): "mar de elétrons" → conduz eletricidade.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Lei de Lavoisier</b> "Na natureza nada se cria, nada se perde, tudo se transforma." A <b>massa se conserva</b>: massa dos reagentes = massa dos produtos. Reações: síntese (A+B→AB), decomposição (AB→A+B), simples e dupla troca.</div>
+  <div class="scroll"><table class="data">
+    <tr><th>Função</th><th>Definição</th><th>Exemplos</th></tr>
+    <tr><td>Ácido</td><td>Libera H⁺ em água</td><td>HCl, H₂SO₄, vinagre, limão</td></tr>
+    <tr><td>Base (hidróxido)</td><td>Libera OH⁻ em água</td><td>NaOH, leite de magnésia, sabão</td></tr>
+    <tr><td>Sal</td><td>Ácido + base → sal + água</td><td>NaCl (sal de cozinha)</td></tr>
+    <tr><td>Óxido</td><td>Binário com oxigênio</td><td>CO₂, H₂O, ferrugem (Fe₂O₃)</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Escala de pH (0–14)</b> pH &lt; 7 = <b>ácido</b> · pH = 7 = <b>neutro</b> · pH &gt; 7 = <b>básico/alcalino</b>. Indicadores (tornassol, fenolftaleína) acusam o caráter.</div>
+  <div class="qc" data-a="16">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">A reação entre um ácido e uma base, chamada neutralização, produz:</p>
+    <ol class="alts">
+      <li data-c="1"><span class="letter">A)</span> sal e água.</li>
+      <li data-c="0"><span class="letter">B)</span> dois gases.</li>
+      <li data-c="0"><span class="letter">C)</span> apenas água.</li>
+      <li data-c="0"><span class="letter">D)</span> um óxido e um metal.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito A.</b> Ácido + base → sal + água (ex.: HCl + NaOH → NaCl + H₂O).</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m17">
+  <h3>17. Física — movimento, força, energia, calor, luz e som <span class="tag-prio p2">🔥🔥 CAI</span></h3>
+  <h4>Movimento e forças</h4>
+  <ul>
+    <li><b>Velocidade média = distância ÷ tempo</b> (v = Δs/Δt). Converter km/h → m/s: divide por 3,6.</li>
+    <li><b>Leis de Newton:</b> 1ª Inércia · 2ª <b>F = m·a</b> · 3ª Ação e reação.</li>
+    <li><b>Peso × massa:</b> massa (kg) é constante; peso é força da gravidade: <b>P = m·g</b> (g ≈ 10 m/s²). Na Lua o peso é menor, a massa é a mesma.</li>
+    <li><b>Máquinas simples:</b> alavanca, roldana/polia, plano inclinado, cunha, parafuso — facilitam o trabalho.</li>
+  </ul>
+  <h4>Energia e calor</h4>
+  <div class="box concept"><b class="tt">Energia</b> Capacidade de realizar trabalho; <b>transforma-se</b> (cinética, potencial, térmica, elétrica, química…) mas <b>conserva-se</b>. Renováveis: solar, eólica, hídrica, biomassa. Não renováveis: petróleo, carvão, gás, nuclear.</div>
+  <div class="box concept"><b class="tt">Calor × Temperatura</b> <b>Temperatura</b> mede a agitação das partículas. <b>Calor</b> é energia térmica em trânsito, que flui <b>do quente para o frio</b>. Propagação: condução, convecção e irradiação.</div>
+  <h4>Luz e som</h4>
+  <ul>
+    <li><b>Luz:</b> propaga-se em linha reta, muito rápida, e <b>anda no vácuo</b>. <b>Reflexão</b> (bate e volta, espelho) × <b>refração</b> (muda de meio, canudo "quebrado" na água).</li>
+    <li><b>Som:</b> onda mecânica, <b>NÃO anda no vácuo</b>. Altura (grave/agudo), intensidade (forte/fraco), timbre (identifica a fonte).</li>
+  </ul>
+  <div class="box peg"><b class="tt">Pegadinha</b> A <b>luz</b> se propaga no vácuo; o <b>som</b> não (precisa de meio material). Por isso vemos o relâmpago antes de ouvir o trovão.</div>
+  <div class="qc" data-a="17">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">Um objeto de 5 kg está sob gravidade g = 10 m/s². Seu peso é:</p>
+    <ol class="alts">
+      <li data-c="0"><span class="letter">A)</span> 5 N.</li>
+      <li data-c="0"><span class="letter">B)</span> 15 N.</li>
+      <li data-c="1"><span class="letter">C)</span> 50 N.</li>
+      <li data-c="0"><span class="letter">D)</span> 0,5 N.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito C.</b> P = m·g = 5 × 10 = 50 N. Massa (5 kg) ≠ peso (50 N).</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<!-- =============== BLOCO C: TERRA E UNIVERSO =============== -->
+<div class="part"><h2>🪐 Bloco C · Terra e Universo</h2><p>Menos questões, mas garante ponto fácil.</p></div>
+
+<section class="mod" id="m18">
+  <h3>18. Astronomia e o planeta Terra <span class="tag-prio p1">🔥 PODE CAIR</span></h3>
+  <ul>
+    <li><b>Sistema Solar:</b> o Sol (estrela) + 8 planetas: <b>Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano, Netuno</b>.</li>
+    <li><b>Rotação</b> (~24 h, em torno do eixo) → <b>dia e noite</b>. <b>Translação</b> (~365 dias, ao redor do Sol) + inclinação do eixo → <b>ano e estações</b>.</li>
+    <li><b>Fases da Lua:</b> Nova, Crescente, Cheia, Minguante. <b>Eclipse solar:</b> Lua entre Sol e Terra. <b>Eclipse lunar:</b> Terra entre Sol e Lua. A Lua influencia as <b>marés</b>.</li>
+    <li><b>Estrutura da Terra (de fora p/ dentro):</b> crosta → manto → núcleo. Placas tectônicas causam terremotos e vulcões.</li>
+    <li><b>Rochas:</b> ígneas/magmáticas (basalto, granito), sedimentares (arenito, calcário), metamórficas (mármore). <b>Solo</b> = rocha decomposta + húmus.</li>
+    <li><b>Água e ar:</b> ciclo da água (evaporação→condensação→precipitação); ar ≈ 78% N₂ + 21% O₂; camada de ozônio filtra o UV.</li>
+    <li><b>Tempo × clima:</b> tempo = o estado atmosférico do momento; clima = padrão médio ao longo dos anos.</li>
+  </ul>
+  <div class="box mnemo"><b class="tt">Mnemônico dos planetas</b> "<b>Me</b>u <b>V</b>izinho <b>T</b>oca <b>M</b>úsica <b>J</b>usto <b>S</b>ó por <b>U</b>ma <b>N</b>oite."</div>
+  <div class="qc" data-a="18">
+    <div class="qc-h">Questão modelo CONSULPAM</div>
+    <p class="qc-q">O movimento de rotação da Terra é o responsável:</p>
+    <ol class="alts">
+      <li data-c="1"><span class="letter">A)</span> pela sucessão dos dias e das noites.</li>
+      <li data-c="0"><span class="letter">B)</span> pelas estações do ano.</li>
+      <li data-c="0"><span class="letter">C)</span> pelas fases da Lua.</li>
+      <li data-c="0"><span class="letter">D)</span> pelos eclipses.</li>
+    </ol>
+    <div class="qc-exp"><b>Gabarito A.</b> Rotação (giro no próprio eixo, ~24 h) causa dia e noite. As estações vêm da translação + inclinação do eixo.</div>
+  </div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<!-- =============== RETA FINAL =============== -->
+<div class="part" id="final"><h2>✅ Reta final — os "quase certos" da CONSULPAM</h2><p>Leia na véspera. Se souber tudo isto, você garante os 20 de Específicos.</p></div>
+<section class="mod">
+  <ul>
+    <li><b>Organelas:</b> mitocôndria = energia; cloroplasto = fotossíntese; núcleo = comando; lisossomo = digestão; ribossomo = proteína.</li>
+    <li><b>Vegetal tem</b> parede, cloroplasto e vacúolo; <b>animal tem</b> lisossomo e centríolo.</li>
+    <li><b>Osmose</b> = passagem de água. Transporte ativo gasta energia.</li>
+    <li><b>Mitose</b> = 2 iguais; <b>meiose</b> = 4 gametas com metade dos cromossomos.</li>
+    <li>Ordem: célula → tecido → órgão → sistema → organismo.</li>
+    <li><b>Vírus</b> = acelular, fora dos 5 reinos. Autótrofo produz, heterótrofo busca alimento.</li>
+    <li><b>Fotossíntese:</b> entra CO₂ + água + luz, sai O₂ + glicose.</li>
+    <li>Artrópodes = maior grupo animal. Aves e mamíferos = homeotérmicos.</li>
+    <li><b>Artéria sai / veia chega</b> ao coração; absorção no <b>intestino delgado</b>; hematose nos <b>alvéolos</b>.</li>
+    <li><b>Camisinha</b> previne gravidez E ISTs.</li>
+    <li><b>Dengue</b> = vírus (<i>Aedes</i>); <b>malária/Chagas</b> = protozoário. Vacina previne; soro trata.</li>
+    <li><b>Mendel Aa × Aa → 3:1.</b> DNA nos cromossomos; humano tem 46.</li>
+    <li><b>Darwin</b> = seleção natural.</li>
+    <li><b>Habitat</b> = onde vive; <b>nicho</b> = o que faz. Energia flui em sentido único; matéria é reciclada. <b>Caatinga</b> = bioma de Coreaú.</li>
+    <li>Mudança de estado de substância pura → <b>temperatura constante</b>. Densidade = m/V.</li>
+    <li><b>Nêutrons = A − Z.</b> Ligações: iônica (transfere), covalente (compartilha).</li>
+    <li><b>Ácido + base → sal + água</b>; pH &lt; 7 ácido, &gt; 7 básico.</li>
+    <li><b>F = m·a</b>; <b>P = m·g</b> (g ≈ 10). Calor vai do quente p/ frio. Som não anda no vácuo, luz anda.</li>
+    <li><b>Rotação</b> → dia/noite; <b>translação</b> → ano/estações. Crosta → manto → núcleo. Tempo ≠ clima.</li>
+  </ul>
+  <div class="box concept" style="text-align:center"><b class="tt">Profa. Bio diz</b> Este é o seu material completo, Josi! 🌱 Faça os módulos, responda todas as questões modelo (clicando nas alternativas) e releia esta reta final na véspera. Confie no seu esforço — Coreaú te espera! 💚</div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+</div>
+
+<!-- ===== avatar tutor ===== -->
+<div id="tutor">
+  <div id="tutorBubble">
+    <button id="tutorClose" onclick="document.getElementById('tutorBubble').classList.add('hide')" aria-label="Fechar">✕</button>
+    <span id="tutorText">Oi, Josi! 👋 Sou a <b>Profa. Bio</b>. Este é o seu material principal. Clique nas alternativas das <b>questões modelo</b> e abra os <b>Teste-se</b> — tudo vira XP! 🌱</span>
+  </div>
+  <svg id="tutorFace" viewBox="0 0 100 100" onclick="tutorTip()" role="img" aria-label="Professora Bio, sua tutora">
+    <circle cx="50" cy="50" r="46" fill="#2B8A3E"/>
+    <circle cx="50" cy="54" r="34" fill="#F1C7A3" stroke="#132F36" stroke-width="2"/>
+    <path d="M16,50 Q20,20 50,20 Q80,20 84,50 Q84,38 50,34 Q16,38 16,50 Z" fill="#3B2A1A"/>
+    <circle cx="38" cy="52" r="8" fill="#fff" stroke="#132F36" stroke-width="1.5"/>
+    <circle cx="62" cy="52" r="8" fill="#fff" stroke="#132F36" stroke-width="1.5"/>
+    <circle cx="39" cy="53" r="3.5" fill="#132F36"/>
+    <circle cx="63" cy="53" r="3.5" fill="#132F36"/>
+    <path d="M30,50 L46,48 M54,48 L70,50" stroke="#132F36" stroke-width="2" fill="none"/>
+    <path d="M40,66 Q50,74 60,66" stroke="#132F36" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="30" cy="63" r="4" fill="#F783AC" opacity=".6"/><circle cx="70" cy="63" r="4" fill="#F783AC" opacity=".6"/>
+    <rect x="72" y="30" width="16" height="12" rx="2" fill="#132F36" transform="rotate(-15 80 36)"/>
+    <text x="80" y="39" text-anchor="middle" font-size="9" fill="#8CE99A" transform="rotate(-15 80 36)">🌿</text>
+  </svg>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const SAY = {
+  idle:['Explique o conceito em voz alta — Técnica Feynman! 🗣️','Errar faz parte, refaça depois. 💪','Cada questão respondida vira XP! ⭐','Foque nos 🔥🔥🔥 — é onde a banca mais bate.'],
+  levelup:'🎉 Subiu de nível, Josi! Você está dominando as Ciências!',
+  mestre:'🏆 500 XP! Você é oficialmente uma MESTRA das Ciências de Coreaú!'
+};
+let tutorTimer;
+function tutorSay(msg, talk=true){
+  const b=$('#tutorBubble'); b.classList.remove('hide');
+  $('#tutorText').innerHTML = msg;
+  const f=$('#tutorFace'); if(talk){ f.classList.add('talk'); clearTimeout(tutorTimer); tutorTimer=setTimeout(()=>f.classList.remove('talk'),1600); }
+}
+function tutorTip(){ tutorSay(SAY.idle[Math.floor(Math.random()*SAY.idle.length)]); }
+
+const GKEY='estudo-ciencias-consulpam-xp';
+let G={xp:0};
+try{ const s=JSON.parse(localStorage.getItem(GKEY)||'{}'); if(s.xp){G.xp=s.xp;} }catch(e){}
+const LEVELS=[[0,'Estagiária'],[100,'Monitora'],[250,'Bióloga Jr.'],[450,'Cientista'],[700,'Mestra em Ciências']];
+function levelName(xp){ let n='Estagiária',i=1; LEVELS.forEach((L,k)=>{ if(xp>=L[0]){n=L[1]; i=k+1;} }); return {n,i}; }
+function renderG(){
+  $('#xpPts').textContent=G.xp;
+  const {n,i}=levelName(G.xp);
+  $('#xpLvl').textContent='Nível '+i+' · '+n;
+  const cur=LEVELS[i-1][0], next=(LEVELS[i]?LEVELS[i][0]:cur+1);
+  $('#xpFill').style.width=Math.min(100,((G.xp-cur)/(next-cur))*100)+'%';
+}
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000); }
+function addXP(pts){
+  const before=levelName(G.xp).i;
+  G.xp+=pts;
+  const after=levelName(G.xp).i;
+  try{ localStorage.setItem(GKEY,JSON.stringify(G)); }catch(e){}
+  renderG(); toast('+'+pts+' XP! ⭐');
+  if(after>before){ setTimeout(()=>{ tutorSay(G.xp>=700?SAY.mestre:SAY.levelup); toast('🎉 Nível '+after+'!'); },600); }
+}
+renderG();
+
+/* Questões modelo: clicar na alternativa revela o gabarito */
+document.querySelectorAll('.qc').forEach(qc=>{
+  const exp=qc.querySelector('.qc-exp');
+  qc.querySelectorAll('ol.alts li').forEach(li=>{
+    li.addEventListener('click', ()=>{
+      if(qc.dataset.answered) return;
+      qc.dataset.answered='1';
+      const correct = li.dataset.c==='1';
+      qc.querySelectorAll('ol.alts li').forEach(x=>{ if(x.dataset.c==='1') x.classList.add('correct'); });
+      if(!correct) li.classList.add('wrong');
+      exp.classList.add('show');
+      addXP(correct?15:5);
+      if(!correct) tutorSay('Sem crise — leia a explicação e siga! 💪', true);
+    });
+  });
+});
+
+/* Teste-se */
+document.querySelectorAll('details.quiz').forEach(d=>{
+  d.addEventListener('toggle', ()=>{ if(d.open && !d.dataset.xp){ d.dataset.xp='1'; addXP(10); }});
+});
+
+setInterval(()=>{ if(!$('#tutorBubble').classList.contains('hide') && Math.random()<.4) tutorTip(); }, 45000);
+if('serviceWorker' in navigator){ window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
+</script>
+</body>
+</html>
