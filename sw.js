@@ -1,10 +1,14 @@
 /* Service Worker — Lab da Josi (PWA offline) */
-const CACHE = 'labjosi-v2';
+const CACHE = 'labjosi-v3';
 const ASSETS = [
   './',
   './index.html',
   './jogo.html',
   './apostila.html',
+  './simulado.html',
+  './img/simulado-q01.png',
+  './img/simulado-q02.png',
+  './img/simulado-q09.png',
   './manifest.json',
   './favicon.svg',
   './icon-180.png',
