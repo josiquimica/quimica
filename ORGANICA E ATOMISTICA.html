@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>🧬 50 Desafios — Orgânica &amp; Atomística</title>
+<title>🧬 80 Desafios — Orgânica, Atomística &amp; UECE</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="theme-color" content="#7048E8">
 <style>
@@ -29,14 +29,14 @@
 
   .group-title{display:flex; align-items:center; gap:8px; margin:18px 0 8px; font-size:1.05rem}
   .group-title .pill{font-family:Consolas,monospace; font-size:.66rem; letter-spacing:.08em; color:#fff; border-radius:999px; padding:3px 10px}
-  .pill.atom{background:var(--atom)} .pill.org{background:var(--org)}
+  .pill.atom{background:var(--atom)} .pill.org{background:var(--org)} .pill.uece{background:#C2255C}
   .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(58px,1fr)); gap:9px}
   .lv{aspect-ratio:1; border:1.5px solid var(--line); border-radius:12px; background:var(--panel); cursor:pointer;
     display:flex; flex-direction:column; align-items:center; justify-content:center; font:inherit; color:var(--ink);
     box-shadow:var(--shadow); transition:transform .12s, border-color .12s; position:relative; padding:2px}
   .lv:hover{transform:translateY(-3px)}
   .lv .n{font-weight:800; font-size:1.05rem}
-  .lv.atom{border-top:4px solid var(--atom)} .lv.org{border-top:4px solid var(--org)}
+  .lv.atom{border-top:4px solid var(--atom)} .lv.org{border-top:4px solid var(--org)} .lv.uece{border-top:4px solid #C2255C}
   .lv .st{font-size:.7rem; height:1em}
   .lv.done{background:var(--org-soft)} .lv.done .st{color:var(--gold)}
 
@@ -64,6 +64,30 @@
   .nav{display:flex; justify-content:space-between; margin-top:16px; gap:10px}
   .btn{background:var(--accent); color:#fff; border:none; border-radius:11px; padding:11px 20px; font:inherit; font-weight:700; cursor:pointer}
   .btn:disabled{opacity:.4; cursor:default} .btn.ghost{background:var(--panel); color:var(--ink); border:1.5px solid var(--line)}
+  .btn.small{padding:8px 14px; font-size:.9rem}
+  .mode{background:var(--accent-soft); color:var(--accent); border:1.5px solid var(--accent); border-radius:999px; padding:5px 14px; font:inherit; font-weight:700; cursor:pointer; font-size:.85rem}
+  .mode:active{transform:scale(.96)}
+
+  /* caixa de cálculo */
+  .calcbox{display:none; background:var(--accent-soft); border:1.5px dashed var(--accent); border-radius:11px; padding:12px 14px; margin-bottom:14px}
+  .calcbox .clab{font-size:.9rem; font-weight:700; margin-bottom:8px}
+  .calcbox .crow{display:flex; gap:8px; flex-wrap:wrap}
+  .calcbox input{flex:1; min-width:120px; font:inherit; font-size:1rem; padding:9px 12px; border:1.5px solid var(--line); border-radius:10px; background:var(--panel); color:var(--ink)}
+  .calcbox #cres{margin-top:8px; font-size:.9rem; font-weight:700}
+
+  /* revisão anki */
+  #rev .front{font-weight:700; font-size:1.05rem; margin:6px 0 14px}
+  #rev .backarea{display:none}
+  #rev .backarea.on{display:block; animation:fade .3s ease}
+  .ansline{background:var(--org-soft); border-left:4px solid var(--good); border-radius:11px; padding:12px 14px; margin-bottom:12px}
+  .fey{background:var(--atom-soft); border-left:4px solid var(--atom); border-radius:11px; padding:12px 14px; margin-bottom:12px}
+  .fey label{font-weight:700; font-size:.9rem; display:block; margin-bottom:8px}
+  .fey textarea{width:100%; min-height:74px; font:inherit; font-size:.95rem; padding:10px; border:1.5px solid var(--line); border-radius:10px; background:var(--panel); color:var(--ink); resize:vertical}
+  .grades{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px}
+  .grades button{font:inherit; font-size:.82rem; font-weight:700; border:none; border-radius:11px; padding:10px 4px; cursor:pointer; color:#fff}
+  .grades button:active{transform:scale(.95)}
+  .g0{background:var(--bad)} .g1{background:var(--gold)} .g2{background:var(--atom)} .g3{background:var(--good)}
+  .duechip{font-family:Consolas,monospace; font-size:.8rem; background:var(--panel); border:1.5px solid var(--line); border-radius:999px; padding:4px 12px}
 
   /* avatar */
   #tutor{position:fixed; right:12px; bottom:12px; z-index:40; display:flex; align-items:flex-end; gap:9px; max-width:min(340px,90vw)}
@@ -80,9 +104,10 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>🧬 50 Desafios</h1>
-    <span class="stars">⭐ <span id="starN">0</span>/50</span>
-    <p class="sub">Química <b>Orgânica</b> &amp; <b>Atomística</b> — com a Profa. Mol te ajudando em tempo real.</p>
+    <h1>🧬 80 Desafios</h1>
+    <span class="stars">⭐ <span id="starN">0</span>/80</span>
+    <button class="mode" onclick="openRev()">🔁 Revisão Anki</button>
+    <p class="sub">Química <b>Orgânica</b>, <b>Atomística</b> &amp; <b>30 questões reais da UECE</b> (gabarito oficial CEV) — com a Profa. Mol te ajudando em tempo real.</p>
   </header>
 
   <!-- HOME -->
@@ -91,6 +116,8 @@
     <div class="grid" id="gridAtom"></div>
     <div class="group-title"><span class="pill org">ORGÂNICA</span> <span>Desafios 26 a 50</span></div>
     <div class="grid" id="gridOrg"></div>
+    <div class="group-title"><span class="pill uece">UECE · PROVA REAL</span> <span>Desafios 51 a 80 — vestibular 2024.2 e 2025.1</span></div>
+    <div class="grid" id="gridUece"></div>
   </div>
 
   <!-- PLAY -->
@@ -102,11 +129,40 @@
     <div class="card">
       <div class="art" id="art"></div>
       <div class="q" id="q"></div>
+      <div class="calcbox" id="calcbox"></div>
       <div class="opts" id="opts"></div>
       <div class="exp" id="exp"></div>
       <div class="nav">
         <button class="btn ghost" id="prev" onclick="openLevel(cur-1)">← anterior</button>
         <button class="btn" id="next" onclick="openLevel(cur+1)">próximo →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVISÃO ANKI -->
+  <div class="screen" id="rev">
+    <div class="qhead">
+      <span class="qtag" style="background:var(--accent)">🔁 REVISÃO ANKI</span>
+      <span class="duechip">📅 <span id="dueN">0</span> para revisar</span>
+      <button class="back" onclick="goHome()">← sair da revisão</button>
+    </div>
+    <div class="card">
+      <div class="art" id="rart"></div>
+      <div class="front" id="rq"></div>
+      <button class="btn" id="rshow" onclick="showBack()">mostrar resposta</button>
+      <div class="backarea" id="rback">
+        <div class="ansline" id="rans"></div>
+        <div class="fey">
+          <label>🗣️ Técnica Feynman — explique com suas palavras, como se ensinasse a um aluno de 15 anos:</label>
+          <textarea id="feytxt" placeholder="Escreva aqui sua explicação... (fica salva no navegador)"></textarea>
+        </div>
+        <div style="font-size:.85rem; color:var(--muted)">Como foi lembrar dessa? Sua escolha define quando o cartão volta:</div>
+        <div class="grades">
+          <button class="g0" onclick="grade(0)">😵 Errei<br>10 min</button>
+          <button class="g1" onclick="grade(1)">😐 Difícil<br>1 dia</button>
+          <button class="g2" onclick="grade(2)">🙂 Bom<br>3 dias</button>
+          <button class="g3" onclick="grade(3)">😎 Fácil<br>7 dias</button>
+        </div>
       </div>
     </div>
   </div>
@@ -194,7 +250,38 @@ const L=[
 {t:'ORG',ti:'Hibridização sp³',art:'CH₃–CH₃',q:'No etano (só ligações simples), cada carbono tem hibridização:',o:['sp³','sp²','sp','sp³d'],ok:0,d:'4 ligações simples = 4 nuvens.',e:'4 nuvens (4 sigmas) → sp³, geometria tetraédrica (109,5°).'},
 {t:'ORG',ti:'Hibridização sp²',art:'CH₂=CH₂',q:'No eteno (uma dupla), cada carbono tem hibridização:',o:['sp²','sp³','sp','sp³d²'],ok:0,d:'A dupla conta como UMA nuvem → 3 nuvens.',e:'3 nuvens → sp², geometria trigonal plana (120°). A dupla = 1 σ + 1 π.'},
 {t:'ORG',ti:'Carbono primário',art:'CH₃–CH₂–CH₃',q:'Um carbono ligado a APENAS 1 outro carbono é classificado como:',o:['Primário','Secundário','Terciário','Quaternário'],ok:0,d:'Conte quantos C vizinhos ele tem.',e:'1 C vizinho = primário; 2 = secundário; 3 = terciário; 4 = quaternário.'},
-{t:'ORG',ti:'Benzeno',art:'C₆H₆ ⬡',q:'O benzeno (C₆H₆), um anel com ligações especiais, pertence à classe dos compostos:',o:['Aromáticos','Alifáticos','Álcoois','Ácidos'],ok:0,d:'Anel de 6 carbonos famoso.',e:'Benzeno = composto AROMÁTICO (anel benzênico com elétrons deslocalizados).'}
+{t:'ORG',ti:'Benzeno',art:'C₆H₆ ⬡',q:'O benzeno (C₆H₆), um anel com ligações especiais, pertence à classe dos compostos:',o:['Aromáticos','Alifáticos','Álcoois','Ácidos'],ok:0,d:'Anel de 6 carbonos famoso.',e:'Benzeno = composto AROMÁTICO (anel benzênico com elétrons deslocalizados).'},
+// ===== UECE PROVAS REAIS 51-80 (gabarito oficial definitivo CEV/UECE) =====
+{t:'UECE',src:'UECE 2024.2',ti:'Funções inorgânicas',art:'H₃PO₄ · KNO₃ · OH⁻',q:'(UECE 2024.2, Q21) Sobre ácidos, bases, sais e óxidos, considere:<br>I. A equação H₃PO₄ + 3H₂O → PO₄³⁻ + 3H₃O⁺ representa uma reação de ionização total.<br>II. Os compostos KNO₃, MgSO₄ e AgNO₃ são óxidos.<br>III. O ânion OH⁻ ligado a um metal alcalino forma uma base forte.<br>É correto o que se afirma em:',o:['I e III apenas','I e II apenas','II e III apenas','I, II e III'],ok:0,d:'Óxido é composto BINÁRIO com oxigênio. KNO₃ tem 3 elementos...',e:'Gabarito oficial: I e III. A afirmação II é falsa: KNO₃, MgSO₄ e AgNO₃ são SAIS. Óxidos são compostos binários de oxigênio (ex.: CaO, CO₂).'},
+{t:'UECE',src:'UECE 2024.2',ti:'Isomeria plana',art:'mesma fórmula, estrutura ≠',q:'(UECE 2024.2, Q22) Considere os pares de compostos:<br>1. metoxibenzeno e 1-hidroxi-2-metil-benzeno;<br>2. propanol e propano-2-ol;<br>3. metoxipropano e etoxietano;<br>4. ácido butanoico e ácido 2-metil-propanoico.<br>A sequência correta dos tipos de isomeria plana de cada par é:',o:['função¹, posição², metameria³, cadeia⁴','função¹, cadeia², posição³, metameria⁴','posição¹, cadeia², metameria³, função⁴','posição¹, função², cadeia³, metameria⁴'],ok:0,d:'Éter vs fenol = funções diferentes; OH mudou de lugar = posição; O mudou de posição na cadeia = metameria; reta vs ramificada = cadeia.',e:'Gabarito oficial: 1) éter × fenol → FUNÇÃO; 2) OH no C1 × C2 → POSIÇÃO; 3) heteroátomo em posições diferentes → METAMERIA; 4) cadeia reta × ramificada → CADEIA.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Le Chatelier',art:'⇌',q:'(UECE 2024.2, Q24) Sobre o deslocamento do equilíbrio químico, assinale a afirmação VERDADEIRA:',o:['Diminuindo a pressão total, o equilíbrio tende a deslocar-se para o sentido do maior volume','Quando se diminui a temperatura, a reação endotérmica é favorecida','Aumentando a quantidade de uma substância, o equilíbrio se desloca produzindo mais dessa substância','Quando um catalisador é adicionado, a concentração das substâncias muda e o equilíbrio se desloca'],ok:0,d:'Menos pressão = o sistema quer ocupar mais espaço.',e:'Gabarito oficial: menor pressão desloca para o lado com MAIOR número de mols gasosos (maior volume). Frio favorece a exotérmica; adicionar substância consome-a; catalisador NÃO desloca equilíbrio.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Tipos de reação',art:'→',q:'(UECE 2024.2, Q25) Associe:<br>1. Na₂CrO₄ + Pb(CH₃COO)₂ → PbCrO₄ + 2Na(CH₃COO)<br>2. 2NaN₃ → 2Na + 3N₂<br>3. Zn + 2HCℓ → ZnCℓ₂ + H₂<br>4. HCℓ + NH₃ → NH₄Cℓ<br>5. 2HCN + Zn(OH)₂ → Zn(CN)₂ + 2H₂O<br>Ordem: ( ) simples troca; ( ) síntese; ( ) análise; ( ) neutralização; ( ) dupla troca. A sequência é:',o:['3, 4, 2, 5, 1','2, 3, 4, 1, 5','3, 1, 4, 5, 2','5, 4, 3, 1, 2'],ok:0,d:'Zn desloca o H = simples troca; juntar tudo = síntese; quebrar = análise; ácido+base = neutralização.',e:'Gabarito oficial: 3 (Zn desloca H = simples troca), 4 (dois viram um = síntese), 2 (um vira dois = análise/decomposição), 5 (ácido + base → sal + água = neutralização), 1 (troca de parceiros = dupla troca).'},
+{t:'UECE',src:'UECE 2024.2',ti:'Famílias da tabela',art:'Na₂SO₄',q:'(UECE 2024.2, Q26) O sulfato de sódio (Na₂SO₄) é usado em detergentes, papel e vidro. Os elementos que o constituem, na ordem da fórmula, pertencem às famílias dos:',o:['alcalinos, calcogênios e calcogênios','alcalinos-terrosos, calcogênios e calcogênios','alcalinos, nitrogênio e calcogênios','alcalinos-terrosos, fósforo e nitrogênio'],ok:0,d:'Na é vizinho do Li e K; S e O ficam na mesma coluna 16.',e:'Gabarito oficial: Na = metal ALCALINO (família 1); S e O = CALCOGÊNIOS (família 16).'},
+{t:'UECE',src:'UECE 2024.2',ti:'Modelos atômicos',art:'⚛️',q:'(UECE 2024.2, Q27) Relacione modelo e proposta:<br>1. Thomson · 2. Rutherford · 3. Bohr · 4. Schrödinger<br>( ) eletrosfera com camadas de energia;<br>( ) regiões que se assemelham a nuvens eletrônicas;<br>( ) átomo com natureza elétrica, divisível, com partículas subatômicas;<br>( ) região central com caráter elétrico positivo.<br>A sequência é:',o:['3, 4, 1, 2','1, 2, 3, 4','4, 3, 2, 1','2, 4, 3, 1'],ok:0,d:'Camadas = Bohr; nuvens = Schrödinger; descobriu o elétron = Thomson; núcleo positivo = Rutherford.',e:'Gabarito oficial: 3 (Bohr = camadas), 4 (Schrödinger = nuvem eletrônica), 1 (Thomson = átomo divisível com elétrons), 2 (Rutherford = núcleo positivo).'},
+{t:'UECE',src:'UECE 2024.2',ti:'Termoquímica',art:'ΔH',q:'(UECE 2024.2, Q29) Complete: Termoquímica estuda a ____¹, na forma de calor, envolvida nas reações. As ____² são representadas pela variação de ____³. A absorção de calor indica reação ____⁴; a reação ____⁵ libera calor.',o:['energia¹, trocas de calor², entalpia³, endotérmica⁴, exotérmica⁵','entalpia¹, trocas de energia², entropia³, exotérmica⁴, endotérmica⁵','entropia¹, trocas de calor², entalpia³, exotérmica⁴, endotérmica⁵','energia¹, trocas de energia², entropia³, endotérmica⁴, exotérmica⁵'],ok:0,d:'ENDO = absorve (entra); EXO = libera (sai).',e:'Gabarito oficial: energia; trocas de calor; ENTALPIA (ΔH); ENDOtérmica absorve; EXOtérmica libera.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Gases: isobárica',art:'P constante · V𝒇 = 0,4·Vᵢ',q:'(UECE 2024.2, Q30) Um gás ideal a volume Vᵢ e temperatura Tᵢ sofre transformação ISOBÁRICA até V𝒇 = 0,4·Vᵢ. A relação entre T𝒇 e Tᵢ é:',o:['5·T𝒇 = 2·Tᵢ','2·T𝒇 = 5·Tᵢ','4·T𝒇 = Tᵢ','T𝒇 = 4·Tᵢ'],ok:0,calc:{ans:200,tol:1,label:'Treine o cálculo: se Tᵢ = 500 K, quanto vale T𝒇 em kelvin? (V/T constante na isobárica)'},d:'Isobárica: V/T = constante (Lei de Charles). V caiu para 40%...',e:'Gabarito oficial: V/T constante → T𝒇 = 0,4·Tᵢ = (2/5)·Tᵢ → 5·T𝒇 = 2·Tᵢ. Com Tᵢ = 500 K: T𝒇 = 200 K.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Soluções',art:'soluto + solvente',q:'(UECE 2024.2, Q31) Marque V ou F:<br>( ) Na solução insaturada, a quantidade de soluto é menor que o coeficiente de solubilidade.<br>( ) Solução saturada é aquela em que o soluto ultrapassa o coeficiente de solubilidade.<br>( ) Solução supersaturada é estável, pois a quantidade de solvente é maior que a estabelecida.<br>( ) Na solução diluída, a quantidade de soluto é muito pequena em relação ao solvente.<br>Sequência correta:',o:['V, F, F, V','F, V, F, V','V, F, V, F','F, V, V, F'],ok:0,d:'Saturada = exatamente NO limite; supersaturada = passou do limite e é INSTÁVEL.',e:'Gabarito oficial: V (insaturada = abaixo do limite), F (saturada = igual ao limite; quem ultrapassa é a supersaturada), F (supersaturada é INSTÁVEL), V (diluída = pouquinho soluto).'},
+{t:'UECE',src:'UECE 2024.2',ti:'Redox no laboratório',art:'KMnO₄ + H₂SO₄ + etanol 🔥',q:'(UECE 2024.2, Q32) No experimento, permanganato de potássio recebe gotas de ácido sulfúrico concentrado; um bastão toca a mistura e depois um algodão com etanol, que se inflama. É correto afirmar que:',o:['O KMnO₄ reage com o H₂SO₄ formando K₂SO₄, MnSO₄, H₂O e O₂','Forma-se uma mistura altamente redutora','O etanol inflama-se porque sofre redução na combustão','O manganês sofre oxidação nessa reação'],ok:0,d:'O permanganato é um oxidante fortíssimo; o Mn⁷⁺ DESCE de nox.',e:'Gabarito oficial: a reação gera K₂SO₄, MnSO₄, H₂O e O₂. A mistura é OXIDANTE; o etanol se OXIDA (combustão) e o Mn⁷⁺ se REDUZ a Mn²⁺.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Radioatividade',art:'α β γ',q:'(UECE 2024.2, Q33) Analise:<br>I. As partículas β são elétrons emitidos pelo núcleo de um átomo instável.<br>II. A emissão gama são ondas eletromagnéticas que apresentam carga e possuem menor poder de penetração que α e β.<br>É correto afirmar que:',o:['I é verdadeira e II é falsa','I é falsa e II é verdadeira','ambas são falsas','ambas são verdadeiras'],ok:0,d:'Gama tem carga? E qual radiação penetra MAIS?',e:'Gabarito oficial: I verdadeira (β⁻ = elétron nuclear). II falsa: radiação gama NÃO tem carga e é a de MAIOR poder de penetração.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Lactose',art:'🥛',q:'(UECE 2024.2, Q34) A lactose, açúcar presente no leite ao qual parte da população é intolerante, é classificada como:',o:['dissacarídeo','monossacarídeo','trissacarídeo','heterosídeo'],ok:0,d:'Lactose = glicose + galactose, duas unidades juntas.',e:'Gabarito oficial: DISSACARÍDEO — formada por dois monossacarídeos (glicose + galactose) unidos por ligação glicosídica.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Aromáticos',art:'⬡ ou cadeia aberta?',q:'(UECE 2024.2, Q35) Um frasco informa conter apenas hidrocarbonetos AROMÁTICOS. A mistura NÃO deverá conter:',o:['3-propil-hept-1-eno','1,4-dimetil-benzeno','1,2-difenil-etano','trifenil-metano'],ok:0,d:'Quem NÃO tem anel benzênico no nome?',e:'Gabarito oficial: 3-propil-hept-1-eno é um ALCENO alifático (sem anel benzênico). Os outros três contêm benzeno/fenil = aromáticos.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Oxidação do etanol',art:'CH₃CH₂OH + [O]',q:'(UECE 2024.2, Q36) Um conhecido composto orgânico que pode ser preparado pela oxidação do etanol é um(a):',o:['ácido carboxílico','cetona','éster','anidrido orgânico'],ok:0,d:'O vinho azeda e vira vinagre...',e:'Gabarito oficial: a oxidação do etanol (álcool primário) dá etanal e, continuando, ÁCIDO ACÉTICO (ácido carboxílico) — é o vinho virando vinagre.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Ligações químicas',art:'Cu·Zn | H·F | K·Br | N·N',q:'(UECE 2024.2, Q37) Relacione:<br>1. Cu e Zn · 2. H e F · 3. K e Br · 4. N e N<br>( ) ligação iônica; ( ) covalente tripla; ( ) metálica; ( ) covalente simples.<br>A sequência é:',o:['3, 4, 1, 2','1, 4, 3, 2','3, 2, 1, 4','3, 1, 4, 1'],ok:0,d:'Metal+ametal = iônica; N₂ tem tripla; metal+metal = metálica.',e:'Gabarito oficial: K–Br iônica (metal + ametal), N≡N tripla, Cu–Zn metálica (liga latão), H–F covalente simples.'},
+{t:'UECE',src:'UECE 2024.2',ti:'Agente redutor',art:'2H⁺ + Zn → H₂ + Zn²⁺',q:'(UECE 2024.2, Q39) Na reação 2H⁺(aq) + Zn(s) → H₂(g) + Zn²⁺(aq), é correto afirmar que o:',o:['Zn é o agente redutor','H⁺ sofre oxidação','Zn²⁺ sofre redução','H₂ é o agente oxidante'],ok:0,d:'Quem DOA elétrons se oxida — e por isso é o agente redutor.',e:'Gabarito oficial: Zn perde 2e⁻ (0 → +2), se OXIDA e por isso é o AGENTE REDUTOR; o H⁺ se reduz (+1 → 0).'},
+{t:'UECE',src:'UECE 2024.2',ti:'Cinética química',art:'⏱️',q:'(UECE 2024.2, Q40) Analise:<br>I. Quanto maior a superfície de contato, maior a velocidade da reação química.<br>II. Catalisadores criam um mecanismo mais curto para o desenvolvimento das reações químicas.<br>É correto afirmar que:',o:['ambas são verdadeiras','I é verdadeira e II é falsa','I é falsa e II é verdadeira','ambas são falsas'],ok:0,d:'Comprimido inteiro ou triturado: qual dissolve mais rápido?',e:'Gabarito oficial: ambas verdadeiras. Mais superfície de contato = mais colisões; catalisador cria caminho alternativo de MENOR energia de ativação.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Ácido forte',art:'HCℓ vs CH₃COOH',q:'(UECE 2025.1, Q21) Sobre ácido forte:<br>I. É uma espécie que, dissolvida em água, possui alta capacidade de perder um próton.<br>II. Na água, um ácido forte perde um próton, que é capturado pela água formando o íon hidrônio.<br>III. O ácido acético (CH₃COOH), presente no vinagre, é um ácido forte.<br>É correto o que se afirma em:',o:['I e II apenas','I e III apenas','II e III apenas','I, II e III'],ok:0,d:'O vinagre é um ácido FRACO — ioniza pouco.',e:'Gabarito oficial: I e II. O ácido acético é FRACO (ioniza pouco, Ka pequeno) — III é falsa.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Nox na adição',art:'CH₂=CH₂ + HCℓ → CH₃—CH₂Cℓ',q:'(UECE 2025.1, Q22) Na reação de adição CH₂=CH₂ + HCℓ → CH₃—CH₂Cℓ, a soma dos números de oxidação dos QUATRO átomos de carbono da reação é:',o:['−8','−6','+8','+6'],ok:0,calc:{ans:-8,tol:0.01,label:'Calcule: no eteno cada C vale −2; no produto, CH₃ vale −3 e CH₂Cℓ vale −1. Some os quatro e digite:'},d:'Cada H ligado ao C empurra −1; o Cℓ puxa +1.',e:'Gabarito oficial: eteno: −2 + (−2) = −4; produto: CH₃ (−3) + CH₂Cℓ (−1) = −4. Total: −8.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Rendimento',art:'CO + Fe₂O₃ → Fe + CO₂',q:'(UECE 2025.1, Q24) Na reação (não ajustada) CO + Fe₂O₃ → Fe + CO₂, reagindo 420 g de CO obtêm-se 495 g de CO₂. O rendimento percentual é:',o:['75%','55%','85%','65%'],ok:0,calc:{ans:75,tol:0.5,label:'Calcule: 420 g ÷ 28 g/mol = ? mol de CO → mesmo nº de mol de CO₂ × 44 g/mol = teórico. Rendimento = 495 ÷ teórico × 100. Digite o %:'},d:'CO tem 28 g/mol; CO₂ tem 44 g/mol; a proporção CO:CO₂ é 1:1.',e:'Gabarito oficial: 420 g CO = 15 mol → máximo 15 mol CO₂ = 660 g. Rendimento = 495/660 = 75%.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Reagente limitante',art:'NH₃ + HNO₃ → NH₄NO₃',q:'(UECE 2025.1, Q25) Na reação NH₃(g) + HNO₃(ℓ) → NH₄NO₃(s), se 85 g de NH₃ reagem com 378 g de HNO₃, o reagente LIMITANTE e o reagente em EXCESSO são, respectivamente:',o:['NH₃ e HNO₃','HNO₃ e NH₃','NH₃ e NH₄NO₃','NH₄NO₃ e NH₃'],ok:0,d:'NH₃: 85÷17 = 5 mol; HNO₃: 378÷63 = 6 mol; proporção 1:1.',e:'Gabarito oficial: NH₃ = 5 mol e HNO₃ = 6 mol. Como a proporção é 1:1, o NH₃ ACABA primeiro (limitante) e sobra 1 mol de HNO₃ (excesso).'},
+{t:'UECE',src:'UECE 2025.1',ti:'Esterificação',art:'ácido + álcool ⇌ X + H₂O',q:'(UECE 2025.1, Q27) Em meio ácido (H₂SO₄), ácido acético + metanol produzem X + H₂O, sendo X um solvente usado em colas e esmaltes. X é:',o:['acetato de metila: CH₃—COO—CH₃','propan-2-ol: CH₃—CH(OH)—CH₃','metóxi-etano: CH₃—O—CH₂—CH₃','ácido propanoico: CH₃—CH₂—COOH'],ok:0,d:'Ácido + álcool = reação de esterificação (sai água).',e:'Gabarito oficial: esterificação de Fischer → ACETATO DE METILA (éster, cheiro característico), CH₃COOCH₃.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Elétrons nos subníveis',art:'s p d f',q:'(UECE 2025.1, Q28) Quatro átomos no estado fundamental:<br>1. no átomo I, o subnível s tem metade da sua capacidade máxima;<br>2. no átomo II, o subnível p tem o quíntuplo dos elétrons do s de I;<br>3. no átomo III, o subnível d tem o total de elétrons de I e II mais três;<br>4. no átomo IV, o subnível f tem metade da capacidade máxima mais cinco.<br>O total de elétrons dos quatro subníveis é:',o:['27','18','20','25'],ok:0,calc:{ans:27,tol:0.01,label:'Capacidades máximas: s=2, p=6, d=10, f=14. Calcule I + II + III + IV e digite:'},d:'s=2, p=6, d=10, f=14. I = metade de 2...',e:'Gabarito oficial: I = 1 (metade de 2); II = 5×1 = 5; III = (1+5)+3 = 9; IV = 7+5 = 12. Total = 1+5+9+12 = 27.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Nomenclatura IUPAC',art:'-ONA',q:'(UECE 2025.1, Q31) Assinale a afirmação VERDADEIRA:',o:['A nomenclatura IUPAC das cetonas contém a terminação ONA','Todos os compostos com OH ligado a cadeia carbônica fechada são fenóis','Nas reações de adição, um átomo da molécula orgânica é substituído por outro','Diante de oxidantes energéticos (KMnO₄, K₂Cr₂O₇), os álcoois se reduzem'],ok:0,d:'Propanona (acetona) termina em...?',e:'Gabarito oficial: cetona = terminação ONA (propanONA). Fenol exige OH em anel AROMÁTICO; adição QUEBRA a ligação π (não substitui); álcoois se OXIDAM diante de oxidantes.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Eletrólise',art:'X³⁺ + 3e⁻ → X',q:'(UECE 2025.1, Q32) Na eletrólise X³⁺ + 3e⁻ → X, foram depositados 3,6 g de X em 1 hora. Sendo a massa molar de X igual a 30 g/mol, a corrente elétrica usada foi de:',o:['9,65 A','96,5 A','45,3 A','4,53 A'],ok:0,calc:{ans:9.65,tol:0.1,label:'Calcule: n = 3,6÷30 mol de X; carga Q = n × 3 × 96500 C; i = Q ÷ 3600 s. Digite a corrente em A:'},d:'1 mol de e⁻ = 96500 C (constante de Faraday); 1 h = 3600 s.',e:'Gabarito oficial: n = 0,12 mol de X → 0,36 mol de e⁻ → Q = 0,36 × 96500 = 34740 C → i = 34740 ÷ 3600 = 9,65 A.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Hidrocarbonetos',art:'C + H',q:'(UECE 2025.1, Q33) Analise:<br>I. Os hidrocarbonetos alifáticos, de cadeia aberta, são classificados como alcanos, alcenos, alcinos, alcadienos e fenóis.<br>II. Os hidrocarbonetos de cadeia fechada e estrutura hexagonal, com ligações simples e duplas alternadas, são denominados aromáticos.<br>É correto afirmar que:',o:['I é falsa e II é verdadeira','I é verdadeira e II é falsa','ambas são falsas','ambas são verdadeiras'],ok:0,d:'Fenol tem OH e anel — é alifático de cadeia aberta?',e:'Gabarito oficial: I é falsa — FENÓIS não são hidrocarbonetos alifáticos (têm OH e anel aromático). II descreve o anel benzênico corretamente.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Configuração externa',art:'ns² np⁴',q:'(UECE 2025.1, Q36) Considere as configurações externas: I. ns² · II. ns²np⁴ · III. ns²np⁶ · IV. ns²np⁶nd³. É correto afirmar que:',o:['II pertence à família do oxigênio','IV pertence à família do boro','I pertence à família do lítio','III pertence à família do flúor'],ok:0,d:'Conte os elétrons de valência de ns²np⁴: 2+4 = 6, como o O.',e:'Gabarito oficial: ns²np⁴ = 6 elétrons de valência = família 16 (do OXIGÊNIO). I (ns²) é família 2; III (ns²np⁶) é gás nobre; IV não é família do boro.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Funções inorgânicas II',art:'óxidos: E–O',q:'(UECE 2025.1, Q37) Sobre as funções inorgânicas, assinale a afirmação VERDADEIRA:',o:['Os óxidos são formados pela ligação do oxigênio com outros elementos, exceto o flúor','Os ácidos não conduzem corrente elétrica, pois não são eletrolíticos','As bases reagem com ácidos formando água e óxidos','Os sais não conduzem corrente elétrica em solução'],ok:0,d:'O flúor é MAIS eletronegativo que o oxigênio...',e:'Gabarito oficial: com flúor forma-se fluoreto de oxigênio (OF₂), não óxido — F é mais eletronegativo. Ácidos em água ionizam e CONDUZEM; ácido+base → sal + água; sais dissolvidos CONDUZEM.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Nome × fórmula',art:'Fe₂(SO₄)₃',q:'(UECE 2025.1, Q39) Assinale a opção que apresenta corretamente o nome da substância e a fórmula correspondente:',o:['sulfato férrico — Fe₂(SO₄)₃','bicarbonato de sódio — NaH₂CO₃','óxido de ferro (III) — Fe₃O₄','carbonato de cálcio — CaCO₂'],ok:0,d:'Férrico = Fe³⁺; sulfato = SO₄²⁻. Cruze as cargas!',e:'Gabarito oficial: Fe³⁺ + SO₄²⁻ cruzando cargas → Fe₂(SO₄)₃. Bicarbonato é NaHCO₃; óxido de ferro (III) é Fe₂O₃; carbonato de cálcio é CaCO₃.'},
+{t:'UECE',src:'UECE 2025.1',ti:'Fórmula pela combustão',art:'148 g → 352 g CO₂ + 180 g H₂O',q:'(UECE 2025.1, Q40) 148 g de um composto com apenas C, H e O queimam completamente formando 352 g de CO₂ e 180 g de H₂O. Sendo a fórmula mínima idêntica à molecular, a massa molecular é:',o:['74','60','54','46'],ok:0,calc:{ans:74,tol:0.5,label:'Calcule: mol C = 352÷44; mol H = 2×(180÷18); massa de O = 148 − 12·(mol C) − 1·(mol H); monte a fórmula mínima e digite a massa molecular:'},d:'Todo C vai para o CO₂ e todo H vai para a H₂O.',e:'Gabarito oficial: C: 8 mol (96 g); H: 20 mol (20 g); O: 148−116 = 32 g = 2 mol. C₈H₂₀O₂ → mínima C₄H₁₀O = 48+10+16 = 74.'}
 ];
 
 /* ---------- estado ---------- */
@@ -215,17 +302,20 @@ function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); 
 
 /* ---------- home ---------- */
 function buildGrid(){
-  const ga=$('#gridAtom'), go=$('#gridOrg'); ga.innerHTML=''; go.innerHTML='';
+  const ga=$('#gridAtom'), go=$('#gridOrg'), gu=$('#gridUece'); ga.innerHTML=''; go.innerHTML=''; gu.innerHTML='';
   L.forEach((lv,i)=>{
     const b=document.createElement('button');
-    b.className='lv '+(lv.t==='ATOM'?'atom':'org')+(done[i]?' done':'');
+    b.className='lv '+(lv.t==='ATOM'?'atom':lv.t==='ORG'?'org':'uece')+(done[i]?' done':'');
     b.innerHTML='<span class="n">'+(i+1)+'</span><span class="st">'+(done[i]?'⭐':'')+'</span>';
     b.onclick=()=>openLevel(i);
-    (lv.t==='ATOM'?ga:go).appendChild(b);
+    (lv.t==='ATOM'?ga:lv.t==='ORG'?go:gu).appendChild(b);
   });
   $('#starN').textContent=starTotal();
+  $('#dueN').textContent=dueList().length;
 }
-function goHome(){ $('#play').classList.remove('on'); $('#home').classList.add('on'); buildGrid(); window.scrollTo({top:0,behavior:'smooth'}); }
+function goHome(){ $('#play').classList.remove('on'); $('#rev').classList.remove('on'); $('#home').classList.add('on'); buildGrid();
+  say('De volta ao mapa! 🗺️ Escolha o próximo desafio — os vermelhos são de provas REAIS da UECE.');
+  window.scrollTo({top:0,behavior:'smooth'}); }
 
 /* ---------- jogar ---------- */
 function shuffle(a){ return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]); }
@@ -233,11 +323,15 @@ function openLevel(i){
   if(i<0||i>=L.length) return;
   cur=i; answered=false;
   const lv=L[i];
-  $('#home').classList.remove('on'); $('#play').classList.add('on');
-  const tag=$('#qtag'); tag.textContent=(lv.t==='ATOM'?'ATOMÍSTICA':'ORGÂNICA')+' · '+(i+1)+'/50';
-  tag.style.background=lv.t==='ATOM'?'var(--atom)':'var(--org)';
+  $('#home').classList.remove('on'); $('#rev').classList.remove('on'); $('#play').classList.add('on');
+  const tag=$('#qtag'); tag.textContent=(lv.t==='ATOM'?'ATOMÍSTICA':lv.t==='ORG'?'ORGÂNICA':lv.src)+' · '+(i+1)+'/'+L.length;
+  tag.style.background=lv.t==='ATOM'?'var(--atom)':lv.t==='ORG'?'var(--org)':'#C2255C';
   $('#art').innerHTML=lv.art;
-  $('#q').textContent=lv.q;
+  $('#q').innerHTML=lv.q;
+  const cb=$('#calcbox');
+  if(lv.calc){ cb.style.display='block';
+    cb.innerHTML='<div class="clab">🧮 '+lv.calc.label+'</div><div class="crow"><input id="cin" inputmode="decimal" placeholder="sua resposta"><button class="btn small" onclick="checkCalc()">conferir</button></div><div id="cres"></div>';
+  } else { cb.style.display='none'; cb.innerHTML=''; }
   $('#exp').className='exp'; $('#exp').innerHTML='';
   $('#prev').disabled=(i===0); $('#next').disabled=(i===L.length-1);
   $('#next').textContent = i===L.length-1?'fim ✓':'próximo →';
@@ -282,8 +376,56 @@ function answer(btn,ok,box){
   setTimeout(()=>{ if(answered && cur<L.length-1) say('Quando quiser, toque em <b>próximo →</b> para o desafio '+(cur+2)+'.',false); }, 4500);
 }
 
+/* ---------- caixa de cálculo ---------- */
+function checkCalc(){
+  const lv=L[cur]; if(!lv.calc) return;
+  const v=parseFloat(($('#cin').value||'').replace(',','.'));
+  const ok=isFinite(v)&&Math.abs(v-lv.calc.ans)<=(lv.calc.tol||0.01);
+  $('#cres').innerHTML= ok?'✅ Cálculo certinho!':'❌ Ainda não bateu — refaça com calma.';
+  $('#cres').style.color= ok?'var(--good)':'var(--bad)';
+  say(ok?'Cálculo perfeito, Josi! 🧮✨ Agora marque a alternativa com confiança.':'Quase! 🔎 Relê a dica: <b>'+lv.d+'</b>');
+}
+
+/* ---------- revisão anki + feynman ---------- */
+const AK='org-atom-anki', FK='org-atom-fey';
+let anki={}, fey={};
+try{ anki=JSON.parse(localStorage.getItem(AK)||'{}'); }catch(e){}
+try{ fey=JSON.parse(localStorage.getItem(FK)||'{}'); }catch(e){}
+let rq=[], rcur=-1;
+function dueList(){ const now=Date.now(); return L.map((_,i)=>i).filter(i=>!anki[i]||anki[i].due<=now); }
+function openRev(){
+  rq=dueList();
+  $('#home').classList.remove('on'); $('#play').classList.remove('on'); $('#rev').classList.add('on');
+  say('Modo revisão estilo Anki! 🔁 Responda na cabeça, mostre a resposta e me conte como foi. O que você errar volta logo; o que souber bem, volta em dias.');
+  nextCard(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextCard(){
+  $('#dueN').textContent=rq.length;
+  const back=$('#rback'); back.classList.remove('on'); $('#rshow').style.display='inline-block';
+  if(!rq.length){ rcur=-1; $('#rart').innerHTML='🎉'; $('#rq').innerHTML='Nada para revisar agora! Volte mais tarde — os cartões reaparecem na hora certa para fixar na memória.'; $('#rshow').style.display='none'; return; }
+  rcur=rq.shift(); const lv=L[rcur];
+  $('#rart').innerHTML=lv.art; $('#rq').innerHTML='<span style="font-size:.75rem; color:var(--muted)">Desafio '+(rcur+1)+' · '+(lv.t==='ATOM'?'Atomística':lv.t==='ORG'?'Orgânica':lv.src)+'</span><br>'+lv.q;
+}
+function showBack(){
+  const lv=L[rcur];
+  $('#rans').innerHTML='✅ <b>Resposta:</b> '+lv.o[lv.ok]+'<br><br>'+lv.e;
+  const ta=$('#feytxt'); ta.value=fey[rcur]||'';
+  ta.oninput=()=>{ fey[rcur]=ta.value; try{ localStorage.setItem(FK,JSON.stringify(fey)); }catch(e){} };
+  $('#rback').classList.add('on'); $('#rshow').style.display='none';
+  say('Antes de avaliar: tente a <b>Técnica Feynman</b> — explique com suas palavras. Se travar em alguma parte, é ali que falta entender! 🗣️');
+}
+function grade(g){
+  const base=[600e3, 864e5, 3*864e5, 7*864e5][g];
+  const prev=(anki[rcur]&&anki[rcur].iv)||0;
+  const iv=g===0?base:Math.max(base, prev*(g===1?1.2:g===2?2:2.5));
+  anki[rcur]={due:Date.now()+iv, iv:iv};
+  try{ localStorage.setItem(AK,JSON.stringify(anki)); }catch(e){}
+  say(['Sem stress — ele volta em 10 minutos. Errar faz parte! 💪','Ok! Volta amanhã para reforçar. 😐➡️🙂','Boa! Esse volta em alguns dias. 🙂','Mandou bem — só daqui a uma semana! 😎'][g]);
+  nextCard();
+}
+
 buildGrid();
-setTimeout(()=>say('Oi, Josi! 👋 Escolha um desafio. Eu te dou uma dica antes e explico depois de você responder!'),400);
+setTimeout(()=>say('Oi, Josi! 👋 Agora são <b>80 desafios</b>: os vermelhos são questões REAIS da UECE com gabarito oficial. E tem o botão <b>🔁 Revisão Anki</b> para fixar de vez!'),400);
 setInterval(()=>{ if(!$('#bubble').classList.contains('hide') && Math.random()<.3) idleTip(); }, 50000);
 </script>
 </body>

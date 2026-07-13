@@ -1,5 +1,5 @@
 /* Service Worker — Lab da Josi (PWA offline) */
-const CACHE = 'labjosi-v4';
+const CACHE = 'labjosi-v5';
 const ASSETS = [
   './',
   './index.html',
