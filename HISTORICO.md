@@ -10,6 +10,8 @@ Registro de todas as alterações do projeto **[Lab da Josi](https://josiquimica
 
 | # | Data | Commit | Autor | Descrição |
 |---|------|--------|-------|-----------|
+| 12 | 13/07/2026 | — | Josiane Ximenes | 50 Desafios de Orgânica & Atomística: nova página `desafios.html` no portal |
+| 11 | 13/07/2026 00:57 | `6ff4a1a` | Claude | Adiciona HISTORICO.md com o registro de commits do projeto |
 | 10 | 13/07/2026 00:32 | `8a02acc` | Claude | Simulado UECE: 81 questões de provas anteriores (2010–2019) |
 | 9 | 13/07/2026 00:05 | `320ea28` | Claude | Animações no celular: efeitos de toque, reduzir-movimento mais suave e cache do PWA |
 | 8 | 12/07/2026 16:12 | `ff6b97f` | Josiane Ximenes | PWA para Safari/iOS: manifest, service worker offline, ícones e meta tags apple |
@@ -27,6 +29,17 @@ Registro de todas as alterações do projeto **[Lab da Josi](https://josiquimica
 ---
 
 ## Detalhes
+
+### 12. 50 Desafios de Orgânica & Atomística
+- **Data:** 13/07/2026
+- Nova página `desafios.html`: 50 desafios interativos (25 de Atomística + 25 de Orgânica)
+  com a Profa. Mol dando dicas em tempo real, explicação após cada resposta e estrelas
+  salvas no navegador.
+- Novo cartão "🧬 Orgânica & Atomística" no portal e cache do service worker atualizado (`labjosi-v4`).
+
+### 11. Registro de commits do projeto
+- **Commit:** `6ff4a1a` · **Data:** 13/07/2026 00:57 · **PR:** [#3](https://github.com/josiquimica/quimica/pull/3)
+- Criação deste arquivo (`HISTORICO.md`) com a tabela-resumo e os detalhes de cada commit.
 
 ### 10. Simulado UECE: 81 questões de provas anteriores (2010–2019)
 - **Commit:** `8a02acc` · **Data:** 13/07/2026 00:32 · **PR:** [#2](https://github.com/josiquimica/quimica/pull/2)

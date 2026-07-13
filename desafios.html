@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🧬 50 Desafios — Orgânica &amp; Atomística</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#7048E8">
+<style>
+  :root{ --bg:#EDEBFA; --panel:#fff; --ink:#1a1730; --muted:#6b6890; --line:#DAD5F0;
+    --atom:#1971C2; --atom-soft:#E1EEFB; --org:#2B8A3E; --org-soft:#E3F5E8;
+    --accent:#7048E8; --accent-soft:#EDE7FB; --good:#2B8A3E; --bad:#C92A2A; --gold:#F59F00;
+    --shadow:0 3px 14px rgba(60,40,120,.14); }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#12101f; --panel:#1c1930; --ink:#ECE9FB; --muted:#9d98c4; --line:#332c52;
+      --atom:#74B4EC; --atom-soft:#1a2740; --org:#69C57A; --org-soft:#16301f;
+      --accent:#B197FC; --accent-soft:#251c3a; --good:#69C57A; --bad:#F08A8A; --gold:#FFC94D;
+      --shadow:0 3px 14px rgba(0,0,0,.4); } }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif;
+    line-height:1.55; padding:0 14px 120px; overflow-x:hidden; -webkit-text-size-adjust:100%}
+  h1,h2,h3{font-family:'Trebuchet MS','Segoe UI',sans-serif; line-height:1.2}
+  .wrap{max-width:720px; margin:0 auto}
+
+  header{padding:18px 0 12px; border-bottom:2px solid var(--line); margin-bottom:16px; display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px}
+  header h1{font-size:1.35rem; margin:0}
+  header .sub{width:100%; margin:0; color:var(--muted); font-size:.88rem}
+  .stars{margin-left:auto; font-family:Consolas,monospace; font-weight:700; background:var(--panel); border:1.5px solid var(--line); border-radius:999px; padding:4px 14px}
+
+  .group-title{display:flex; align-items:center; gap:8px; margin:18px 0 8px; font-size:1.05rem}
+  .group-title .pill{font-family:Consolas,monospace; font-size:.66rem; letter-spacing:.08em; color:#fff; border-radius:999px; padding:3px 10px}
+  .pill.atom{background:var(--atom)} .pill.org{background:var(--org)}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(58px,1fr)); gap:9px}
+  .lv{aspect-ratio:1; border:1.5px solid var(--line); border-radius:12px; background:var(--panel); cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; font:inherit; color:var(--ink);
+    box-shadow:var(--shadow); transition:transform .12s, border-color .12s; position:relative; padding:2px}
+  .lv:hover{transform:translateY(-3px)}
+  .lv .n{font-weight:800; font-size:1.05rem}
+  .lv.atom{border-top:4px solid var(--atom)} .lv.org{border-top:4px solid var(--org)}
+  .lv .st{font-size:.7rem; height:1em}
+  .lv.done{background:var(--org-soft)} .lv.done .st{color:var(--gold)}
+
+  /* tela de jogo */
+  .screen{display:none} .screen.on{display:block; animation:fade .3s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1}}
+  .qhead{display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap}
+  .qtag{font-family:Consolas,monospace; font-size:.68rem; letter-spacing:.08em; color:#fff; border-radius:999px; padding:3px 11px}
+  .back{margin-left:auto; background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer; font:inherit; font-size:.85rem}
+  .card{background:var(--panel); border:1.5px solid var(--line); border-radius:16px; padding:18px; box-shadow:var(--shadow)}
+  .art{background:var(--bg); border:1.5px dashed var(--line); border-radius:12px; padding:16px; margin-bottom:14px; text-align:center;
+    font-size:1.5rem; font-family:'Cambria Math','Times New Roman',serif; overflow-x:auto}
+  .art svg{max-width:100%; height:auto}
+  .q{font-weight:700; font-size:1.08rem; margin:6px 0 14px}
+  .opts{display:grid; gap:9px}
+  .opt{display:flex; align-items:center; gap:10px; text-align:left; background:var(--bg); border:1.5px solid var(--line);
+    border-radius:11px; padding:11px 13px; font:inherit; font-size:1rem; cursor:pointer; color:var(--ink)}
+  .opt:hover{border-color:var(--accent)}
+  .opt .k{flex:none; width:26px; height:26px; border-radius:7px; background:var(--line); display:grid; place-items:center; font-family:Consolas,monospace; font-weight:700}
+  .opt.right{border-color:var(--good); background:var(--org-soft)} .opt.right .k{background:var(--good); color:#fff}
+  .opt.wrong{border-color:var(--bad); background:#fbe7e7} .opt.wrong .k{background:var(--bad); color:#fff}
+  .opt:disabled{cursor:default}
+  .exp{margin-top:14px; border-radius:11px; padding:12px 14px; font-size:.94rem; display:none}
+  .exp.on{display:block} .exp.good{background:var(--org-soft); border-left:4px solid var(--good)} .exp.bad{background:#fbe7e7; border-left:4px solid var(--bad)}
+  .nav{display:flex; justify-content:space-between; margin-top:16px; gap:10px}
+  .btn{background:var(--accent); color:#fff; border:none; border-radius:11px; padding:11px 20px; font:inherit; font-weight:700; cursor:pointer}
+  .btn:disabled{opacity:.4; cursor:default} .btn.ghost{background:var(--panel); color:var(--ink); border:1.5px solid var(--line)}
+
+  /* avatar */
+  #tutor{position:fixed; right:12px; bottom:12px; z-index:40; display:flex; align-items:flex-end; gap:9px; max-width:min(340px,90vw)}
+  #bubble{background:var(--panel); border:2px solid var(--accent); border-radius:15px 15px 3px 15px; padding:10px 13px; font-size:.88rem; box-shadow:0 6px 20px rgba(0,0,0,.2); position:relative}
+  #bubble.hide{display:none} #bubble b{color:var(--accent)}
+  #bClose{position:absolute; top:-8px; right:-8px; width:20px; height:20px; border-radius:50%; background:var(--muted); color:#fff; border:none; cursor:pointer; font-size:.7rem}
+  #face{flex:none; width:62px; height:62px; cursor:pointer; filter:drop-shadow(0 3px 7px rgba(0,0,0,.25))}
+  #face.talk{animation:bob 1s ease-in-out infinite} @keyframes bob{50%{transform:translateY(-5px)}}
+  .toast{position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-16px); background:var(--gold); color:#3a2600; padding:9px 18px; border-radius:999px; font-weight:800; z-index:50; opacity:0; transition:.3s}
+  .toast.on{opacity:1; transform:translateX(-50%) translateY(0)}
+  @media (max-width:520px){ header h1{font-size:1.15rem} .art{font-size:1.25rem} #face{width:50px;height:50px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🧬 50 Desafios</h1>
+    <span class="stars">⭐ <span id="starN">0</span>/50</span>
+    <p class="sub">Química <b>Orgânica</b> &amp; <b>Atomística</b> — com a Profa. Mol te ajudando em tempo real.</p>
+  </header>
+
+  <!-- HOME -->
+  <div class="screen on" id="home">
+    <div class="group-title"><span class="pill atom">ATOMÍSTICA</span> <span>Desafios 1 a 25</span></div>
+    <div class="grid" id="gridAtom"></div>
+    <div class="group-title"><span class="pill org">ORGÂNICA</span> <span>Desafios 26 a 50</span></div>
+    <div class="grid" id="gridOrg"></div>
+  </div>
+
+  <!-- PLAY -->
+  <div class="screen" id="play">
+    <div class="qhead">
+      <span class="qtag" id="qtag">ATOMÍSTICA · 1/50</span>
+      <button class="back" onclick="goHome()">← todos os desafios</button>
+    </div>
+    <div class="card">
+      <div class="art" id="art"></div>
+      <div class="q" id="q"></div>
+      <div class="opts" id="opts"></div>
+      <div class="exp" id="exp"></div>
+      <div class="nav">
+        <button class="btn ghost" id="prev" onclick="openLevel(cur-1)">← anterior</button>
+        <button class="btn" id="next" onclick="openLevel(cur+1)">próximo →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AVATAR -->
+<div id="tutor">
+  <div id="bubble"><button id="bClose" onclick="document.getElementById('bubble').classList.add('hide')">✕</button><span id="bText"></span></div>
+  <svg id="face" viewBox="0 0 100 100" onclick="idleTip()" aria-label="Profa. Mol">
+    <circle cx="50" cy="50" r="46" fill="#7048E8"/>
+    <circle cx="50" cy="54" r="34" fill="#F1C7A3" stroke="#1a1730" stroke-width="2"/>
+    <path d="M16,50 Q20,20 50,20 Q80,20 84,50 Q84,38 50,34 Q16,38 16,50 Z" fill="#5C4033"/>
+    <circle cx="38" cy="52" r="8" fill="#fff" stroke="#1a1730" stroke-width="1.5"/>
+    <circle cx="62" cy="52" r="8" fill="#fff" stroke="#1a1730" stroke-width="1.5"/>
+    <circle cx="39" cy="53" r="3.5" fill="#1a1730"/><circle cx="63" cy="53" r="3.5" fill="#1a1730"/>
+    <path d="M30,50 L46,48 M54,48 L70,50" stroke="#1a1730" stroke-width="2" fill="none"/>
+    <path d="M40,66 Q50,74 60,66" stroke="#1a1730" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="30" cy="63" r="4" fill="#F783AC" opacity=".6"/><circle cx="70" cy="63" r="4" fill="#F783AC" opacity=".6"/>
+  </svg>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+/* ---------- helpers de arte ---------- */
+function bohr(shells){ // shells: array com nº de elétrons por camada
+  let r=[18,30,42,54], s='<svg viewBox="0 0 160 130">';
+  s+='<circle cx="80" cy="65" r="12" fill="#C2255C" stroke="#1a1730" stroke-width="2"/>';
+  shells.forEach((e,i)=>{ const rad=r[i]; s+=`<circle cx="80" cy="65" r="${rad}" fill="none" stroke="#8a86b8" stroke-width="1.3"/>`;
+    for(let k=0;k<e;k++){ const ang=(k/e)*Math.PI*2 - Math.PI/2; const x=80+Math.cos(ang)*rad, y=65+Math.sin(ang)*rad;
+      s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.4" fill="#1971C2"/>`; } });
+  return s+'</svg>';
+}
+/* ---------- 50 desafios ---------- */
+const L=[
+// ===== ATOMÍSTICA 1-25 =====
+{t:'ATOM',ti:'Número atômico',art:'Z',q:'O número atômico (Z) de um elemento indica a quantidade de:',o:['Prótons','Nêutrons','Prótons + nêutrons','Elétrons de valência'],ok:0,d:'Z é a "identidade" do átomo — o que o define.',e:'Z = nº de PRÓTONS. Todo átomo com Z=6 é carbono, sempre.'},
+{t:'ATOM',ti:'Prótons do Na',art:bohr([2,8,1]),q:'O sódio tem Z = 11. Quantos prótons ele possui?',o:['11','23','12','1'],ok:0,d:'Prótons = o próprio Z.',e:'Z = 11 → 11 prótons. (A imagem mostra as camadas 2-8-1.)'},
+{t:'ATOM',ti:'Nêutrons',art:'A = 23 · Z = 11',q:'Um átomo tem número de massa A = 23 e Z = 11. Quantos nêutrons?',o:['12','11','23','34'],ok:0,d:'Nêutrons = A − Z.',e:'N = A − Z = 23 − 11 = 12 nêutrons.'},
+{t:'ATOM',ti:'Elétrons neutro',art:'átomo neutro',q:'Num átomo neutro, o número de elétrons é igual ao número de:',o:['Prótons','Nêutrons','Massa','Camadas'],ok:0,d:'Neutro = cargas equilibradas.',e:'Átomo neutro: nº de elétrons = nº de prótons (mesma carga + e −).'},
+{t:'ATOM',ti:'Rutherford',art:'✨ lâmina de ouro',q:'No experimento de Rutherford, a maioria das partículas α atravessou a folha. Conclusão:',o:['O átomo é praticamente vazio, com núcleo pequeno e denso','O átomo é maciço','Os elétrons ficam no núcleo','O átomo não tem carga'],ok:0,d:'Se quase tudo passou reto...','e':'O átomo é praticamente VAZIO; a massa e a carga + estão num núcleo minúsculo.'},
+{t:'ATOM',ti:'Dalton',art:'⚪',q:'O modelo atômico de Dalton comparava o átomo a uma:',o:['Esfera maciça e indivisível','Nuvem de elétrons','Sistema solar','Pudim de passas'],ok:0,d:'O mais antigo e simples.',e:'Dalton (1803): esfera maciça, indivisível — a "bola de bilhar".'},
+{t:'ATOM',ti:'Thomson',art:'🍮',q:'O modelo do "pudim de passas" (esfera positiva com elétrons incrustados) é de:',o:['Thomson','Bohr','Dalton','Rutherford'],ok:0,d:'Pense no doce com passas.',e:'Thomson (1897) descobriu o elétron e propôs o pudim de passas.'},
+{t:'ATOM',ti:'Bohr',art:bohr([2,8,8,2]),q:'Segundo Bohr, os elétrons giram ao redor do núcleo em:',o:['Níveis de energia definidos (órbitas)','Qualquer lugar','Dentro do núcleo','Linha reta'],ok:0,d:'Como degraus de energia.',e:'Bohr (1913): elétrons em níveis/órbitas de energia bem definidos.'},
+{t:'ATOM',ti:'Isótopos',art:'mesmo Z',q:'Átomos com o MESMO número de prótons (Z) mas diferentes números de massa são:',o:['Isótopos','Isóbaros','Isótonos','Íons'],ok:0,d:'"Iso-topos": mesmo lugar na tabela.',e:'Isótopos: mesmo Z, A diferente. Ex.: ¹²C e ¹⁴C.'},
+{t:'ATOM',ti:'Isóbaros',art:'mesmo A',q:'Átomos de elementos diferentes, mas com o MESMO número de massa (A), são:',o:['Isóbaros','Isótopos','Isótonos','Alótropos'],ok:0,d:'"bar" lembra massa/peso.',e:'Isóbaros: mesmo A, Z diferente. Ex.: ⁴⁰Ar e ⁴⁰Ca.'},
+{t:'ATOM',ti:'Isótonos',art:'mesmo N',q:'Átomos com o mesmo número de NÊUTRONS são chamados de:',o:['Isótonos','Isótopos','Isóbaros','Isoeletrônicos'],ok:0,d:'"tons" → nêutrons.',e:'Isótonos: mesmo nº de nêutrons (N), Z e A diferentes.'},
+{t:'ATOM',ti:'Camada K',art:'K L M N...',q:'Qual é o número MÁXIMO de elétrons na primeira camada (K)?',o:['2','8','18','1'],ok:0,d:'A camada mais interna é pequena.',e:'K comporta no máximo 2 elétrons. (L=8, M=18, N=32...)'},
+{t:'ATOM',ti:'Linus Pauling',art:'...4s → ?',q:'No diagrama de Linus Pauling, qual subnível é preenchido logo APÓS o 4s²?',o:['3d','4p','4d','5s'],ok:0,d:'A energia sobe na diagonal.',e:'A ordem é ...4s² 3d¹⁰ 4p⁶... — depois do 4s vem o 3d.'},
+{t:'ATOM',ti:'Número de massa',art:'A = ?',q:'O número de massa (A) de um átomo é a soma de:',o:['Prótons + nêutrons','Prótons + elétrons','Só prótons','Nêutrons + elétrons'],ok:0,d:'A massa fica no núcleo.',e:'A = prótons + nêutrons (Z + N). Os elétrons quase não pesam.'},
+{t:'ATOM',ti:'Cátion',art:'perdeu e⁻',q:'Um átomo que PERDE elétrons se torna um íon:',o:['Cátion (positivo)','Ânion (negativo)','Neutro','Isótopo'],ok:0,d:'Perder carga negativa sobra o quê?',e:'Perdeu elétron(s) → fica positivo → CÁTION. Ex.: Na⁺.'},
+{t:'ATOM',ti:'Ânion',art:'ganhou e⁻',q:'Um átomo que GANHA elétrons se torna um íon:',o:['Ânion (negativo)','Cátion (positivo)','Neutro','Isóbaro'],ok:0,d:'Ganhar carga negativa dá o quê?',e:'Ganhou elétron(s) → fica negativo → ÂNION. Ex.: Cl⁻.'},
+{t:'ATOM',ti:'Elétrons do Na⁺',art:'Na⁺ (Z=11)',q:'O sódio (Z=11) forma o cátion Na⁺. Quantos elétrons tem esse íon?',o:['10','11','12','1'],ok:0,d:'Perdeu 1 elétron do átomo neutro.',e:'Neutro tinha 11 elétrons; perdeu 1 → 10 elétrons.'},
+{t:'ATOM',ti:'Gases nobres',art:'8 e⁻',q:'Os gases nobres são estáveis porque possuem, em geral, na última camada:',o:['8 elétrons (octeto)','2 prótons','Nenhum elétron','1 elétron'],ok:0,d:'A "regra do octeto".',e:'8 elétrons na camada de valência = estabilidade (exceto o He, com 2).'},
+{t:'ATOM',ti:'Camada de valência',art:'última camada',q:'A camada de valência de um átomo é:',o:['A última camada (mais externa)','A mais interna','O núcleo','A camada K sempre'],ok:0,d:'É quem faz as ligações.',e:'Valência = última camada; seus elétrons fazem as ligações químicas.'},
+{t:'ATOM',ti:'Distribuição',art:bohr([2,8,7]),q:'A distribuição eletrônica mostrada é 2-8-7. Qual é o número atômico (Z)?',o:['17','15','7','25'],ok:0,d:'Some os elétrons das camadas.',e:'2+8+7 = 17 elétrons → Z = 17 (é o cloro!).'},
+{t:'ATOM',ti:'Energia de ionização',art:'arrancar e⁻',q:'Energia de ionização é a energia necessária para:',o:['Arrancar um elétron de um átomo gasoso','Adicionar um nêutron','Ganhar um elétron','Fundir o átomo'],ok:0,d:'"ionizar" = virar íon perdendo e⁻.',e:'É a energia para RETIRAR um elétron. Cresce rumo ao flúor na tabela.'},
+{t:'ATOM',ti:'Subnível p',art:'s p d f',q:'Qual o número MÁXIMO de elétrons em um subnível do tipo p?',o:['6','2','10','14'],ok:0,d:'s=2, p=?, d=10, f=14.',e:'s=2, p=6, d=10, f=14. O subnível p comporta 6 elétrons.'},
+{t:'ATOM',ti:'Prótons = elétrons',art:'neutro',q:'Assinale a afirmação CORRETA sobre um átomo neutro:',o:['Tem igual número de prótons e elétrons','Tem mais elétrons que prótons','Não tem elétrons','Tem carga positiva'],ok:0,d:'"Neutro" = sem carga total.',e:'Neutro → prótons = elétrons, cargas se anulam.'},
+{t:'ATOM',ti:'Isoeletrônicos',art:'mesmo nº e⁻',q:'Espécies com o MESMO número de elétrons (ex.: Na⁺, Ne, F⁻) são chamadas:',o:['Isoeletrônicas','Isótopas','Isóbaras','Isótonas'],ok:0,d:'"iso-eletrônico" fala por si.',e:'Isoeletrônicas: mesmo nº de elétrons. Na⁺, Ne e F⁻ têm 10 elétrons cada.'},
+{t:'ATOM',ti:'Salto de Bohr',art:'💡',q:'Segundo Bohr, quando um elétron salta de um nível mais alto para um mais baixo, ele:',o:['Libera energia (luz)','Absorve energia','Vira próton','Some'],ok:0,d:'Descer "sobra" energia.',e:'Ao cair de nível, o elétron LIBERA energia na forma de luz (fóton).'},
+// ===== ORGÂNICA 26-50 =====
+{t:'ORG',ti:'Ligações do C',art:'C',q:'Quantas ligações o átomo de carbono faz nas moléculas orgânicas?',o:['4','2','3','1'],ok:0,d:'É a "regra" que rege toda a orgânica.',e:'O carbono é tetravalente: sempre faz 4 ligações.'},
+{t:'ORG',ti:'Cadeia aberta',art:'C–C–C–C',q:'Uma cadeia carbônica que NÃO forma ciclo (anel) é classificada como:',o:['Aberta (acíclica)','Fechada','Aromática','Ramificada'],ok:0,d:'Sem anel = ?',e:'Cadeia aberta (acíclica): as pontas não se fecham em ciclo.'},
+{t:'ORG',ti:'Saturada',art:'C–C–C (só simples)',q:'Uma cadeia que possui APENAS ligações simples entre carbonos é:',o:['Saturada','Insaturada','Aromática','Heterogênea'],ok:0,d:'Só simples = "cheia" de hidrogênios.',e:'Saturada = só ligações simples. Insaturada tem dupla ou tripla.'},
+{t:'ORG',ti:'Insaturada',art:'C=C',q:'A presença de uma ligação DUPLA ou TRIPLA entre carbonos torna a cadeia:',o:['Insaturada','Saturada','Cíclica','Normal'],ok:0,d:'Dupla/tripla = ?',e:'Insaturada: tem pelo menos uma dupla (=) ou tripla (≡).'},
+{t:'ORG',ti:'Prefixo 1C',art:'1 carbono',q:'Na nomenclatura, o prefixo para 1 carbono é:',o:['MET','ET','PROP','BUT'],ok:0,d:'"MEu Tio..." começa com...',e:'1C = MET (metano). 2=ET, 3=PROP, 4=BUT, 5=PENT.'},
+{t:'ORG',ti:'Prefixo 3C',art:'C–C–C',q:'Qual o prefixo para uma cadeia principal de 3 carbonos?',o:['PROP','ET','BUT','MET'],ok:0,d:'MET(1)-ET(2)-?(3).',e:'3 carbonos = PROP (ex.: propano, propanol).'},
+{t:'ORG',ti:'Álcool',art:'CH₃–CH₂–OH',q:'O grupo –OH ligado a carbono saturado caracteriza a função:',o:['Álcool','Aldeído','Cetona','Ácido'],ok:0,d:'O etanol é o exemplo famoso.',e:'–OH em carbono saturado = ÁLCOOL. Ex.: etanol.'},
+{t:'ORG',ti:'Aldeído',art:'CH₃–CHO',q:'O grupo –CHO (na ponta da cadeia) caracteriza a função:',o:['Aldeído','Cetona','Éter','Álcool'],ok:0,d:'Termina em -al.',e:'–CHO na extremidade = ALDEÍDO. Ex.: etanal, formol.'},
+{t:'ORG',ti:'Cetona',art:'CH₃–CO–CH₃',q:'O grupo C=O (carbonila) ENTRE dois carbonos caracteriza a função:',o:['Cetona','Aldeído','Ácido','Amina'],ok:0,d:'A acetona é o exemplo.',e:'C=O no meio da cadeia = CETONA. Ex.: propanona (acetona).'},
+{t:'ORG',ti:'Ácido carboxílico',art:'CH₃–COOH',q:'O grupo –COOH caracteriza qual função orgânica?',o:['Ácido carboxílico','Éster','Álcool','Cetona'],ok:0,d:'O vinagre tem esse grupo.',e:'–COOH = ÁCIDO CARBOXÍLICO. Ex.: ácido acético (vinagre).'},
+{t:'ORG',ti:'Éster',art:'CH₃–COO–CH₃',q:'O grupo –COO– (entre carbonos) e o aroma de frutas indicam a função:',o:['Éster','Éter','Ácido','Amina'],ok:0,d:'Cheiro de fruta em balas.',e:'–COO– = ÉSTER, responsável por muitos aromas de frutas.'},
+{t:'ORG',ti:'Amina',art:'CH₃–NH₂',q:'O grupo –NH₂ ligado a carbono caracteriza a função:',o:['Amina','Amida','Álcool','Nitrocomposto'],ok:0,d:'Parente orgânico da amônia (NH₃).',e:'–NH₂ = AMINA. É como a amônia com um carbono no lugar de um H.'},
+{t:'ORG',ti:'Éter',art:'CH₃–O–CH₃',q:'Um oxigênio ligado ENTRE dois carbonos (C–O–C) caracteriza a função:',o:['Éter','Éster','Álcool','Cetona'],ok:0,d:'O oxigênio fica no meio, sem H.',e:'C–O–C = ÉTER. Ex.: éter dietílico (anestésico antigo).'},
+{t:'ORG',ti:'Nomear metano',art:'CH₄',q:'Qual o nome do hidrocarboneto CH₄ (1 carbono, só simples)?',o:['Metano','Etano','Metanol','Etanol'],ok:0,d:'MET + AN + O.',e:'1C (met) + só simples (an) + hidrocarboneto (o) = METANO.'},
+{t:'ORG',ti:'Nomear etanol',art:'CH₃–CH₂–OH',q:'Qual o nome de CH₃–CH₂–OH?',o:['Etanol','Metanol','Etanal','Etano'],ok:0,d:'2C + função álcool.',e:'2C (et) + saturado (an) + álcool (ol) = ETANOL.'},
+{t:'ORG',ti:'Nomear propanona',art:'CH₃–CO–CH₃',q:'Qual o nome de CH₃–CO–CH₃ (a acetona)?',o:['Propanona','Propanal','Propanol','Propano'],ok:0,d:'3C + cetona.',e:'3C (prop) + cetona (ona) = PROPANONA (a acetona do removedor).'},
+{t:'ORG',ti:'Hidrocarboneto',art:'só C e H',q:'Um composto formado APENAS por carbono e hidrogênio é um:',o:['Hidrocarboneto','Álcool','Éster','Sal'],ok:0,d:'O nome entrega: hidro + carbono.',e:'Hidrocarboneto = só C e H. Ex.: metano, etano, benzeno.'},
+{t:'ORG',ti:'Alceno',art:'CH₂=CH₂',q:'Um hidrocarboneto com uma ligação DUPLA entre carbonos é um:',o:['Alceno (eno)','Alcano (ano)','Alcino (ino)','Álcool'],ok:0,d:'Dupla → infixo -en-.',e:'Dupla = ALCENO (eteno). Simples = alcano; tripla = alcino.'},
+{t:'ORG',ti:'Cadeia ramificada',art:'C–C(–C)–C',q:'Uma cadeia que possui "galhos" (ramificações) saindo da cadeia principal é:',o:['Ramificada','Normal (reta)','Cíclica','Saturada'],ok:0,d:'Tem galhos = ?',e:'Ramificada: tem ramificações. Normal (reta) não tem galhos.'},
+{t:'ORG',ti:'Cadeia heterogênea',art:'C–C–O–C',q:'Quando há um heteroátomo (O, N, S) ENTRE carbonos da cadeia principal, ela é:',o:['Heterogênea','Homogênea','Saturada','Aberta'],ok:0,d:'"Hetero" = diferente no meio.',e:'Heterogênea: tem heteroátomo entre carbonos. Homogênea só tem C na cadeia.'},
+{t:'ORG',ti:'Isomeria de função',art:'C₂H₆O',q:'Etanol (álcool) e metoximetano (éter) têm a mesma fórmula C₂H₆O. Isso é isomeria:',o:['Plana de função','De cadeia','Geométrica','Óptica'],ok:0,d:'Mesma fórmula, FUNÇÕES diferentes.',e:'Isomeria plana de FUNÇÃO: mesma fórmula molecular, funções diferentes.'},
+{t:'ORG',ti:'Hibridização sp³',art:'CH₃–CH₃',q:'No etano (só ligações simples), cada carbono tem hibridização:',o:['sp³','sp²','sp','sp³d'],ok:0,d:'4 ligações simples = 4 nuvens.',e:'4 nuvens (4 sigmas) → sp³, geometria tetraédrica (109,5°).'},
+{t:'ORG',ti:'Hibridização sp²',art:'CH₂=CH₂',q:'No eteno (uma dupla), cada carbono tem hibridização:',o:['sp²','sp³','sp','sp³d²'],ok:0,d:'A dupla conta como UMA nuvem → 3 nuvens.',e:'3 nuvens → sp², geometria trigonal plana (120°). A dupla = 1 σ + 1 π.'},
+{t:'ORG',ti:'Carbono primário',art:'CH₃–CH₂–CH₃',q:'Um carbono ligado a APENAS 1 outro carbono é classificado como:',o:['Primário','Secundário','Terciário','Quaternário'],ok:0,d:'Conte quantos C vizinhos ele tem.',e:'1 C vizinho = primário; 2 = secundário; 3 = terciário; 4 = quaternário.'},
+{t:'ORG',ti:'Benzeno',art:'C₆H₆ ⬡',q:'O benzeno (C₆H₆), um anel com ligações especiais, pertence à classe dos compostos:',o:['Aromáticos','Alifáticos','Álcoois','Ácidos'],ok:0,d:'Anel de 6 carbonos famoso.',e:'Benzeno = composto AROMÁTICO (anel benzênico com elétrons deslocalizados).'}
+];
+
+/* ---------- estado ---------- */
+const SK='org-atom-stars';
+let done={}; try{ done=JSON.parse(localStorage.getItem(SK)||'{}'); }catch(e){}
+let cur=0, answered=false, streak=0, nudgeTimer=null;
+
+function starTotal(){ return Object.keys(done).length; }
+function saveStars(){ try{ localStorage.setItem(SK,JSON.stringify(done)); }catch(e){} $('#starN').textContent=starTotal(); }
+
+/* ---------- avatar ---------- */
+let tm;
+function say(msg,talk=true){ $('#bubble').classList.remove('hide'); $('#bText').innerHTML=msg;
+  if(talk){ $('#face').classList.add('talk'); clearTimeout(tm); tm=setTimeout(()=>$('#face').classList.remove('talk'),1600); } }
+const IDLE=['Sem pressa — leia com calma. 🧪','Errar aqui é aprender de graça! 💜','Você já tá pegando o jeito! ⭐','Use as dicas, é pra isso que estou aqui. 😊'];
+function idleTip(){ say(IDLE[Math.floor(Math.random()*IDLE.length)]); }
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),1600); }
+
+/* ---------- home ---------- */
+function buildGrid(){
+  const ga=$('#gridAtom'), go=$('#gridOrg'); ga.innerHTML=''; go.innerHTML='';
+  L.forEach((lv,i)=>{
+    const b=document.createElement('button');
+    b.className='lv '+(lv.t==='ATOM'?'atom':'org')+(done[i]?' done':'');
+    b.innerHTML='<span class="n">'+(i+1)+'</span><span class="st">'+(done[i]?'⭐':'')+'</span>';
+    b.onclick=()=>openLevel(i);
+    (lv.t==='ATOM'?ga:go).appendChild(b);
+  });
+  $('#starN').textContent=starTotal();
+}
+function goHome(){ $('#play').classList.remove('on'); $('#home').classList.add('on'); buildGrid(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+/* ---------- jogar ---------- */
+function shuffle(a){ return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]); }
+function openLevel(i){
+  if(i<0||i>=L.length) return;
+  cur=i; answered=false;
+  const lv=L[i];
+  $('#home').classList.remove('on'); $('#play').classList.add('on');
+  const tag=$('#qtag'); tag.textContent=(lv.t==='ATOM'?'ATOMÍSTICA':'ORGÂNICA')+' · '+(i+1)+'/50';
+  tag.style.background=lv.t==='ATOM'?'var(--atom)':'var(--org)';
+  $('#art').innerHTML=lv.art;
+  $('#q').textContent=lv.q;
+  $('#exp').className='exp'; $('#exp').innerHTML='';
+  $('#prev').disabled=(i===0); $('#next').disabled=(i===L.length-1);
+  $('#next').textContent = i===L.length-1?'fim ✓':'próximo →';
+  // opções embaralhadas
+  const opts=shuffle(lv.o.map((t,idx)=>({t,ok:idx===lv.ok})));
+  const box=$('#opts'); box.innerHTML='';
+  const K=['A','B','C','D'];
+  opts.forEach((op,idx)=>{
+    const b=document.createElement('button'); b.className='opt';
+    b.innerHTML='<span class="k">'+K[idx]+'</span><span>'+op.t+'</span>';
+    b.onclick=()=>answer(b,op.ok,box);
+    // orientação em tempo real: ao mirar uma opção, o avatar reage
+    b.addEventListener('pointerenter',()=>{ if(!answered && Math.random()<.5) say(['Essa? Pensa bem... 🤔','Compara com a dica antes de clicar. 👀','Confia no seu raciocínio! 💪','Lê de novo com calma. 🧐'][Math.floor(Math.random()*4)],false); });
+    box.appendChild(b);
+  });
+  say('<b>Dica:</b> '+lv.d);
+  // cutucada se demorar a responder
+  clearTimeout(nudgeTimer);
+  nudgeTimer=setTimeout(()=>{ if(!answered) say('Sem pressa, Josi. 🔎 Relembra: <b>'+lv.d+'</b>'); }, 12000);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function answer(btn,ok,box){
+  if(answered) return; answered=true;
+  clearTimeout(nudgeTimer);
+  const lv=L[cur];
+  [...box.children].forEach(c=>c.disabled=true);
+  if(ok){ btn.classList.add('right'); }
+  else{ btn.classList.add('wrong');
+    [...box.children].forEach(c=>{ if(c.querySelector('span:last-child').textContent===lv.o[lv.ok]) c.classList.add('right'); }); }
+  const ex=$('#exp'); ex.className='exp on '+(ok?'good':'bad');
+  ex.innerHTML=(ok?'✅ <b>Acertou!</b> ':'❌ <b>Quase!</b> ')+lv.e;
+  if(ok){
+    streak++;
+    if(!done[cur]){ done[cur]=1; saveStars(); toast('+1 ⭐'); }
+    if(streak>=3){ say('🔥 <b>Sequência de '+streak+'!</b> Você tá voando, Josi!'); toast('🔥 '+streak+' seguidas!'); }
+    else say(['Isso mesmo! 🎉','Perfeito, Josi! ⭐','Mandou bem! 💜'][Math.floor(Math.random()*3)]);
+  } else {
+    streak=0;
+    say('Sem problema — olha a explicação aqui embaixo. Você acerta na próxima! 💪');
+  }
+  // orientação: sugere avançar
+  setTimeout(()=>{ if(answered && cur<L.length-1) say('Quando quiser, toque em <b>próximo →</b> para o desafio '+(cur+2)+'.',false); }, 4500);
+}
+
+buildGrid();
+setTimeout(()=>say('Oi, Josi! 👋 Escolha um desafio. Eu te dou uma dica antes e explico depois de você responder!'),400);
+setInterval(()=>{ if(!$('#bubble').classList.contains('hide') && Math.random()<.3) idleTip(); }, 50000);
+</script>
+</body>
+</html>

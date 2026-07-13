@@ -15,11 +15,11 @@
 <style>
   :root{
     --bg:#EDF4F2; --panel:#FFFFFF; --ink:#132F36; --muted:#587179; --line:#D5E2E0;
-    --accent:#C2255C; --calc:#7048E8; --info:#1971C2; --shadow:0 6px 24px rgba(19,47,54,.12);
+    --accent:#C2255C; --calc:#7048E8; --info:#1971C2; --org:#2B8A3E; --shadow:0 6px 24px rgba(19,47,54,.12);
   }
   @media (prefers-color-scheme: dark){
     :root{--bg:#0E1B1E; --panel:#152A2F; --ink:#E4EFED; --muted:#93ABA9; --line:#28454B;
-      --accent:#F06595; --calc:#B197FC; --info:#74B4EC; --shadow:0 6px 24px rgba(0,0,0,.4);}
+      --accent:#F06595; --calc:#B197FC; --info:#74B4EC; --org:#69C57A; --shadow:0 6px 24px rgba(0,0,0,.4);}
   }
   *{box-sizing:border-box}
   body{margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
@@ -43,12 +43,13 @@
   a.card.game:hover,a.card.game:active{border-color:var(--accent)}
   a.card.book:hover,a.card.book:active{border-color:var(--calc)}
   a.card.exam:hover,a.card.exam:active{border-color:var(--info)}
+  a.card.quiz:hover,a.card.quiz:active{border-color:var(--org)}
   .emoji{font-size:2.6rem}
   a.card h2{margin:0; font-size:1.3rem}
-  a.card.game h2{color:var(--accent)} a.card.book h2{color:var(--calc)} a.card.exam h2{color:var(--info)}
+  a.card.game h2{color:var(--accent)} a.card.book h2{color:var(--calc)} a.card.exam h2{color:var(--info)} a.card.quiz h2{color:var(--org)}
   a.card p{margin:0; color:var(--muted); font-size:.92rem}
   .go{margin-top:6px; font-weight:700; font-size:.9rem}
-  a.card.game .go{color:var(--accent)} a.card.book .go{color:var(--calc)} a.card.exam .go{color:var(--info)}
+  a.card.game .go{color:var(--accent)} a.card.book .go{color:var(--calc)} a.card.exam .go{color:var(--info)} a.card.quiz .go{color:var(--org)}
   footer{margin-top:34px; color:var(--muted); font-size:.82rem; text-align:center}
   .tag{display:inline-block; font-family:Consolas,monospace; font-size:.66rem; letter-spacing:.08em;
     color:#fff; background:var(--info); border-radius:999px; padding:2px 10px; width:fit-content}
@@ -71,6 +72,13 @@
       <h2>Apostila de Estudo</h2>
       <p>Todo o edital explicado passo a passo, com cálculos resolvidos, calculadoras interativas, avatar que ensina e gamificação.</p>
       <span class="go">Estudar agora →</span>
+    </a>
+    <a class="card quiz" href="desafios.html">
+      <span class="emoji">🧬</span>
+      <span class="tag" style="background:var(--org)">50 DESAFIOS · 50 ⭐</span>
+      <h2>Orgânica &amp; Atomística</h2>
+      <p>50 desafios rápidos com a Profa. Mol te dando dicas em tempo real: modelos atômicos, íons, isótopos, funções orgânicas e nomenclatura.</p>
+      <span class="go">Encarar desafios →</span>
     </a>
     <a class="card exam" href="simulado.html">
       <span class="emoji">🎓</span>
