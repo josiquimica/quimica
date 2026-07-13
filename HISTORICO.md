@@ -10,6 +10,8 @@ Registro de todas as alterações do projeto **[Lab da Josi](https://josiquimica
 
 | # | Data | Commit | Autor | Descrição |
 |---|------|--------|-------|-----------|
+| 14 | 13/07/2026 | — | Josiane Ximenes | Revisão mobile/Safari PWA em todas as páginas (safe-area, toque, cache) |
+| 13 | 13/07/2026 | — | Josiane Ximenes | +30 questões reais UECE (gabarito CEV), caixa de cálculo, revisão Anki e Técnica Feynman |
 | 12 | 13/07/2026 | — | Josiane Ximenes | 50 Desafios de Orgânica & Atomística: nova página `desafios.html` no portal |
 | 11 | 13/07/2026 00:57 | `6ff4a1a` | Claude | Adiciona HISTORICO.md com o registro de commits do projeto |
 | 10 | 13/07/2026 00:32 | `8a02acc` | Claude | Simulado UECE: 81 questões de provas anteriores (2010–2019) |
@@ -29,6 +31,21 @@ Registro de todas as alterações do projeto **[Lab da Josi](https://josiquimica
 ---
 
 ## Detalhes
+
+### 14. Revisão mobile/Safari PWA (4 revisores em paralelo)
+- **Data:** 13/07/2026
+- Todas as páginas: conteúdo respeitando o notch e a barra de gestos do iPhone (`safe-area-inset`),
+  efeitos de toque `:active` ativados no iOS, correções `-webkit-` no flip 3D da memória,
+  cronômetro da corrida pausando em segundo plano, tabelas do simulado com rolagem própria,
+  tooltips da apostila funcionando por toque, animação `fadein` que faltava, inputs sem zoom
+  automático no iOS, service worker sem cachear respostas de erro (`labjosi-v6`).
+
+### 13. +30 questões reais UECE, caixa de cálculo, Anki e Feynman
+- **Data:** 13/07/2026
+- `desafios.html` passou de 50 para 80 desafios: 30 questões reais de Química da UECE
+  (2ª fase 2024.2 e 2025.1), respostas conferidas nos gabaritos oficiais definitivos da CEV.
+- Caixa "🧮 confira seu cálculo" nas 6 questões de cálculo; Profa. Mol comenta a cada mudança;
+  modo 🔁 Revisão Anki (repetição espaçada) com Técnica Feynman.
 
 ### 12. 50 Desafios de Orgânica & Atomística
 - **Data:** 13/07/2026

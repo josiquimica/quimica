@@ -3,6 +3,7 @@
   "short_name": "Lab da Josi",
   "description": "Jogo e apostila de Química para concurso de Professor (SEDUC-CE).",
   "lang": "pt-BR",
+  "id": "./",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

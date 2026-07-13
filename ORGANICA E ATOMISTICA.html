@@ -6,19 +6,25 @@
 <title>🧬 80 Desafios — Orgânica, Atomística &amp; UECE</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="theme-color" content="#7048E8">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-180.png">
 <style>
   :root{ --bg:#EDEBFA; --panel:#fff; --ink:#1a1730; --muted:#6b6890; --line:#DAD5F0;
     --atom:#1971C2; --atom-soft:#E1EEFB; --org:#2B8A3E; --org-soft:#E3F5E8;
-    --accent:#7048E8; --accent-soft:#EDE7FB; --good:#2B8A3E; --bad:#C92A2A; --gold:#F59F00;
+    --accent:#7048E8; --accent-soft:#EDE7FB; --good:#2B8A3E; --bad:#C92A2A; --bad-soft:#fbe7e7; --gold:#F59F00;
     --shadow:0 3px 14px rgba(60,40,120,.14); }
   @media (prefers-color-scheme:dark){
     :root{ --bg:#12101f; --panel:#1c1930; --ink:#ECE9FB; --muted:#9d98c4; --line:#332c52;
       --atom:#74B4EC; --atom-soft:#1a2740; --org:#69C57A; --org-soft:#16301f;
-      --accent:#B197FC; --accent-soft:#251c3a; --good:#69C57A; --bad:#F08A8A; --gold:#FFC94D;
+      --accent:#B197FC; --accent-soft:#251c3a; --good:#69C57A; --bad:#F08A8A; --bad-soft:#3a1c22; --gold:#FFC94D;
       --shadow:0 3px 14px rgba(0,0,0,.4); } }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif;
-    line-height:1.55; padding:0 14px 120px; overflow-x:hidden; -webkit-text-size-adjust:100%}
+    line-height:1.55; overflow-x:hidden; -webkit-text-size-adjust:100%;
+    padding:env(safe-area-inset-top,0px) max(14px,env(safe-area-inset-right,0px)) calc(120px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px))}
   h1,h2,h3{font-family:'Trebuchet MS','Segoe UI',sans-serif; line-height:1.2}
   .wrap{max-width:720px; margin:0 auto}
 
@@ -34,7 +40,8 @@
   .lv{aspect-ratio:1; border:1.5px solid var(--line); border-radius:12px; background:var(--panel); cursor:pointer;
     display:flex; flex-direction:column; align-items:center; justify-content:center; font:inherit; color:var(--ink);
     box-shadow:var(--shadow); transition:transform .12s, border-color .12s; position:relative; padding:2px}
-  .lv:hover{transform:translateY(-3px)}
+  @media(hover:hover){ .lv:hover{transform:translateY(-3px)} }
+  .lv:active{transform:translateY(-3px)}
   .lv .n{font-weight:800; font-size:1.05rem}
   .lv.atom{border-top:4px solid var(--atom)} .lv.org{border-top:4px solid var(--org)} .lv.uece{border-top:4px solid #C2255C}
   .lv .st{font-size:.7rem; height:1em}
@@ -54,13 +61,14 @@
   .opts{display:grid; gap:9px}
   .opt{display:flex; align-items:center; gap:10px; text-align:left; background:var(--bg); border:1.5px solid var(--line);
     border-radius:11px; padding:11px 13px; font:inherit; font-size:1rem; cursor:pointer; color:var(--ink)}
-  .opt:hover{border-color:var(--accent)}
+  @media(hover:hover){ .opt:hover{border-color:var(--accent)} }
+  .opt:active:not(:disabled){border-color:var(--accent)}
   .opt .k{flex:none; width:26px; height:26px; border-radius:7px; background:var(--line); display:grid; place-items:center; font-family:Consolas,monospace; font-weight:700}
   .opt.right{border-color:var(--good); background:var(--org-soft)} .opt.right .k{background:var(--good); color:#fff}
-  .opt.wrong{border-color:var(--bad); background:#fbe7e7} .opt.wrong .k{background:var(--bad); color:#fff}
+  .opt.wrong{border-color:var(--bad); background:var(--bad-soft)} .opt.wrong .k{background:var(--bad); color:#fff}
   .opt:disabled{cursor:default}
   .exp{margin-top:14px; border-radius:11px; padding:12px 14px; font-size:.94rem; display:none}
-  .exp.on{display:block} .exp.good{background:var(--org-soft); border-left:4px solid var(--good)} .exp.bad{background:#fbe7e7; border-left:4px solid var(--bad)}
+  .exp.on{display:block} .exp.good{background:var(--org-soft); border-left:4px solid var(--good)} .exp.bad{background:var(--bad-soft); border-left:4px solid var(--bad)}
   .nav{display:flex; justify-content:space-between; margin-top:16px; gap:10px}
   .btn{background:var(--accent); color:#fff; border:none; border-radius:11px; padding:11px 20px; font:inherit; font-weight:700; cursor:pointer}
   .btn:disabled{opacity:.4; cursor:default} .btn.ghost{background:var(--panel); color:var(--ink); border:1.5px solid var(--line)}
@@ -82,7 +90,7 @@
   .ansline{background:var(--org-soft); border-left:4px solid var(--good); border-radius:11px; padding:12px 14px; margin-bottom:12px}
   .fey{background:var(--atom-soft); border-left:4px solid var(--atom); border-radius:11px; padding:12px 14px; margin-bottom:12px}
   .fey label{font-weight:700; font-size:.9rem; display:block; margin-bottom:8px}
-  .fey textarea{width:100%; min-height:74px; font:inherit; font-size:.95rem; padding:10px; border:1.5px solid var(--line); border-radius:10px; background:var(--panel); color:var(--ink); resize:vertical}
+  .fey textarea{width:100%; min-height:74px; font:inherit; font-size:16px; padding:10px; border:1.5px solid var(--line); border-radius:10px; background:var(--panel); color:var(--ink); resize:vertical}
   .grades{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px}
   .grades button{font:inherit; font-size:.82rem; font-weight:700; border:none; border-radius:11px; padding:10px 4px; cursor:pointer; color:#fff}
   .grades button:active{transform:scale(.95)}
@@ -90,7 +98,7 @@
   .duechip{font-family:Consolas,monospace; font-size:.8rem; background:var(--panel); border:1.5px solid var(--line); border-radius:999px; padding:4px 12px}
 
   /* avatar */
-  #tutor{position:fixed; right:12px; bottom:12px; z-index:40; display:flex; align-items:flex-end; gap:9px; max-width:min(340px,90vw)}
+  #tutor{position:fixed; right:calc(12px + env(safe-area-inset-right,0px)); bottom:calc(12px + env(safe-area-inset-bottom,0px)); z-index:40; display:flex; align-items:flex-end; gap:9px; max-width:min(340px,90vw)}
   #bubble{background:var(--panel); border:2px solid var(--accent); border-radius:15px 15px 3px 15px; padding:10px 13px; font-size:.88rem; box-shadow:0 6px 20px rgba(0,0,0,.2); position:relative}
   #bubble.hide{display:none} #bubble b{color:var(--accent)}
   #bClose{position:absolute; top:-8px; right:-8px; width:20px; height:20px; border-radius:50%; background:var(--muted); color:#fff; border:none; cursor:pointer; font-size:.7rem}
@@ -99,6 +107,7 @@
   .toast{position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-16px); background:var(--gold); color:#3a2600; padding:9px 18px; border-radius:999px; font-weight:800; z-index:50; opacity:0; transition:.3s}
   .toast.on{opacity:1; transform:translateX(-50%) translateY(0)}
   @media (max-width:520px){ header h1{font-size:1.15rem} .art{font-size:1.25rem} #face{width:50px;height:50px} }
+  @media (max-width:400px){ .grades{grid-template-columns:repeat(2,1fr)} }
 </style>
 </head>
 <body>
@@ -343,8 +352,10 @@ function openLevel(i){
     const b=document.createElement('button'); b.className='opt';
     b.innerHTML='<span class="k">'+K[idx]+'</span><span>'+op.t+'</span>';
     b.onclick=()=>answer(b,op.ok,box);
-    // orientação em tempo real: ao mirar uma opção, o avatar reage
-    b.addEventListener('pointerenter',()=>{ if(!answered && Math.random()<.5) say(['Essa? Pensa bem... 🤔','Compara com a dica antes de clicar. 👀','Confia no seu raciocínio! 💪','Lê de novo com calma. 🧐'][Math.floor(Math.random()*4)],false); });
+    // orientação em tempo real: ao mirar uma opção, o avatar reage (só onde há mouse; no toque o clique já dispara a resposta)
+    if(window.matchMedia && matchMedia('(hover:hover)').matches){
+      b.addEventListener('pointerenter',()=>{ if(!answered && Math.random()<.5) say(['Essa? Pensa bem... 🤔','Compara com a dica antes de clicar. 👀','Confia no seu raciocínio! 💪','Lê de novo com calma. 🧐'][Math.floor(Math.random()*4)],false); });
+    }
     box.appendChild(b);
   });
   say('<b>Dica:</b> '+lv.d);
@@ -424,6 +435,8 @@ function grade(g){
   nextCard();
 }
 
+document.body.addEventListener('touchstart',function(){},{passive:true}); /* habilita :active no iOS Safari */
+if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
 buildGrid();
 setTimeout(()=>say('Oi, Josi! 👋 Agora são <b>80 desafios</b>: os vermelhos são questões REAIS da UECE com gabarito oficial. E tem o botão <b>🔁 Revisão Anki</b> para fixar de vez!'),400);
 setInterval(()=>{ if(!$('#bubble').classList.contains('hide') && Math.random()<.3) idleTip(); }, 50000);

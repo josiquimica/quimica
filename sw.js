@@ -1,5 +1,5 @@
 /* Service Worker — Lab da Josi (PWA offline) */
-const CACHE = 'labjosi-v5';
+const CACHE = 'labjosi-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -41,10 +41,14 @@ self.addEventListener('fetch', e => {
     caches.match(e.request).then(hit => {
       if (hit) return hit;
       return fetch(e.request).then(resp => {
-        const copy = resp.clone();
-        caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
+        if (resp && resp.ok && resp.type === 'basic') {
+          const copy = resp.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
+        }
         return resp;
-      }).catch(() => caches.match('./index.html'));
+      }).catch(() => {
+        if (e.request.mode === 'navigate') return caches.match('./index.html');
+      });
     })
   );
 });

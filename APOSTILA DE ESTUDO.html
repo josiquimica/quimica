@@ -30,7 +30,8 @@
     }
   }
   *{box-sizing:border-box}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; margin:0; padding:0 16px 80px; overflow-x:hidden; -webkit-text-size-adjust:100%}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; margin:0; overflow-x:hidden; -webkit-text-size-adjust:100%;
+    padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(80px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
   h1,h2,h3,h4{font-family:'Trebuchet MS','Segoe UI',sans-serif; line-height:1.25; text-wrap:balance}
   .wrap{max-width:860px; margin:0 auto}
   a{color:var(--accent)}
@@ -45,7 +46,7 @@
   nav.toc ol{margin:6px 0; padding-left:22px}
   nav.toc li{margin:3px 0}
   nav.toc a{text-decoration:none; font-weight:600}
-  nav.toc a:hover{text-decoration:underline}
+  nav.toc a:hover,nav.toc a:active,nav.toc a:focus{text-decoration:underline}
   nav.toc .sub{font-size:.86rem; color:var(--muted); font-weight:400}
 
   .part{margin:38px 0 10px; padding:14px 20px; border-radius:14px; background:linear-gradient(135deg,var(--accent),#E64980); color:#fff; box-shadow:var(--shadow)}
@@ -100,7 +101,7 @@
   .tip::after{
     content:attr(data-tip); position:absolute; left:50%; bottom:135%; transform:translateX(-50%) translateY(6px);
     background:var(--ink); color:var(--bg); padding:8px 12px; border-radius:8px; font-size:.82rem; font-weight:400;
-    line-height:1.4; width:max-content; max-width:260px; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,.3);
+    line-height:1.4; width:max-content; max-width:min(260px,86vw); text-align:left; box-shadow:0 4px 14px rgba(0,0,0,.3);
     opacity:0; pointer-events:none; transition:opacity .18s, transform .18s; z-index:50; white-space:normal;
   }
   .tip::before{
@@ -126,18 +127,19 @@
   .calcbox .fields{display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end}
   .field{display:flex; flex-direction:column; gap:3px}
   .field label{font-size:.78rem; color:var(--muted); font-weight:600}
-  .field input,.field select{font:inherit; font-size:.95rem; padding:7px 9px; width:120px; border:1.5px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink)}
+  .field input,.field select{font:inherit; font-size:16px; padding:7px 9px; width:120px; border:1.5px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink)}
   .field input:focus,.field select:focus{outline:none; border-color:var(--calc)}
   .calcbox button.go{background:var(--calc); color:#fff; border:none; border-radius:8px; padding:9px 18px; font:inherit; font-weight:700; cursor:pointer; transition:transform .12s}
   .calcbox button.go:hover,.calcbox button.go:active{transform:translateY(-2px)}
   .calcout{margin-top:12px; font-size:.92rem; display:none}
+  @keyframes fadein{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
   .calcout.show{display:block; animation:fadein .3s ease}
   .calcout .stepline{padding:4px 0 4px 26px; position:relative; border-left:2px solid var(--calc); margin-left:8px}
   .calcout .stepline::before{content:'▸'; position:absolute; left:6px; color:var(--calc)}
   .calcout .final{background:var(--good-soft); border:1.5px solid var(--good); border-radius:8px; padding:8px 12px; margin-top:8px; font-weight:700}
 
   /* ---------- avatar tutor ---------- */
-  #tutor{position:fixed; right:16px; bottom:16px; z-index:80; display:flex; align-items:flex-end; gap:10px; max-width:min(360px,88vw)}
+  #tutor{position:fixed; right:calc(16px + env(safe-area-inset-right,0px)); bottom:calc(16px + env(safe-area-inset-bottom,0px)); z-index:80; display:flex; align-items:flex-end; gap:10px; max-width:min(360px,88vw)}
   #tutorBubble{background:var(--panel); border:2px solid var(--accent); border-radius:16px 16px 4px 16px; padding:11px 15px; font-size:.9rem; box-shadow:0 6px 22px rgba(0,0,0,.22); position:relative; transition:opacity .3s, transform .3s}
   #tutorBubble.hide{opacity:0; transform:translateY(10px) scale(.9); pointer-events:none}
   #tutorBubble b{color:var(--accent)}
@@ -1423,6 +1425,10 @@ document.querySelectorAll('details.quiz').forEach(d=>{
 
 /* mensagem ociosa a cada 45s se a bolha estiver aberta */
 setInterval(()=>{ if(!$('#tutorBubble').classList.contains('hide') && Math.random()<.4) tutorTip(); }, 45000);
+
+/* mobile: habilita :active no iOS e permite tooltip por toque (foco) */
+document.body.addEventListener('touchstart',function(){},{passive:true});
+document.querySelectorAll('.tip').forEach(t=>{ t.tabIndex=0; });
 
 if('serviceWorker' in navigator){ window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
 </script>

@@ -36,7 +36,8 @@
   body{
     background:var(--bg); color:var(--ink);
     font-family:'Segoe UI', system-ui, sans-serif;
-    line-height:1.55; margin:0; padding:0 16px 60px;
+    line-height:1.55; margin:0;
+    padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(60px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
     overflow-x:hidden; -webkit-text-size-adjust:100%;
   }
   h1,h2,h3{font-family:'Trebuchet MS','Segoe UI',sans-serif; text-wrap:balance; line-height:1.2}
@@ -226,9 +227,9 @@
   /* ---------- E11 jogo da memória ---------- */
   .mem-grid{display:grid; grid-template-columns:repeat(4,minmax(66px,1fr)); gap:10px; margin-top:4px}
   .mem{position:relative; aspect-ratio:3/4; perspective:700px; background:none; border:none; padding:0; cursor:pointer; font:inherit}
-  .mem .in{position:absolute; inset:0; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.34,1.25,.64,1)}
+  .mem .in{position:absolute; inset:0; -webkit-transform-style:preserve-3d; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.34,1.25,.64,1)}
   .mem.open .in{transform:rotateY(180deg)}
-  .mem .f,.mem .b{position:absolute; inset:0; backface-visibility:hidden; border-radius:12px; display:grid; place-items:center; padding:6px; text-align:center; border:2px solid var(--line); box-shadow:var(--shadow)}
+  .mem .f,.mem .b{position:absolute; inset:0; -webkit-backface-visibility:hidden; backface-visibility:hidden; border-radius:12px; display:grid; place-items:center; padding:6px; text-align:center; border:2px solid var(--line); box-shadow:var(--shadow)}
   .mem .f{background:var(--accent); color:var(--accent-ink); font-size:1.6rem}
   .mem .b{background:var(--panel); transform:rotateY(180deg); font-weight:700; font-size:.9rem; color:var(--ink)}
   .mem.got .b{border-color:var(--good); background:var(--good-soft)}
@@ -793,7 +794,7 @@
         Velocidade sobe com: temperatura, concentração, superfície de contato e <b>catalisador</b> (↓ energia de ativação via caminho alternativo — veja o gráfico).
         <b>Le Chatelier</b>: o equilíbrio desloca para MINIMIZAR a perturbação — ↑T favorece o sentido endotérmico; ↑P favorece o lado com menos mols gasosos.
         Catalisador <b>não desloca</b> equilíbrio, e Kc só muda com a temperatura.
-        <svg viewBox="0 0 560 190" style="margin-top:10px" role="img" aria-label="Gráfico de energia de ativação">
+        <svg viewBox="0 0 560 190" style="margin-top:10px; width:100%; height:auto" role="img" aria-label="Gráfico de energia de ativação">
           <line x1="50" y1="160" x2="530" y2="160" stroke="var(--muted)" stroke-width="2"/>
           <line x1="50" y1="160" x2="50" y2="20" stroke="var(--muted)" stroke-width="2"/>
           <text x="40" y="30" text-anchor="end" class="data">E</text>
@@ -2150,6 +2151,7 @@ $('#btnRace').addEventListener('click', ()=>{
   $('#note8').innerHTML = '🫧 Efervescência! O copo B está borbulhando MUITO mais…';
   let t = 0;
   const iv = setInterval(()=>{
+    if(document.hidden) return; /* pausa a corrida quando o app vai para segundo plano */
     t++;
     if(t <= 15) $('#timB').textContent = '⏱ ' + t + ' s';
     if(t === 15){
@@ -2581,7 +2583,7 @@ function confettiRain(){
   for(let i=0;i<44;i++){
     const c = document.createElement('div');
     c.className = 'confetti';
-    c.style.left = Math.random()*100 + 'vw';
+    c.style.left = Math.random()*96 + 'vw';
     c.style.background = colors[i % colors.length];
     c.style.animationDuration = (2.2 + Math.random()*2.2) + 's';
     c.style.animationDelay = (Math.random()*1.2) + 's';
@@ -2607,6 +2609,7 @@ $('#btnReset').addEventListener('click', ()=>{
   location.reload();
 });
 
+document.body.addEventListener('touchstart',function(){},{passive:true}); /* habilita :active no iOS Safari */
 if('serviceWorker' in navigator){ window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
 </script>
 </body>

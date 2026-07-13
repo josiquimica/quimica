@@ -26,9 +26,10 @@
       --shadow:0 6px 24px rgba(0,0,0,.4);}
   }
   *{box-sizing:border-box}
-  body{margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+  body{margin:0; min-height:100vh; min-height:100dvh; background:var(--bg); color:var(--ink);
     font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; overflow-x:hidden;
-    -webkit-text-size-adjust:100%; padding:0 16px 60px}
+    -webkit-text-size-adjust:100%;
+    padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(60px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
   .wrap{max-width:860px; margin:0 auto}
   header.top{padding:22px 0 8px}
   header.top h1{font-family:'Trebuchet MS',sans-serif; font-size:1.6rem; margin:0}
@@ -37,7 +38,7 @@
   .aviso{background:var(--panel); border:1.5px solid var(--line); border-left:5px solid var(--info);
     border-radius:12px; padding:12px 16px; margin:14px 0; font-size:.88rem; color:var(--muted)}
   .aviso b{color:var(--ink)}
-  .placar{position:sticky; top:0; z-index:30; background:var(--bg); padding:10px 0; display:flex;
+  .placar{position:-webkit-sticky; position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--bg); padding:10px 0; display:flex;
     flex-wrap:wrap; gap:8px; align-items:center; border-bottom:1.5px solid var(--line); margin-bottom:16px}
   .chip{background:var(--panel); border:1.5px solid var(--line); border-radius:999px;
     padding:6px 14px; font:inherit; font-size:.88rem; cursor:pointer; color:var(--ink)}
@@ -54,11 +55,12 @@
   .q-enun{margin:0 0 12px; white-space:pre-line}
   .q-enun img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line);
     border-radius:8px; padding:6px; margin:8px 0; display:block}
-  table.qt{border-collapse:collapse; margin:10px 0; font-size:.9rem; background:var(--panel2)}
+  table.qt{border-collapse:collapse; margin:10px 0; font-size:.9rem; background:var(--panel2);
+    display:block; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; width:fit-content}
   table.qt th, table.qt td{border:1px solid var(--line); padding:5px 12px; text-align:left}
   table.qt th{background:var(--panel2); font-weight:700}
   .eqs{background:var(--panel2); border:1px solid var(--line); border-radius:8px;
-    padding:8px 14px; margin:8px 0; font-size:.93rem}
+    padding:8px 14px; margin:8px 0; font-size:.93rem; overflow-x:auto; -webkit-overflow-scrolling:touch}
   .q-opts{display:grid; gap:8px}
   .q-opt{display:flex; align-items:flex-start; gap:10px; text-align:left;
     background:var(--panel2); border:1.5px solid var(--line); border-radius:10px;
@@ -317,7 +319,8 @@ const KEY='simuladoUECE';
 let resp={}; try{ resp=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
 let filtro='all';
 const lista=document.getElementById('lista');
-function salvar(){ localStorage.setItem(KEY, JSON.stringify(resp)); }
+function salvar(){ try{ localStorage.setItem(KEY, JSON.stringify(resp)); }catch(e){} }
+document.body.addEventListener('touchstart',function(){},{passive:true}); /* habilita :active no iOS Safari */
 function placar(){
   const qs=QS.filter(q=>filtro==='all'||q.t===filtro);
   const done=qs.filter(q=>resp[q.n]!=null);
