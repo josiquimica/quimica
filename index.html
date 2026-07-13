@@ -39,9 +39,9 @@
   a.card{display:flex; flex-direction:column; gap:8px; text-decoration:none; color:var(--ink);
     background:var(--panel); border:1.5px solid var(--line); border-radius:18px; padding:26px 24px;
     box-shadow:var(--shadow); transition:transform .18s, border-color .18s}
-  a.card:hover{transform:translateY(-5px)}
-  a.card.game:hover{border-color:var(--accent)}
-  a.card.book:hover{border-color:var(--calc)}
+  a.card:hover,a.card:active{transform:translateY(-5px)}
+  a.card.game:hover,a.card.game:active{border-color:var(--accent)}
+  a.card.book:hover,a.card.book:active{border-color:var(--calc)}
   .emoji{font-size:2.6rem}
   a.card h2{margin:0; font-size:1.3rem}
   a.card.game h2{color:var(--accent)} a.card.book h2{color:var(--calc)}

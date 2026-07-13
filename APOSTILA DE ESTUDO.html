@@ -129,7 +129,7 @@
   .field input,.field select{font:inherit; font-size:.95rem; padding:7px 9px; width:120px; border:1.5px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink)}
   .field input:focus,.field select:focus{outline:none; border-color:var(--calc)}
   .calcbox button.go{background:var(--calc); color:#fff; border:none; border-radius:8px; padding:9px 18px; font:inherit; font-weight:700; cursor:pointer; transition:transform .12s}
-  .calcbox button.go:hover{transform:translateY(-2px)}
+  .calcbox button.go:hover,.calcbox button.go:active{transform:translateY(-2px)}
   .calcout{margin-top:12px; font-size:.92rem; display:none}
   .calcout.show{display:block; animation:fadein .3s ease}
   .calcout .stepline{padding:4px 0 4px 26px; position:relative; border-left:2px solid var(--calc); margin-left:8px}
@@ -142,7 +142,7 @@
   #tutorBubble.hide{opacity:0; transform:translateY(10px) scale(.9); pointer-events:none}
   #tutorBubble b{color:var(--accent)}
   #tutorFace{flex:none; width:66px; height:66px; cursor:pointer; filter:drop-shadow(0 3px 8px rgba(0,0,0,.25)); transition:transform .3s}
-  #tutorFace:hover{transform:scale(1.08) rotate(-3deg)}
+  #tutorFace:hover,#tutorFace:active{transform:scale(1.08) rotate(-3deg)}
   #tutorFace.talk{animation:bob 1s ease-in-out infinite}
   @keyframes bob{50%{transform:translateY(-5px)}}
   #tutorClose{position:absolute; top:-8px; right:-8px; width:22px; height:22px; border-radius:50%; background:var(--muted); color:#fff; border:none; cursor:pointer; font-size:.8rem; line-height:1; display:grid; place-items:center}
