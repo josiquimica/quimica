@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🔬 Apostila de Ciências — Coreaú/CONSULPAM</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#2B8A3E">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ciências Coreaú">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+  :root{
+    --bg:#EDF4F2; --panel:#FFFFFF; --panel2:#F6FAF9; --ink:#132F36; --muted:#587179;
+    --line:#D5E2E0; --accent:#2B8A3E; --accent-soft:#E3F5E8;
+    --good:#2B8A3E; --good-soft:#E3F5E8; --bad:#C92A2A; --bad-soft:#FBE7E7;
+    --info:#1971C2; --info-soft:#E1EEFB; --warn:#B87708; --warn-soft:#FDF0DC;
+    --calc:#7048E8; --calc-soft:#EDE7FB; --shadow:0 2px 10px rgba(19,47,54,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E1B1E; --panel:#152A2F; --panel2:#1B3339; --ink:#E4EFED; --muted:#93ABA9;
+      --line:#28454B; --accent:#69C57A; --accent-soft:#1B3226;
+      --good:#69C57A; --good-soft:#1B3226; --bad:#F08A8A; --bad-soft:#3A2224;
+      --info:#74B4EC; --info-soft:#1B2E42; --warn:#F0B24E; --warn-soft:#3A2E1C;
+      --calc:#B197FC; --calc-soft:#251C3A; --shadow:0 2px 10px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; margin:0; padding:0 16px 90px; overflow-x:hidden; -webkit-text-size-adjust:100%}
+  h1,h2,h3,h4{font-family:'Trebuchet MS','Segoe UI',sans-serif; line-height:1.25; text-wrap:balance}
+  .wrap{max-width:860px; margin:0 auto}
+  a{color:var(--accent)}
+
+  header.top{padding:22px 0 14px; border-bottom:3px solid var(--accent); margin-bottom:16px}
+  header.top h1{font-size:1.7rem; margin:0 0 4px}
+  header.top p{margin:2px 0; color:var(--muted); font-size:.94rem}
+  .home-link{display:inline-block; margin:10px 0 0; font-size:.86rem; font-weight:700; text-decoration:none}
+  .print-tip{background:var(--info-soft); border-left:4px solid var(--info); border-radius:8px; padding:8px 14px; font-size:.9rem; margin-top:12px}
+
+  nav.toc{background:var(--panel); border:1.5px solid var(--line); border-radius:14px; padding:16px 20px; box-shadow:var(--shadow); margin-bottom:26px}
+  nav.toc h2{margin:0 0 8px; font-size:1.1rem; color:var(--accent)}
+  nav.toc ol{margin:6px 0; padding-left:22px}
+  nav.toc li{margin:3px 0}
+  nav.toc a{text-decoration:none; font-weight:600}
+  nav.toc a:hover{text-decoration:underline}
+  nav.toc .sub{font-size:.86rem; color:var(--muted); font-weight:400}
+
+  .part{margin:38px 0 10px; padding:14px 20px; border-radius:14px; background:linear-gradient(135deg,var(--accent),#40C057); color:#fff; box-shadow:var(--shadow)}
+  .part h2{margin:0; font-size:1.35rem}
+  .part p{margin:4px 0 0; opacity:.95; font-size:.9rem}
+
+  section.mod{background:var(--panel); border:1.5px solid var(--line); border-radius:14px; padding:20px 22px; margin:18px 0; box-shadow:var(--shadow)}
+  section.mod > h3{margin-top:0; font-size:1.25rem; color:var(--accent); border-bottom:2px solid var(--line); padding-bottom:8px}
+  .pomo{display:inline-block; font-family:Consolas,monospace; font-size:.72rem; background:var(--warn-soft); color:var(--warn); border-radius:999px; padding:2px 10px; margin-left:8px; vertical-align:middle}
+  section.mod h4{font-size:1.06rem; margin:20px 0 6px; color:var(--info)}
+  section.mod p{margin:8px 0}
+  section.mod ul,section.mod ol{margin:8px 0; padding-left:24px}
+  section.mod li{margin:4px 0}
+  b,strong{color:var(--ink)}
+  .term{color:var(--accent); font-weight:700}
+
+  .box{border-radius:10px; padding:12px 16px; margin:14px 0; font-size:.95rem}
+  .box b.tt{display:block; font-family:Consolas,monospace; font-size:.72rem; letter-spacing:.1em; margin-bottom:6px; text-transform:uppercase}
+  .concept{background:var(--info-soft); border-left:4px solid var(--info)} .concept b.tt{color:var(--info)}
+  .prova{background:var(--accent-soft); border-left:4px solid var(--accent)} .prova b.tt{color:var(--accent)}
+  .mnemo{background:var(--warn-soft); border-left:4px solid var(--warn)} .mnemo b.tt{color:var(--warn)}
+  .peg{background:var(--bad-soft); border-left:4px solid var(--bad)} .peg b.tt{color:var(--bad)}
+
+  table.data{border-collapse:collapse; width:100%; margin:14px 0; font-size:.9rem; overflow:hidden; border-radius:8px}
+  table.data th,table.data td{border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top}
+  table.data th{background:var(--panel2); color:var(--accent); font-family:Consolas,monospace; font-size:.78rem; letter-spacing:.04em}
+  table.data tr:nth-child(even) td{background:var(--panel2)}
+  .scroll{overflow-x:auto}
+
+  details.quiz{background:var(--panel2); border:1.5px solid var(--line); border-radius:10px; padding:10px 16px; margin:12px 0}
+  details.quiz summary{cursor:pointer; font-weight:700; color:var(--info)}
+  details.quiz summary::marker{color:var(--info)}
+  details.quiz .ans{margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); color:var(--good); font-weight:600}
+  .top-link{display:block; text-align:right; font-size:.8rem; margin-top:10px}
+
+  .tip{border-bottom:2px dotted var(--info); cursor:help; position:relative}
+  .tip:focus{outline:none}
+  .tip::after{content:attr(data-tip); position:absolute; left:50%; bottom:135%; transform:translateX(-50%) translateY(6px);
+    background:var(--ink); color:var(--bg); padding:8px 12px; border-radius:8px; font-size:.82rem; font-weight:400;
+    line-height:1.4; width:max-content; max-width:260px; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,.3);
+    opacity:0; pointer-events:none; transition:opacity .18s, transform .18s; z-index:50; white-space:normal;}
+  .tip::before{content:''; position:absolute; left:50%; bottom:135%; transform:translateX(-50%) translateY(6px);
+    border:6px solid transparent; border-top-color:var(--ink); margin-bottom:-6px; opacity:0; transition:opacity .18s; z-index:50;}
+  .tip:hover::after,.tip:focus::after,.tip:active::after,.tip:hover::before,.tip:focus::before,.tip:active::before{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  .xp-wrap{display:flex; align-items:center; gap:10px; margin-top:14px; flex-wrap:wrap}
+  .xp-badge{font-family:Consolas,monospace; font-weight:700; font-size:.9rem; background:var(--accent); color:#fff; border-radius:999px; padding:4px 14px}
+  .xp-bar{flex:1; min-width:160px; height:14px; background:var(--panel2); border:1.5px solid var(--line); border-radius:999px; overflow:hidden}
+  .xp-fill{height:100%; width:0; background:linear-gradient(90deg,var(--good),#69DB7C); transition:width .6s cubic-bezier(.34,1.3,.64,1)}
+  .xp-lvl{font-size:.82rem; color:var(--muted); font-family:Consolas,monospace}
+  .badges{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+  .badge{font-size:1.3rem; filter:grayscale(1) opacity(.3); transition:filter .4s, transform .4s}
+  .badge.on{filter:none; transform:scale(1.15)}
+
+  figure{margin:16px 0; text-align:center}
+  figure svg{max-width:100%; height:auto; background:var(--panel2); border:1.5px solid var(--line); border-radius:12px; padding:10px}
+  figcaption{font-size:.84rem; color:var(--muted); margin-top:6px; font-style:italic}
+  svg text{fill:var(--ink); font-family:'Segoe UI',sans-serif}
+  svg .lbl{font-size:12px; font-weight:700}
+  svg .sm{font-size:10px; fill:var(--muted)}
+
+  #tutor{position:fixed; right:16px; bottom:16px; z-index:80; display:flex; align-items:flex-end; gap:10px; max-width:min(360px,88vw)}
+  #tutorBubble{background:var(--panel); border:2px solid var(--accent); border-radius:16px 16px 4px 16px; padding:11px 15px; font-size:.9rem; box-shadow:0 6px 22px rgba(0,0,0,.22); position:relative; transition:opacity .3s, transform .3s}
+  #tutorBubble.hide{opacity:0; transform:translateY(10px) scale(.9); pointer-events:none}
+  #tutorBubble b{color:var(--accent)}
+  #tutorFace{flex:none; width:66px; height:66px; cursor:pointer; filter:drop-shadow(0 3px 8px rgba(0,0,0,.25)); transition:transform .3s}
+  #tutorFace:hover,#tutorFace:active{transform:scale(1.08) rotate(-3deg)}
+  #tutorFace.talk{animation:bob 1s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-5px)}}
+  #tutorClose{position:absolute; top:-8px; right:-8px; width:22px; height:22px; border-radius:50%; background:var(--muted); color:#fff; border:none; cursor:pointer; font-size:.8rem; line-height:1; display:grid; place-items:center}
+  .toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px); background:var(--good); color:#fff; padding:10px 20px; border-radius:999px; font-weight:700; box-shadow:0 6px 20px rgba(0,0,0,.3); opacity:0; transition:opacity .3s, transform .3s; z-index:90}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:640px){
+    body{padding:0 10px 80px}
+    header.top h1{font-size:1.35rem}
+    header.top{padding:16px 0 12px}
+    nav.toc{padding:13px 15px}
+    .part{padding:12px 15px} .part h2{font-size:1.15rem}
+    section.mod{padding:16px 14px}
+    section.mod > h3{font-size:1.12rem}
+    section.mod h4{font-size:1rem}
+    .box{padding:11px 13px; font-size:.9rem}
+    table.data{font-size:.82rem} table.data th,table.data td{padding:6px 8px}
+    #tutor{right:8px; bottom:8px; max-width:min(300px,92vw)}
+    #tutorFace{width:52px; height:52px}
+    #tutorBubble{font-size:.82rem; padding:9px 12px}
+    .xp-lvl{font-size:.76rem}
+  }
+  @media (max-width:380px){ header.top h1{font-size:1.18rem} #tutorFace{width:46px; height:46px} }
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
+  @media print{
+    body{padding:0; font-size:11pt} .top-link,nav.toc,.print-tip,#tutor,.xp-wrap,.badges{display:none}
+    section.mod,.box,figure svg{box-shadow:none; break-inside:avoid}
+    .part{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .tip{border:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top" id="topo">
+  <h1>🔬 Apostila de Ciências</h1>
+  <p><b>Professor de Ciências — Prefeitura de Coreaú/CE</b> · Banca <b>CONSULPAM</b> · Conhecimentos Específicos.</p>
+  <p>Organizada pelas três unidades temáticas da <b>BNCC</b>: <b>Matéria e Energia</b>, <b>Vida e Evolução</b> e <b>Terra e Universo</b> — cobrindo todo o programa de Ciências do Ensino Fundamental (anos finais).</p>
+  <a class="home-link" href="index.html">← Voltar ao portal</a>
+  <div class="print-tip">🖨️ <b>Dica:</b> aperte <b>Ctrl+P</b> para salvar em PDF. Estude <b>1 módulo por pomodoro (25 min)</b> — o tempo está em cada título. 💡 Toque nos termos <span class="tip" data-tip="Isto é um tooltip! Toque em qualquer palavra sublinhada de azul para ver a explicação rápida.">sublinhados</span> para dicas rápidas, e abra os <b>Teste-se</b> para ganhar XP com a <b>Profa. Bio</b>.</div>
+  <div class="xp-wrap">
+    <span class="xp-badge">⭐ <span id="xpPts">0</span> XP</span>
+    <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+    <span class="xp-lvl" id="xpLvl">Nível 1 · Estagiária</span>
+  </div>
+  <div class="badges" id="badges">
+    <span class="badge" data-b="materia" title="Estudou Matéria e Energia">⚗️</span>
+    <span class="badge" data-b="vida" title="Estudou Vida e Evolução">🧬</span>
+    <span class="badge" data-b="corpo" title="Estudou o Corpo Humano">🫀</span>
+    <span class="badge" data-b="eco" title="Estudou Ecologia">🌍</span>
+    <span class="badge" data-b="universo" title="Estudou Terra e Universo">🪐</span>
+    <span class="badge" data-b="mestre" title="500 XP — Mestra!">🏆</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>🗺️ Índice — clique para pular</h2>
+  <ol>
+    <li><b><a href="#u1">UNIDADE 1 · Matéria e Energia</a></b>
+      <ul style="list-style:none; padding-left:6px">
+        <li><a href="#m1">1.</a> <span class="sub">Matéria: propriedades, estados e mudanças de estado</span></li>
+        <li><a href="#m2">2.</a> <span class="sub">Substâncias, misturas e separação de misturas</span></li>
+        <li><a href="#m3">3.</a> <span class="sub">Átomo, elementos e Tabela Periódica</span></li>
+        <li><a href="#m4">4.</a> <span class="sub">Ligações, reações químicas e funções inorgânicas</span></li>
+        <li><a href="#m5">5.</a> <span class="sub">Física: movimento, forças e máquinas simples</span></li>
+        <li><a href="#m6">6.</a> <span class="sub">Energia, calor, luz, som, eletricidade e magnetismo</span></li>
+      </ul>
+    </li>
+    <li><b><a href="#u2">UNIDADE 2 · Vida e Evolução</a></b>
+      <ul style="list-style:none; padding-left:6px">
+        <li><a href="#m7">7.</a> <span class="sub">Citologia: a célula e suas organelas</span></li>
+        <li><a href="#m8">8.</a> <span class="sub">Bioquímica celular, divisão celular e tecidos</span></li>
+        <li><a href="#m9">9.</a> <span class="sub">Classificação dos seres vivos (5 reinos + vírus)</span></li>
+        <li><a href="#m10">10.</a> <span class="sub">Botânica e Zoologia</span></li>
+        <li><a href="#m11">11.</a> <span class="sub">Corpo humano: os sistemas</span></li>
+        <li><a href="#m12">12.</a> <span class="sub">Reprodução, sexualidade e saúde</span></li>
+        <li><a href="#m13">13.</a> <span class="sub">Genética e Evolução</span></li>
+        <li><a href="#m14">14.</a> <span class="sub">Ecologia e meio ambiente</span></li>
+      </ul>
+    </li>
+    <li><b><a href="#u3">UNIDADE 3 · Terra e Universo</a></b>
+      <ul style="list-style:none; padding-left:6px">
+        <li><a href="#m15">15.</a> <span class="sub">Astronomia: Sistema Solar, Lua e estações</span></li>
+        <li><a href="#m16">16.</a> <span class="sub">Terra: estrutura, rochas, solo e atmosfera</span></li>
+      </ul>
+    </li>
+    <li><b><a href="#final">✅ Reta final — resumo relâmpago</a></b></li>
+  </ol>
+</nav>
+
+<!-- ==================== UNIDADE 1 ==================== -->
+<div class="part" id="u1">
+  <h2>⚗️ Unidade 1 · Matéria e Energia</h2>
+  <p>Do átomo às reações químicas, e da força ao raio de luz: a base física e química das Ciências.</p>
+</div>
+
+<section class="mod" id="m1">
+  <h3>1. Matéria: propriedades, estados e mudanças <span class="pomo">⏱️ 25 min</span></h3>
+  <p><b class="term">Matéria</b> é tudo que tem massa e ocupa lugar no espaço. Um pedaço específico de matéria com forma e limites é um <b class="term">corpo</b>; um corpo fabricado para uma função é um <b>objeto</b>.</p>
+
+  <h4>Propriedades da matéria</h4>
+  <ul>
+    <li><b>Gerais</b> (todo tipo de matéria tem): massa, volume, <span class="tip" data-tip="Não podem ocupar o mesmo lugar ao mesmo tempo.">impenetrabilidade</span>, <span class="tip" data-tip="Pode ter o volume reduzido.">compressibilidade</span>, elasticidade, divisibilidade, inércia.</li>
+    <li><b>Específicas</b> (identificam a substância): <b>densidade</b>, <b>ponto de fusão</b> e <b>ponto de ebulição</b>, dureza, cor, brilho, maleabilidade, ductibilidade, solubilidade, magnetismo.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Conceito-chave</b> <b>Densidade = massa ÷ volume</b> (d = m/V). Se a densidade do objeto é menor que a da água (1 g/cm³), ele <b>flutua</b>; se é maior, <b>afunda</b>.</div>
+
+  <h4>Estados físicos e mudanças de estado</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Estado</th><th>Forma</th><th>Volume</th><th>Partículas</th></tr>
+    <tr><td>Sólido</td><td>Fixa</td><td>Fixo</td><td>Muito unidas, vibram no lugar</td></tr>
+    <tr><td>Líquido</td><td>Do recipiente</td><td>Fixo</td><td>Próximas, deslizam</td></tr>
+    <tr><td>Gasoso</td><td>Do recipiente</td><td>Variável</td><td>Afastadas, muito agitadas</td></tr>
+  </table></div>
+  <ul>
+    <li><b>Fusão:</b> sólido → líquido &nbsp;|&nbsp; <b>Solidificação:</b> líquido → sólido</li>
+    <li><b>Vaporização:</b> líquido → gás (evaporação lenta; ebulição com bolhas; calefação brusca) &nbsp;|&nbsp; <b>Condensação/liquefação:</b> gás → líquido</li>
+    <li><b>Sublimação:</b> sólido ⇄ gás direto (ex.: naftalina, gelo-seco)</li>
+  </ul>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> Aquecendo, as partículas se <b>agitam e afastam</b>: sólido → líquido → gás. Esfriando, é o caminho de volta.</div>
+  <div class="box peg"><b class="tt">Pegadinha</b> Durante a mudança de estado de uma substância pura, a <b>temperatura NÃO muda</b> (patamar no gráfico). Ex.: água ferve a 100 °C e fica em 100 °C até virar todo vapor.</div>
+
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Um cubo de gelo derrete e depois a água ferve. Que mudanças de estado ocorreram, nessa ordem?
+    <div class="ans">Fusão (sólido→líquido) e depois vaporização/ebulição (líquido→gás).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m2">
+  <h3>2. Substâncias, misturas e separação <span class="pomo">⏱️ 25 min</span></h3>
+  <ul>
+    <li><b class="term">Substância pura simples:</b> formada por <b>um só</b> elemento (O₂, H₂, Fe, O₃).</li>
+    <li><b class="term">Substância pura composta:</b> <b>dois ou mais</b> elementos combinados (H₂O, CO₂, NaCl).</li>
+    <li><b class="term">Mistura homogênea (solução):</b> uma só fase, aspecto uniforme (água + sal, ar, ligas metálicas).</li>
+    <li><b class="term">Mistura heterogênea:</b> duas ou mais fases visíveis (água + óleo, granito, água + areia).</li>
+  </ul>
+  <div class="box concept"><b class="tt">Conceito</b> <b>Fase</b> = cada porção uniforme da mistura. Água + óleo + areia = 3 fases (heterogênea). Todo gás com gás é sempre homogêneo.</div>
+
+  <h4>Métodos de separação de misturas</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Método</th><th>Serve para</th><th>Exemplo</th></tr>
+    <tr><td>Catação / peneiração</td><td>Sólidos de tamanhos diferentes</td><td>Separar feijão de pedras</td></tr>
+    <tr><td>Filtração</td><td>Sólido + líquido / sólido + gás</td><td>Coar café; filtro de ar</td></tr>
+    <tr><td>Decantação</td><td>Sólido + líquido ou 2 líquidos imiscíveis</td><td>Água + areia; funil de bromo (água/óleo)</td></tr>
+    <tr><td>Separação magnética</td><td>Material magnético + outro</td><td>Ferro na areia</td></tr>
+    <tr><td>Evaporação</td><td>Sólido dissolvido em líquido</td><td>Sal do mar (salinas)</td></tr>
+    <tr><td>Destilação simples</td><td>Sólido dissolvido + líquido (recupera o líquido)</td><td>Água salgada → água pura</td></tr>
+    <tr><td>Destilação fracionada</td><td>Líquidos miscíveis com PE diferentes</td><td>Petróleo; água + álcool</td></tr>
+  </table></div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Água + sal (homogênea) → separa por <b>evaporação/destilação</b>. Água + areia (heterogênea) → <b>filtração ou decantação</b>. Saber ligar a mistura ao método certo é clássico.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Como separar uma mistura de álcool e água, que se misturam totalmente?
+    <div class="ans">Destilação fracionada — o álcool ferve antes (78 °C) e é recolhido separado da água (100 °C).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m3">
+  <h3>3. Átomo, elementos e Tabela Periódica <span class="pomo">⏱️ 30 min</span></h3>
+  <h4>Modelos atômicos (a história)</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Modelo</th><th>Ideia central</th></tr>
+    <tr><td>Dalton (1808)</td><td>"Bola de bilhar": átomo maciço e indivisível.</td></tr>
+    <tr><td>Thomson (1897)</td><td>"Pudim de passas": esfera positiva com elétrons incrustados. Descobriu o elétron.</td></tr>
+    <tr><td>Rutherford (1911)</td><td>Núcleo pequeno, positivo e denso; eletrosfera vazia ao redor.</td></tr>
+    <tr><td>Bohr (1913)</td><td>Elétrons em camadas/níveis de energia definidos (órbitas).</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Conceito</b> O átomo tem <b>núcleo</b> (prótons + nêutrons) e <b>eletrosfera</b> (elétrons). Prótons têm carga +, elétrons −, nêutrons neutros. Átomo neutro: nº de prótons = nº de elétrons.</div>
+  <ul>
+    <li><b>Número atômico (Z)</b> = nº de prótons — identifica o elemento.</li>
+    <li><b>Número de massa (A)</b> = prótons + nêutrons. Logo, <b>nêutrons = A − Z</b>.</li>
+    <li><b>Íons:</b> <b>cátion</b> (perdeu elétron, carga +) e <b>ânion</b> (ganhou elétron, carga −).</li>
+    <li><b>Isótopos:</b> mesmo Z, A diferente (ex.: ¹²C e ¹⁴C).</li>
+  </ul>
+
+  <h4>Tabela Periódica</h4>
+  <ul>
+    <li><b>Períodos</b> (linhas, 1 a 7) = nº de camadas eletrônicas. <b>Grupos/famílias</b> (colunas, 1 a 18) = elementos com propriedades parecidas.</li>
+    <li><b>Metais</b> (maioria): brilho, conduzem calor/eletricidade, maleáveis. <b>Ametais/não-metais:</b> à direita. <b>Gases nobres:</b> grupo 18, estáveis.</li>
+    <li>Famílias importantes: <b>1</b> metais alcalinos, <b>2</b> alcalino-terrosos, <b>17</b> halogênios, <b>18</b> gases nobres.</li>
+  </ul>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> Camadas eletrônicas K L M N O P Q comportam no máximo <b>2, 8, 18, 32, 32, 18, 8</b> elétrons. A última camada define a reatividade.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Dado A e Z, calcular prótons, nêutrons e elétrons é quase certo. Ex.: Na (Z=11, A=23) → 11 p, 12 n, 11 e⁻ (átomo neutro).</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    O cloro tem Z = 17 e A = 35. Quantos nêutrons há no núcleo?
+    <div class="ans">n = A − Z = 35 − 17 = 18 nêutrons.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m4">
+  <h3>4. Ligações, reações e funções inorgânicas <span class="pomo">⏱️ 30 min</span></h3>
+  <h4>Ligações químicas</h4>
+  <ul>
+    <li><b class="term">Iônica:</b> metal + ametal; há <b>transferência</b> de elétrons e formação de íons (ex.: NaCl). Forma sólidos, altos pontos de fusão, conduzem eletricidade dissolvidos.</li>
+    <li><b class="term">Covalente (molecular):</b> ametal + ametal; há <b>compartilhamento</b> de elétrons (ex.: H₂O, CO₂, O₂).</li>
+    <li><b class="term">Metálica:</b> entre metais; "mar de elétrons" livres → conduzem eletricidade e calor.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Regra do octeto</b> Os átomos tendem a ficar com <b>8 elétrons</b> na última camada (como os gases nobres) para ganhar estabilidade.</div>
+
+  <h4>Reações químicas</h4>
+  <p>Uma <b>transformação química</b> forma novas substâncias. Evidências: mudança de cor, liberação de gás, formação de precipitado, mudança de temperatura. Reagentes → Produtos.</p>
+  <ul>
+    <li><b>Síntese/adição:</b> A + B → AB</li>
+    <li><b>Análise/decomposição:</b> AB → A + B</li>
+    <li><b>Simples troca (deslocamento):</b> A + BC → AC + B</li>
+    <li><b>Dupla troca:</b> AB + CD → AD + CB</li>
+  </ul>
+  <div class="box concept"><b class="tt">Lei de Lavoisier</b> "Na natureza nada se cria, nada se perde, tudo se transforma." A <b>massa se conserva</b>: massa dos reagentes = massa dos produtos. Por isso balanceamos as equações.</div>
+
+  <h4>Funções inorgânicas</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Função</th><th>Definição (Arrhenius)</th><th>Exemplos</th></tr>
+    <tr><td>Ácido</td><td>Libera H⁺ em água</td><td>HCl, H₂SO₄, HNO₃, vinagre</td></tr>
+    <tr><td>Base</td><td>Libera OH⁻ em água</td><td>NaOH, Ca(OH)₂, leite de magnésia</td></tr>
+    <tr><td>Sal</td><td>Ácido + base → sal + água (neutralização)</td><td>NaCl, NaHCO₃</td></tr>
+    <tr><td>Óxido</td><td>Composto binário com oxigênio</td><td>CO₂, H₂O, Fe₂O₃ (ferrugem)</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Escala de pH (0 a 14)</b> pH &lt; 7 <b>ácido</b> · pH = 7 <b>neutro</b> · pH &gt; 7 <b>básico/alcalino</b>. Indicadores como fenolftaleína e papel de tornassol acusam o caráter.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Neutralização: <b>ácido + base → sal + água</b>. Ex.: HCl + NaOH → NaCl + H₂O. Reconhecer ácidos (azedos) e bases (adstringentes/escorregadias) do dia a dia é comum.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Um suco tem pH 3 e a água sanitária pH 12. Qual é ácido e qual é básico?
+    <div class="ans">Suco (pH 3) é ácido; água sanitária (pH 12) é básica.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m5">
+  <h3>5. Física: movimento, forças e máquinas <span class="pomo">⏱️ 30 min</span></h3>
+  <h4>Movimento</h4>
+  <ul>
+    <li><b class="term">Referencial:</b> ponto a partir do qual se observa o movimento (repouso e movimento são relativos).</li>
+    <li><b class="term">Velocidade média = distância ÷ tempo</b> (v = Δs/Δt). Unidade padrão m/s (ou km/h).</li>
+    <li><b>Aceleração:</b> variação da velocidade no tempo. Se v aumenta, movimento acelerado; se diminui, retardado.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Converter km/h ↔ m/s</b> Divida por 3,6 para ir de km/h a m/s (ex.: 72 km/h ÷ 3,6 = 20 m/s). Multiplique por 3,6 no caminho inverso.</div>
+
+  <h4>Leis de Newton</h4>
+  <ol>
+    <li><b>1ª (Inércia):</b> um corpo permanece parado ou em MRU se a força resultante for zero.</li>
+    <li><b>2ª (Fundamental):</b> <b>F = m · a</b> (força = massa × aceleração).</li>
+    <li><b>3ª (Ação e reação):</b> a toda ação corresponde uma reação de mesma intensidade e sentido oposto.</li>
+  </ol>
+  <div class="box concept"><b class="tt">Peso × Massa</b> <b>Massa</b> (kg) é a quantidade de matéria, é constante. <b>Peso</b> (N) é a força da gravidade sobre a massa: <b>P = m · g</b> (g ≈ 10 m/s² na Terra). Na Lua o peso é menor, a massa é a mesma.</div>
+
+  <h4>Máquinas simples</h4>
+  <ul>
+    <li><b>Alavanca</b> (gangorra, tesoura, alicate): multiplica força usando um ponto de apoio.</li>
+    <li><b>Roldana/polia:</b> muda a direção da força; associadas, reduzem o esforço.</li>
+    <li><b>Plano inclinado, cunha e parafuso:</b> facilitam levantar/cortar/fixar com menos força.</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Aplicar F = m·a e P = m·g com números simples é frequente. Ex.: massa 5 kg, g = 10 → peso = 50 N.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Um carro percorre 100 km em 2 h. Qual a velocidade média?
+    <div class="ans">v = 100 ÷ 2 = 50 km/h.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m6">
+  <h3>6. Energia, calor, luz, som e eletricidade <span class="pomo">⏱️ 30 min</span></h3>
+  <div class="box concept"><b class="tt">Conceito</b> <b>Energia</b> é a capacidade de realizar trabalho. Ela se <b>transforma</b> (cinética, potencial, térmica, elétrica, luminosa, química, nuclear) mas <b>se conserva</b> — não se cria nem se destrói.</div>
+  <ul>
+    <li><b>Cinética:</b> energia do movimento. <b>Potencial gravitacional:</b> energia armazenada pela altura.</li>
+    <li><b>Fontes renováveis:</b> solar, eólica, hídrica, biomassa, maremotriz. <b>Não renováveis:</b> petróleo, carvão, gás natural, nuclear.</li>
+  </ul>
+
+  <h4>Calor e temperatura</h4>
+  <div class="box concept"><b class="tt">Não confunda</b> <b>Temperatura</b> mede a agitação das partículas (°C, K). <b>Calor</b> é energia térmica em trânsito, que flui <b>do corpo quente para o frio</b>. Propagação: condução (sólidos), convecção (fluidos), irradiação (ondas, sem meio).</div>
+
+  <h4>Óptica (luz)</h4>
+  <ul>
+    <li>A luz se propaga em linha reta e no vácuo a ~300.000 km/s.</li>
+    <li><b>Reflexão:</b> a luz "bate e volta" (espelhos). <b>Refração:</b> muda de velocidade/direção ao trocar de meio (canudo "quebrado" na água).</li>
+    <li>Cores: a luz branca se decompõe no arco-íris; um objeto tem a cor da luz que <b>reflete</b>.</li>
+  </ul>
+
+  <h4>Som e ondas</h4>
+  <p>O <b>som</b> é onda mecânica: precisa de meio material (não se propaga no vácuo). Propriedades: altura (grave/agudo = frequência), intensidade (forte/fraco), timbre (identifica a fonte).</p>
+
+  <h4>Eletricidade e magnetismo</h4>
+  <ul>
+    <li><b>Corrente elétrica:</b> movimento ordenado de elétrons. <b>Condutores</b> (metais) x <b>isolantes</b> (borracha, plástico).</li>
+    <li><b>Circuito:</b> fonte + fios + resistor. Em <b>série</b> (um caminho) x <b>paralelo</b> (vários caminhos).</li>
+    <li><b>Ímã:</b> tem polo norte e sul; polos iguais se repelem, opostos se atraem. Corrente elétrica gera campo magnético (eletroímã).</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Distinguir <b>calor × temperatura</b> e <b>reflexão × refração</b> é campeão de questões. Guarde: som NÃO anda no vácuo; luz anda.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Por que vemos o relâmpago antes de ouvir o trovão?
+    <div class="ans">A luz é muito mais rápida que o som, então a imagem chega ao observador antes do barulho.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<!-- ==================== UNIDADE 2 ==================== -->
+<div class="part" id="u2">
+  <h2>🧬 Unidade 2 · Vida e Evolução</h2>
+  <p>Da célula ao corpo humano, dos reinos à ecologia: o coração da prova de Ciências.</p>
+</div>
+
+<section class="mod" id="m7">
+  <h3>7. Citologia: a célula e suas organelas <span class="pomo">⏱️ 30 min</span></h3>
+  <div class="box concept"><b class="tt">Teoria celular</b> Todo ser vivo é formado por células; a célula é a unidade estrutural e funcional da vida; toda célula vem de outra célula.</div>
+  <ul>
+    <li><b class="term">Procarionte:</b> sem núcleo definido, DNA solto no citoplasma (bactérias e cianobactérias).</li>
+    <li><b class="term">Eucarionte:</b> núcleo definido por membrana (protistas, fungos, plantas, animais).</li>
+  </ul>
+  <h4>Partes e organelas</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Estrutura</th><th>Função</th></tr>
+    <tr><td>Membrana plasmática</td><td>Envolve a célula; seletiva (controla entrada/saída)</td></tr>
+    <tr><td>Citoplasma</td><td>Meio onde ficam as organelas</td></tr>
+    <tr><td>Núcleo</td><td>Guarda o DNA; comanda a célula</td></tr>
+    <tr><td>Mitocôndria</td><td>Respiração celular → produz energia (ATP)</td></tr>
+    <tr><td>Ribossomos</td><td>Síntese de proteínas</td></tr>
+    <tr><td>Retículo endoplasmático</td><td>Rugoso: proteínas · Liso: lipídios e detox</td></tr>
+    <tr><td>Complexo golgiense</td><td>Empacota e secreta substâncias</td></tr>
+    <tr><td>Lisossomos</td><td>Digestão intracelular</td></tr>
+    <tr><td>Cloroplasto (vegetal)</td><td>Fotossíntese (tem clorofila)</td></tr>
+    <tr><td>Vacúolo (vegetal)</td><td>Armazena água e substâncias</td></tr>
+    <tr><td>Parede celular (vegetal)</td><td>Dá sustentação e proteção</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Célula animal × vegetal</b> A <b>vegetal</b> tem parede celular, cloroplastos e grande vacúolo. A <b>animal</b> não tem parede nem cloroplasto, e tem lisossomos e centríolos.</div>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> Mitocôndria = a <b>usina</b> da célula (energia). Cloroplasto = a <b>cozinha</b> (produz o alimento na fotossíntese).</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> "Qual organela produz energia?" → mitocôndria. "Onde ocorre a fotossíntese?" → cloroplasto. "O que controla a célula?" → núcleo.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Cite duas estruturas presentes na célula vegetal e ausentes na animal.
+    <div class="ans">Parede celular e cloroplastos (também o grande vacúolo central).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m8">
+  <h3>8. Bioquímica, divisão celular e tecidos <span class="pomo">⏱️ 25 min</span></h3>
+  <h4>Composição química da célula</h4>
+  <ul>
+    <li><b>Água:</b> substância mais abundante; meio das reações.</li>
+    <li><b>Sais minerais:</b> cálcio (ossos), ferro (sangue), iodo (tireoide).</li>
+    <li><b>Carboidratos (glicídios):</b> energia rápida (glicose, amido).</li>
+    <li><b>Lipídios:</b> reserva de energia, isolamento térmico, hormônios.</li>
+    <li><b>Proteínas:</b> construção e função (enzimas, anticorpos); feitas de <b>aminoácidos</b>.</li>
+    <li><b>Vitaminas:</b> reguladoras; sua falta causa doenças (avitaminoses).</li>
+    <li><b>Ácidos nucleicos:</b> DNA e RNA — guardam e executam a informação genética.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Enzimas</b> São proteínas que aceleram reações (catalisadores biológicos). Modelo "chave-fechadura": cada enzima atua num substrato específico e sofre com temperatura e pH.</div>
+
+  <h4>Divisão celular</h4>
+  <ul>
+    <li><b class="term">Mitose:</b> 1 célula → 2 células <b>iguais</b> (mesmo nº de cromossomos). Faz crescimento, reparo e reprodução assexuada.</li>
+    <li><b class="term">Meiose:</b> 1 célula → 4 células com <b>metade</b> dos cromossomos (gametas). Base da reprodução sexuada e da variabilidade.</li>
+  </ul>
+
+  <h4>Tecidos e níveis de organização</h4>
+  <p><b>Célula → tecido → órgão → sistema → organismo.</b> Nos animais, quatro tecidos básicos:</p>
+  <ul>
+    <li><b>Epitelial:</b> reveste e protege (pele, mucosas).</li>
+    <li><b>Conjuntivo:</b> preenche e sustenta (osso, cartilagem, sangue, gordura).</li>
+    <li><b>Muscular:</b> contrai e move (liso, estriado esquelético, cardíaco).</li>
+    <li><b>Nervoso:</b> conduz impulsos (neurônios).</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Mitose = <b>iguais</b>, meiose = <b>gametas com metade</b>. E a ordem célula→tecido→órgão→sistema→organismo é pedida direto.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Que tipo de divisão celular produz os gametas (óvulos e espermatozoides)?
+    <div class="ans">Meiose — gera 4 células com metade dos cromossomos.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m9">
+  <h3>9. Classificação dos seres vivos <span class="pomo">⏱️ 25 min</span></h3>
+  <div class="box concept"><b class="tt">Taxonomia</b> Ordem do maior para o menor grupo: <b>Reino → Filo → Classe → Ordem → Família → Gênero → Espécie</b>. A <b>nomenclatura binomial</b> (Lineu) usa Gênero + espécie em latim, itálico: <i>Homo sapiens</i>.</div>
+  <h4>Os cinco reinos</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Reino</th><th>Características</th><th>Exemplos</th></tr>
+    <tr><td>Monera</td><td>Procariontes, unicelulares</td><td>Bactérias, cianobactérias</td></tr>
+    <tr><td>Protista</td><td>Eucariontes simples</td><td>Protozoários, algas</td></tr>
+    <tr><td>Fungi</td><td>Eucariontes, decompositores, heterótrofos</td><td>Cogumelos, bolores, leveduras</td></tr>
+    <tr><td>Plantae</td><td>Autótrofos (fotossíntese)</td><td>Musgos, samambaias, árvores</td></tr>
+    <tr><td>Animalia</td><td>Heterótrofos, multicelulares</td><td>Insetos, peixes, mamíferos</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Vírus — caso à parte</b> Não têm célula (acelulares) e só se reproduzem dentro de uma célula hospedeira. Por isso ficam <b>fora</b> dos cinco reinos. Causam gripe, dengue, covid, HIV.</div>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> Reinos: "<b>M</b>onera, <b>P</b>rotista, <b>F</b>ungi, <b>P</b>lantae, <b>A</b>nimalia". Autótrofo = produz seu alimento; heterótrofo = busca no ambiente.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Por que os vírus não são classificados em nenhum dos cinco reinos?
+    <div class="ans">Porque não são formados por células (são acelulares) e só se reproduzem parasitando células vivas.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m10">
+  <h3>10. Botânica e Zoologia <span class="pomo">⏱️ 30 min</span></h3>
+  <h4>Botânica — grupos de plantas</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Grupo</th><th>Vasos?</th><th>Sementes/flores?</th><th>Exemplo</th></tr>
+    <tr><td>Briófitas</td><td>Não</td><td>Não</td><td>Musgos</td></tr>
+    <tr><td>Pteridófitas</td><td>Sim</td><td>Não (esporos)</td><td>Samambaias</td></tr>
+    <tr><td>Gimnospermas</td><td>Sim</td><td>Semente, sem fruto</td><td>Pinheiros</td></tr>
+    <tr><td>Angiospermas</td><td>Sim</td><td>Flor e fruto</td><td>Maioria das plantas</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Fotossíntese</b> 6 CO₂ + 6 H₂O + luz → glicose (C₆H₁₂O₆) + 6 O₂. A planta capta gás carbônico e libera oxigênio, usando clorofila e luz solar. É a base das cadeias alimentares.</div>
+  <p>Funções vegetais: <b>respiração</b> (consome O₂, ocorre o tempo todo), <b>transpiração</b> (perde água pelas folhas) e <b>reprodução</b> (flor → fruto → semente; polinização).</p>
+
+  <h4>Zoologia — invertebrados e vertebrados</h4>
+  <ul>
+    <li><b>Invertebrados</b> (sem coluna): poríferos (esponjas), cnidários (águas-vivas), platelmintos, nematódeos, anelídeos (minhoca), moluscos (caramujo, polvo), artrópodes (insetos, aranhas, crustáceos) e equinodermos (estrela-do-mar).</li>
+    <li><b>Vertebrados</b> (com coluna): peixes, anfíbios, répteis, aves e mamíferos.</li>
+  </ul>
+  <div class="scroll"><table class="data">
+    <tr><th>Classe</th><th>Marca registrada</th></tr>
+    <tr><td>Peixes</td><td>Escamas, brânquias, pecilotérmicos</td></tr>
+    <tr><td>Anfíbios</td><td>Pele úmida; vida na água e na terra (sapo)</td></tr>
+    <tr><td>Répteis</td><td>Pele com escamas secas; ovos com casca (cobra, jacaré)</td></tr>
+    <tr><td>Aves</td><td>Penas, bico, homeotérmicas, ovíparas</td></tr>
+    <tr><td>Mamíferos</td><td>Pelos e glândulas mamárias; homeotérmicos</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Não confunda</b> <b>Homeotérmicos</b> (aves e mamíferos) mantêm a temperatura constante. <b>Pecilotérmicos/ectotérmicos</b> (peixes, anfíbios, répteis) dependem do ambiente.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Artrópodes são o maior grupo animal (insetos!). Fotossíntese: entra CO₂ + água + luz, sai O₂ + glicose — decore quem entra e quem sai.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Qual gás a planta libera e qual ela absorve na fotossíntese?
+    <div class="ans">Absorve gás carbônico (CO₂) e libera oxigênio (O₂).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m11">
+  <h3>11. Corpo humano: os sistemas <span class="pomo">⏱️ 35 min</span></h3>
+  <div class="scroll"><table class="data">
+    <tr><th>Sistema</th><th>Função</th><th>Órgãos-chave</th></tr>
+    <tr><td>Digestório</td><td>Digere e absorve nutrientes</td><td>Boca, esôfago, estômago, intestinos, fígado, pâncreas</td></tr>
+    <tr><td>Respiratório</td><td>Troca gasosa (entra O₂, sai CO₂)</td><td>Nariz, traqueia, brônquios, pulmões, alvéolos</td></tr>
+    <tr><td>Circulatório</td><td>Transporta sangue, gases e nutrientes</td><td>Coração, artérias, veias, capilares</td></tr>
+    <tr><td>Urinário/excretor</td><td>Filtra o sangue e elimina resíduos</td><td>Rins, ureteres, bexiga, uretra</td></tr>
+    <tr><td>Nervoso</td><td>Comanda, percebe e coordena</td><td>Cérebro, medula, nervos, neurônios</td></tr>
+    <tr><td>Endócrino</td><td>Produz hormônios (regulação)</td><td>Hipófise, tireoide, pâncreas, suprarrenais</td></tr>
+    <tr><td>Locomotor</td><td>Sustentação e movimento</td><td>Ossos, músculos, articulações</td></tr>
+    <tr><td>Reprodutor</td><td>Reprodução</td><td>Ovários/útero; testículos</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Digestão em resumo</b> Boca (mastigação + saliva/amilase) → estômago (suco gástrico, ácido) → intestino delgado (absorção, com bile do fígado e suco do pâncreas) → intestino grosso (água e formação das fezes).</div>
+  <div class="box concept"><b class="tt">Circulação</b> Coração tem 4 câmaras (2 átrios, 2 ventrículos). <b>Artérias</b> saem do coração; <b>veias</b> chegam. Pequena circulação: coração ↔ pulmões (oxigena o sangue). Grande circulação: coração ↔ corpo.</div>
+  <div class="box concept"><b class="tt">Respiração</b> Nos <b>alvéolos</b> pulmonares o sangue solta CO₂ e capta O₂ (hematose). Não confunda com a respiração celular (na mitocôndria).</div>
+  <ul>
+    <li><b>Sangue:</b> hemácias (transportam O₂), leucócitos (defesa), plaquetas (coagulação), plasma (líquido).</li>
+    <li><b>Neurônio:</b> corpo celular, dendritos (recebem) e axônio (transmite). Sistema nervoso central (encéfalo + medula) e periférico (nervos).</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Ligar o órgão ao sistema é clássico: alvéolo→respiratório, néfron/rim→urinário, neurônio→nervoso. E "artéria sai / veia chega" ao coração.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Em que órgão ocorre a maior parte da absorção dos nutrientes dos alimentos?
+    <div class="ans">No intestino delgado.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m12">
+  <h3>12. Reprodução, sexualidade e saúde <span class="pomo">⏱️ 30 min</span></h3>
+  <h4>Sistema reprodutor e reprodução humana</h4>
+  <ul>
+    <li><b>Feminino:</b> ovários (produzem óvulos e hormônios), tubas uterinas, útero, vagina. Ciclo menstrual ~28 dias; ovulação por volta do 14º dia.</li>
+    <li><b>Masculino:</b> testículos (produzem espermatozoides e testosterona), epidídimo, canais deferentes, pênis.</li>
+    <li><b>Fecundação:</b> espermatozoide + óvulo → zigoto → embrião → feto (gestação ~9 meses).</li>
+    <li><b>Puberdade:</b> caracteres sexuais secundários controlados por hormônios.</li>
+  </ul>
+  <h4>Métodos contraceptivos e ISTs</h4>
+  <ul>
+    <li><b>Métodos:</b> camisinha (única que também previne ISTs), pílula, DIU, laqueadura, vasectomia, tabelinha.</li>
+    <li><b>ISTs/DSTs:</b> HIV/aids, sífilis, gonorreia, HPV, hepatites B e C, herpes. Prevenção: preservativo e vacinação (HPV, hepatite B).</li>
+  </ul>
+  <h4>Saúde e doenças</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Causa</th><th>Exemplos</th></tr>
+    <tr><td>Vírus</td><td>Gripe, dengue, covid, sarampo, aids</td></tr>
+    <tr><td>Bactérias</td><td>Tuberculose, tétano, cólera, hanseníase</td></tr>
+    <tr><td>Protozoários</td><td>Malária, doença de Chagas, amebíase</td></tr>
+    <tr><td>Vermes</td><td>Ascaridíase (lombriga), teníase, esquistossomose</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Prevenção</b> Vacinas (imunização ativa), saneamento básico (água tratada e esgoto), higiene, alimentação equilibrada. <b>Vacina</b> estimula o corpo a produzir anticorpos; o <b>soro</b> já traz anticorpos prontos.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Ligar a doença ao agente (vírus/bactéria/protozoário/verme) e à forma de transmissão. Ex.: dengue → vírus, transmitido pelo mosquito <i>Aedes aegypti</i>.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Qual método contraceptivo também protege contra ISTs?
+    <div class="ans">A camisinha (preservativo).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m13">
+  <h3>13. Genética e Evolução <span class="pomo">⏱️ 30 min</span></h3>
+  <h4>Genética</h4>
+  <ul>
+    <li><b class="term">DNA:</b> molécula em dupla-hélice que guarda a informação genética. Trechos de DNA = <b>genes</b>. Os genes ficam nos <b>cromossomos</b> (humano: 46, ou 23 pares).</li>
+    <li><b>Gene dominante</b> (letra maiúscula, ex.: A) se manifesta mesmo em dose única; <b>recessivo</b> (a) só aparece em dose dupla (aa).</li>
+    <li><b>Genótipo</b> = conjunto de genes; <b>fenótipo</b> = característica observável (genótipo + ambiente).</li>
+  </ul>
+  <div class="box concept"><b class="tt">1ª Lei de Mendel</b> Cada característica é determinada por um par de fatores (alelos) que se separam na formação dos gametas. Cruzar Aa × Aa dá proporção fenotípica <b>3 dominantes : 1 recessivo</b>.</div>
+  <p><b>Herança do sexo:</b> mulher XX, homem XY. O pai determina o sexo do bebê (dá X ou Y). Exemplos de herança ligada ao X: daltonismo e hemofilia.</p>
+
+  <h4>Evolução</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Teoria</th><th>Ideia</th></tr>
+    <tr><td>Lamarck</td><td>Lei do uso e desuso + herança dos caracteres adquiridos (hoje refutada)</td></tr>
+    <tr><td>Darwin</td><td><b>Seleção natural</b>: o mais adaptado sobrevive e deixa mais descendentes</td></tr>
+  </table></div>
+  <p><b>Evidências da evolução:</b> fósseis, órgãos homólogos, semelhanças embrionárias, DNA. Fonte de variabilidade: <b>mutações</b> e reprodução sexuada.</p>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> Lamarck = "a girafa esticou o pescoço e passou isso adiante". Darwin = "já existiam girafas de pescoços variados; as de pescoço longo sobreviveram melhor" (seleção natural).</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Quadro de Mendel (proporção 3:1), diferença Lamarck × Darwin e o conceito de seleção natural são recorrentes.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    No cruzamento Aa × Aa, qual a proporção fenotípica esperada?
+    <div class="ans">3 dominantes : 1 recessivo.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m14">
+  <h3>14. Ecologia e meio ambiente <span class="pomo">⏱️ 35 min</span></h3>
+  <h4>Conceitos fundamentais</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Termo</th><th>Significado</th></tr>
+    <tr><td>Espécie</td><td>Seres semelhantes que se cruzam e geram descendentes férteis</td></tr>
+    <tr><td>População</td><td>Indivíduos da mesma espécie numa área</td></tr>
+    <tr><td>Comunidade (biocenose)</td><td>Conjunto de populações que convivem</td></tr>
+    <tr><td>Ecossistema</td><td>Comunidade + ambiente físico (fatores bióticos + abióticos)</td></tr>
+    <tr><td>Habitat</td><td>"Endereço" da espécie (onde vive)</td></tr>
+    <tr><td>Nicho ecológico</td><td>"Profissão" da espécie (o que faz no ecossistema)</td></tr>
+    <tr><td>Biosfera</td><td>Conjunto de todos os ecossistemas do planeta</td></tr>
+  </table></div>
+  <h4>Cadeias e teias alimentares</h4>
+  <ul>
+    <li><b>Produtores:</b> autótrofos (plantas, algas) — base da cadeia.</li>
+    <li><b>Consumidores:</b> primários (herbívoros), secundários e terciários (carnívoros).</li>
+    <li><b>Decompositores:</b> fungos e bactérias — reciclam a matéria.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Fluxo de energia</b> A energia flui em <b>sentido único</b> (sol → produtores → consumidores) e diminui a cada nível trófico. Já a <b>matéria é reciclada</b> pelos ciclos biogeoquímicos.</div>
+  <p><b>Ciclos biogeoquímicos:</b> água, carbono, oxigênio e nitrogênio circulam entre seres vivos e ambiente.</p>
+
+  <h4>Relações ecológicas</h4>
+  <ul>
+    <li><b>Harmônicas:</b> mutualismo/protocooperação, comensalismo, sociedade, colônia.</li>
+    <li><b>Desarmônicas:</b> competição, predação, parasitismo, amensalismo.</li>
+  </ul>
+
+  <h4>Biomas brasileiros e impactos ambientais</h4>
+  <p><b>Biomas:</b> Amazônia, Cerrado, Caatinga (do sertão cearense!), Mata Atlântica, Pantanal e Pampa.</p>
+  <ul>
+    <li><b>Poluição:</b> do ar (efeito estufa, chuva ácida, buraco na camada de ozônio), da água (esgoto, eutrofização) e do solo (lixo, agrotóxicos).</li>
+    <li><b>Desenvolvimento sustentável:</b> usar os recursos sem comprometer as gerações futuras (3 R's: reduzir, reutilizar, reciclar).</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Diferenciar <b>habitat × nicho</b>, ordenar a cadeia alimentar (produtor→consumidores→decompositor) e reconhecer a <b>Caatinga</b> como bioma nordestino são certeiros.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Na cadeia capim → gafanhoto → sapo → cobra, quem é o produtor e quem é o consumidor primário?
+    <div class="ans">Produtor: capim. Consumidor primário: gafanhoto (herbívoro).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<!-- ==================== UNIDADE 3 ==================== -->
+<div class="part" id="u3">
+  <h2>🪐 Unidade 3 · Terra e Universo</h2>
+  <p>Astronomia e as camadas do nosso planeta.</p>
+</div>
+
+<section class="mod" id="m15">
+  <h3>15. Astronomia: Sistema Solar, Lua e estações <span class="pomo">⏱️ 25 min</span></h3>
+  <ul>
+    <li><b>Sistema Solar:</b> o Sol (estrela) e 8 planetas. Ordem a partir do Sol: <b>Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano, Netuno</b>.</li>
+    <li><b>Rochosos/internos:</b> Mercúrio, Vênus, Terra, Marte. <b>Gasosos/externos:</b> Júpiter, Saturno, Urano, Netuno.</li>
+  </ul>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> "<b>Me</b>u <b>V</b>izinho <b>T</b>oca <b>M</b>úsica <b>J</b>usto <b>S</b>ó por <b>U</b>ma <b>N</b>oite" → Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano, Netuno.</div>
+  <h4>Movimentos da Terra</h4>
+  <ul>
+    <li><b>Rotação:</b> gira em torno do próprio eixo (~24 h) → dia e noite.</li>
+    <li><b>Translação:</b> volta ao redor do Sol (~365 dias) → ano e, junto à inclinação do eixo, as <b>estações</b>.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Fases da Lua</b> Nova, Crescente, Cheia e Minguante (movimento da Lua ao redor da Terra). <b>Eclipse solar:</b> Lua entre Sol e Terra. <b>Eclipse lunar:</b> Terra entre Sol e Lua.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Rotação → dia/noite; translação → ano/estações. Não troque! E as marés são influenciadas pela Lua.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Qual movimento da Terra é responsável pela sucessão dos dias e das noites?
+    <div class="ans">A rotação (giro em torno do próprio eixo).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="m16">
+  <h3>16. Terra: estrutura, rochas, solo e atmosfera <span class="pomo">⏱️ 25 min</span></h3>
+  <h4>Estrutura interna</h4>
+  <ul>
+    <li><b>Crosta</b> (litosfera, onde vivemos), <b>manto</b> (rocha pastosa) e <b>núcleo</b> (metálico, muito quente).</li>
+    <li><b>Placas tectônicas:</b> a crosta é dividida em placas que se movem → terremotos, vulcões e formação de montanhas.</li>
+  </ul>
+  <h4>Rochas e solo</h4>
+  <ul>
+    <li><b>Rochas:</b> magmáticas/ígneas (do magma, ex.: basalto, granito), sedimentares (por deposição, ex.: arenito, calcário) e metamórficas (transformadas por calor/pressão, ex.: mármore).</li>
+    <li><b>Solo:</b> formado pela decomposição das rochas + matéria orgânica (húmus). Camadas (horizontes) e tipos (arenoso, argiloso, humoso). Cuidados: evitar erosão, rotação de culturas, adubação.</li>
+  </ul>
+  <h4>Água e atmosfera</h4>
+  <ul>
+    <li><b>Ciclo da água:</b> evaporação → condensação → precipitação → infiltração/escoamento. A maior parte da água é salgada; doce é minoria.</li>
+    <li><b>Atmosfera:</b> camadas (troposfera, estratosfera...). O ar é mistura de gases (~78% N₂, ~21% O₂). A <b>camada de ozônio</b> filtra o UV.</li>
+    <li><b>Tempo × clima:</b> tempo é o estado atmosférico do momento; clima é o padrão ao longo dos anos.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Efeito estufa</b> É natural e mantém a Terra aquecida; o problema é a <b>intensificação</b> pela queima de combustíveis fósseis, que causa o aquecimento global.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Ordem crosta→manto→núcleo, tipos de rocha e a diferença <b>tempo × clima</b> aparecem com frequência.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Qual a diferença entre tempo e clima?
+    <div class="ans">Tempo é a condição atmosférica de um momento/dia; clima é o padrão médio de uma região ao longo de muitos anos.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<!-- ==================== RETA FINAL ==================== -->
+<div class="part" id="final">
+  <h2>✅ Reta final — resumo relâmpago</h2>
+  <p>Leia na véspera da prova. São os "quase certos" da CONSULPAM em Ciências.</p>
+</div>
+<section class="mod">
+  <ul>
+    <li><b>Densidade</b> = m/V; menor que a água → flutua.</li>
+    <li>Mudança de estado de substância pura → <b>temperatura constante</b>.</li>
+    <li><b>Nêutrons = A − Z</b>; átomo neutro: prótons = elétrons.</li>
+    <li>Ligações: iônica (transfere), covalente (compartilha), metálica (mar de elétrons).</li>
+    <li><b>Ácido + base → sal + água</b>; pH &lt; 7 ácido, &gt; 7 básico.</li>
+    <li>Newton: <b>F = m·a</b>; peso <b>P = m·g</b> (g ≈ 10).</li>
+    <li>Calor flui do quente para o frio; som não anda no vácuo, luz anda.</li>
+    <li>Mitocôndria = energia; cloroplasto = fotossíntese; núcleo = comando.</li>
+    <li>Mitose = células iguais; meiose = gametas com metade dos cromossomos.</li>
+    <li>Fotossíntese: entra CO₂ + H₂O + luz, sai O₂ + glicose.</li>
+    <li>Artéria <b>sai</b>, veia <b>chega</b> ao coração; absorção no intestino delgado.</li>
+    <li>Camisinha previne gravidez <b>e</b> ISTs.</li>
+    <li>Mendel Aa × Aa → <b>3:1</b>; Darwin = seleção natural.</li>
+    <li>Habitat = onde vive; nicho = o que faz. Caatinga = bioma nordestino.</li>
+    <li>Rotação → dia/noite; translação → ano/estações.</li>
+    <li>Crosta → manto → núcleo; tempo ≠ clima.</li>
+  </ul>
+  <div class="box concept" style="text-align:center"><b class="tt">Profa. Bio diz</b> Você chegou ao fim, Josi! 🌱 Revise a reta final, faça o <b>Jogo de Ciências</b> e o <b>Simulado</b>. Confie no seu esforço — você vai arrasar em Coreaú! 💚</div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+</div>
+
+<!-- ===== avatar tutor ===== -->
+<div id="tutor">
+  <div id="tutorBubble">
+    <button id="tutorClose" onclick="document.getElementById('tutorBubble').classList.add('hide')" aria-label="Fechar">✕</button>
+    <span id="tutorText">Oi, Josi! 👋 Eu sou a <b>Profa. Bio</b>. Estude um módulo por vez e abra os <b>Teste-se</b> — cada um vira XP lá em cima! 🌱</span>
+  </div>
+  <svg id="tutorFace" viewBox="0 0 100 100" onclick="tutorTip()" role="img" aria-label="Professora Bio, sua tutora">
+    <circle cx="50" cy="50" r="46" fill="#2B8A3E"/>
+    <circle cx="50" cy="54" r="34" fill="#F1C7A3" stroke="#132F36" stroke-width="2"/>
+    <path d="M16,50 Q20,20 50,20 Q80,20 84,50 Q84,38 50,34 Q16,38 16,50 Z" fill="#3B2A1A"/>
+    <circle cx="38" cy="52" r="8" fill="#fff" stroke="#132F36" stroke-width="1.5"/>
+    <circle cx="62" cy="52" r="8" fill="#fff" stroke="#132F36" stroke-width="1.5"/>
+    <circle cx="39" cy="53" r="3.5" fill="#132F36"/>
+    <circle cx="63" cy="53" r="3.5" fill="#132F36"/>
+    <path d="M30,50 L46,48 M54,48 L70,50" stroke="#132F36" stroke-width="2" fill="none"/>
+    <path d="M40,66 Q50,74 60,66" stroke="#132F36" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="30" cy="63" r="4" fill="#F783AC" opacity=".6"/><circle cx="70" cy="63" r="4" fill="#F783AC" opacity=".6"/>
+    <rect x="72" y="30" width="16" height="12" rx="2" fill="#132F36" transform="rotate(-15 80 36)"/>
+    <text x="80" y="39" text-anchor="middle" font-size="9" fill="#8CE99A" transform="rotate(-15 80 36)">🌿</text>
+  </svg>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const SAY = {
+  idle:['Explique o conceito em voz alta — é a Técnica Feynman! 🗣️','Errar faz parte, refaça depois. 💪','Cada Teste-se vira XP lá em cima! ⭐','Liga sempre o conceito ao dia a dia. 🌍'],
+  levelup:'🎉 Subiu de nível, Josi! Você está dominando as Ciências!',
+  mestre:'🏆 500 XP! Você é oficialmente uma MESTRA das Ciências!'
+};
+let tutorTimer;
+function tutorSay(msg, talk=true){
+  const b=$('#tutorBubble'); b.classList.remove('hide');
+  $('#tutorText').innerHTML = msg;
+  const f=$('#tutorFace'); if(talk){ f.classList.add('talk'); clearTimeout(tutorTimer); tutorTimer=setTimeout(()=>f.classList.remove('talk'),1600); }
+}
+function tutorTip(){ tutorSay(SAY.idle[Math.floor(Math.random()*SAY.idle.length)]); }
+
+const GKEY='ciencias-coreau-xp';
+let G={xp:0, badges:{}};
+try{ const s=JSON.parse(localStorage.getItem(GKEY)||'{}'); if(s.xp){G.xp=s.xp; G.badges=s.badges||{};} }catch(e){}
+const LEVELS=[[0,'Estagiária'],[80,'Monitora'],[180,'Bióloga Jr.'],[320,'Cientista'],[500,'Mestra em Ciências']];
+function levelName(xp){ let n='Estagiária',i=1; LEVELS.forEach((L,k)=>{ if(xp>=L[0]){n=L[1]; i=k+1;} }); return {n,i}; }
+function renderG(){
+  $('#xpPts').textContent=G.xp;
+  const {n,i}=levelName(G.xp);
+  $('#xpLvl').textContent='Nível '+i+' · '+n;
+  const cur=LEVELS[i-1][0], next=(LEVELS[i]?LEVELS[i][0]:cur+1);
+  const pct=Math.min(100,((G.xp-cur)/(next-cur))*100);
+  $('#xpFill').style.width=pct+'%';
+  document.querySelectorAll('.badge').forEach(b=>b.classList.toggle('on',!!G.badges[b.dataset.b]));
+}
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+function addXP(pts, badge){
+  const before=levelName(G.xp).i;
+  G.xp+=pts;
+  if(badge) G.badges[badge]=1;
+  if(G.xp>=500) G.badges.mestre=1;
+  const after=levelName(G.xp).i;
+  try{ localStorage.setItem(GKEY,JSON.stringify(G)); }catch(e){}
+  renderG();
+  toast('+'+pts+' XP! ⭐');
+  if(after>before){ setTimeout(()=>{ tutorSay(G.badges.mestre&&G.xp>=500?SAY.mestre:SAY.levelup); toast('🎉 Nível '+after+'!'); },600); }
+}
+renderG();
+
+/* XP + badge por seção ao abrir os Teste-se */
+const SEC_BADGE={m1:'materia',m2:'materia',m3:'materia',m4:'materia',m5:'materia',m6:'materia',
+  m7:'vida',m8:'vida',m9:'vida',m10:'vida',m11:'corpo',m12:'corpo',m13:'vida',m14:'eco',
+  m15:'universo',m16:'universo'};
+document.querySelectorAll('details.quiz').forEach(d=>{
+  d.addEventListener('toggle', ()=>{ if(d.open && !d.dataset.xp){
+    d.dataset.xp='1';
+    const sec=d.closest('section.mod'); const badge=sec?SEC_BADGE[sec.id]:null;
+    addXP(10, badge);
+  }});
+});
+
+setInterval(()=>{ if(!$('#tutorBubble').classList.contains('hide') && Math.random()<.4) tutorTip(); }, 45000);
+if('serviceWorker' in navigator){ window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
+</script>
+</body>
+</html>

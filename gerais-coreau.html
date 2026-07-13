@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>📘 Conhecimentos Gerais e Pedagógicos — Coreaú/CONSULPAM</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#1971C2">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Gerais Coreaú">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+  :root{
+    --bg:#EDF4F2; --panel:#FFFFFF; --panel2:#F6FAF9; --ink:#132F36; --muted:#587179;
+    --line:#D5E2E0; --accent:#1971C2; --accent-soft:#E1EEFB;
+    --good:#2B8A3E; --good-soft:#E3F5E8; --bad:#C92A2A; --bad-soft:#FBE7E7;
+    --info:#1971C2; --info-soft:#E1EEFB; --warn:#B87708; --warn-soft:#FDF0DC;
+    --calc:#7048E8; --calc-soft:#EDE7FB; --shadow:0 2px 10px rgba(19,47,54,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E1B1E; --panel:#152A2F; --panel2:#1B3339; --ink:#E4EFED; --muted:#93ABA9;
+      --line:#28454B; --accent:#74B4EC; --accent-soft:#1B2E42;
+      --good:#69C57A; --good-soft:#1B3226; --bad:#F08A8A; --bad-soft:#3A2224;
+      --info:#74B4EC; --info-soft:#1B2E42; --warn:#F0B24E; --warn-soft:#3A2E1C;
+      --calc:#B197FC; --calc-soft:#251C3A; --shadow:0 2px 10px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; margin:0; padding:0 16px 90px; overflow-x:hidden; -webkit-text-size-adjust:100%}
+  h1,h2,h3,h4{font-family:'Trebuchet MS','Segoe UI',sans-serif; line-height:1.25; text-wrap:balance}
+  .wrap{max-width:860px; margin:0 auto}
+  a{color:var(--accent)}
+  header.top{padding:22px 0 14px; border-bottom:3px solid var(--accent); margin-bottom:16px}
+  header.top h1{font-size:1.7rem; margin:0 0 4px}
+  header.top p{margin:2px 0; color:var(--muted); font-size:.94rem}
+  .home-link{display:inline-block; margin:10px 0 0; font-size:.86rem; font-weight:700; text-decoration:none}
+  .print-tip{background:var(--info-soft); border-left:4px solid var(--info); border-radius:8px; padding:8px 14px; font-size:.9rem; margin-top:12px}
+  nav.toc{background:var(--panel); border:1.5px solid var(--line); border-radius:14px; padding:16px 20px; box-shadow:var(--shadow); margin-bottom:26px}
+  nav.toc h2{margin:0 0 8px; font-size:1.1rem; color:var(--accent)}
+  nav.toc ol{margin:6px 0; padding-left:22px}
+  nav.toc li{margin:3px 0}
+  nav.toc a{text-decoration:none; font-weight:600}
+  nav.toc a:hover{text-decoration:underline}
+  nav.toc .sub{font-size:.86rem; color:var(--muted); font-weight:400}
+  .part{margin:38px 0 10px; padding:14px 20px; border-radius:14px; background:linear-gradient(135deg,var(--accent),#4DABF7); color:#fff; box-shadow:var(--shadow)}
+  .part h2{margin:0; font-size:1.35rem}
+  .part p{margin:4px 0 0; opacity:.95; font-size:.9rem}
+  section.mod{background:var(--panel); border:1.5px solid var(--line); border-radius:14px; padding:20px 22px; margin:18px 0; box-shadow:var(--shadow)}
+  section.mod > h3{margin-top:0; font-size:1.25rem; color:var(--accent); border-bottom:2px solid var(--line); padding-bottom:8px}
+  .pomo{display:inline-block; font-family:Consolas,monospace; font-size:.72rem; background:var(--warn-soft); color:var(--warn); border-radius:999px; padding:2px 10px; margin-left:8px; vertical-align:middle}
+  section.mod h4{font-size:1.06rem; margin:20px 0 6px; color:var(--info)}
+  section.mod p{margin:8px 0}
+  section.mod ul,section.mod ol{margin:8px 0; padding-left:24px}
+  section.mod li{margin:4px 0}
+  b,strong{color:var(--ink)}
+  .term{color:var(--accent); font-weight:700}
+  .box{border-radius:10px; padding:12px 16px; margin:14px 0; font-size:.95rem}
+  .box b.tt{display:block; font-family:Consolas,monospace; font-size:.72rem; letter-spacing:.1em; margin-bottom:6px; text-transform:uppercase}
+  .concept{background:var(--info-soft); border-left:4px solid var(--info)} .concept b.tt{color:var(--info)}
+  .prova{background:var(--good-soft); border-left:4px solid var(--good)} .prova b.tt{color:var(--good)}
+  .mnemo{background:var(--warn-soft); border-left:4px solid var(--warn)} .mnemo b.tt{color:var(--warn)}
+  .peg{background:var(--bad-soft); border-left:4px solid var(--bad)} .peg b.tt{color:var(--bad)}
+  table.data{border-collapse:collapse; width:100%; margin:14px 0; font-size:.9rem; overflow:hidden; border-radius:8px}
+  table.data th,table.data td{border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top}
+  table.data th{background:var(--panel2); color:var(--accent); font-family:Consolas,monospace; font-size:.78rem; letter-spacing:.04em}
+  table.data tr:nth-child(even) td{background:var(--panel2)}
+  .scroll{overflow-x:auto}
+  details.quiz{background:var(--panel2); border:1.5px solid var(--line); border-radius:10px; padding:10px 16px; margin:12px 0}
+  details.quiz summary{cursor:pointer; font-weight:700; color:var(--info)}
+  details.quiz summary::marker{color:var(--info)}
+  details.quiz .ans{margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); color:var(--good); font-weight:600}
+  .top-link{display:block; text-align:right; font-size:.8rem; margin-top:10px}
+  .tip{border-bottom:2px dotted var(--info); cursor:help; position:relative}
+  .tip::after{content:attr(data-tip); position:absolute; left:50%; bottom:135%; transform:translateX(-50%) translateY(6px);
+    background:var(--ink); color:var(--bg); padding:8px 12px; border-radius:8px; font-size:.82rem; font-weight:400;
+    line-height:1.4; width:max-content; max-width:260px; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,.3);
+    opacity:0; pointer-events:none; transition:opacity .18s, transform .18s; z-index:50; white-space:normal;}
+  .tip:hover::after,.tip:focus::after,.tip:active::after{opacity:1; transform:translateX(-50%) translateY(0)}
+  .xp-wrap{display:flex; align-items:center; gap:10px; margin-top:14px; flex-wrap:wrap}
+  .xp-badge{font-family:Consolas,monospace; font-weight:700; font-size:.9rem; background:var(--accent); color:#fff; border-radius:999px; padding:4px 14px}
+  .xp-bar{flex:1; min-width:160px; height:14px; background:var(--panel2); border:1.5px solid var(--line); border-radius:999px; overflow:hidden}
+  .xp-fill{height:100%; width:0; background:linear-gradient(90deg,var(--good),#69DB7C); transition:width .6s cubic-bezier(.34,1.3,.64,1)}
+  .xp-lvl{font-size:.82rem; color:var(--muted); font-family:Consolas,monospace}
+  @media (max-width:640px){
+    body{padding:0 10px 70px}
+    header.top h1{font-size:1.35rem}
+    .part{padding:12px 15px} .part h2{font-size:1.15rem}
+    section.mod{padding:16px 14px}
+    section.mod > h3{font-size:1.12rem}
+    table.data{font-size:.82rem} table.data th,table.data td{padding:6px 8px}
+  }
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
+  @media print{
+    body{padding:0; font-size:11pt} .top-link,nav.toc,.print-tip,.xp-wrap{display:none}
+    section.mod,.box{box-shadow:none; break-inside:avoid}
+    .part{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .tip{border:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top" id="topo">
+  <h1>📘 Conhecimentos Gerais e Pedagógicos</h1>
+  <p><b>Professor — Prefeitura de Coreaú/CE</b> · Banca <b>CONSULPAM</b>.</p>
+  <p>A parte de <b>Conhecimentos Gerais</b> da prova (Português, Raciocínio Lógico/Matemática, Informática, Legislação e o Município de Coreaú) somada à <b>Legislação Educacional e Conhecimentos Pedagógicos</b> cobrados dos professores.</p>
+  <a class="home-link" href="index.html">← Voltar ao portal</a>
+  <div class="print-tip">🖨️ <b>Ctrl+P</b> salva em PDF. Abra os <b>Teste-se</b> para ganhar XP. Estrutura típica CONSULPAM: <b>Português (10)</b> + <b>Informática/Legislação/Raciocínio/Município (10)</b> + <b>Específicos de Ciências (20)</b>, e ainda a <b>Prova Didática</b>.</div>
+  <div class="xp-wrap">
+    <span class="xp-badge">⭐ <span id="xpPts">0</span> XP</span>
+    <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+    <span class="xp-lvl" id="xpLvl">Nível 1</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>🗺️ Índice</h2>
+  <ol>
+    <li><b><a href="#p1">PARTE 1 · Conhecimentos Gerais</a></b>
+      <ul style="list-style:none; padding-left:6px">
+        <li><a href="#g1">A.</a> <span class="sub">Língua Portuguesa</span></li>
+        <li><a href="#g2">B.</a> <span class="sub">Raciocínio Lógico e Matemática</span></li>
+        <li><a href="#g3">C.</a> <span class="sub">Informática Básica</span></li>
+        <li><a href="#g4">D.</a> <span class="sub">Legislação e Noções de Direito</span></li>
+        <li><a href="#g5">E.</a> <span class="sub">Conhecimentos sobre Coreaú-CE</span></li>
+      </ul>
+    </li>
+    <li><b><a href="#p2">PARTE 2 · Legislação Educacional e Pedagogia</a></b>
+      <ul style="list-style:none; padding-left:6px">
+        <li><a href="#g6">F.</a> <span class="sub">LDB, ECA, Constituição e PNE</span></li>
+        <li><a href="#g7">G.</a> <span class="sub">BNCC e Currículo do Ceará</span></li>
+        <li><a href="#g8">H.</a> <span class="sub">Teóricos, tendências e didática</span></li>
+        <li><a href="#g9">I.</a> <span class="sub">Avaliação, planejamento e inclusão</span></li>
+        <li><a href="#g10">J.</a> <span class="sub">A Prova Didática — como se preparar</span></li>
+      </ul>
+    </li>
+  </ol>
+</nav>
+
+<!-- ============ PARTE 1 ============ -->
+<div class="part" id="p1"><h2>📗 Parte 1 · Conhecimentos Gerais</h2><p>A base comum a todos os cargos.</p></div>
+
+<section class="mod" id="g1">
+  <h3>A. Língua Portuguesa <span class="pomo">⏱️ 30 min</span></h3>
+  <h4>Interpretação de texto (o que mais cai!)</h4>
+  <ul>
+    <li>Diferencie <b>ideia principal</b> × detalhes; <b>tema</b> × título.</li>
+    <li><b>Explícito</b> (está escrito) × <b>implícito</b> (subentendido/pressuposto).</li>
+    <li>Cuidado com <b>"segundo o texto"</b>: responda pelo texto, não pela sua opinião.</li>
+    <li>Tipos textuais: narração, descrição, dissertação (argumentativa/expositiva), injunção. Gêneros: notícia, crônica, carta, edital, e-mail, receita…</li>
+  </ul>
+  <h4>Ortografia, acentuação e crase</h4>
+  <ul>
+    <li>Acentuam-se todas as <b>proparoxítonas</b>; oxítonas terminadas em a(s), e(s), o(s), em, ens; paroxítonas com terminações "difíceis".</li>
+    <li><b>Crase</b> = a (preposição) + a (artigo) = à. Ex.: "Vou <b>à</b> escola". Não há crase antes de palavra masculina nem de verbo.</li>
+    <li>Novo acordo: sem trema (exceto nomes), sem acento em "ideia", "voo", "leem".</li>
+  </ul>
+  <h4>Classes de palavras e sintaxe</h4>
+  <div class="scroll"><table class="data">
+    <tr><th>Classe</th><th>Função</th></tr>
+    <tr><td>Substantivo</td><td>Nomeia seres, coisas, ideias</td></tr>
+    <tr><td>Adjetivo</td><td>Caracteriza o substantivo</td></tr>
+    <tr><td>Verbo</td><td>Ação, estado, fenômeno (tempo, modo, pessoa)</td></tr>
+    <tr><td>Advérbio</td><td>Modifica verbo/adjetivo (modo, tempo, lugar…)</td></tr>
+    <tr><td>Pronome</td><td>Substitui/acompanha o nome</td></tr>
+    <tr><td>Preposição / Conjunção</td><td>Conectam termos e orações</td></tr>
+  </table></div>
+  <div class="box concept"><b class="tt">Concordância</b> <b>Verbal:</b> o verbo concorda com o sujeito ("Os alunos <b>estudam</b>"). <b>Nominal:</b> artigo/adjetivo concordam com o substantivo ("Muitas <b>meninas</b> aplicadas").</div>
+  <div class="box concept"><b class="tt">Sentido das palavras</b> Sinônimos (=), antônimos (≠), homônimos (som/grafia iguais, sentidos diferentes), parônimos (parecidos: "tráfego"×"tráfico"). Sentido próprio (denotativo) × figurado (conotativo).</div>
+  <div class="box concept"><b class="tt">Coesão e coerência</b> <b>Coesão</b> = amarração (conectivos, pronomes). <b>Coerência</b> = lógica/sentido do todo. Figuras: metáfora, comparação, ironia, hipérbole, personificação.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Interpretação, crase e concordância dominam. Leia o enunciado com atenção: "assinale a INCORRETA" derruba muita gente.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    "Vou à feira" — por que há crase?
+    <div class="ans">Porque "à" = preposição a + artigo a, exigido pelo verbo ir (quem vai, vai a algum lugar) diante de palavra feminina.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="g2">
+  <h3>B. Raciocínio Lógico e Matemática <span class="pomo">⏱️ 25 min</span></h3>
+  <ul>
+    <li><b>Sequências</b> (numéricas/lógicas): descubra o padrão (soma, produto, alternância).</li>
+    <li><b>Proposições:</b> conectivos "e" (∧), "ou" (∨), "se…então" (→), negação (¬). Negar "todo A é B" = "existe A que não é B".</li>
+    <li><b>Porcentagem:</b> 20% de 150 = 0,20 × 150 = 30. Aumento de 10% = ×1,10; desconto de 10% = ×0,90.</li>
+    <li><b>Regra de três:</b> monte a proporção e multiplique em cruz (direta) ou inverta (inversa).</li>
+    <li><b>Razão e proporção, MMC/MDC, frações</b> e problemas do dia a dia (troco, média, tempo).</li>
+  </ul>
+  <div class="box concept"><b class="tt">Regra de três direta</b> Se 3 cadernos custam R$ 12, quanto custam 5? 3→12, 5→x ⇒ x = (5×12)/3 = <b>R$ 20</b>.</div>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> "Porcentagem = por cento = dividir por 100". 45% = 45/100 = 0,45.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Numa turma de 40 alunos, 25% faltaram. Quantos vieram à aula?
+    <div class="ans">Faltaram 25% de 40 = 10; vieram 40 − 10 = 30 alunos.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="g3">
+  <h3>C. Informática Básica <span class="pomo">⏱️ 20 min</span></h3>
+  <ul>
+    <li><b>Hardware</b> (parte física: CPU, memória RAM, HD/SSD, teclado) × <b>Software</b> (programas). <b>Sistema operacional:</b> Windows, Linux, Android.</li>
+    <li><b>Pacote Office/BrOffice:</b> Word (textos), Excel (planilhas, fórmulas =SOMA, =MÉDIA), PowerPoint (slides).</li>
+    <li><b>Internet:</b> navegadores (Chrome, Edge, Firefox), URL, e-mail, nuvem, download/upload.</li>
+    <li><b>Atalhos:</b> Ctrl+C copiar, Ctrl+V colar, Ctrl+X recortar, Ctrl+Z desfazer, Ctrl+S salvar, Ctrl+P imprimir.</li>
+    <li><b>Segurança:</b> vírus, antivírus, backup, senhas fortes, phishing, golpes.</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Atalhos do teclado e funções básicas do Excel (=SOMA, =MÉDIA, célula, coluna) são presença garantida.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Qual atalho salva o documento no Windows?
+    <div class="ans">Ctrl + S.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="g4">
+  <h3>D. Legislação e Noções de Direito <span class="pomo">⏱️ 20 min</span></h3>
+  <ul>
+    <li><b>Constituição Federal de 1988:</b> direitos e garantias fundamentais (art. 5º); a educação como <b>direito de todos e dever do Estado e da família</b> (art. 205).</li>
+    <li><b>Princípios da Administração Pública (art. 37):</b> <b>L</b>egalidade, <b>I</b>mpessoalidade, <b>M</b>oralidade, <b>P</b>ublicidade, <b>E</b>ficiência — <b>"LIMPE"</b>.</li>
+    <li><b>Lei Orgânica do Município</b> de Coreaú e o <b>Estatuto/PCCR do Magistério</b> (Lei nº 880/26 — Plano de Cargos, Carreiras e Remuneração do Magistério de Coreaú).</li>
+    <li>Regime jurídico do servidor: direitos, deveres, posse, estágio probatório.</li>
+  </ul>
+  <div class="box mnemo"><b class="tt">Mnemônico</b> Princípios da Administração = <b>LIMPE</b> (Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência).</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Cite os cinco princípios expressos da Administração Pública.
+    <div class="ans">Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência (LIMPE).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="g5">
+  <h3>E. Conhecimentos sobre Coreaú-CE <span class="pomo">⏱️ 15 min</span></h3>
+  <div class="box concept"><b class="tt">Fique de olho</b> A banca costuma cobrar dados do município: história, localização, símbolos, economia e aspectos gerais. Confirme os números atuais no site oficial da Prefeitura e no IBGE, pois podem mudar.</div>
+  <ul>
+    <li><b>Localização:</b> Coreaú fica no <b>noroeste do Ceará</b>, na região do Vale do Coreaú/Ibiapaba, próxima a Sobral.</li>
+    <li><b>Aspectos gerais:</b> município do sertão cearense; clima semiárido; bioma predominante <b>Caatinga</b>. Economia ligada à agropecuária, comércio e serviços públicos.</li>
+    <li><b>Símbolos e organização:</b> bandeira, brasão e hino municipais; poderes Executivo (prefeito) e Legislativo (Câmara de Vereadores).</li>
+    <li><b>História:</b> pesquise a emancipação política, origem do nome e distritos do município no material oficial.</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Datas de emancipação, nome do rio/serra, distritos e símbolos municipais. Vale imprimir a página "História" do site da Prefeitura de Coreaú.</div>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<!-- ============ PARTE 2 ============ -->
+<div class="part" id="p2"><h2>📕 Parte 2 · Legislação Educacional e Pedagogia</h2><p>O que diferencia a prova de professor — e vale muito na Prova Didática.</p></div>
+
+<section class="mod" id="g6">
+  <h3>F. LDB, ECA, Constituição e PNE <span class="pomo">⏱️ 30 min</span></h3>
+  <h4>LDB — Lei nº 9.394/1996</h4>
+  <ul>
+    <li>Organiza a educação nacional em <b>Educação Básica</b> (infantil, fundamental, médio) e <b>Superior</b>.</li>
+    <li><b>Educação Infantil</b> (creche 0-3, pré-escola 4-5); <b>Ensino Fundamental</b> de 9 anos, obrigatório dos 6 aos 14; ensino obrigatório e gratuito dos <b>4 aos 17 anos</b>.</li>
+    <li>Princípios: igualdade de acesso, gestão democrática, valorização dos profissionais, liberdade de aprender e ensinar.</li>
+    <li>Currículo com <b>base nacional comum</b> + parte diversificada; carga mínima de <b>800 h / 200 dias</b> letivos.</li>
+  </ul>
+  <h4>ECA — Lei nº 8.069/1990</h4>
+  <ul>
+    <li>Criança: até 12 anos incompletos; adolescente: 12 a 18. Doutrina da <b>proteção integral</b>.</li>
+    <li>Direito à educação, à convivência familiar, à proteção contra violência e trabalho infantil.</li>
+    <li>Dever da escola de <b>comunicar ao Conselho Tutelar</b> maus-tratos e faltas/evasão reiteradas.</li>
+  </ul>
+  <h4>Constituição e PNE</h4>
+  <ul>
+    <li>CF/88 (art. 205 a 214): educação como direito social; <b>gratuidade</b> no ensino público; aplicação mínima de recursos.</li>
+    <li><b>PNE</b> (Plano Nacional de Educação, Lei 13.005/2014): metas e estratégias decenais para a educação.</li>
+    <li>Financiamento: <b>FUNDEB</b> (fundo permanente para a educação básica).</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Idades da educação obrigatória (4 a 17), estrutura da educação básica pela LDB e o papel do <b>Conselho Tutelar</b> (ECA) são clássicos da CONSULPAM.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Segundo a LDB/Constituição, entre que idades a educação é obrigatória e gratuita?
+    <div class="ans">Dos 4 aos 17 anos.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="g7">
+  <h3>G. BNCC e Currículo do Ceará <span class="pomo">⏱️ 25 min</span></h3>
+  <ul>
+    <li><b>BNCC</b> (Base Nacional Comum Curricular): documento que define as <b>aprendizagens essenciais</b> de todo estudante. Organizada por <b>competências</b> (10 competências gerais), áreas, componentes, unidades temáticas, objetos de conhecimento e <b>habilidades</b> (os códigos EF06CI01…).</li>
+    <li><b>Ciências da Natureza</b> na BNCC (anos finais): três unidades — <b>Matéria e Energia</b>, <b>Vida e Evolução</b>, <b>Terra e Universo</b> (as mesmas da sua apostila!).</li>
+    <li><b>Currículo do Ceará (DCRC)</b>: documento estadual alinhado à BNCC, referência para o planejamento das aulas na rede.</li>
+    <li>Ideias-chave: <b>competências e habilidades</b>, protagonismo do estudante, contextualização, avaliação formativa.</li>
+  </ul>
+  <div class="box concept"><b class="tt">Competência (BNCC)</b> É a mobilização de <b>conhecimentos + habilidades + atitudes + valores</b> para resolver demandas da vida. Não é decorar, é saber usar.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Saber que a BNCC organiza Ciências em <b>Matéria e Energia, Vida e Evolução, Terra e Universo</b>, e citar a estrutura competências→habilidades, ajuda na objetiva e brilha na Prova Didática.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Quais são as três unidades temáticas de Ciências na BNCC (anos finais)?
+    <div class="ans">Matéria e Energia; Vida e Evolução; Terra e Universo.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="g8">
+  <h3>H. Teóricos, tendências e didática <span class="pomo">⏱️ 30 min</span></h3>
+  <div class="scroll"><table class="data">
+    <tr><th>Teórico</th><th>Ideia central</th></tr>
+    <tr><td>Piaget</td><td>Construtivismo; estágios do desenvolvimento; aprendizagem como construção ativa</td></tr>
+    <tr><td>Vygotsky</td><td>Sociointeracionismo; <b>Zona de Desenvolvimento Proximal</b>; papel da mediação e da linguagem</td></tr>
+    <tr><td>Wallon</td><td>Afetividade e emoção no desenvolvimento; visão integral da criança</td></tr>
+    <tr><td>Paulo Freire</td><td>Educação libertadora e dialógica; crítica à "educação bancária"; leitura de mundo</td></tr>
+    <tr><td>Ausubel</td><td>Aprendizagem significativa; partir dos conhecimentos prévios</td></tr>
+    <tr><td>Henri Wallon / Emília Ferreiro</td><td>Ferreiro: psicogênese da língua escrita (alfabetização)</td></tr>
+  </table></div>
+  <h4>Tendências pedagógicas</h4>
+  <ul>
+    <li><b>Liberais:</b> tradicional (foco no professor/conteúdo), renovada/escolanovista (aluno no centro), tecnicista (técnicas e resultados).</li>
+    <li><b>Progressistas:</b> libertadora (Freire), libertária, crítico-social dos conteúdos.</li>
+  </ul>
+  <div class="box concept"><b class="tt">ZDP (Vygotsky)</b> Distância entre o que o aluno faz <b>sozinho</b> e o que faz <b>com ajuda</b>. Ensinar é atuar nessa zona, com mediação e "andaimes".</div>
+  <div class="box concept"><b class="tt">Aprendizagem significativa (Ausubel)</b> O novo conteúdo "ancora" no que o aluno já sabe. Por isso começamos a aula sondando o conhecimento prévio.</div>
+  <div class="box prova"><b class="tt">Cai na prova</b> Ligar teórico → conceito: Vygotsky/ZDP, Piaget/estágios, Freire/dialógica-libertadora, Ausubel/significativa. E identificar a tendência tradicional × construtivista numa situação de aula.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    De quem é a ideia de Zona de Desenvolvimento Proximal?
+    <div class="ans">De Vygotsky (perspectiva sociointeracionista).</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="g9">
+  <h3>I. Avaliação, planejamento e inclusão <span class="pomo">⏱️ 25 min</span></h3>
+  <h4>Avaliação da aprendizagem</h4>
+  <ul>
+    <li><b>Diagnóstica</b> (no início, sonda o que sabem), <b>formativa</b> (durante, acompanha e regula), <b>somativa</b> (ao final, verifica resultados).</li>
+    <li>Avaliação a serviço da aprendizagem, não da punição; feedback e retomada.</li>
+  </ul>
+  <h4>Planejamento e PPP</h4>
+  <ul>
+    <li>Níveis: plano de <b>curso</b>, de <b>unidade</b> e de <b>aula</b> (objetivos, conteúdos, metodologia, recursos, avaliação).</li>
+    <li><b>Projeto Político-Pedagógico (PPP):</b> identidade e planejamento coletivo da escola; <b>gestão democrática</b> e participação da comunidade.</li>
+    <li>Metodologias ativas, interdisciplinaridade, contextualização, uso de tecnologias.</li>
+  </ul>
+  <h4>Educação inclusiva</h4>
+  <ul>
+    <li>Direito à educação para <b>todos</b>; Educação Especial na perspectiva inclusiva; <b>AEE</b> (Atendimento Educacional Especializado) e sala de recursos.</li>
+    <li>Acessibilidade, adaptações curriculares, respeito à diversidade (LBI — Lei Brasileira de Inclusão, 13.146/2015).</li>
+  </ul>
+  <div class="box prova"><b class="tt">Cai na prova</b> Os três tipos de avaliação (diagnóstica/formativa/somativa) e o caráter <b>democrático</b> do PPP são recorrentes. Inclusão: AEE e "escola para todos".</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Que tipo de avaliação acompanha e regula a aprendizagem durante o processo?
+    <div class="ans">A avaliação formativa.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod" id="g10">
+  <h3>J. A Prova Didática — como se preparar <span class="pomo">⏱️ 20 min</span></h3>
+  <p>Para os cargos de professor, além da objetiva há a <b>Prova Didática</b>: você ministra uma aula sobre um tema sorteado do conteúdo de Ciências, diante de banca examinadora.</p>
+  <div class="box concept"><b class="tt">O que a banca avalia</b> Domínio do conteúdo · plano de aula alinhado à <b>BNCC/Currículo do Ceará</b> · didática e clareza · metodologia e recursos · gestão do tempo · postura e interação · aderência ao tema sorteado.</div>
+  <h4>Roteiro de uma aula nota 10</h4>
+  <ol>
+    <li><b>Introdução:</b> apresente o tema e sonde o conhecimento prévio (Ausubel) com uma pergunta ou situação do cotidiano.</li>
+    <li><b>Objetivos:</b> diga o que os alunos vão aprender (associe a uma habilidade da BNCC).</li>
+    <li><b>Desenvolvimento:</b> explique com exemplos, esquema no quadro, analogias e participação.</li>
+    <li><b>Recursos:</b> quadro, experimento simples, imagem, objetos do dia a dia.</li>
+    <li><b>Fechamento e avaliação:</b> retome os pontos-chave, faça uma pergunta e proponha uma atividade.</li>
+    <li><b>Tempo:</b> ensaie para caber no cronômetro; não corra nem sobre tempo.</li>
+  </ol>
+  <div class="box mnemo"><b class="tt">Mnemônico da aula</b> "<b>I-O-D-R-F</b>": Introdução, Objetivos, Desenvolvimento, Recursos, Fechamento.</div>
+  <div class="box prova"><b class="tt">Dica de ouro</b> Escolha exemplos do sertão cearense e da Caatinga — contextualizar com a realidade dos alunos de Coreaú encanta a banca e mostra domínio da BNCC.</div>
+  <details class="quiz"><summary>🧠 Teste-se</summary>
+    Como uma boa aula deve começar, segundo a aprendizagem significativa?
+    <div class="ans">Sondando/ativando os conhecimentos prévios dos alunos antes de introduzir o conteúdo novo.</div>
+  </details>
+  <a class="top-link" href="#topo">↑ topo</a>
+</section>
+
+<section class="mod">
+  <div class="box concept" style="text-align:center"><b class="tt">Bons estudos!</b> Combine esta página com a <b>Apostila de Ciências</b> e o <b>Jogo</b>. Faça a objetiva com calma (25 pts em Gerais + 25 em Específicos aprovam) e capriche na Didática. Você consegue, Josi! 💙</div>
+</section>
+</div>
+
+<div class="toast" id="toast" style="position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px); background:var(--good); color:#fff; padding:10px 20px; border-radius:999px; font-weight:700; box-shadow:0 6px 20px rgba(0,0,0,.3); opacity:0; transition:opacity .3s, transform .3s; z-index:90"></div>
+<style>.toast.show{opacity:1 !important; transform:translateX(-50%) translateY(0) !important}</style>
+<script>
+const $ = s => document.querySelector(s);
+const GKEY='gerais-coreau-xp';
+let G={xp:0};
+try{ const s=JSON.parse(localStorage.getItem(GKEY)||'{}'); if(s.xp){G.xp=s.xp;} }catch(e){}
+const LEVELS=[[0,'Iniciante'],[60,'Aplicada'],[140,'Dedicada'],[240,'Concurseira Fera'],[360,'Pronta pra posse']];
+function levelName(xp){ let n='Iniciante',i=1; LEVELS.forEach((L,k)=>{ if(xp>=L[0]){n=L[1]; i=k+1;} }); return {n,i}; }
+function renderG(){
+  $('#xpPts').textContent=G.xp;
+  const {n,i}=levelName(G.xp);
+  $('#xpLvl').textContent='Nível '+i+' · '+n;
+  const cur=LEVELS[i-1][0], next=(LEVELS[i]?LEVELS[i][0]:cur+1);
+  $('#xpFill').style.width=Math.min(100,((G.xp-cur)/(next-cur))*100)+'%';
+}
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000); }
+function addXP(p){ G.xp+=p; try{localStorage.setItem(GKEY,JSON.stringify(G));}catch(e){} renderG(); toast('+'+p+' XP! ⭐'); }
+renderG();
+document.querySelectorAll('details.quiz').forEach(d=>{
+  d.addEventListener('toggle', ()=>{ if(d.open && !d.dataset.xp){ d.dataset.xp='1'; addXP(10); }});
+});
+if('serviceWorker' in navigator){ window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
+</script>
+</body>
+</html>

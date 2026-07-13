@@ -24,10 +24,12 @@
   *{box-sizing:border-box}
   body{margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
     font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; overflow-x:hidden; -webkit-text-size-adjust:100%;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 18px 60px}
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:32px 18px 60px}
   h1{font-family:'Trebuchet MS',sans-serif; font-size:2.1rem; margin:0 0 6px; text-align:center}
   .sub{color:var(--muted); text-align:center; max-width:560px; margin:0 0 32px; font-size:1rem}
   .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:20px; width:100%; max-width:720px}
+  .group-title{width:100%; max-width:720px; font-size:1.05rem; margin:30px 0 4px; padding-bottom:6px; border-bottom:2px solid var(--line); text-align:left}
+  .group-title:first-of-type{margin-top:6px}
   @media (max-width:520px){
     body{padding:24px 14px 48px}
     h1{font-size:1.7rem}
@@ -57,7 +59,34 @@
 </head>
 <body>
   <h1>🧪 Lab da Josi</h1>
-  <p class="sub">Estudo de Química para concurso de Professor — conteúdo do Edital SEDUC-CE / CONSULPAM, do jeito que fixa na memória.</p>
+  <p class="sub">Estudo para concurso de Professor — <b>Ciências (Coreaú/CONSULPAM)</b> e Química, do jeito que fixa na memória.</p>
+
+  <h2 class="group-title" style="color:var(--org)">🔬 Ciências — Concurso de Coreaú (CONSULPAM)</h2>
+  <div class="cards">
+    <a class="card quiz" href="ciencias.html">
+      <span class="emoji">🔬</span>
+      <span class="tag" style="background:var(--org)">16 MÓDULOS · TODO O EDITAL</span>
+      <h2>Apostila de Ciências</h2>
+      <p>Todo o conteúdo específico pelas 3 unidades da BNCC: Matéria e Energia, Vida e Evolução, Terra e Universo. Com a Profa. Bio, XP e testes.</p>
+      <span class="go">Estudar agora →</span>
+    </a>
+    <a class="card game" href="jogo-ciencias.html">
+      <span class="emoji">🎮</span>
+      <span class="tag">8 ESTAÇÕES · 40 QUESTÕES</span>
+      <h2>Jogo de Ciências</h2>
+      <p>Quiz interativo por estações: química, física, célula, corpo humano, genética, ecologia e astronomia. Ganhe estrelas!</p>
+      <span class="go">Jogar agora →</span>
+    </a>
+    <a class="card exam" href="gerais-coreau.html">
+      <span class="emoji">📘</span>
+      <span class="tag">PORTUGUÊS · LEGISLAÇÃO · DIDÁTICA</span>
+      <h2>Conhecimentos Gerais e Pedagógicos</h2>
+      <p>Português, Raciocínio Lógico, Informática, Legislação, o município de Coreaú, LDB/ECA/BNCC e como se sair bem na Prova Didática.</p>
+      <span class="go">Estudar agora →</span>
+    </a>
+  </div>
+
+  <h2 class="group-title" style="color:var(--accent)">🧪 Química (material anterior)</h2>
   <div class="cards">
     <a class="card game" href="jogo.html">
       <span class="emoji">🎮</span>

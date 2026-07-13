@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🎮 Jogo de Ciências — Coreaú/CONSULPAM</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#2B8A3E">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Jogo Ciências">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+  :root{
+    --bg:#EDF4F2; --panel:#FFFFFF; --panel2:#F6FAF9; --ink:#132F36; --muted:#587179;
+    --line:#D5E2E0; --accent:#2B8A3E; --accent2:#40C057;
+    --good:#2B8A3E; --good-soft:#E3F5E8; --bad:#C92A2A; --bad-soft:#FBE7E7;
+    --info:#1971C2; --info-soft:#E1EEFB; --warn:#B87708; --star:#F59F00;
+    --shadow:0 4px 18px rgba(19,47,54,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E1B1E; --panel:#152A2F; --panel2:#1B3339; --ink:#E4EFED; --muted:#93ABA9;
+      --line:#28454B; --accent:#69C57A; --accent2:#40C057;
+      --good:#69C57A; --good-soft:#1B3226; --bad:#F08A8A; --bad-soft:#3A2224;
+      --info:#74B4EC; --info-soft:#1B2E42; --warn:#F0B24E; --star:#FFD43B;
+      --shadow:0 4px 18px rgba(0,0,0,.4);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,sans-serif;
+    line-height:1.6; overflow-x:hidden; -webkit-text-size-adjust:100%; padding:0 14px 60px}
+  h1,h2,h3{font-family:'Trebuchet MS',sans-serif; line-height:1.2}
+  .wrap{max-width:760px; margin:0 auto}
+  a{color:var(--accent)}
+  header.top{text-align:center; padding:24px 0 8px}
+  header.top h1{font-size:1.9rem; margin:0 0 4px}
+  header.top p{margin:2px 0; color:var(--muted); font-size:.95rem}
+  .home-link{display:inline-block; margin:8px 0 0; font-size:.85rem; font-weight:700; text-decoration:none}
+
+  .hud{position:sticky; top:0; z-index:20; background:var(--panel); border:1.5px solid var(--line); border-radius:0 0 16px 16px;
+    box-shadow:var(--shadow); padding:10px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:18px}
+  .hud .stars{font-size:1.1rem; color:var(--star); font-weight:700}
+  .hud .score{font-family:Consolas,monospace; font-weight:700; background:var(--accent); color:#fff; border-radius:999px; padding:4px 14px; font-size:.9rem}
+  .hud button{background:transparent; border:1.5px solid var(--line); color:var(--muted); border-radius:999px; padding:4px 12px; font:inherit; font-size:.8rem; cursor:pointer}
+
+  .stations{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(150px,100%),1fr)); gap:12px}
+  .st{background:var(--panel); border:1.5px solid var(--line); border-radius:16px; padding:16px 14px; box-shadow:var(--shadow);
+    cursor:pointer; text-align:center; transition:transform .16s, border-color .16s}
+  .st:hover,.st:active{transform:translateY(-4px); border-color:var(--accent)}
+  .st .emoji{font-size:2rem}
+  .st h3{margin:6px 0 2px; font-size:1rem; color:var(--accent)}
+  .st .meta{font-size:.76rem; color:var(--muted)}
+  .st .done{font-size:.8rem; color:var(--star); font-weight:700; margin-top:4px; min-height:1em}
+
+  .panelbox{background:var(--panel); border:1.5px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:22px; margin-top:6px}
+  .qhead{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:4px}
+  .qhead .cat{font-weight:700; color:var(--accent)}
+  .qhead .prog{font-family:Consolas,monospace; font-size:.82rem; color:var(--muted)}
+  .qtext{font-size:1.12rem; font-weight:600; margin:12px 0 16px}
+  .opts{display:grid; gap:10px}
+  .opt{text-align:left; background:var(--panel2); border:1.5px solid var(--line); border-radius:12px; padding:12px 15px;
+    font:inherit; font-size:1rem; color:var(--ink); cursor:pointer; transition:transform .1s, border-color .15s, background .15s}
+  .opt:hover:not(:disabled),.opt:active:not(:disabled){transform:translateX(4px); border-color:var(--accent)}
+  .opt:disabled{cursor:default}
+  .opt.correct{background:var(--good-soft); border-color:var(--good); color:var(--good); font-weight:700}
+  .opt.wrong{background:var(--bad-soft); border-color:var(--bad); color:var(--bad)}
+  .feedback{margin-top:16px; padding:12px 15px; border-radius:12px; font-size:.95rem; display:none}
+  .feedback.show{display:block; animation:fade .3s ease}
+  .feedback.ok{background:var(--good-soft); border-left:4px solid var(--good)}
+  .feedback.no{background:var(--bad-soft); border-left:4px solid var(--bad)}
+  .feedback b{color:var(--ink)}
+  @keyframes fade{from{opacity:0; transform:translateY(6px)}to{opacity:1}}
+  .navbtns{display:flex; justify-content:space-between; gap:10px; margin-top:18px}
+  .btn{background:var(--accent); color:#fff; border:none; border-radius:12px; padding:11px 22px; font:inherit; font-weight:700; cursor:pointer; transition:transform .12s}
+  .btn:hover,.btn:active{transform:translateY(-2px)}
+  .btn.ghost{background:transparent; color:var(--muted); border:1.5px solid var(--line)}
+  .btn:disabled{opacity:.4; cursor:default; transform:none}
+
+  .result{text-align:center; padding:20px 10px}
+  .result .big{font-size:3rem}
+  .result h2{margin:6px 0}
+  .result .stars-earned{font-size:1.8rem; color:var(--star); margin:8px 0}
+  .toast{position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-20px); background:var(--good); color:#fff;
+    padding:9px 18px; border-radius:999px; font-weight:700; box-shadow:0 6px 20px rgba(0,0,0,.3); opacity:0; transition:.3s; z-index:90}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+  .hidden{display:none !important}
+  footer{margin-top:26px; text-align:center; color:var(--muted); font-size:.82rem}
+  @media (max-width:520px){
+    header.top h1{font-size:1.5rem}
+    .qtext{font-size:1.02rem}
+    .opt{font-size:.95rem; padding:11px 13px}
+    .panelbox{padding:16px}
+  }
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1>🎮 Jogo de Ciências</h1>
+  <p>8 estações · quiz do edital de <b>Coreaú/CONSULPAM</b> · ganhe ⭐ e vire Mestra!</p>
+  <a class="home-link" href="index.html">← Voltar ao portal</a>
+</header>
+
+<div class="hud">
+  <span class="stars" id="hudStars">⭐ 0 / 8</span>
+  <span class="score" id="hudScore">0 pts</span>
+  <button id="resetBtn" title="Zerar progresso">↺ Reiniciar</button>
+</div>
+
+<!-- Mapa de estações -->
+<div id="map">
+  <div class="stations" id="stations"></div>
+  <footer>Cada estação tem 5 perguntas. Acerte pelo menos 4 para ganhar a ⭐. Seu progresso fica salvo no navegador.</footer>
+</div>
+
+<!-- Área de jogo -->
+<div id="game" class="panelbox hidden">
+  <div class="qhead">
+    <span class="cat" id="gCat">Estação</span>
+    <span class="prog" id="gProg">1 / 5</span>
+  </div>
+  <div class="qtext" id="gQ">Pergunta…</div>
+  <div class="opts" id="gOpts"></div>
+  <div class="feedback" id="gFb"></div>
+  <div class="navbtns">
+    <button class="btn ghost" id="gQuit">✕ Sair</button>
+    <button class="btn" id="gNext" disabled>Próxima →</button>
+  </div>
+</div>
+
+<!-- Resultado -->
+<div id="result" class="panelbox result hidden"></div>
+
+<div class="toast" id="toast"></div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+/* ---------- BANCO DE QUESTÕES ---------- */
+const STATIONS = [
+  { id:'materia', emoji:'⚗️', name:'Matéria e Química', qs:[
+    { q:'Qual é a fórmula da densidade?', o:['massa × volume','massa ÷ volume','volume ÷ massa','massa + volume'], a:1, e:'Densidade = massa ÷ volume. Se for menor que a da água (1 g/cm³), o corpo flutua.'},
+    { q:'Um átomo tem número atômico Z=17 e número de massa A=35. Quantos nêutrons possui?', o:['17','35','18','52'], a:2, e:'Nêutrons = A − Z = 35 − 17 = 18.'},
+    { q:'Passagem do estado líquido para o gasoso chama-se:', o:['Fusão','Solidificação','Vaporização','Condensação'], a:2, e:'Líquido → gás é vaporização (evaporação/ebulição).'},
+    { q:'Ácido + base produzem:', o:['Sal + água','Óxido + gás','Dois ácidos','Água apenas'], a:0, e:'Reação de neutralização: ácido + base → sal + água. Ex.: HCl + NaOH → NaCl + H₂O.'},
+    { q:'Qual método separa água e sal dissolvidos?', o:['Filtração','Catação','Evaporação/destilação','Separação magnética'], a:2, e:'Como o sal está dissolvido (mistura homogênea), usa-se evaporação ou destilação.'},
+  ]},
+  { id:'fisica', emoji:'🧲', name:'Física e Energia', qs:[
+    { q:'A 2ª Lei de Newton é expressa por:', o:['P = m·g','F = m·a','v = s/t','d = m/V'], a:1, e:'Força = massa × aceleração (F = m·a).'},
+    { q:'Um carro faz 120 km em 2 horas. Velocidade média?', o:['60 km/h','120 km/h','240 km/h','30 km/h'], a:0, e:'v = distância ÷ tempo = 120 ÷ 2 = 60 km/h.'},
+    { q:'O calor sempre flui:', o:['Do frio para o quente','Do quente para o frio','Nos dois sentidos igualmente','Só em metais'], a:1, e:'O calor flui espontaneamente do corpo de maior para o de menor temperatura.'},
+    { q:'O som, diferente da luz, NÃO se propaga:', o:['No ar','Na água','No vácuo','Em sólidos'], a:2, e:'Som é onda mecânica: precisa de meio material. No vácuo não há propagação.'},
+    { q:'Qual destas é uma fonte de energia renovável?', o:['Petróleo','Carvão','Energia solar','Gás natural'], a:2, e:'Solar, eólica, hídrica e biomassa são renováveis; petróleo, carvão e gás são fósseis.'},
+  ]},
+  { id:'celula', emoji:'🔬', name:'Célula', qs:[
+    { q:'Qual organela produz energia (respiração celular)?', o:['Núcleo','Mitocôndria','Ribossomo','Vacúolo'], a:1, e:'A mitocôndria é a "usina" da célula, produzindo ATP.'},
+    { q:'Onde ocorre a fotossíntese?', o:['Mitocôndria','Cloroplasto','Lisossomo','Complexo de Golgi'], a:1, e:'No cloroplasto, que contém clorofila (presente na célula vegetal).'},
+    { q:'Estrutura presente na célula vegetal e ausente na animal:', o:['Membrana','Núcleo','Parede celular','Citoplasma'], a:2, e:'Parede celular e cloroplastos são exclusivos da célula vegetal.'},
+    { q:'A divisão celular que forma gametas, com metade dos cromossomos, é a:', o:['Mitose','Meiose','Fissão','Brotamento'], a:1, e:'Meiose: 1 célula → 4 com metade dos cromossomos (gametas).'},
+    { q:'O que comanda a célula e guarda o DNA?', o:['Membrana','Núcleo','Mitocôndria','Ribossomo'], a:1, e:'O núcleo guarda o material genético e coordena a célula.'},
+  ]},
+  { id:'reinos', emoji:'🍄', name:'Seres Vivos', qs:[
+    { q:'Bactérias pertencem a qual reino?', o:['Fungi','Plantae','Monera','Animalia'], a:2, e:'Monera reúne os seres procariontes, como as bactérias.'},
+    { q:'Por que os vírus ficam fora dos cinco reinos?', o:['São grandes demais','Não têm célula (acelulares)','Fazem fotossíntese','São plantas'], a:1, e:'Vírus são acelulares e só se reproduzem dentro de células hospedeiras.'},
+    { q:'Cogumelos e bolores são do reino:', o:['Fungi','Protista','Monera','Plantae'], a:0, e:'Reino Fungi: eucariontes heterótrofos e decompositores.'},
+    { q:'Qual grupo de plantas tem flores e frutos?', o:['Briófitas','Pteridófitas','Gimnospermas','Angiospermas'], a:3, e:'Angiospermas produzem flor e fruto (a maioria das plantas).'},
+    { q:'O maior grupo de animais (insetos, aranhas, crustáceos) é o dos:', o:['Moluscos','Artrópodes','Anelídeos','Cnidários'], a:1, e:'Artrópodes são o grupo mais numeroso do reino animal.'},
+  ]},
+  { id:'corpo', emoji:'🫀', name:'Corpo Humano', qs:[
+    { q:'A maior parte da absorção de nutrientes ocorre no:', o:['Estômago','Intestino grosso','Intestino delgado','Esôfago'], a:2, e:'É no intestino delgado que a maioria dos nutrientes é absorvida.'},
+    { q:'Vaso que SAI do coração levando sangue ao corpo:', o:['Veia','Artéria','Capilar linfático','Nervo'], a:1, e:'Artérias saem do coração; veias chegam a ele.'},
+    { q:'A troca gasosa (hematose) ocorre nos:', o:['Brônquios','Alvéolos','Rins','Néfrons'], a:1, e:'Nos alvéolos pulmonares o sangue capta O₂ e libera CO₂.'},
+    { q:'Órgão que filtra o sangue e produz a urina:', o:['Fígado','Rim','Baço','Pâncreas'], a:1, e:'Os rins filtram o sangue e formam a urina (sistema urinário).'},
+    { q:'A célula básica do sistema nervoso é o:', o:['Neurônio','Hemácia','Leucócito','Osteócito'], a:0, e:'O neurônio conduz os impulsos nervosos.'},
+  ]},
+  { id:'genetica', emoji:'🧬', name:'Genética e Evolução', qs:[
+    { q:'No cruzamento Aa × Aa, a proporção fenotípica é:', o:['1 : 1','3 : 1','2 : 2','4 : 0'], a:1, e:'3 dominantes : 1 recessivo (1ª Lei de Mendel).'},
+    { q:'A molécula que guarda a informação genética é o:', o:['ATP','DNA','Glicose','Colágeno'], a:1, e:'O DNA, em dupla-hélice, contém os genes.'},
+    { q:'A teoria da seleção natural foi proposta por:', o:['Lamarck','Mendel','Darwin','Newton'], a:2, e:'Darwin: o mais adaptado sobrevive e deixa mais descendentes.'},
+    { q:'Quantos cromossomos há nas células do corpo humano?', o:['23','46','46 pares','92'], a:1, e:'46 cromossomos (23 pares).'},
+    { q:'Quem determina o sexo do bebê?', o:['A mãe (X)','O pai (X ou Y)','Ambos igualmente','O ambiente'], a:1, e:'O pai fornece X ou Y; a mãe sempre fornece X.'},
+  ]},
+  { id:'ecologia', emoji:'🌍', name:'Ecologia', qs:[
+    { q:'Na cadeia capim → gafanhoto → sapo, o produtor é:', o:['O sapo','O gafanhoto','O capim','O sol'], a:2, e:'Produtores são os autótrofos (plantas), base da cadeia.'},
+    { q:'Fungos e bactérias que reciclam a matéria são:', o:['Produtores','Consumidores','Decompositores','Predadores'], a:2, e:'Decompositores devolvem os nutrientes ao ambiente.'},
+    { q:'"Onde a espécie vive" é o seu:', o:['Nicho','Habitat','Bioma','Fenótipo'], a:1, e:'Habitat = endereço; nicho = "profissão" da espécie.'},
+    { q:'Bioma típico do sertão nordestino/cearense:', o:['Amazônia','Pantanal','Caatinga','Pampa'], a:2, e:'A Caatinga é o bioma do semiárido nordestino, presente em Coreaú.'},
+    { q:'A energia, ao longo da cadeia alimentar, flui:', o:['Em sentido único e diminui','Em ciclo fechado','Aumenta a cada nível','Fica constante'], a:0, e:'A energia flui em sentido único e diminui; a matéria é que é reciclada.'},
+  ]},
+  { id:'universo', emoji:'🪐', name:'Terra e Universo', qs:[
+    { q:'O movimento responsável pelos dias e noites é a:', o:['Translação','Rotação','Precessão','Órbita da Lua'], a:1, e:'Rotação (giro em torno do próprio eixo, ~24 h).'},
+    { q:'As estações do ano resultam da:', o:['Rotação','Translação + inclinação do eixo','Fases da Lua','Distância ao Sol apenas'], a:1, e:'Translação em torno do Sol somada à inclinação do eixo terrestre.'},
+    { q:'Ordem correta a partir do Sol:', o:['Terra, Vênus, Marte','Mercúrio, Vênus, Terra, Marte','Marte, Terra, Vênus','Vênus, Mercúrio, Terra'], a:1, e:'Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano, Netuno.'},
+    { q:'Camadas da Terra, de fora para dentro:', o:['Núcleo, manto, crosta','Crosta, manto, núcleo','Manto, crosta, núcleo','Crosta, núcleo, manto'], a:1, e:'Crosta (superfície) → manto → núcleo (centro).'},
+    { q:'Diferença entre tempo e clima:', o:['São sinônimos','Tempo é o momento; clima é o padrão de anos','Clima é o momento; tempo é o padrão','Ambos duram 1 dia'], a:1, e:'Tempo = condição do momento; clima = média ao longo de muitos anos.'},
+  ]},
+];
+
+/* ---------- ESTADO ---------- */
+const SKEY='jogo-ciencias-coreau';
+let S={score:0, done:{}};
+try{ const s=JSON.parse(localStorage.getItem(SKEY)||'{}'); if(s){S.score=s.score||0; S.done=s.done||{};} }catch(e){}
+function save(){ try{localStorage.setItem(SKEY,JSON.stringify(S));}catch(e){} }
+function starCount(){ return Object.values(S.done).filter(Boolean).length; }
+function renderHud(){ $('#hudStars').textContent='⭐ '+starCount()+' / '+STATIONS.length; $('#hudScore').textContent=S.score+' pts'; }
+
+/* ---------- MAPA ---------- */
+function renderMap(){
+  const box=$('#stations'); box.innerHTML='';
+  STATIONS.forEach(st=>{
+    const el=document.createElement('div'); el.className='st';
+    el.innerHTML='<div class="emoji">'+st.emoji+'</div><h3>'+st.name+'</h3>'+
+      '<div class="meta">5 perguntas</div>'+
+      '<div class="done">'+(S.done[st.id]?'⭐ Concluída':'')+'</div>';
+    el.onclick=()=>startStation(st.id);
+    box.appendChild(el);
+  });
+  renderHud();
+}
+
+/* ---------- JOGO ---------- */
+let cur=null, qi=0, hits=0, answered=false;
+function startStation(id){
+  cur=STATIONS.find(s=>s.id===id); qi=0; hits=0;
+  $('#map').classList.add('hidden'); $('#result').classList.add('hidden'); $('#game').classList.remove('hidden');
+  showQ();
+}
+function showQ(){
+  answered=false;
+  const q=cur.qs[qi];
+  $('#gCat').textContent=cur.emoji+' '+cur.name;
+  $('#gProg').textContent=(qi+1)+' / '+cur.qs.length;
+  $('#gQ').textContent=q.q;
+  const opts=$('#gOpts'); opts.innerHTML='';
+  q.o.forEach((txt,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.textContent=txt;
+    b.onclick=()=>choose(i,b);
+    opts.appendChild(b);
+  });
+  const fb=$('#gFb'); fb.className='feedback'; fb.innerHTML='';
+  $('#gNext').disabled=true;
+  $('#gNext').textContent = (qi===cur.qs.length-1)?'Ver resultado ✓':'Próxima →';
+}
+function choose(i,btn){
+  if(answered) return; answered=true;
+  const q=cur.qs[qi];
+  const buttons=[...document.querySelectorAll('.opt')];
+  buttons.forEach(b=>b.disabled=true);
+  const fb=$('#gFb');
+  if(i===q.a){
+    btn.classList.add('correct'); hits++; S.score+=20; save(); renderHud();
+    fb.className='feedback ok show'; fb.innerHTML='✅ <b>Acertou!</b> '+q.e+' <b>(+20 pts)</b>';
+    toast('+20 pts! ⭐');
+  } else {
+    btn.classList.add('wrong'); buttons[q.a].classList.add('correct');
+    fb.className='feedback no show'; fb.innerHTML='❌ <b>Quase!</b> A correta é <b>“'+q.o[q.a]+'”</b>. '+q.e;
+  }
+  $('#gNext').disabled=false;
+}
+$('#gNext').onclick=()=>{
+  if(qi<cur.qs.length-1){ qi++; showQ(); }
+  else finish();
+};
+$('#gQuit').onclick=()=>{ $('#game').classList.add('hidden'); renderMap(); $('#map').classList.remove('hidden'); };
+
+function finish(){
+  const earned = hits>=4;
+  if(earned && !S.done[cur.id]){ S.done[cur.id]=true; S.score+=50; save(); }
+  renderHud();
+  $('#game').classList.add('hidden');
+  const r=$('#result'); r.classList.remove('hidden');
+  const total=starCount();
+  let msg = earned? 'Você ganhou a estrela desta estação! 🌟' : 'Faltou pouco! Refaça e mire em 4 acertos. 💪';
+  let extra='';
+  if(total===STATIONS.length){ extra='<p style="color:var(--star); font-weight:700; font-size:1.1rem">🏆 PARABÉNS! Você concluiu TODAS as 8 estações — Mestra das Ciências de Coreaú!</p>'; }
+  r.innerHTML='<div class="big">'+(earned?'🎉':'📚')+'</div>'+
+    '<h2>'+cur.name+'</h2>'+
+    '<div class="stars-earned">'+(earned?'⭐':'☆')+'</div>'+
+    '<p>Você acertou <b>'+hits+' de '+cur.qs.length+'</b>.</p>'+
+    '<p>'+msg+'</p>'+extra+
+    '<div class="navbtns" style="justify-content:center; gap:12px; flex-wrap:wrap">'+
+      '<button class="btn ghost" id="rAgain">↺ Refazer</button>'+
+      '<button class="btn" id="rMap">🗺️ Mapa de estações</button>'+
+    '</div>';
+  $('#rAgain').onclick=()=>startStation(cur.id);
+  $('#rMap').onclick=()=>{ r.classList.add('hidden'); renderMap(); $('#map').classList.remove('hidden'); };
+}
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600); }
+$('#resetBtn').onclick=()=>{ if(confirm('Zerar todo o progresso do jogo?')){ S={score:0,done:{}}; save(); renderMap(); } };
+
+renderMap();
+if('serviceWorker' in navigator){ window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
+</script>
+</body>
+</html>
